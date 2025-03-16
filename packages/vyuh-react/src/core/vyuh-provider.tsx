@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { create } from 'zustand';
-import { PluginDescriptor } from './plugins/plugin-descriptor';
 import { FeatureDescriptor } from './feature-descriptor';
 import { PlatformComponentBuilder } from './platform-component-builder';
 import { bootstrap } from './platform/platform-bootstrap';
 import { InitState } from './platform/platform-init-tracker';
+import { PluginDescriptor } from './plugins/plugin-descriptor';
 
 // Core platform state
 export interface VyuhPlatformState {
@@ -77,7 +77,7 @@ export const VyuhProvider: React.FC<VyuhProviderProps> = ({
   components = PlatformComponentBuilder.system,
   initialLocation,
 }) => {
-  const { initState, error, componentBuilder, setError, reset } =
+  const { initState, error, componentBuilder, reset, setError } =
     useVyuhStore();
   const bootstrapRef = React.useRef<AbortController | null>(null);
 
@@ -121,7 +121,6 @@ export const VyuhProvider: React.FC<VyuhProviderProps> = ({
         // Check if we were cancelled
         if (signal.aborted) return;
       } catch (error) {
-        // Set error in the store if not aborted
         if (!signal.aborted) {
           const finalError =
             error instanceof Error ? error : new Error(String(error));
@@ -144,9 +143,7 @@ export const VyuhProvider: React.FC<VyuhProviderProps> = ({
       pluginsRef.current.plugins.forEach((plugin) => {
         try {
           plugin.dispose();
-        } catch (error) {
-          // Silently handle plugin disposal errors
-        }
+        } catch (error) {}
       });
     };
   }, []); // Empty dependency array - only run on mount/unmount
@@ -198,12 +195,7 @@ export function useVyuh() {
   const store = useVyuhStore();
 
   return {
-    state: {
-      initialized: store.initState === InitState.ready,
-      features: store.features,
-      error: store.error,
-      initState: store.initState,
-    },
+    features: store.features,
     plugins: store.plugins,
     components: store.componentBuilder,
   };
@@ -240,12 +232,4 @@ export function useRestartPlatform() {
       }
     },
   };
-}
-
-// Helper hook to force re-render
-function useForceUpdate() {
-  const [, setTick] = React.useState(0);
-  return React.useCallback(() => {
-    setTick((tick) => tick + 1);
-  }, []);
 }
