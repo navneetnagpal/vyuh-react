@@ -1,12 +1,12 @@
 import {
   ContentProvider,
   LiveContentProvider,
+  NoOpLiveContentProvider,
 } from '@/core/content/content-provider';
 import { FileReference, ImageReference } from '@/core/content/reference';
 import { RouteBase } from '@/core/content/route-base';
 import { createClient, SanityClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
-import { defineLive } from 'next-sanity';
 
 export interface SanityConfig {
   projectId: string;
@@ -21,7 +21,7 @@ export class SanityContentProvider extends ContentProvider {
   private client: SanityClient;
   private imageBuilder: any;
   private cacheDuration: number;
-  private _live: SanityLiveContentProvider;
+  // private _live: SanityLiveContentProvider;
 
   constructor(config: SanityConfig, cacheDuration: number = 300000) {
     // Default 5 minutes
@@ -41,7 +41,7 @@ export class SanityContentProvider extends ContentProvider {
 
     this.imageBuilder = imageUrlBuilder(this.client);
     this.cacheDuration = cacheDuration;
-    this._live = new SanityLiveContentProvider(this.client);
+    // this._live = new SanityLiveContentProvider(this.client);
   }
 
   static withConfig(config: {
@@ -53,12 +53,12 @@ export class SanityContentProvider extends ContentProvider {
 
   async init(): Promise<void> {
     // Initialize any resources needed
-    return this._live.init();
+    // return this._live.init();
   }
 
   async dispose(): Promise<void> {
     // Clean up any resources
-    return this._live.dispose();
+    // return this._live.dispose();
   }
 
   async fetchById<T>(
@@ -194,112 +194,11 @@ export class SanityContentProvider extends ContentProvider {
 
   // Live content provider implementation
   override get live(): LiveContentProvider {
-    return this._live;
+    return new NoOpLiveContentProvider();
+    // return this._live;
   }
 
   override get supportsLive(): boolean {
-    return true;
-  }
-}
-
-class SanityLiveContentProvider implements LiveContentProvider {
-  private readonly client: SanityClient;
-  private liveClient: ReturnType<typeof defineLive>;
-  readonly title: string = 'Sanity Live Content Provider';
-
-  constructor(client: SanityClient) {
-    this.client = client;
-    this.liveClient = defineLive({
-      client: this.client,
-      browserToken: this.client.config().token,
-      serverToken: this.client.config().token,
-    });
-  }
-
-  async init(): Promise<void> {
-    return Promise.resolve();
-  }
-
-  async dispose(): Promise<void> {
-    return Promise.resolve();
-  }
-
-  async fetchById<T>(
-    id: string,
-    options: {
-      includeDrafts?: boolean;
-    },
-  ): Promise<T | null> {
-    const query = `*[_id == $id][0]`;
-    const params = { id };
-
-    const { data } = await this.liveClient.sanityFetch({
-      query,
-      params,
-      perspective: options.includeDrafts ? 'previewDrafts' : 'published',
-    });
-
-    return data as T;
-  }
-
-  async fetchSingle<T>(
-    query: string,
-    options: {
-      queryParams?: Record<string, any>;
-      includeDrafts?: boolean;
-    },
-  ): Promise<T | null> {
-    const { data } = await this.liveClient.sanityFetch({
-      query,
-      params: options.queryParams || {},
-      perspective: options.includeDrafts ? 'previewDrafts' : 'published',
-    });
-
-    return data as T;
-  }
-
-  async fetchMultiple<T>(
-    query: string,
-    options: {
-      queryParams?: Record<string, any>;
-      includeDrafts?: boolean;
-    },
-  ): Promise<T[] | null> {
-    const { data } = await this.liveClient.sanityFetch({
-      query,
-      params: options.queryParams || {},
-      perspective: options.includeDrafts ? 'previewDrafts' : 'published',
-    });
-
-    return data as T[];
-  }
-
-  async fetchRoute(options: {
-    path?: string;
-    routeId?: string;
-    includeDrafts?: boolean;
-  }): Promise<RouteBase | null> {
-    let query: string;
-    let params: Record<string, any> = {};
-
-    if (options.path) {
-      query = `*[_type == "route" && path == $path][0]`;
-      params.path = options.path;
-    } else if (options.routeId) {
-      query = `*[_type == "route" && _id == $routeId][0]`;
-      params.routeId = options.routeId;
-    } else {
-      throw new Error('Either path or routeId must be provided');
-    }
-
-    const { data } = await this.liveClient.sanityFetch({
-      query,
-      params,
-      perspective: options.includeDrafts ? 'previewDrafts' : 'published',
-    });
-
-    if (!data) return null;
-
-    return data as RouteBase;
+    return false;
   }
 }

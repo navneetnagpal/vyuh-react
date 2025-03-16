@@ -11,9 +11,9 @@ import { TelemetryPlugin } from './telemetry/telemetry-plugin';
  * Describes the plugins available to the Vyuh platform.
  */
 export class PluginDescriptor {
-  readonly content: ContentPlugin;
-  readonly telemetry: TelemetryPlugin;
-  readonly event: EventPlugin;
+  readonly content?: ContentPlugin;
+  readonly telemetry?: TelemetryPlugin;
+  readonly event?: EventPlugin;
 
   constructor({
     content = new DefaultContentPlugin(new NoOpContentProvider()),

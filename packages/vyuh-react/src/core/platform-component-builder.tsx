@@ -7,7 +7,7 @@ export class PlatformComponentBuilder {
   /**
    * Build the app loader component shown during initial app load
    */
-  appLoader: () => React.ReactNode;
+  renderAppLoader: () => React.ReactNode;
 
   /**
    * Build the content loader component shown when loading content
@@ -22,7 +22,7 @@ export class PlatformComponentBuilder {
   /**
    * Build the error view component shown when an error occurs
    */
-  errorView: (props: {
+  renderError: (props: {
     title: string;
     error: Error | null;
     onRetry?: () => void;
@@ -43,10 +43,10 @@ export class PlatformComponentBuilder {
       onRetry?: () => void;
     }) => React.ReactNode;
   }) {
-    this.appLoader = appLoader;
+    this.renderAppLoader = appLoader;
     this.contentLoader = contentLoader;
     this.routeLoader = routeLoader;
-    this.errorView = errorView;
+    this.renderError = errorView;
   }
 
   /**
@@ -56,10 +56,10 @@ export class PlatformComponentBuilder {
     overrides: Partial<PlatformComponentBuilder>,
   ): PlatformComponentBuilder {
     return new PlatformComponentBuilder({
-      appLoader: overrides.appLoader || this.appLoader,
+      appLoader: overrides.renderAppLoader || this.renderAppLoader,
       contentLoader: overrides.contentLoader || this.contentLoader,
       routeLoader: overrides.routeLoader || this.routeLoader,
-      errorView: overrides.errorView || this.errorView,
+      errorView: overrides.renderError || this.renderError,
     });
   }
 

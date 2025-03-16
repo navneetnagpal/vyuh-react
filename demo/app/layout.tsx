@@ -1,6 +1,11 @@
 'use client';
 
-import { FeatureDescriptor, VyuhProvider } from '@vyuh/react';
+import {
+  FeatureDescriptor,
+  VyuhProvider,
+  DefaultContentPlugin,
+  SanityContentProvider,
+} from '@vyuh/react';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import React from 'react';
@@ -21,6 +26,22 @@ const counter = new FeatureDescriptor({
   init: () => Promise.resolve(),
 });
 
+// Configure Sanity content provider
+const sanityProvider = SanityContentProvider.withConfig({
+  config: {
+    projectId: '8b76lu9s',
+    dataset: 'production',
+    perspective: 'previewDrafts',
+    useCdn: false,
+    token:
+      'skt2tSTitRob9TonNNubWg09bg0dACmwE0zHxSePlJisRuF1mWJOvgg3ZF68CAWrqtSIOzewbc56dGavACyznDTsjm30ws874WoSH3E5wPMFrqVW8C0Hc0pJGzpYQiehfL9GTRrIyoO3y2aBQIxHpegGspzxAevZcchleelaH5uM6LAnOJT1',
+  },
+  cacheDuration: 300000, // 5 minutes
+});
+
+// Create the content plugin with the Sanity provider
+const contentPlugin = new DefaultContentPlugin(sanityProvider);
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -31,7 +52,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <VyuhProvider features={() => [counter]}>{children}</VyuhProvider>
+        <VyuhProvider
+          features={() => [counter]}
+          plugins={{
+            content: contentPlugin,
+          }}
+        >
+          {children}
+        </VyuhProvider>
       </body>
     </html>
   );
