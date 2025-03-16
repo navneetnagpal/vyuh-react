@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect } from 'react';
 import { create } from 'zustand';
 import { PluginDescriptor } from './plugins/plugin-descriptor';
@@ -75,34 +77,60 @@ export const VyuhProvider: React.FC<VyuhProviderProps> = ({
   components = PlatformComponentBuilder.system,
   initialLocation,
 }) => {
-  const { initState, error, componentBuilder } = useVyuhStore();
+  const { initState, error, componentBuilder, setError, reset } =
+    useVyuhStore();
   const bootstrapRef = React.useRef<AbortController | null>(null);
 
-  // Start the bootstrap process
-  useEffect(() => {
-    // Create abort controller for cancellation
-    bootstrapRef.current = new AbortController();
-    const signal = bootstrapRef.current.signal;
+  // Store the initial props in refs to avoid dependency changes
+  const pluginsRef = React.useRef(plugins);
+  const featuresRef = React.useRef(features);
+  const componentsRef = React.useRef(components);
+  const initialLocationRef = React.useRef(initialLocation);
 
-    // Start bootstrap process
-    const bootstrapProcess = async () => {
+  // Update refs when props change (without triggering effect)
+  if (plugins !== pluginsRef.current) pluginsRef.current = plugins;
+  if (features !== featuresRef.current) featuresRef.current = features;
+  if (components !== componentsRef.current) componentsRef.current = components;
+  if (initialLocation !== initialLocationRef.current)
+    initialLocationRef.current = initialLocation;
+
+  // Start the bootstrap process - with empty dependency array
+  React.useEffect(() => {
+    const runBootstrap = async () => {
+      // Clean up previous bootstrap if exists
+      if (bootstrapRef.current) {
+        bootstrapRef.current.abort();
+        bootstrapRef.current = null;
+      }
+
+      // Reset store to clean state
+      reset();
+
+      // Create abort controller for cancellation
+      bootstrapRef.current = new AbortController();
+      const signal = bootstrapRef.current.signal;
+
       try {
         await bootstrap({
-          plugins,
-          features,
-          components,
-          initialLocation,
+          plugins: pluginsRef.current,
+          features: featuresRef.current,
+          components: componentsRef.current,
+          initialLocation: initialLocationRef.current,
         });
 
         // Check if we were cancelled
         if (signal.aborted) return;
       } catch (error) {
-        // Error is already handled in bootstrap
-        console.error('Bootstrap process failed:', error);
+        // Set error in the store if not aborted
+        if (!signal.aborted) {
+          const finalError =
+            error instanceof Error ? error : new Error(String(error));
+          setError(finalError);
+        }
       }
     };
 
-    bootstrapProcess();
+    runBootstrap();
 
     // Cleanup on unmount
     return () => {
@@ -113,11 +141,15 @@ export const VyuhProvider: React.FC<VyuhProviderProps> = ({
       }
 
       // Dispose plugins
-      plugins.plugins.forEach((plugin) => {
-        plugin.dispose();
+      pluginsRef.current.plugins.forEach((plugin) => {
+        try {
+          plugin.dispose();
+        } catch (error) {
+          // Silently handle plugin disposal errors
+        }
       });
     };
-  }, [plugins, components, features, initialLocation]);
+  }, []); // Empty dependency array - only run on mount/unmount
 
   // Render based on initialization state
   if (
@@ -134,12 +166,24 @@ export const VyuhProvider: React.FC<VyuhProviderProps> = ({
       error,
       onRetry: () => {
         // Reset and retry initialization
-        useVyuhStore.getState().reset();
+        reset();
+
+        // Force a re-bootstrap by creating a new AbortController
+        if (bootstrapRef.current) {
+          bootstrapRef.current.abort();
+          bootstrapRef.current = null;
+        }
+
+        // Re-run the bootstrap process with proper error handling
         bootstrap({
-          plugins,
-          features,
-          components,
-          initialLocation,
+          plugins: pluginsRef.current,
+          features: featuresRef.current,
+          components: componentsRef.current,
+          initialLocation: initialLocationRef.current,
+        }).catch((error) => {
+          const finalError =
+            error instanceof Error ? error : new Error(String(error));
+          setError(finalError);
         });
       },
     });
@@ -196,4 +240,12 @@ export function useRestartPlatform() {
       }
     },
   };
+}
+
+// Helper hook to force re-render
+function useForceUpdate() {
+  const [, setTick] = React.useState(0);
+  return React.useCallback(() => {
+    setTick((tick) => tick + 1);
+  }, []);
 }

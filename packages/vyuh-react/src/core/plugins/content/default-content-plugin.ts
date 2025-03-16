@@ -1,3 +1,4 @@
+import React from 'react';
 import { ContentPlugin } from './content-plugin';
 import { ContentDescriptor } from '../../content/content-descriptor';
 
@@ -6,6 +7,10 @@ import { ContentDescriptor } from '../../content/content-descriptor';
  */
 export class DefaultContentPlugin extends ContentPlugin {
   private descriptors: Map<string, ContentDescriptor> = new Map();
+
+  constructor() {
+    super('vyuh.plugin.content.default', 'Default Content Plugin');
+  }
 
   /**
    * Register a content descriptor
@@ -42,5 +47,13 @@ export class DefaultContentPlugin extends ContentPlugin {
     // Default implementation returns null
     // This should be overridden by the application
     return null;
+  }
+
+  dispose(): Promise<void> {
+    return Promise.resolve(undefined);
+  }
+
+  init(): Promise<void> {
+    return Promise.resolve(undefined);
   }
 }

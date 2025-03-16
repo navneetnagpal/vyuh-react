@@ -15,6 +15,9 @@
     "declaration": true,
     "outDir": "dist"
   },
-  "include": ["src"],
+  "include": [
+    "src",
+    "../../node_modules/.pnpm/@types+node@12.20.55/node_modules/@types/node/globals.d.ts"
+  ],
   "exclude": ["node_modules", "dist"]
 }

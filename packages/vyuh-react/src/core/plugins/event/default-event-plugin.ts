@@ -1,43 +1,48 @@
-import { EventPlugin, VyuhEvent, EventListener, DisposeFunction } from './event-plugin';
+import {
+  EventPlugin,
+  VyuhEvent,
+  EventListener,
+  DisposeFunction,
+} from './event-plugin';
 
 /**
  * Default implementation of EventPlugin
  */
 export class DefaultEventPlugin extends EventPlugin {
   private eventListeners: Map<string, Set<EventListener<any>>> = new Map();
-  
+
   constructor() {
     super(
       'vyuh.plugin.event.default',
       'Default Event Plugin',
-      true // Event plugin should be preloaded
+      true, // Event plugin should be preloaded
     );
   }
-  
+
   async init(): Promise<void> {
     console.log(`[${this.name}] Initialized`);
   }
-  
+
   async dispose(): Promise<void> {
     // Clear all event listeners
     this.eventListeners.clear();
     console.log(`[${this.name}] Disposed`);
   }
-  
+
   /**
    * Subscribe to events of a specific type
    */
   on<T extends VyuhEvent>(listener: EventListener<T>): DisposeFunction {
     // We use the constructor name as the event type
     const eventType = this.getEventType<T>();
-    
+
     if (!this.eventListeners.has(eventType)) {
       this.eventListeners.set(eventType, new Set());
     }
-    
+
     const listeners = this.eventListeners.get(eventType)!;
     listeners.add(listener);
-    
+
     // Return a dispose function
     return () => {
       const listeners = this.eventListeners.get(eventType);
@@ -49,7 +54,7 @@ export class DefaultEventPlugin extends EventPlugin {
       }
     };
   }
-  
+
   /**
    * Subscribe to a single occurrence of an event
    */
@@ -57,12 +62,12 @@ export class DefaultEventPlugin extends EventPlugin {
     const dispose = this.on<T>((event: T) => {
       // Call the listener
       listener(event);
-      
+
       // Unsubscribe after first call
       dispose();
     });
   }
-  
+
   /**
    * Emit an event to all subscribers
    */
@@ -71,15 +76,15 @@ export class DefaultEventPlugin extends EventPlugin {
     if (!event.timestamp) {
       (event as any).timestamp = new Date();
     }
-    
+
     // Get event type from the event's constructor
     const eventType = this.getEventTypeFromEvent(event);
-    
+
     // Get listeners for this event type
     const listeners = this.eventListeners.get(eventType);
     if (listeners) {
       // Call all listeners
-      listeners.forEach(listener => {
+      listeners.forEach((listener) => {
         try {
           listener(event);
         } catch (error) {
@@ -88,7 +93,7 @@ export class DefaultEventPlugin extends EventPlugin {
       });
     }
   }
-  
+
   /**
    * Helper to get the event type string from a generic type parameter
    */
@@ -97,7 +102,7 @@ export class DefaultEventPlugin extends EventPlugin {
     // In a real implementation, you might use a more sophisticated approach
     return 'event';
   }
-  
+
   /**
    * Helper to get the event type string from an event instance
    */
@@ -111,14 +116,10 @@ export class DefaultEventPlugin extends EventPlugin {
  * Create a new event
  */
 export function createEvent<T = void>(name: string, data?: T): VyuhEvent<T> {
-  return {
-    name,
-    timestamp: new Date(),
-    data
-  };
+  return new VyuhEvent<T>(name, data);
 }
 
 /**
  * System ready event
  */
-export const SystemReadyEvent = createEvent('vyuh.event.systemReady');
+export const systemReadyEvent = new VyuhEvent('vyuh.event.systemReady');
