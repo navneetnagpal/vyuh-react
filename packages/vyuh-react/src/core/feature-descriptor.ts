@@ -1,7 +1,7 @@
 import { IconType } from 'react-icons';
 import { ContentDescriptor } from './content/content-descriptor';
-import { ExtensionDescriptor } from './extensions/extension-descriptor';
 import { ExtensionBuilder } from './extensions/extension-builder';
+import { ExtensionDescriptor } from './extensions/extension-descriptor';
 
 /**
  * Describes a feature in the Vyuh platform.
@@ -108,12 +108,4 @@ export class FeatureDescriptor {
       }
     }
   }
-}
-
-/**
- * Create a feature descriptor
- * @deprecated Use the FeatureDescriptor constructor directly
- */
-export function createFeature(descriptor: ConstructorParameters<typeof FeatureDescriptor>[0]): FeatureDescriptor {
-  return new FeatureDescriptor(descriptor);
 }

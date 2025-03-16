@@ -1,8 +1,9 @@
-import { Plugin } from './plugin';
+import { NoOpContentProvider } from '@/core/content/noop-content-provider';
+import { DefaultContentPlugin } from '@/core/plugins/content/default-content-plugin';
 import { ContentPlugin } from './content/content-plugin';
-import { EventPlugin } from './event/event-plugin';
-import { DefaultContentPlugin } from './content/default-content-plugin';
 import { DefaultEventPlugin } from './event/default-event-plugin';
+import { EventPlugin } from './event/event-plugin';
+import { Plugin } from './plugin';
 import { DefaultTelemetryPlugin } from './telemetry/default-telemetry-plugin';
 import { TelemetryPlugin } from './telemetry/telemetry-plugin';
 
@@ -15,7 +16,7 @@ export class PluginDescriptor {
   readonly event: EventPlugin;
 
   constructor({
-    content = new DefaultContentPlugin(),
+    content = new DefaultContentPlugin(new NoOpContentProvider()),
     telemetry = new DefaultTelemetryPlugin(),
     event = new DefaultEventPlugin(),
   } = {}) {

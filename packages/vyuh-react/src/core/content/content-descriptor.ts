@@ -1,26 +1,33 @@
+import { LayoutConfiguration } from './layout-configuration';
+
 /**
- * Describes a content type in the Vyuh platform.
- * Content descriptors define the structure and behavior of content types.
+ * Descriptor for content types in the Vyuh system.
+ *
+ * Content descriptors define:
+ * - Metadata about a content type (schema type, title)
+ * - Available layouts for a content type
+ *
+ * They are used by ContentBuilder to initialize content types
+ * with their available configurations.
  */
 export class ContentDescriptor {
   /**
-   * Human-readable title of the content type
-   */
-  readonly title: string;
-
-  /**
-   * Schema type identifier from the CMS
-   * Must match the type name defined in the CMS schema
+   * The schema type of the content
    */
   readonly schemaType: string;
 
   /**
-   * Optional list of available layouts for this content type
+   * The title of the content
    */
-  readonly layouts?: string[];
+  readonly title: string;
 
   /**
-   * The feature that this content descriptor was registered by
+   * Available layouts for this content type
+   */
+  readonly layouts?: LayoutConfiguration[];
+
+  /**
+   * The feature that registered this content descriptor
    */
   private _sourceFeature?: string;
 
@@ -32,26 +39,53 @@ export class ContentDescriptor {
   }
 
   /**
-   * Set the source feature
-   */
-  setSourceFeature(featureName: string): void {
-    this._sourceFeature = featureName;
-  }
-
-  /**
    * Creates a new content descriptor
    */
   constructor({
-    title,
     schemaType,
-    layouts,
+    title,
+    layouts = [],
   }: {
-    title: string;
     schemaType: string;
-    layouts?: string[];
+    title: string;
+    layouts?: LayoutConfiguration[];
   }) {
-    this.title = title;
     this.schemaType = schemaType;
+    this.title = title;
     this.layouts = layouts;
+  }
+
+  /**
+   * Set the source feature
+   */
+  setSourceFeature(featureName?: string): void {
+    this._sourceFeature = featureName;
+
+    // Also set source feature on layouts
+    if (this.layouts) {
+      for (const layout of this.layouts) {
+        if (typeof layout.setSourceFeature === 'function') {
+          layout.setSourceFeature(featureName);
+        }
+      }
+    }
+  }
+
+  /**
+   * Creates a default content descriptor with standard conventions
+   */
+  static createDefault({
+    schemaType,
+    title,
+  }: {
+    schemaType: string;
+    title: string;
+  }) {
+    return (layouts?: LayoutConfiguration[]) =>
+      new ContentDescriptor({
+        schemaType,
+        title,
+        layouts,
+      });
   }
 }

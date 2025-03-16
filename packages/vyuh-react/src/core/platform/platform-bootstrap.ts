@@ -1,9 +1,18 @@
-import { PluginDescriptor } from '../plugins/plugin-descriptor';
+import { ExtensionBuilder } from '@/core/extensions/extension-builder';
+import { ExtensionDescriptor } from '@/core/extensions/extension-descriptor';
+import { useVyuhStore } from '@/hooks/use-vyuh';
 import { FeatureDescriptor } from '../feature-descriptor';
-import { useVyuhStore } from '../vyuh-provider';
 import { PlatformComponentBuilder } from '../platform-component-builder';
-import { InitState } from './platform-init-tracker';
 import { systemReadyEvent } from '../plugins/event/default-event-plugin';
+import { PluginDescriptor } from '../plugins/plugin-descriptor';
+
+export enum InitState {
+  notStarted = 'not_started',
+  plugins = 'plugins',
+  features = 'features',
+  ready = 'ready',
+  error = 'error',
+}
 
 /**
  * Bootstrap options for the Vyuh platform
@@ -34,8 +43,12 @@ interface BootstrapOptions {
  * Bootstrap the Vyuh platform
  * This is the entry point for initializing the platform
  */
-export async function bootstrap(options: BootstrapOptions): Promise<void> {
-  const { plugins, features, components, initialLocation } = options;
+export async function bootstrap({
+  plugins,
+  features,
+  components,
+  initialLocation,
+}: BootstrapOptions): Promise<void> {
   const store = useVyuhStore.getState();
 
   store.init({ plugins, components });
@@ -53,11 +66,10 @@ export async function bootstrap(options: BootstrapOptions): Promise<void> {
         await pluginsTrace.stop();
       }
 
-      // Load features (set state AFTER loading)
-      const featuresTrace = await trace.startChild('Features', 'Load');
+      // Initialize features and their extensions
+      const featuresTrace = await trace.startChild('Features', 'Init');
       try {
-        const loadedFeatures = await loadFeatures(features);
-        store.setFeatures(loadedFeatures);
+        await initFeatures(features, plugins);
         store.setInitState(InitState.features);
       } finally {
         await featuresTrace.stop();
@@ -95,6 +107,20 @@ async function initPlugins(plugins: PluginDescriptor): Promise<void> {
 
   // First dispose any existing plugins
   await Promise.all(plugins.plugins.map((plugin) => plugin.dispose()));
+
+  // Then validate plugin names are unique
+  const pluginNames = new Set<string>();
+  for (const plugin of plugins.plugins) {
+    if (pluginNames.has(plugin.name)) {
+      const error = new Error(`Plugin name "${plugin.name}" is not unique`);
+      telemetry.reportError(error, {
+        params: { plugin: plugin.name },
+        fatal: true,
+      });
+      throw error;
+    }
+    pluginNames.add(plugin.name);
+  }
 
   // First initialize preloaded plugins
   const preloadedPlugins = plugins.plugins.filter(
@@ -150,6 +176,61 @@ async function initPlugins(plugins: PluginDescriptor): Promise<void> {
 }
 
 /**
+ * Initialize features and their extensions
+ */
+async function initFeatures(
+  featuresBuilder: () => FeatureDescriptor[] | Promise<FeatureDescriptor[]>,
+  plugins: PluginDescriptor,
+): Promise<void> {
+  const store = useVyuhStore.getState();
+  const telemetry = store.plugins.telemetry;
+
+  // First dispose any existing features
+  const existingFeatures = store.features;
+  if (existingFeatures.length > 0) {
+    const disposeTrace = await telemetry.startTrace('Features', 'Dispose');
+    try {
+      await disposeFeatures(existingFeatures);
+    } finally {
+      await disposeTrace.stop();
+    }
+  }
+
+  // Load features
+  const featuresLoadTrace = await telemetry.startTrace('Features', 'Load');
+  let features: FeatureDescriptor[] = [];
+
+  try {
+    features = await loadFeatures(featuresBuilder);
+    store.setFeatures(features);
+  } finally {
+    await featuresLoadTrace.stop();
+  }
+
+  // Initialize each feature
+  const featureInitTrace = await telemetry.startTrace(
+    'Feature Initialization',
+    'Init',
+  );
+  try {
+    await initFeatureInstances(features);
+  } finally {
+    await featureInitTrace.stop();
+  }
+
+  // Initialize feature extensions
+  const extensionsTrace = await telemetry.startTrace(
+    'Feature Extensions',
+    'Init',
+  );
+  try {
+    await initFeatureExtensions(features);
+  } finally {
+    await extensionsTrace.stop();
+  }
+}
+
+/**
  * Load all features
  */
 async function loadFeatures(
@@ -158,7 +239,6 @@ async function loadFeatures(
   const store = useVyuhStore.getState();
   const telemetry = store.plugins.telemetry;
 
-  const featuresTrace = await telemetry.startTrace('Features', 'Load');
   try {
     const features = await featuresBuilder();
 
@@ -186,7 +266,152 @@ async function loadFeatures(
       fatal: true,
     });
     throw error;
-  } finally {
-    await featuresTrace.stop();
   }
+}
+
+/**
+ * Initialize feature extensions
+ */
+async function initFeatureExtensions(
+  features: FeatureDescriptor[],
+): Promise<void> {
+  const store = useVyuhStore.getState();
+  const telemetry = store.plugins.telemetry;
+
+  // Get all extension builders from features
+  const extensionBuilders = features.flatMap(
+    (feature) => feature.extensionBuilders || [],
+  );
+
+  // Get all extension descriptors from features
+  const extensionDescriptors = features.flatMap(
+    (feature) => feature.extensions || [],
+  );
+
+  // Group extension builders by type and validate uniqueness
+  const buildersByType: Record<string, ExtensionBuilder> = {};
+  for (const builder of extensionBuilders) {
+    const type = builder.type;
+
+    // Check if we already have a builder for this type
+    if (buildersByType[type]) {
+      const error = new Error(
+        `Multiple extension builders found for type: ${type}. There can only be one builder per extension type.`,
+      );
+      telemetry.reportError(error, {
+        params: { extensionType: type },
+        fatal: true,
+      });
+      throw error;
+    }
+
+    buildersByType[type] = builder;
+  }
+
+  // Group extension descriptors by type
+  const descriptorsByType = extensionDescriptors.reduce(
+    (acc, descriptor) => {
+      const type = descriptor.type;
+      if (!acc[type]) {
+        acc[type] = [];
+      }
+      acc[type].push(descriptor);
+      return acc;
+    },
+    {} as Record<string, ExtensionDescriptor[]>,
+  );
+
+  // Process each extension type
+  for (const type in descriptorsByType) {
+    const typeTrace = await telemetry.startTrace(`${type} Extensions`, 'Init');
+    try {
+      const descriptors = descriptorsByType[type];
+      const builder = buildersByType[type];
+
+      // Throw an error if no builder exists for this extension type
+      if (!builder) {
+        const error = new Error(
+          `Missing ExtensionBuilder for ExtensionDescriptor of type: ${type}`,
+        );
+        telemetry.reportError(error, {
+          params: { extensionType: type },
+          fatal: true,
+        });
+        throw error;
+      }
+
+      // Build extensions with the appropriate descriptors
+      builder.build(descriptors);
+    } finally {
+      await typeTrace.stop();
+    }
+  }
+}
+
+/**
+ * Dispose all features by calling their dispose methods
+ */
+async function disposeFeatures(features: FeatureDescriptor[]): Promise<void> {
+  const store = useVyuhStore.getState();
+  const telemetry = store.plugins.telemetry;
+
+  const disposePromises = features
+    .filter((feature) => feature.dispose)
+    .map(async (feature) => {
+      const featureTrace = await telemetry.startTrace(
+        `Feature: ${feature.title || feature.name}`,
+        'Dispose',
+      );
+      try {
+        await feature.dispose?.();
+        telemetry.log(`Feature disposed: ${feature.name}`, 'info');
+      } catch (error) {
+        const finalError =
+          error instanceof Error ? error : new Error(String(error));
+        telemetry.reportError(finalError, {
+          params: { feature: feature.name },
+          fatal: false,
+        });
+        // Don't rethrow here to ensure all features get a chance to dispose
+      } finally {
+        await featureTrace.stop();
+      }
+    });
+
+  await Promise.all(disposePromises);
+}
+
+/**
+ * Initialize each feature instance by calling its init method
+ */
+async function initFeatureInstances(
+  features: FeatureDescriptor[],
+): Promise<void> {
+  const store = useVyuhStore.getState();
+  const telemetry = store.plugins.telemetry;
+
+  const initPromises = features.map(async (feature) => {
+    if (feature.init) {
+      const featureTrace = await telemetry.startTrace(
+        `Feature: ${feature.title || feature.name}`,
+        'Init',
+      );
+      try {
+        await feature.init();
+        telemetry.log(`Feature initialized: ${feature.name}`, 'info');
+      } catch (error) {
+        const finalError =
+          error instanceof Error ? error : new Error(String(error));
+        telemetry.reportError(finalError, {
+          params: { feature: feature.name },
+          fatal: false,
+        });
+        throw finalError;
+      } finally {
+        await featureTrace.stop();
+      }
+    }
+  });
+
+  await Promise.all(initPromises);
 }

@@ -5,7 +5,7 @@ import { useVyuhPlatform } from '../core/VyuhProvider';
  */
 export function useDI() {
   const { plugins } = useVyuhPlatform();
-  
+
   return {
     /**
      * Get an instance of a registered dependency
@@ -13,12 +13,12 @@ export function useDI() {
     get: <T>(key: string | symbol): T => {
       return plugins.di.get<T>(key);
     },
-    
+
     /**
      * Register a dependency
      */
     register: <T>(key: string | symbol, factory: () => T): void => {
       plugins.di.register(key, factory);
-    }
+    },
   };
 }

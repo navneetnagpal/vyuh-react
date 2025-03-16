@@ -1,32 +1,47 @@
+import { ContentProvider } from '@/core/content/content-provider';
+import React from 'react';
+import { ContentBuilder } from '../../content/content-builder';
 import { Plugin } from '../plugin';
-import { ContentDescriptor } from '../../content/content-descriptor';
 
 /**
- * Plugin for managing content in the Vyuh platform.
+ * Plugin for managing content
  */
 export abstract class ContentPlugin extends Plugin {
   /**
-   * Register a content descriptor
+   * The content provider
    */
-  abstract register(descriptor: ContentDescriptor): void;
+  readonly provider: ContentProvider;
 
   /**
-   * Get a content descriptor by schema type
+   * Creates a new content plugin
    */
-  abstract get(schemaType: string): ContentDescriptor | undefined;
+  constructor(name: string, title: string, provider: ContentProvider) {
+    super(name, title);
+    this.provider = provider;
+  }
 
   /**
-   * Get all registered content descriptors
+   * Register a content builder
    */
-  abstract getAll(): ContentDescriptor[];
+  abstract registerBuilder(builder: ContentBuilder): void;
 
   /**
-   * Check if a content descriptor is registered
+   * Get a content builder by schema type
+   */
+  abstract getBuilder(schemaType: string): ContentBuilder | undefined;
+
+  /**
+   * Get all registered content builders
+   */
+  abstract getAllBuilders(): ContentBuilder[];
+
+  /**
+   * Check if a content builder is registered
    */
   abstract isRegistered(schemaType: string): boolean;
 
   /**
    * Build content from a JSON object
    */
-  abstract buildContent(json: Record<string, any>): React.ReactNode;
+  abstract render(json: Record<string, any>): React.ReactNode;
 }

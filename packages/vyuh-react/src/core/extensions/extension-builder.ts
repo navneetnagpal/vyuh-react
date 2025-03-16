@@ -41,5 +41,5 @@ export abstract class ExtensionBuilder {
    * Build an extension descriptor
    * This method should be implemented by subclasses
    */
-  abstract build(): ExtensionDescriptor;
+  abstract build(descriptors: ExtensionDescriptor[]): void;
 }

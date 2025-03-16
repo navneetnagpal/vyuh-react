@@ -32,10 +32,10 @@ export class DefaultTelemetryPlugin extends TelemetryPlugin {
       stackTrace?: string;
       params?: Record<string, any>;
       fatal?: boolean;
-    }
+    },
   ): Promise<void> {
     await Promise.all(
-      this.providers.map((provider) => provider.reportError(error, options))
+      this.providers.map((provider) => provider.reportError(error, options)),
     );
   }
 
@@ -44,7 +44,7 @@ export class DefaultTelemetryPlugin extends TelemetryPlugin {
     operation: string,
     options?: {
       level?: 'info' | 'warning' | 'error';
-    }
+    },
   ): Promise<any> {
     const traces = await Promise.all(
       this.providers.map((provider) =>
@@ -59,7 +59,7 @@ export class DefaultTelemetryPlugin extends TelemetryPlugin {
       startChild: async (
         childName: string,
         childOperation: string,
-        childOptions?: any
+        childOptions?: any,
       ) => {
         const childTraces = await Promise.all(
           traces.map((trace) =>

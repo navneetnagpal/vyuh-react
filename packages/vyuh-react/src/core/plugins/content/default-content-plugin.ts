@@ -1,59 +1,70 @@
 import React from 'react';
-import { ContentPlugin } from './content-plugin';
-import { ContentDescriptor } from '../../content/content-descriptor';
+import { ContentBuilder } from '@/core/content/content-builder';
+import { ContentPlugin } from '@/core/plugins/content/content-plugin';
+import { ContentProvider } from '@/core/content/content-provider';
 
 /**
  * Default implementation of ContentPlugin.
  */
 export class DefaultContentPlugin extends ContentPlugin {
-  private descriptors: Map<string, ContentDescriptor> = new Map();
+  private builders: Map<string, ContentBuilder> = new Map();
 
-  constructor() {
-    super('vyuh.plugin.content.default', 'Default Content Plugin');
+  constructor(provider: ContentProvider) {
+    super('vyuh.plugin.content.default', 'Default Content Plugin', provider);
   }
 
   /**
-   * Register a content descriptor
+   * Register a content builder
    */
-  register(descriptor: ContentDescriptor): void {
-    this.descriptors.set(descriptor.schemaType, descriptor);
+  registerBuilder(builder: ContentBuilder): void {
+    this.builders.set(builder.schemaType, builder);
   }
 
   /**
-   * Get a content descriptor by schema type
+   * Get a content builder by schema type
    */
-  get(schemaType: string): ContentDescriptor | undefined {
-    return this.descriptors.get(schemaType);
+  getBuilder(schemaType: string): ContentBuilder | undefined {
+    return this.builders.get(schemaType);
   }
 
   /**
-   * Get all registered content descriptors
+   * Get all registered content builders
    */
-  getAll(): ContentDescriptor[] {
-    return Array.from(this.descriptors.values());
+  getAllBuilders(): ContentBuilder[] {
+    return Array.from(this.builders.values());
   }
 
   /**
-   * Check if a content descriptor is registered
+   * Check if a content builder is registered
    */
   isRegistered(schemaType: string): boolean {
-    return this.descriptors.has(schemaType);
+    return this.builders.has(schemaType);
   }
 
   /**
    * Build content from a JSON object
    */
-  buildContent(json: Record<string, any>): React.ReactNode {
-    // Default implementation returns null
-    // This should be overridden by the application
-    return null;
+  render(json: Record<string, any>): React.ReactNode {
+    const schemaType = this.provider.schemaType(json);
+    const builder = this.builders.get(schemaType);
+
+    if (!builder) {
+      console.warn(`No builder found for schema type: ${schemaType}`);
+      return null;
+    }
+
+    return builder.render(json);
   }
 
-  dispose(): Promise<void> {
-    return Promise.resolve(undefined);
+  async dispose(): Promise<void> {
+    // Dispose the content provider
+    await this.provider.dispose();
+    return Promise.resolve();
   }
 
-  init(): Promise<void> {
-    return Promise.resolve(undefined);
+  async init(): Promise<void> {
+    // Initialize the content provider
+    await this.provider.init();
+    return Promise.resolve();
   }
 }

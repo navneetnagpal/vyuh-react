@@ -1,8 +1,8 @@
 import {
+  DisposeFunction,
+  EventListener,
   EventPlugin,
   VyuhEvent,
-  EventListener,
-  DisposeFunction,
 } from './event-plugin';
 
 /**
