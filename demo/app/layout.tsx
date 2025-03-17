@@ -1,5 +1,6 @@
 'use client';
 
+import * as system from '@vyuh/feature-system';
 import {
   FeatureDescriptor,
   VyuhProvider,
@@ -32,7 +33,7 @@ const sanityProvider = SanityContentProvider.withConfig({
   config: {
     projectId: '8b76lu9s',
     dataset: 'production',
-    perspective: 'previewDrafts',
+    perspective: 'drafts',
     useCdn: false,
     token:
       'skt2tSTitRob9TonNNubWg09bg0dACmwE0zHxSePlJisRuF1mWJOvgg3ZF68CAWrqtSIOzewbc56dGavACyznDTsjm30ws874WoSH3E5wPMFrqVW8C0Hc0pJGzpYQiehfL9GTRrIyoO3y2aBQIxHpegGspzxAevZcchleelaH5uM6LAnOJT1',
@@ -54,7 +55,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <VyuhProvider features={() => [counter]} plugins={plugins}>
+        <VyuhProvider
+          features={() => [counter, system.feature]}
+          plugins={plugins}
+        >
           {children}
         </VyuhProvider>
       </body>

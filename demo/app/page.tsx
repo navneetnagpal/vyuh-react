@@ -3,5 +3,5 @@
 import { RouteBuilder } from '@vyuh/react';
 
 export default function Home() {
-  return <RouteBuilder url={'/home'} allowRefresh={true} />;
+  return <RouteBuilder url={'/chakra'} allowRefresh={true} />;
 }

@@ -1,5 +1,5 @@
-import { LiveContentProvider } from '@/core/plugins/content/content-provider';
 import { RouteBase } from '@/core/content/route-base';
+import { LiveContentProvider } from '@/core/plugins/content/content-provider';
 import { SanityClient } from '@sanity/client';
 import { defineLive } from 'next-sanity';
 
@@ -37,7 +37,7 @@ export class SanityLiveContentProvider implements LiveContentProvider {
     const { data } = await this.liveClient.sanityFetch({
       query,
       params,
-      perspective: options.includeDrafts ? 'previewDrafts' : 'published',
+      perspective: options.includeDrafts ? 'drafts' : 'published',
     });
 
     return data as T;
@@ -53,7 +53,7 @@ export class SanityLiveContentProvider implements LiveContentProvider {
     const { data } = await this.liveClient.sanityFetch({
       query,
       params: options.queryParams || {},
-      perspective: options.includeDrafts ? 'previewDrafts' : 'published',
+      perspective: options.includeDrafts ? 'drafts' : 'published',
     });
 
     return data as T;
@@ -69,7 +69,7 @@ export class SanityLiveContentProvider implements LiveContentProvider {
     const { data } = await this.liveClient.sanityFetch({
       query,
       params: options.queryParams || {},
-      perspective: options.includeDrafts ? 'previewDrafts' : 'published',
+      perspective: options.includeDrafts ? 'drafts' : 'published',
     });
 
     return data as T[];
@@ -96,7 +96,7 @@ export class SanityLiveContentProvider implements LiveContentProvider {
     const { data } = await this.liveClient.sanityFetch({
       query,
       params,
-      perspective: options.includeDrafts ? 'previewDrafts' : 'published',
+      perspective: options.includeDrafts ? 'drafts' : 'published',
     });
 
     if (!data) return null;

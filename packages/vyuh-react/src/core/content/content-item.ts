@@ -1,6 +1,6 @@
+import { ContentModifierConfiguration } from '../extensions/content/content-modifier-configuration';
+import { LayoutConfiguration } from '../extensions/content/layout-configuration';
 import { SchemaItem } from './schema-item';
-import { LayoutConfiguration } from './layout-configuration';
-import { ContentModifierConfiguration } from './content-modifier-configuration';
 
 /**
  * The base class for all content items in Vyuh.

@@ -1,6 +1,6 @@
 import { ContentItem } from '@/core/content/content-item';
+import { LayoutConfiguration } from '@/core/extensions/content/layout-configuration';
 import React from 'react';
-import { LayoutConfiguration } from '@/core/content/layout-configuration';
 import { ContentDescriptor } from './content-descriptor';
 
 /**
@@ -10,7 +10,7 @@ import { ContentDescriptor } from './content-descriptor';
  * - Managing layout configurations for content types
  * - Building content widgets
  */
-export class ContentBuilder<TContent extends ContentItem> {
+export class ContentBuilder<TContent extends ContentItem = ContentItem> {
   /**
    * The schema type for this builder
    */

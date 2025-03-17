@@ -1,8 +1,6 @@
-import { ContentBuilder } from '@/core/plugins/content/content-builder';
+import { ContentBuilder, LayoutConfiguration, useVyuh } from '@vyuh/react';
 import React from 'react';
 import { Route } from './route';
-import { useVyuh } from '@/hooks/use-vyuh';
-import { LayoutConfiguration } from './layout-configuration';
 
 /**
  * Content builder for Route content items

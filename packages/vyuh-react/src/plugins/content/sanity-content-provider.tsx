@@ -1,10 +1,10 @@
+import { FileReference, ImageReference } from '@/core/content/reference';
+import { RouteBase } from '@/core/content/route-base';
 import {
   ContentProvider,
   LiveContentProvider,
   NoOpLiveContentProvider,
 } from '@/core/plugins/content/content-provider';
-import { FileReference, ImageReference } from '@/core/content/reference';
-import { RouteBase } from '@/core/content/route-base';
 import { createClient, SanityClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
 
@@ -13,7 +13,7 @@ export interface SanityConfig {
   dataset: string;
   apiVersion?: string;
   useCdn?: boolean;
-  perspective?: 'published' | 'previewDrafts' | 'raw';
+  perspective?: 'published' | 'drafts' | 'raw';
   token?: string;
 }
 
@@ -124,10 +124,28 @@ export class SanityContentProvider extends ContentProvider {
       let params: Record<string, any> = {};
 
       if (options.path) {
-        query = `*[_type == "route" && path == $path][0]`;
+        // Match the Dart implementation's route query
+        query = `*[_type in ["vyuh.route", "vyuh.conditionalRoute"] && path == $path] | order(_type asc, _updatedAt desc) {
+          ...,
+          "category": category->,
+          "regions": regions[] {
+            "identifier": region->identifier, 
+            "title": region->title,
+            items,
+          },
+        }[0]`;
         params.path = options.path;
       } else if (options.routeId) {
-        query = `*[_type == "route" && _id == $routeId][0]`;
+        // Match the Dart implementation's route by ID query
+        query = `*[_id == $routeId] {
+          ...,
+          "category": category->,
+          "regions": regions[] {
+            "identifier": region->identifier, 
+            "title": region->title,
+            items,
+          },
+        }[0]`;
         params.routeId = options.routeId;
       } else {
         throw new Error('Either path or routeId must be provided');

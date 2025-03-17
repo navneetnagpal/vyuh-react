@@ -1,5 +1,4 @@
-import { IconType } from 'react-icons';
-import { ContentDescriptor } from './plugins/content/content-descriptor';
+import React from 'react';
 import { ExtensionBuilder } from './extensions/extension-builder';
 import { ExtensionDescriptor } from './extensions/extension-descriptor';
 
@@ -26,7 +25,7 @@ export class FeatureDescriptor {
   /**
    * Optional icon for the feature
    */
-  readonly icon?: IconType;
+  readonly icon?: React.ReactNode;
 
   /**
    * Optional list of extensions provided by this feature
@@ -37,11 +36,6 @@ export class FeatureDescriptor {
    * Optional list of extension builders exposed by this feature
    */
   readonly extensionBuilders?: ExtensionBuilder[];
-
-  /**
-   * Optional list of content descriptors provided by this feature
-   */
-  readonly contents?: ContentDescriptor[];
 
   /**
    * Initialize the feature
@@ -63,17 +57,15 @@ export class FeatureDescriptor {
     icon,
     extensions,
     extensionBuilders,
-    contents,
     init,
     dispose,
   }: {
     name: string;
     title: string;
     description?: string;
-    icon?: IconType;
+    icon?: React.ReactNode;
     extensions?: ExtensionDescriptor[];
     extensionBuilders?: ExtensionBuilder[];
-    contents?: ContentDescriptor[];
     init?: () => Promise<void>;
     dispose?: () => Promise<void>;
   }) {
@@ -83,7 +75,6 @@ export class FeatureDescriptor {
     this.icon = icon;
     this.extensions = extensions;
     this.extensionBuilders = extensionBuilders;
-    this.contents = contents;
     this.init = init;
     this.dispose = dispose;
 
@@ -98,13 +89,6 @@ export class FeatureDescriptor {
     if (extensions) {
       for (const extension of extensions) {
         extension.setSourceFeature(name);
-      }
-    }
-
-    // Set the source feature in all content descriptors
-    if (contents) {
-      for (const content of contents) {
-        content.setSourceFeature(name);
       }
     }
   }

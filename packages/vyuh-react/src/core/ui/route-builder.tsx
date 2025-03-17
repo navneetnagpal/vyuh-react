@@ -1,14 +1,14 @@
+import { RouteBase } from '@/core/content/route-base';
+import { useVyuh } from '@/hooks/use-vyuh';
 import React, {
   Component,
   ErrorInfo,
+  ReactNode,
   Suspense,
   useCallback,
-  useState,
   useEffect,
-  ReactNode,
+  useState,
 } from 'react';
-import { RouteBase } from '@/core/content/route-base';
-import { useVyuh } from '@/hooks/use-vyuh';
 
 /**
  * Props for the RouteBuilder component
@@ -93,31 +93,61 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 function RouteContent({ url, routeId }: { url?: string; routeId?: string }) {
   const { plugins } = useVyuh();
   const [route, setRoute] = useState<RouteBase | null>(null);
-
-  const fetchRoute = useCallback(async () => {
-    if (!url && !routeId) {
-      throw new Error('Either url or routeId must be provided');
-    }
-
-    const routeData = await plugins.content.provider.fetchRoute({
-      path: url,
-      routeId,
-    });
-
-    if (!routeData) {
-      throw new Error(`No route found for ${url || routeId}`);
-    }
-
-    return routeData;
-  }, [plugins.content, url, routeId]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    fetchRoute().then(setRoute);
-  }, [fetchRoute]);
+    let isMounted = true;
+
+    async function loadRoute() {
+      try {
+        if (!url && !routeId) {
+          throw new Error('Either url or routeId must be provided');
+        }
+
+        setLoading(true);
+        setError(null);
+
+        const routeData = await plugins.content.provider.fetchRoute({
+          path: url,
+          routeId,
+        });
+
+        if (!isMounted) return;
+
+        setRoute(routeData);
+      } catch (err) {
+        if (!isMounted) return;
+        // Ensure we're working with an Error object
+        const errorObj = err instanceof Error ? err : new Error(String(err));
+        setError(errorObj);
+        // This will propagate to the error boundary
+        throw errorObj;
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
+    }
+
+    loadRoute();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [plugins.content, url, routeId]);
+
+  // If there's an error, throw it to be caught by the error boundary
+  if (error) {
+    throw error;
+  }
+
+  if (loading) {
+    return null; // Let Suspense handle the loading state
+  }
 
   if (!route) {
-    // This should only happen briefly before the effect runs
-    return null;
+    throw new Error(`No route found for ${url || routeId}`);
   }
 
   return <>{plugins.content.render(route)}</>;

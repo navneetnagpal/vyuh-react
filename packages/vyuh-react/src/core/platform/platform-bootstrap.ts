@@ -1,15 +1,10 @@
 import { ExtensionBuilder } from '@/core/extensions/extension-builder';
 import { ExtensionDescriptor } from '@/core/extensions/extension-descriptor';
-import { ContentPlugin } from '@/core/plugins/content/content-plugin';
 import { useVyuhStore } from '@/hooks/use-vyuh';
 import { FeatureDescriptor } from '../feature-descriptor';
 import { PlatformComponentBuilder } from '../platform-component-builder';
 import { systemReadyEvent } from '../plugins/event/default-event-plugin';
 import { PluginDescriptor } from '../plugins/plugin-descriptor';
-import { DefaultContentPlugin } from '../plugins/content/default-content-plugin';
-import { NoOpContentProvider } from '../plugins/content/noop-content-provider';
-import { DefaultTelemetryPlugin } from '../plugins/telemetry/default-telemetry-plugin';
-import { DefaultEventPlugin } from '../plugins/event/default-event-plugin';
 
 export enum InitState {
   notStarted = 'not_started',

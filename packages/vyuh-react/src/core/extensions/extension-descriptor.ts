@@ -1,24 +1,19 @@
 /**
- * Base class for extension descriptors.
- * Extensions allow features to extend the functionality of other features.
+ * Base abstract class for all extension descriptors in the Vyuh system.
+ *
+ * Extensions are modular components that add functionality to the Vyuh framework.
+ * This class should not be instantiated directly - use a specific extension type.
  */
-export class ExtensionDescriptor {
+export abstract class ExtensionDescriptor {
   /**
-   * The type of extension
+   * The type of the extension
    */
   readonly type: string;
 
   /**
-   * The feature that this extension descriptor was registered by
+   * The feature that registered this extension
    */
   private _sourceFeature?: string;
-
-  /**
-   * Creates a new extension descriptor
-   */
-  constructor({ type }: { type: string }) {
-    this.type = type;
-  }
 
   /**
    * Get the source feature
@@ -28,10 +23,17 @@ export class ExtensionDescriptor {
   }
 
   /**
-   * Set the source feature for this extension descriptor
-   * This is called by the FeatureDescriptor when the extension is registered
+   * Set the source feature
    */
-  setSourceFeature(featureName?: string): void {
+  setSourceFeature(featureName: string): void {
     this._sourceFeature = featureName;
+  }
+
+  /**
+   * Creates a new extension descriptor
+   * @protected - Constructor should only be called by subclasses
+   */
+  protected constructor({ type }: { type: string }) {
+    this.type = type;
   }
 }

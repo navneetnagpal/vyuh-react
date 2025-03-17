@@ -1,8 +1,10 @@
-import { ContentItem } from './content-item';
-import { RouteBase } from './route-base';
-import { Category } from './category';
-import { LayoutConfiguration } from './layout-configuration';
-import { ContentModifierConfiguration } from './content-modifier-configuration';
+import {
+  Category,
+  ContentItem,
+  ContentModifierConfiguration,
+  LayoutConfiguration,
+  RouteBase,
+} from '@vyuh/react';
 
 /**
  * Route content item implementation for Vyuh React

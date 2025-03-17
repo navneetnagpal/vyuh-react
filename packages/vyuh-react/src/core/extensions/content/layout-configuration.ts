@@ -14,7 +14,9 @@ import React from 'react';
  * Each content type can have multiple layout variants, allowing the
  * same content to be displayed differently in different contexts.
  */
-export abstract class LayoutConfiguration<TContent extends ContentItem> {
+export abstract class LayoutConfiguration<
+  TContent extends ContentItem = ContentItem,
+> {
   /**
    * The schema type identifier for this layout
    */

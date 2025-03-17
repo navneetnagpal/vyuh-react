@@ -1,6 +1,6 @@
 import React from 'react';
-import { SchemaItem } from './schema-item';
-import { ContentItem } from './content-item';
+import { ContentItem } from '../../content/content-item';
+import { SchemaItem } from '../../content/schema-item';
 
 /**
  * Configuration for modifying content presentation.
@@ -27,6 +27,18 @@ export abstract class ContentModifierConfiguration implements SchemaItem {
   readonly title?: string;
 
   /**
+   * The feature that registered this content modifier configuration
+   */
+  private _sourceFeature?: string;
+
+  /**
+   * Get the source feature
+   */
+  get sourceFeature(): string | undefined {
+    return this._sourceFeature;
+  }
+
+  /**
    * Creates a new content modifier configuration
    *
    * @param data
@@ -34,6 +46,13 @@ export abstract class ContentModifierConfiguration implements SchemaItem {
   protected constructor(data: { schemaType: string; title?: string }) {
     this.schemaType = data.schemaType;
     this.title = data.title;
+  }
+
+  /**
+   * Set the source feature
+   */
+  setSourceFeature(featureName?: string): void {
+    this._sourceFeature = featureName;
   }
 
   /**

@@ -1,7 +1,8 @@
+import { ContentItem } from '@/core/content/content-item';
 import { ContentProvider } from '@/core/plugins/content/content-provider';
 import React from 'react';
-import { ContentBuilder } from './content-builder';
-import { Plugin } from '../plugin';
+import { Plugin } from '@/core/plugins/plugin';
+import { ExtensionBuilder } from '@/core/extensions/extension-builder';
 
 /**
  * Plugin for managing content
@@ -15,33 +16,22 @@ export abstract class ContentPlugin extends Plugin {
   /**
    * Creates a new content plugin
    */
-  constructor(name: string, title: string, provider: ContentProvider) {
+  protected constructor(
+    name: string,
+    title: string,
+    provider: ContentProvider,
+  ) {
     super(name, title);
     this.provider = provider;
   }
 
   /**
-   * Register a content builder
-   */
-  abstract registerBuilder(builder: ContentBuilder): void;
-
-  /**
-   * Get a content builder by schema type
-   */
-  abstract getBuilder(schemaType: string): ContentBuilder | undefined;
-
-  /**
-   * Get all registered content builders
-   */
-  abstract getAllBuilders(): ContentBuilder[];
-
-  /**
-   * Check if a content builder is registered
-   */
-  abstract isRegistered(schemaType: string): boolean;
-
-  /**
    * Build content from a JSON object
    */
-  abstract render(json: Record<string, any>): React.ReactNode;
+  abstract render(json: ContentItem): React.ReactNode;
+
+  /**
+   * Attach an extension builder to this plugin
+   */
+  abstract attach(extBuilder: ExtensionBuilder): void;
 }

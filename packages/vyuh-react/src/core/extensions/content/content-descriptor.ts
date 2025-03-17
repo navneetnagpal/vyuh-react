@@ -1,4 +1,4 @@
-import { LayoutConfiguration } from '../../content/layout-configuration';
+import { LayoutConfiguration } from './layout-configuration';
 
 /**
  * Descriptor for content types in the Vyuh system.

@@ -1,10 +1,10 @@
+import { FileReference, ImageReference } from '@/core/content/reference';
 import { RouteBase } from '@/core/content/route-base';
 import {
   ContentProvider,
   LiveContentProvider,
 } from '@/core/plugins/content/content-provider';
 import { NoOpLiveContentProvider } from '@/core/plugins/content/noop-live-content-provider';
-import { FileReference, ImageReference } from '@/core/content/reference';
 
 /**
  * No-op implementation of ContentProvider.
