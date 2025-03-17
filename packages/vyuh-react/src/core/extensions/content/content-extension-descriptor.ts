@@ -1,5 +1,5 @@
-import { ContentDescriptor } from '../../content/content-descriptor';
-import { ContentBuilder } from '../../content/content-builder';
+import { ContentDescriptor } from '../../plugins/content/content-descriptor';
+import { ContentBuilder } from '../../plugins/content/content-builder';
 import { ExtensionDescriptor } from '../extension-descriptor';
 
 /**

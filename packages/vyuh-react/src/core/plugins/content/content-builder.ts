@@ -1,5 +1,6 @@
+import { ContentItem } from '@/core/content/content-item';
 import React from 'react';
-import { LayoutConfiguration } from './layout-configuration';
+import { LayoutConfiguration } from '@/core/content/layout-configuration';
 import { ContentDescriptor } from './content-descriptor';
 
 /**
@@ -9,7 +10,7 @@ import { ContentDescriptor } from './content-descriptor';
  * - Managing layout configurations for content types
  * - Building content widgets
  */
-export class ContentBuilder {
+export class ContentBuilder<TContent extends ContentItem> {
   /**
    * The schema type for this builder
    */
@@ -25,18 +26,6 @@ export class ContentBuilder {
    */
   get defaultLayout(): LayoutConfiguration {
     return this._defaultLayout;
-  }
-
-  /**
-   * The default layout descriptor
-   */
-  private _defaultLayoutDescriptor: LayoutConfiguration;
-
-  /**
-   * Get the default layout descriptor
-   */
-  get defaultLayoutDescriptor(): LayoutConfiguration {
-    return this._defaultLayoutDescriptor;
   }
 
   /**
@@ -76,15 +65,12 @@ export class ContentBuilder {
   constructor({
     schemaType,
     defaultLayout,
-    defaultLayoutDescriptor,
   }: {
     schemaType: string;
     defaultLayout: LayoutConfiguration;
-    defaultLayoutDescriptor: LayoutConfiguration;
   }) {
     this.schemaType = schemaType;
     this._defaultLayout = defaultLayout;
-    this._defaultLayoutDescriptor = defaultLayoutDescriptor;
   }
 
   /**
@@ -105,7 +91,7 @@ export class ContentBuilder {
 
     // Combine default layout with user layouts, ensuring uniqueness
     const uniqueLayouts = new Set<LayoutConfiguration>([
-      this.defaultLayoutDescriptor,
+      this.defaultLayout,
       ...userLayouts,
     ]);
 
@@ -115,7 +101,7 @@ export class ContentBuilder {
   /**
    * Build a widget for the given content item
    */
-  render(content: Record<string, any>): React.ReactNode {
+  render(content: TContent): React.ReactNode {
     // Get the layout from the content or use default
     const layoutType = content.layout || this.defaultLayout.schemaType;
     let layout = this._layouts.find((l) => l.schemaType === layoutType);
@@ -133,7 +119,6 @@ export class ContentBuilder {
    */
   setDefaultLayout(layout: LayoutConfiguration): void {
     this._defaultLayout = layout;
-    this._defaultLayoutDescriptor = layout;
   }
 
   /**

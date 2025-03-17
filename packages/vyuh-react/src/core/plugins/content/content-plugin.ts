@@ -1,6 +1,6 @@
-import { ContentProvider } from '@/core/content/content-provider';
+import { ContentProvider } from '@/core/plugins/content/content-provider';
 import React from 'react';
-import { ContentBuilder } from '../../content/content-builder';
+import { ContentBuilder } from './content-builder';
 import { Plugin } from '../plugin';
 
 /**

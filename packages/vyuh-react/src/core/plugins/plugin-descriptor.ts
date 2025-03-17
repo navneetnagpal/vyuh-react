@@ -1,4 +1,4 @@
-import { NoOpContentProvider } from '@/core/content/noop-content-provider';
+import { NoOpContentProvider } from '@/core/plugins/content/noop-content-provider';
 import { DefaultContentPlugin } from '@/core/plugins/content/default-content-plugin';
 import { ContentPlugin } from './content/content-plugin';
 import { DefaultEventPlugin } from './event/default-event-plugin';
@@ -11,18 +11,14 @@ import { TelemetryPlugin } from './telemetry/telemetry-plugin';
  * Describes the plugins available to the Vyuh platform.
  */
 export class PluginDescriptor {
-  readonly content?: ContentPlugin;
-  readonly telemetry?: TelemetryPlugin;
-  readonly event?: EventPlugin;
+  readonly content: ContentPlugin;
+  readonly telemetry: TelemetryPlugin;
+  readonly event: EventPlugin;
 
-  constructor({
-    content = new DefaultContentPlugin(new NoOpContentProvider()),
-    telemetry = new DefaultTelemetryPlugin(),
-    event = new DefaultEventPlugin(),
-  } = {}) {
-    this.content = content;
-    this.telemetry = telemetry;
-    this.event = event;
+  constructor(props: Partial<PluginDescriptor> = {}) {
+    this.content = props.content ?? PluginDescriptor.system.content;
+    this.telemetry = props.telemetry ?? PluginDescriptor.system.telemetry;
+    this.event = props.event ?? PluginDescriptor.system.event;
   }
 
   /**
@@ -44,7 +40,9 @@ export class PluginDescriptor {
   /**
    * Default system plugins
    */
-  static get system(): PluginDescriptor {
-    return new PluginDescriptor();
-  }
+  static readonly system = new PluginDescriptor({
+    content: new DefaultContentPlugin(new NoOpContentProvider()),
+    telemetry: new DefaultTelemetryPlugin(),
+    event: new DefaultEventPlugin(),
+  });
 }

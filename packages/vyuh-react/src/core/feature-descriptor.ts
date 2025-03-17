@@ -1,5 +1,5 @@
 import { IconType } from 'react-icons';
-import { ContentDescriptor } from './content/content-descriptor';
+import { ContentDescriptor } from './plugins/content/content-descriptor';
 import { ExtensionBuilder } from './extensions/extension-builder';
 import { ExtensionDescriptor } from './extensions/extension-descriptor';
 

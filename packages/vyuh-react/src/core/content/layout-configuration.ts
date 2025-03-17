@@ -1,3 +1,4 @@
+import { ContentItem } from '@/core/content/content-item';
 import React from 'react';
 
 /**
@@ -13,7 +14,7 @@ import React from 'react';
  * Each content type can have multiple layout variants, allowing the
  * same content to be displayed differently in different contexts.
  */
-export abstract class LayoutConfiguration {
+export abstract class LayoutConfiguration<TContent extends ContentItem> {
   /**
    * The schema type identifier for this layout
    */
@@ -44,7 +45,7 @@ export abstract class LayoutConfiguration {
   /**
    * Creates a new layout configuration
    */
-  constructor({
+  protected constructor({
     schemaType,
     title,
     contentType,
@@ -71,5 +72,5 @@ export abstract class LayoutConfiguration {
    * @param content The content item to render
    * @returns A React component representing the content with this layout
    */
-  abstract render(content: Record<string, any>): React.ReactNode;
+  abstract render(content: TContent): React.ReactNode;
 }

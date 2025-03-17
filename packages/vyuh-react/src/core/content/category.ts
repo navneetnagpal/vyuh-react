@@ -1,32 +1,51 @@
-import { SchemaItem } from './schema-item';
+import { ContentItem } from './content-item';
+import { LayoutConfiguration } from './layout-configuration';
+import { ContentModifierConfiguration } from './content-modifier-configuration';
 
 /**
- * A category for organizing routes.
+ * Category for organizing routes
  *
- * Categories help structure routes in a hierarchical manner.
- * They can be used to:
- * - Group related routes
- * - Create navigation menus
- * - Filter and sort routes
+ * Categories provide a way to group related routes and apply
+ * common configuration like layouts and modifiers.
  */
-export interface Category extends SchemaItem {
+export class Category extends ContentItem {
   /**
-   * Unique identifier for the category
+   * Schema type identifier for categories
    */
-  readonly identifier: string;
+  static readonly schemaName: string = 'vyuh.category';
 
-  /**
-   * Human-readable title for the category
-   */
+  readonly id: string;
   readonly title: string;
+  readonly slug: string;
+
+  constructor(data: {
+    id: string;
+    title: string;
+    slug: string;
+    layout?: LayoutConfiguration;
+    modifiers?: ContentModifierConfiguration[];
+  }) {
+    super({
+      schemaType: Category.schemaName,
+      layout: data.layout,
+      modifiers: data.modifiers,
+    });
+
+    this.id = data.id;
+    this.title = data.title;
+    this.slug = data.slug;
+  }
 
   /**
-   * Optional layout configuration for routes in this category
+   * Create a Category instance from JSON data
    */
-  readonly layout?: any;
-
-  /**
-   * Optional modifiers for routes in this category
-   */
-  readonly modifiers?: any[];
+  static fromJson(json: Record<string, any>): Category {
+    return new Category({
+      id: json.id || json._id,
+      title: json.title,
+      slug: json.slug,
+      layout: json.layout,
+      modifiers: json.modifiers,
+    });
+  }
 }

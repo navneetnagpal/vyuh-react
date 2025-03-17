@@ -1,8 +1,8 @@
 import { ExtensionDescriptor } from '@/core/extensions/extension-descriptor';
 
 import { useVyuhStore } from '@/hooks/use-vyuh';
-import { ContentBuilder } from '../../content/content-builder';
-import { ContentDescriptor } from '../../content/content-descriptor';
+import { ContentBuilder } from '../../plugins/content/content-builder';
+import { ContentDescriptor } from '../../plugins/content/content-descriptor';
 import { LayoutConfiguration } from '../../content/layout-configuration';
 import { ContentPlugin } from '../../plugins/content/content-plugin';
 import { ExtensionBuilder } from '../extension-builder';

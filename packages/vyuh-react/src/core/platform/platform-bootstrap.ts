@@ -1,10 +1,15 @@
 import { ExtensionBuilder } from '@/core/extensions/extension-builder';
 import { ExtensionDescriptor } from '@/core/extensions/extension-descriptor';
+import { ContentPlugin } from '@/core/plugins/content/content-plugin';
 import { useVyuhStore } from '@/hooks/use-vyuh';
 import { FeatureDescriptor } from '../feature-descriptor';
 import { PlatformComponentBuilder } from '../platform-component-builder';
 import { systemReadyEvent } from '../plugins/event/default-event-plugin';
 import { PluginDescriptor } from '../plugins/plugin-descriptor';
+import { DefaultContentPlugin } from '../plugins/content/default-content-plugin';
+import { NoOpContentProvider } from '../plugins/content/noop-content-provider';
+import { DefaultTelemetryPlugin } from '../plugins/telemetry/default-telemetry-plugin';
+import { DefaultEventPlugin } from '../plugins/event/default-event-plugin';
 
 export enum InitState {
   notStarted = 'not_started',
@@ -21,7 +26,7 @@ interface BootstrapOptions {
   /**
    * Plugin descriptor containing all plugins to be loaded
    */
-  plugins: PluginDescriptor;
+  plugins?: Partial<PluginDescriptor>;
 
   /**
    * Function that returns a list of features or a promise that resolves to a list of features
@@ -31,7 +36,7 @@ interface BootstrapOptions {
   /**
    * Platform component builder
    */
-  components: PlatformComponentBuilder;
+  components?: PlatformComponentBuilder;
 
   /**
    * Optional initial location for the router
@@ -47,56 +52,50 @@ export async function bootstrap({
   plugins,
   features,
   components,
-  initialLocation,
 }: BootstrapOptions): Promise<void> {
   const store = useVyuhStore.getState();
 
-  store.init({ plugins, components });
+  // Ensure we have a complete plugin descriptor with defaults
+  const pluginDescriptor = ensureCompletePluginDescriptor(plugins);
+
+  store.init({
+    plugins: pluginDescriptor,
+    components: components ?? PlatformComponentBuilder.system,
+  });
+  store.setInitState(InitState.plugins);
 
   try {
-    const telemetry = plugins.telemetry;
-    const trace = await telemetry.startTrace('Platform', 'Bootstrap');
+    // Initialize plugins
+    await initPlugins(pluginDescriptor);
 
-    try {
-      const pluginsTrace = await trace.startChild('Plugins', 'Init');
-      try {
-        await initPlugins(plugins);
-        store.setInitState(InitState.plugins);
-      } finally {
-        await pluginsTrace.stop();
-      }
+    // Initialize features
+    store.setInitState(InitState.features);
+    await initFeatures(features, pluginDescriptor);
 
-      // Initialize features and their extensions
-      const featuresTrace = await trace.startChild('Features', 'Init');
-      try {
-        await initFeatures(features, plugins);
-        store.setInitState(InitState.features);
-      } finally {
-        await featuresTrace.stop();
-      }
+    // Dispatch system ready event
+    store.plugins.event.emit(systemReadyEvent);
 
-      // Mark as ready
-      store.setInitState(InitState.ready);
-
-      // Emit ready event if we have an event system
-      if (plugins.event) {
-        plugins.event.emit(systemReadyEvent);
-      }
-    } finally {
-      await trace.stop();
-    }
+    // Set ready state
+    store.setInitState(InitState.ready);
   } catch (error) {
-    const finalError =
-      error instanceof Error ? error : new Error(String(error));
-
-    console.error('Bootstrap failed:', finalError);
-    store.setError(finalError);
-
-    // Report error to telemetry
-    if (plugins.telemetry) {
-      await plugins.telemetry.reportError(finalError);
-    }
+    store.setInitState(InitState.error);
+    store.setError(error instanceof Error ? error : new Error(String(error)));
+    throw error;
   }
+}
+
+/**
+ * Ensure we have a complete plugin descriptor with all required plugins
+ */
+function ensureCompletePluginDescriptor(
+  plugins?: Partial<PluginDescriptor>,
+): PluginDescriptor {
+  // If no plugins provided, use system defaults
+  if (!plugins) {
+    return PluginDescriptor.system;
+  }
+
+  return new PluginDescriptor(plugins);
 }
 
 /**

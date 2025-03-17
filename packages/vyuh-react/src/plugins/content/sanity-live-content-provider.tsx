@@ -1,4 +1,4 @@
-import { LiveContentProvider } from '@/core/content/content-provider';
+import { LiveContentProvider } from '@/core/plugins/content/content-provider';
 import { RouteBase } from '@/core/content/route-base';
 import { SanityClient } from '@sanity/client';
 import { defineLive } from 'next-sanity';

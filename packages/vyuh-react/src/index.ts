@@ -13,7 +13,10 @@ export { SanityLiveContentProvider } from '@/plugins/content/sanity-live-content
 export * from './core/plugins/plugin-descriptor';
 
 // Content System
-export * from './core/content/content-builder';
-export * from './core/content/noop-content-provider';
+export * from './core/plugins/content/content-builder';
+export * from './core/plugins/content/noop-content-provider';
 export * from './core/content/route-base';
-export * from './core/content/content-provider';
+export * from './core/plugins/content/content-provider';
+
+// UI
+export * from './core/ui/route-builder';

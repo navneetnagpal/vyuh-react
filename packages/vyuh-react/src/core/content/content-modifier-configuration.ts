@@ -15,26 +15,41 @@ import { ContentItem } from './content-item';
  * Modifiers are applied in order, wrapping the content item's component
  * tree from inside out.
  */
-export interface ContentModifierConfiguration extends SchemaItem {
+export abstract class ContentModifierConfiguration implements SchemaItem {
+  /**
+   * The schema type identifier for this modifier
+   */
+  readonly schemaType: string;
+
   /**
    * Optional title for this modifier
    */
   readonly title?: string;
 
   /**
+   * Creates a new content modifier configuration
+   *
+   * @param data
+   */
+  protected constructor(data: { schemaType: string; title?: string }) {
+    this.schemaType = data.schemaType;
+    this.title = data.title;
+  }
+
+  /**
    * Builds the modified component for the given content.
    *
    * This method wraps the child component with additional functionality
    * or styling based on the modifier's configuration.
-   * 
+   *
    * @param child The child component to modify
    * @param content The content item being modified
    * @param key Optional React key
    * @returns A React component with the modification applied
    */
-  build(
+  abstract apply(
     child: React.ReactNode,
     content: ContentItem,
-    key?: React.Key
+    key?: React.Key,
   ): React.ReactElement;
 }

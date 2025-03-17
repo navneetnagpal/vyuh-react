@@ -3,7 +3,7 @@ import { LayoutConfiguration } from './layout-configuration';
 import { ContentModifierConfiguration } from './content-modifier-configuration';
 
 /**
- * The base interface for all content items in Vyuh.
+ * The base class for all content items in Vyuh.
  *
  * A content item represents a piece of content that can be:
  * - Fetched from a Content Management System (CMS)
@@ -15,7 +15,12 @@ import { ContentModifierConfiguration } from './content-modifier-configuration';
  * They combine data from the CMS with presentation logic to create
  * rich, interactive user interfaces.
  */
-export interface ContentItem extends SchemaItem {
+export abstract class ContentItem implements SchemaItem {
+  /**
+   * The schema type of the content item.
+   */
+  readonly schemaType: string;
+
   /**
    * The layout configuration for the content item.
    * Defines how the content should be visually presented.
@@ -33,4 +38,14 @@ export interface ContentItem extends SchemaItem {
    * Used internally by the content system for hierarchical content.
    */
   parent?: ContentItem;
+
+  protected constructor(data: {
+    schemaType: string;
+    layout?: LayoutConfiguration;
+    modifiers?: ContentModifierConfiguration[];
+  }) {
+    this.schemaType = data.schemaType;
+    this.layout = data.layout;
+    this.modifiers = data.modifiers;
+  }
 }

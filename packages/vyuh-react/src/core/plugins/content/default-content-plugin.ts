@@ -1,7 +1,7 @@
 import React from 'react';
-import { ContentBuilder } from '@/core/content/content-builder';
+import { ContentBuilder } from '@/core/plugins/content/content-builder';
 import { ContentPlugin } from '@/core/plugins/content/content-plugin';
-import { ContentProvider } from '@/core/content/content-provider';
+import { ContentProvider } from '@/core/plugins/content/content-provider';
 
 /**
  * Default implementation of ContentPlugin.

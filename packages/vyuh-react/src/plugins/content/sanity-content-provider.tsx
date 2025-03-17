@@ -2,7 +2,7 @@ import {
   ContentProvider,
   LiveContentProvider,
   NoOpLiveContentProvider,
-} from '@/core/content/content-provider';
+} from '@/core/plugins/content/content-provider';
 import { FileReference, ImageReference } from '@/core/content/reference';
 import { RouteBase } from '@/core/content/route-base';
 import { createClient, SanityClient } from '@sanity/client';
@@ -26,7 +26,7 @@ export class SanityContentProvider extends ContentProvider {
   constructor(config: SanityConfig, cacheDuration: number = 300000) {
     // Default 5 minutes
     super({
-      name: 'vyuh.content.provider.sanity',
+      name: 'vyuh.plugin.content.provider.sanity',
       title: 'Sanity Content Provider',
     });
 

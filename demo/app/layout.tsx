@@ -5,6 +5,7 @@ import {
   VyuhProvider,
   DefaultContentPlugin,
   SanityContentProvider,
+  PluginDescriptor,
 } from '@vyuh/react';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
@@ -39,8 +40,9 @@ const sanityProvider = SanityContentProvider.withConfig({
   cacheDuration: 300000, // 5 minutes
 });
 
-// Create the content plugin with the Sanity provider
-const contentPlugin = new DefaultContentPlugin(sanityProvider);
+const plugins = new PluginDescriptor({
+  content: new DefaultContentPlugin(sanityProvider),
+});
 
 export default function RootLayout({
   children,
@@ -52,12 +54,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <VyuhProvider
-          features={() => [counter]}
-          plugins={{
-            content: contentPlugin,
-          }}
-        >
+        <VyuhProvider features={() => [counter]} plugins={plugins}>
           {children}
         </VyuhProvider>
       </body>
