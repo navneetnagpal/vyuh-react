@@ -1,3 +1,5 @@
+'use client';
+
 import { RouteBase, useVyuh } from '@vyuh/react';
 import React, {
   Component,

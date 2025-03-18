@@ -1,5 +1,3 @@
-'use client';
-
 import { RouteBuilder } from '@vyuh/extension-content';
 
 export default function Home() {
