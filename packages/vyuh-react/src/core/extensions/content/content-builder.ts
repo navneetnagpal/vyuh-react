@@ -1,5 +1,6 @@
 import { ContentItem } from '@/core/content/content-item';
 import { LayoutConfiguration } from '@/core/extensions/content/layout-configuration';
+import { useVyuhStore } from '@/hooks/use-vyuh';
 import React from 'react';
 import { ContentDescriptor } from './content-descriptor';
 
@@ -26,18 +27,6 @@ export class ContentBuilder<TContent extends ContentItem = ContentItem> {
    */
   get defaultLayout(): LayoutConfiguration {
     return this._defaultLayout;
-  }
-
-  /**
-   * List of all available layouts
-   */
-  private _layouts: LayoutConfiguration[] = [];
-
-  /**
-   * Get all available layouts
-   */
-  get layouts(): LayoutConfiguration[] {
-    return this._layouts;
   }
 
   /**
@@ -83,19 +72,10 @@ export class ContentBuilder<TContent extends ContentItem = ContentItem> {
    *
    * @param descriptors Content descriptors for this content type
    */
-  init(descriptors: ContentDescriptor[]): void {
-    // Extract layouts from descriptors
-    const userLayouts = descriptors.flatMap(
-      (descriptor) => descriptor.layouts || [],
-    );
+  init(descriptors: ContentDescriptor[]): void {}
 
-    // Combine default layout with user layouts, ensuring uniqueness
-    const uniqueLayouts = new Set<LayoutConfiguration>([
-      this.defaultLayout,
-      ...userLayouts,
-    ]);
-
-    this._layouts = Array.from(uniqueLayouts);
+  getLayout(content: TContent): string {
+    return content.layout?.schemaType || this.defaultLayout.schemaType;
   }
 
   /**
@@ -103,11 +83,18 @@ export class ContentBuilder<TContent extends ContentItem = ContentItem> {
    */
   render(content: TContent): React.ReactNode {
     // Get the layout from the content or use default
-    const layoutType = content.layout || this.defaultLayout.schemaType;
-    let layout = this._layouts.find((l) => l.schemaType === layoutType);
+    const layoutType = this.getLayout(content);
+    const store = useVyuhStore.getState();
+    const contentPlugin = store.plugins.content;
+    const telemetry = store.plugins.telemetry;
+
+    let layout = contentPlugin.getItem(LayoutConfiguration, layoutType);
 
     if (!layout) {
-      console.debug(`No layout found for ${this.schemaType}. Using default.`);
+      telemetry?.log(
+        `No layout found for ${this.schemaType}. Using default.`,
+        'debug',
+      );
       layout = this.defaultLayout;
     }
 
@@ -119,27 +106,5 @@ export class ContentBuilder<TContent extends ContentItem = ContentItem> {
    */
   setDefaultLayout(layout: LayoutConfiguration): void {
     this._defaultLayout = layout;
-  }
-
-  /**
-   * Register type descriptors with the content system
-   *
-   * This is a helper method for subclasses to register additional type descriptors
-   * that may be needed for their specific content type.
-   *
-   * @param descriptors The type descriptors to register
-   * @param checkUnique Whether to check for uniqueness (defaults to false)
-   */
-  protected registerDescriptors<T>(
-    descriptors: any[],
-    checkUnique: boolean = false,
-  ): void {
-    // This would be implemented to register descriptors with the content system
-    // In a real implementation, this would likely call into a registry service
-
-    // For now, just log the registration
-    console.debug(
-      `Registering ${descriptors.length} descriptors for ${this.schemaType}`,
-    );
   }
 }

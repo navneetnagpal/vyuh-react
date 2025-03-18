@@ -1,15 +1,18 @@
-import { ContentExtensionBuilder } from '@vyuh/react';
+import { UnknownContentBuilder } from '@/content/unknown';
+import {
+  ContentExtensionBuilder,
+  ContentExtensionDescriptor,
+  FeatureDescriptor,
+} from '@vyuh/react';
 import React from 'react';
-import { FeatureDescriptor } from '@vyuh/react';
-import { ContentExtensionDescriptor } from '@vyuh/react';
 import { RouteContentBuilder } from './content/route-builder';
 import { RouteDescriptor } from './content/route-descriptor';
+import './styles.css'; // Import Tailwind CSS
 
 /**
  * System feature for Vyuh React
  *
  * Provides core content types and functionality:
- * - Routes: Basic route content type
  */
 export const feature = new FeatureDescriptor({
   name: 'system',
@@ -19,8 +22,11 @@ export const feature = new FeatureDescriptor({
   extensions: [
     new ContentExtensionDescriptor({
       contents: [new RouteDescriptor()],
-      contentBuilders: [new RouteContentBuilder()],
+      contentBuilders: [new RouteContentBuilder(), new UnknownContentBuilder()],
     }),
   ],
   extensionBuilders: [new ContentExtensionBuilder()],
+  init: async () => {
+    console.log('System feature initialized with Tailwind CSS 4.0');
+  },
 });

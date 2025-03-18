@@ -1,0 +1,21 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
+  
+  /* You can customize colors and other theme values here */
+  --color-primary: #3b82f6;
+  --color-secondary: #6b7280;
+  --color-accent: #8b5cf6;
+  
+  --rounded-btn: 0.5rem;
+  --rounded-box: 1rem;
+}
+
+/* Optional: Add your custom utilities */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

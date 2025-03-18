@@ -62,23 +62,6 @@ export class Route extends RouteBase {
     // Perform any cleanup logic here
     return Promise.resolve();
   }
-
-  /**
-   * Create a Route instance from JSON data
-   */
-  static fromJson(json: Record<string, any>): Route {
-    return new Route({
-      id: json.id || json._id,
-      title: json.title,
-      path: json.path,
-      category: json.category,
-      updatedAt: json.updatedAt || json._updatedAt,
-      createdAt: json.createdAt || json._createdAt,
-      regions: Array.isArray(json.regions) ? json.regions : [],
-      layout: json.layout,
-      modifiers: json.modifiers,
-    });
-  }
 }
 
 /**

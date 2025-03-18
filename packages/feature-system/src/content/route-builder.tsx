@@ -16,30 +16,17 @@ export class RouteContentBuilder extends ContentBuilder<Route> {
   }
 
   /**
-   * Create a Route instance from JSON data
-   */
-  fromJson(json: Record<string, any>): Route {
-    return Route.fromJson(json);
-  }
-
-  /**
    * Render a Route content item
    *
    * This uses the route's layout configuration or falls back to the category layout.
    * If no layout is found, it uses the default layout.
    */
-  render(content: Route): React.ReactNode {
-    // Get the layout from the content or use default
-    const layout = content.getLayout();
-
-    if (!layout) {
-      console.debug(
-        `No layout found for ${content.schemaType}. Using default.`,
-      );
-      return this.defaultLayout.render(content);
-    }
-
-    return layout.render(content);
+  override getLayout(content: Route): string {
+    return (
+      content.layout?.schemaType ||
+      content.category?.layout?.schemaType ||
+      this.defaultLayout.schemaType
+    );
   }
 }
 
@@ -72,14 +59,20 @@ function DefaultRouteComponent({ route }: { route: Route }) {
   const { plugins } = useVyuh();
 
   return (
-    <div className="default-route">
-      <h1>{route.title}</h1>
+    <div className="w-full max-w-7xl mx-auto px-4 py-6">
+      <h1 className="text-3xl font-bold text-neutral-900 mb-6">
+        {route.title}
+      </h1>
       {route.regions.map((region, index) => (
-        <div key={region.identifier || index} className="region">
-          <h2>{region.title}</h2>
-          <div className="region-content">
+        <div key={region.identifier || index} className="mb-8">
+          {region.title && (
+            <h2 className="text-xl font-semibold text-neutral-800 mb-4">
+              {region.title}
+            </h2>
+          )}
+          <div className="flex flex-col gap-6">
             {region.items.map((item, itemIndex) => (
-              <div key={itemIndex} className="region-item">
+              <div key={itemIndex} className="">
                 {plugins.content.render(item)}
               </div>
             ))}

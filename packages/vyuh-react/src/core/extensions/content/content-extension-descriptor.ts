@@ -9,7 +9,7 @@ import { ExtensionDescriptor } from '@/core/extensions/extension-descriptor';
  * Descriptor for content extensions
  */
 export class ContentExtensionDescriptor extends ExtensionDescriptor {
-  static readonly type = 'vyuh.extension.content';
+  static readonly extensionType = 'vyuh.extension.content';
 
   /**
    * Content descriptors
@@ -46,7 +46,7 @@ export class ContentExtensionDescriptor extends ExtensionDescriptor {
     conditions,
     contentModifiers,
   }: Partial<ContentExtensionDescriptor>) {
-    super({ type: ContentExtensionDescriptor.type });
+    super({ type: ContentExtensionDescriptor.extensionType });
 
     this.contents = contents;
     this.contentBuilders = contentBuilders;
