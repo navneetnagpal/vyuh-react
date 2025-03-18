@@ -1,4 +1,4 @@
-import { Category } from '@/content/category';
+import { Category } from '@vyuh/react/src/core/content/category';
 import {
   ContentItem,
   ContentModifierConfiguration,

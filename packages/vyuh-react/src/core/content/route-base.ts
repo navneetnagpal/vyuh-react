@@ -1,7 +1,7 @@
-import { ContentModifierConfiguration } from '../extensions/content/content-modifier-configuration';
-import { LayoutConfiguration } from '../extensions/content/layout-configuration';
-import { Category } from './category';
-import { ContentItem } from './content-item';
+import { Category } from '@/core/content/category';
+import { ContentItem } from '@/core/content/content-item';
+import { ContentModifierConfiguration } from '@/core/content/content-modifier-configuration';
+import { LayoutConfiguration } from '@/core/content/layout-configuration';
 
 /**
  * Base class for all route content items in Vyuh.
@@ -77,40 +77,5 @@ export abstract class RouteBase extends ContentItem {
       data.createdAt instanceof Date
         ? data.createdAt
         : new Date(data.createdAt);
-  }
-
-  /**
-   * Initialize the route when it becomes active.
-   *
-   * This is called when the route is first navigated to.
-   * Use this to set up any route-specific state or resources.
-   * Return null to prevent the route from being shown.
-   *
-   * @returns A promise that resolves to the initialized route, or null if initialization failed
-   */
-  abstract init(): Promise<RouteBase | null>;
-
-  /**
-   * Clean up the route when it is no longer active.
-   *
-   * This is called when navigating away from the route.
-   * Use this to clean up any resources initialized in [init].
-   */
-  abstract dispose(): Promise<void>;
-
-  /**
-   * Get the layout configuration for this route.
-   * Falls back to category layout if route layout is not defined.
-   */
-  getLayout(): LayoutConfiguration | null {
-    return this.layout || this.category?.layout || null;
-  }
-
-  /**
-   * Get the modifiers for this route.
-   * Falls back to category modifiers if route modifiers are not defined.
-   */
-  getModifiers(): ContentModifierConfiguration[] | null {
-    return this.modifiers || this.category?.modifiers || null;
   }
 }

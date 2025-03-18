@@ -25,10 +25,11 @@ export * from './core/plugins/content/noop-content-provider';
 
 // Content System
 export * from './core/content/schema-item';
-export * from './core/content/route-base';
 export * from './core/content/content-item';
 export * from './core/content/reference';
 export * from './core/content/unknown';
+export * from './core/content/route-base';
+export * from './core/content/category';
 export * from './core/content/layout-configuration';
 export * from './core/content/action-configuration';
 export * from './core/content/condition-configuration';

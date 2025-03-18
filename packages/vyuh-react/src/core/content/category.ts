@@ -2,7 +2,7 @@ import {
   ContentItem,
   ContentModifierConfiguration,
   LayoutConfiguration,
-} from '@vyuh/react';
+} from '@/index';
 
 /**
  * Category for organizing routes
