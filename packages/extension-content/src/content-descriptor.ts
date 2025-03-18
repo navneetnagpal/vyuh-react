@@ -1,4 +1,4 @@
-import { LayoutConfiguration } from './layout-configuration';
+import { LayoutConfiguration } from '@vyuh/react';
 
 /**
  * Descriptor for content types in the Vyuh system.

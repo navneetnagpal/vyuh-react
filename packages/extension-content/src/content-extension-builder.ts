@@ -1,14 +1,16 @@
-import { ConditionConfiguration } from '@/core/extensions/content/condition-configuration';
-import { ItemType } from '@/core/extensions/content/types';
-import { ExtensionDescriptor } from '@/core/extensions/extension-descriptor';
-import { useVyuhStore } from '@/hooks/use-vyuh';
-import { ExtensionBuilder } from '../extension-builder';
-import { ActionConfiguration } from './action-configuration';
-import { ContentBuilder } from './content-builder';
-import { ContentDescriptor } from './content-descriptor';
-import { ContentExtensionDescriptor } from './content-extension-descriptor';
-import { ContentModifierConfiguration } from './content-modifier-configuration';
-import { LayoutConfiguration } from './layout-configuration';
+import { ContentBuilder } from '@/content-builder';
+import { ContentDescriptor } from '@/content-descriptor';
+import { ContentExtensionDescriptor } from '@/content-extension-descriptor';
+import {
+  ContentModifierConfiguration,
+  LayoutConfiguration,
+  useVyuhStore,
+} from '@vyuh/react';
+import { ActionConfiguration } from '@vyuh/react/src/core/content/action-configuration';
+import { ConditionConfiguration } from '@vyuh/react/src/core/content/condition-configuration';
+import { ExtensionBuilder } from '@vyuh/react/src/core/extensions/extension-builder';
+import { ExtensionDescriptor } from '@vyuh/react/src/core/extensions/extension-descriptor';
+import { ItemType } from '@vyuh/react/src/core/extensions/types';
 
 /**
  * Builder for content extensions

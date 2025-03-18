@@ -1,5 +1,5 @@
-import { ContentModifierConfiguration } from '../extensions/content/content-modifier-configuration';
-import { LayoutConfiguration } from '../extensions/content/layout-configuration';
+import { ContentModifierConfiguration } from '@/core/content/content-modifier-configuration';
+import { LayoutConfiguration } from '@/core/content/layout-configuration';
 import { SchemaItem } from './schema-item';
 
 /**

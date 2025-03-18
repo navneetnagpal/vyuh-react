@@ -1,7 +1,7 @@
+import { DefaultContentPlugin } from '@vyuh/extension-content';
 import {
   FeatureDescriptor,
   PluginDescriptor,
-  DefaultContentPlugin,
   SanityContentProvider,
 } from '@vyuh/react';
 

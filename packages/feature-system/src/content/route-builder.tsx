@@ -1,4 +1,5 @@
-import { ContentBuilder, LayoutConfiguration, useVyuh } from '@vyuh/react';
+import { ContentBuilder } from '@vyuh/extension-content';
+import { LayoutConfiguration, useVyuh } from '@vyuh/react';
 import React from 'react';
 import { Route } from './route';
 
@@ -33,7 +34,7 @@ export class RouteContentBuilder extends ContentBuilder<Route> {
 /**
  * Default layout for routes when no specific layout is configured
  */
-export class DefaultRouteLayout extends LayoutConfiguration<Route> {
+class DefaultRouteLayout extends LayoutConfiguration<Route> {
   static readonly schemaName: string = 'vyuh.route.layout.default';
 
   constructor() {

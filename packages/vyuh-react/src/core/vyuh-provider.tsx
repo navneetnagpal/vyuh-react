@@ -3,8 +3,8 @@
 import { useVyuhStore } from '@/hooks/use-vyuh';
 import React from 'react';
 import { FeatureDescriptor } from './feature-descriptor';
+import { bootstrap, InitState } from './platform-bootstrap';
 import { PlatformComponentBuilder } from './platform-component-builder';
-import { bootstrap, InitState } from './platform/platform-bootstrap';
 import { PluginDescriptor } from './plugins/plugin-descriptor';
 
 // Provider props

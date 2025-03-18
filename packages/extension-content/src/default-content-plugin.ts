@@ -1,12 +1,14 @@
-import { ContentItem } from '@/core/content/content-item';
-import { Unknown } from '@/core/content/unknown';
-import { ContentBuilder } from '@/core/extensions/content/content-builder';
-import { ContentExtensionBuilder } from '@/core/extensions/content/content-extension-builder';
-import { ItemType } from '@/core/extensions/content/types';
-import { ExtensionBuilder } from '@/core/extensions/extension-builder';
-import { ContentPlugin } from '@/core/plugins/content/content-plugin';
-import { ContentProvider } from '@/core/plugins/content/content-provider';
-import { useVyuhStore } from '@/hooks/use-vyuh';
+import { ContentBuilder } from '@/content-builder';
+import { ContentExtensionBuilder } from '@/content-extension-builder';
+import {
+  ContentItem,
+  ContentPlugin,
+  ContentProvider,
+  ExtensionBuilder,
+  type ItemType,
+  Unknown,
+  useVyuhStore,
+} from '@vyuh/react';
 import React from 'react';
 
 /**

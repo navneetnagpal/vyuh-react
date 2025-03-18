@@ -1,6 +1,8 @@
-import { ContentModifierConfiguration } from '../extensions/content/content-modifier-configuration';
-import { LayoutConfiguration } from '../extensions/content/layout-configuration';
-import { ContentItem } from './content-item';
+import {
+  ContentItem,
+  ContentModifierConfiguration,
+  LayoutConfiguration,
+} from '@vyuh/react';
 
 /**
  * Category for organizing routes

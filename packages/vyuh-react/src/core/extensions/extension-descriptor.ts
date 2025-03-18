@@ -6,11 +6,6 @@
  */
 export abstract class ExtensionDescriptor {
   /**
-   * The type of the extension
-   */
-  readonly type: string;
-
-  /**
    * The feature that registered this extension
    */
   private _sourceFeature?: string;
@@ -33,7 +28,8 @@ export abstract class ExtensionDescriptor {
    * Creates a new extension descriptor
    * @protected - Constructor should only be called by subclasses
    */
-  protected constructor({ type }: { type: string }) {
+  protected constructor(public type: string) {
     this.type = type;
+    this._sourceFeature = undefined;
   }
 }

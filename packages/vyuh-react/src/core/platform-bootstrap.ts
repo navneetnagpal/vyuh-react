@@ -1,10 +1,10 @@
 import { ExtensionBuilder } from '@/core/extensions/extension-builder';
 import { ExtensionDescriptor } from '@/core/extensions/extension-descriptor';
 import { useVyuhStore } from '@/hooks/use-vyuh';
-import { FeatureDescriptor } from '../feature-descriptor';
-import { PlatformComponentBuilder } from '../platform-component-builder';
-import { systemReadyEvent } from '../plugins/event/default-event-plugin';
-import { PluginDescriptor } from '../plugins/plugin-descriptor';
+import { FeatureDescriptor } from './feature-descriptor';
+import { PlatformComponentBuilder } from './platform-component-builder';
+import { systemReadyEvent } from './plugins/event/default-event-plugin';
+import { PluginDescriptor } from './plugins/plugin-descriptor';
 
 export enum InitState {
   notStarted = 'not_started',

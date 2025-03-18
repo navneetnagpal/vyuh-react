@@ -1,5 +1,5 @@
+import { Category } from '@/content/category';
 import {
-  Category,
   ContentItem,
   ContentModifierConfiguration,
   LayoutConfiguration,

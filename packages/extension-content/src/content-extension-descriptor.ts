@@ -1,9 +1,11 @@
-import { ActionConfiguration } from '@/core/extensions/content/action-configuration';
-import { ConditionConfiguration } from '@/core/extensions/content/condition-configuration';
-import { ContentBuilder } from '@/core/extensions/content/content-builder';
-import { ContentDescriptor } from '@/core/extensions/content/content-descriptor';
-import { ContentModifierConfiguration } from '@/core/extensions/content/content-modifier-configuration';
-import { ExtensionDescriptor } from '@/core/extensions/extension-descriptor';
+import { ContentBuilder } from '@/content-builder';
+import { ContentDescriptor } from '@/content-descriptor';
+import {
+  ActionConfiguration,
+  ConditionConfiguration,
+  ContentModifierConfiguration,
+  ExtensionDescriptor,
+} from '@vyuh/react';
 
 /**
  * Descriptor for content extensions
@@ -46,7 +48,7 @@ export class ContentExtensionDescriptor extends ExtensionDescriptor {
     conditions,
     contentModifiers,
   }: Partial<ContentExtensionDescriptor>) {
-    super({ type: ContentExtensionDescriptor.extensionType });
+    super(ContentExtensionDescriptor.extensionType);
 
     this.contents = contents;
     this.contentBuilders = contentBuilders;

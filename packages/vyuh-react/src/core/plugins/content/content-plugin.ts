@@ -1,6 +1,6 @@
 import { ContentItem } from '@/core/content/content-item';
-import { ItemType } from '@/core/extensions/content/types';
 import { ExtensionBuilder } from '@/core/extensions/extension-builder';
+import { ItemType } from '@/core/extensions/types';
 import { ContentProvider } from '@/core/plugins/content/content-provider';
 import { Plugin } from '@/core/plugins/plugin';
 import React from 'react';
@@ -29,7 +29,7 @@ export abstract class ContentPlugin extends Plugin {
   /**
    * Build content from a JSON object
    */
-  abstract render(json: ContentItem): React.ReactNode;
+  abstract render(json: Record<string, any> | ContentItem): React.ReactNode;
 
   /**
    * Attach an extension builder to this plugin

@@ -18,7 +18,7 @@ export interface SanityConfig {
 }
 
 export class SanityContentProvider extends ContentProvider {
-  private client: SanityClient;
+  private readonly client: SanityClient;
   private imageBuilder: any;
   private cacheDuration: number;
   // private _live: SanityLiveContentProvider;
@@ -119,13 +119,12 @@ export class SanityContentProvider extends ContentProvider {
     routeId?: string;
     useCache?: boolean;
   }): Promise<RouteBase | null> {
-    try {
-      let query: string;
-      let params: Record<string, any> = {};
+    let query: string;
+    let params: Record<string, any> = {};
 
-      if (options.path) {
-        // Match the Dart implementation's route query
-        query = `*[_type in ["vyuh.route", "vyuh.conditionalRoute"] && path == $path] | order(_type asc, _updatedAt desc) {
+    if (options.path) {
+      // Match the Dart implementation's route query
+      query = `*[_type in ["vyuh.route", "vyuh.conditionalRoute"] && path == $path] | order(_type asc, _updatedAt desc) {
           ...,
           "category": category->,
           "regions": regions[] {
@@ -134,10 +133,10 @@ export class SanityContentProvider extends ContentProvider {
             items,
           },
         }[0]`;
-        params.path = options.path;
-      } else if (options.routeId) {
-        // Match the Dart implementation's route by ID query
-        query = `*[_id == $routeId] {
+      params.path = options.path;
+    } else if (options.routeId) {
+      // Match the Dart implementation's route by ID query
+      query = `*[_id == $routeId] {
           ...,
           "category": category->,
           "regions": regions[] {
@@ -146,19 +145,15 @@ export class SanityContentProvider extends ContentProvider {
             items,
           },
         }[0]`;
-        params.routeId = options.routeId;
-      } else {
-        throw new Error('Either path or routeId must be provided');
-      }
-
-      const result = await this.client.fetch(query, params);
-
-      if (!result) return null;
-      return result as RouteBase;
-    } catch (error) {
-      console.error('Error fetching route:', error);
-      return null;
+      params.routeId = options.routeId;
+    } else {
+      throw new Error('Either path or routeId must be provided');
     }
+
+    const result = await this.client.fetch(query, params);
+
+    if (!result) return null;
+    return result as RouteBase;
   }
 
   image(

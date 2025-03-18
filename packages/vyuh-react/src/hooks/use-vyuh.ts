@@ -1,8 +1,8 @@
 'use client';
 
 import { FeatureDescriptor } from '@/core/feature-descriptor';
+import { InitState } from '@/core/platform-bootstrap';
 import { PlatformComponentBuilder } from '@/core/platform-component-builder';
-import { InitState } from '@/core/platform/platform-bootstrap';
 import { PluginDescriptor } from '@/core/plugins/plugin-descriptor';
 import { create } from 'zustand/index';
 

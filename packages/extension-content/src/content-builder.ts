@@ -1,6 +1,4 @@
-import { ContentItem } from '@/core/content/content-item';
-import { LayoutConfiguration } from '@/core/extensions/content/layout-configuration';
-import { useVyuhStore } from '@/hooks/use-vyuh';
+import { ContentItem, LayoutConfiguration, useVyuhStore } from '@vyuh/react';
 import React from 'react';
 import { ContentDescriptor } from './content-descriptor';
 

@@ -1,5 +1,4 @@
-import { RouteBase } from '@/core/content/route-base';
-import { useVyuh } from '@/hooks/use-vyuh';
+import { RouteBase, useVyuh } from '@vyuh/react';
 import React, {
   Component,
   ErrorInfo,

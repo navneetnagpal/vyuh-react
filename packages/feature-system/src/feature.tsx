@@ -1,9 +1,10 @@
+import { PortableTextContentBuilder } from '@/content/portable-text-builder';
 import { UnknownContentBuilder } from '@/content/unknown';
 import {
   ContentExtensionBuilder,
   ContentExtensionDescriptor,
-  FeatureDescriptor,
-} from '@vyuh/react';
+} from '@vyuh/extension-content';
+import { FeatureDescriptor } from '@vyuh/react';
 import React from 'react';
 import { RouteContentBuilder } from './content/route-builder';
 import { RouteDescriptor } from './content/route-descriptor';
@@ -20,9 +21,14 @@ export const feature = new FeatureDescriptor({
   description: 'Core building blocks of the Vyuh React framework',
   icon: <span>🧩</span>, // Using emoji as a simple icon
   extensions: [
+    // @ts-ignore
     new ContentExtensionDescriptor({
       contents: [new RouteDescriptor()],
-      contentBuilders: [new RouteContentBuilder(), new UnknownContentBuilder()],
+      contentBuilders: [
+        new RouteContentBuilder(),
+        new UnknownContentBuilder(),
+        new PortableTextContentBuilder(),
+      ],
     }),
   ],
   extensionBuilders: [new ContentExtensionBuilder()],

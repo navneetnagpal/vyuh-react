@@ -1,5 +1,4 @@
-import { DefaultContentPlugin } from '@/core/extensions/content/default-content-plugin';
-import { NoOpContentProvider } from '@/core/plugins/content/noop-content-provider';
+import { NoOpContentPlugin } from '@/core/plugins/content/noop-content-plugin';
 import { ContentPlugin } from './content/content-plugin';
 import { DefaultEventPlugin } from './event/default-event-plugin';
 import { EventPlugin } from './event/event-plugin';
@@ -41,7 +40,7 @@ export class PluginDescriptor {
    * Default system plugins
    */
   static readonly system = new PluginDescriptor({
-    content: new DefaultContentPlugin(new NoOpContentProvider()),
+    content: new NoOpContentPlugin(),
     telemetry: new DefaultTelemetryPlugin(),
     event: new DefaultEventPlugin(),
   });

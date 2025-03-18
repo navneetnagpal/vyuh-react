@@ -1,4 +1,5 @@
-import { ContentBuilder, LayoutConfiguration, Unknown } from '@vyuh/react';
+import { ContentBuilder } from '@vyuh/extension-content';
+import { LayoutConfiguration, Unknown } from '@vyuh/react';
 import { TriangleAlert } from 'lucide-react';
 import React from 'react';
 
@@ -11,7 +12,7 @@ import React from 'react';
  * - Description of the issue
  * - Themed error presentation
  */
-export class DefaultUnknownLayout extends LayoutConfiguration<Unknown> {
+class DefaultUnknownLayout extends LayoutConfiguration<Unknown> {
   static readonly schemaName = `${Unknown.schemaName}.layout.default`;
 
   constructor() {

@@ -1,5 +1,5 @@
-import { ContentDescriptor } from '@vyuh/react/src/core/extensions/content/content-descriptor';
-import { LayoutConfiguration } from '@vyuh/react/src/core/extensions/content/layout-configuration';
+import { ContentDescriptor } from '@vyuh/extension-content';
+import { LayoutConfiguration } from '@vyuh/react';
 import { Route } from './route';
 import { RouteLifecycleConfiguration } from './route-lifecycle-configuration';
 

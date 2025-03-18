@@ -18,7 +18,7 @@ export abstract class ExtensionBuilder {
   /**
    * Creates a new extension builder
    */
-  constructor({ type }: { type: string }) {
+  protected constructor({ type }: { type: string }) {
     this.type = type;
   }
 
