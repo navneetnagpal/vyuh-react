@@ -1,13 +1,12 @@
-import { DefaultContentPlugin } from '@vyuh/extension-content';
+import { DefaultContentPlugin } from '@vyuh/react-extension-content';
 import {
   FeatureDescriptor,
   PluginDescriptor,
   SanityContentProvider,
-} from '@vyuh/react';
+} from '@vyuh/react-core';
 
 // Features
-import * as system from '@vyuh/feature-system';
-import '@vyuh/feature-system/styles.css';
+import * as system from '@vyuh/react-feature-system';
 
 /**
  * Counter feature definition

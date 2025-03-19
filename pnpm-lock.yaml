@@ -24,15 +24,15 @@ importers:
 
   demo:
     dependencies:
-      '@vyuh/extension-content':
+      '@vyuh/react-core':
         specifier: ^0.1.0
-        version: link:../packages/extension-content
-      '@vyuh/feature-system':
+        version: link:../packages/react-core
+      '@vyuh/react-extension-content':
         specifier: ^0.1.0
-        version: link:../packages/feature-system
-      '@vyuh/react':
+        version: link:../packages/react-extension-content
+      '@vyuh/react-feature-system':
         specifier: ^0.1.0
-        version: link:../packages/vyuh-react
+        version: link:../packages/react-feature-system
       next:
         specifier: ^15.2.2
         version: 15.2.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -71,17 +71,41 @@ importers:
         specifier: ^5.8.2
         version: 5.8.2
 
-  packages/extension-content:
+  packages/react-core:
     dependencies:
-      '@vyuh/react':
-        specifier: ^0.1.0
-        version: link:../vyuh-react
+      '@sanity/client':
+        specifier: ^6.28.3
+        version: 6.28.3(debug@4.4.0)
+      '@sanity/image-url':
+        specifier: ^1.1.0
+        version: 1.1.0
+      '@tailwindcss/cli':
+        specifier: ^4.0.14
+        version: 4.0.14
+      '@tailwindcss/postcss':
+        specifier: ^4.0.14
+        version: 4.0.14
+      lucide-react:
+        specifier: ^0.482.0
+        version: 0.482.0(react@19.0.0)
+      next-sanity:
+        specifier: ^9.9.4
+        version: 9.9.4(@emotion/is-prop-valid@1.2.2)(@sanity/client@6.28.3)(@sanity/icons@3.7.0(react@19.0.0))(@sanity/types@3.79.0(@types/react@19.0.10))(@sanity/ui@2.15.6(@emotion/is-prop-valid@1.2.2)(react-dom@19.0.0(react@19.0.0))(react-is@18.3.1)(react@19.0.0)(styled-components@6.1.15(react-dom@19.0.0(react@19.0.0))(react@19.0.0)))(next@15.3.0-canary.10(@babel/core@7.26.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react-is@18.3.1)(react@19.0.0)(sanity@3.79.0(@emotion/is-prop-valid@1.2.2)(@types/babel__core@7.20.5)(@types/node@22.13.10)(@types/react@19.0.10)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.15(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0))(styled-components@6.1.15(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
       react:
         specifier: ^19.0.0
         version: 19.0.0
       react-dom:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
+      react-icons:
+        specifier: ^5.5.0
+        version: 5.5.0(react@19.0.0)
+      tailwindcss:
+        specifier: ^4.0.14
+        version: 4.0.14
+      zustand:
+        specifier: ^5.0.3
+        version: 5.0.3(@types/react@19.0.10)(immer@10.1.1)(react@19.0.0)(use-sync-external-store@1.4.0(react@19.0.0))
     devDependencies:
       '@types/react':
         specifier: ^19.0.10
@@ -111,17 +135,14 @@ importers:
         specifier: ^5.8.2
         version: 5.8.2
 
-  packages/feature-system:
+  packages/react-extension-content:
     dependencies:
-      '@portabletext/react':
-        specifier: ^3.2.1
-        version: 3.2.1(react@19.0.0)
-      '@vyuh/extension-content':
+      '@vyuh/react-core':
         specifier: ^0.1.0
-        version: link:../extension-content
-      '@vyuh/react':
-        specifier: ^0.1.0
-        version: link:../vyuh-react
+        version: link:../react-core
+      lucide-react:
+        specifier: ^0.482.0
+        version: 0.482.0(react@19.0.0)
       react:
         specifier: ^19.0.0
         version: 19.0.0
@@ -156,9 +177,6 @@ importers:
       eslint-plugin-react-hooks:
         specifier: ^5.2.0
         version: 5.2.0(eslint@9.22.0(jiti@2.4.2))
-      lucide-react:
-        specifier: ^0.482.0
-        version: 0.482.0(react@19.0.0)
       tailwindcss:
         specifier: ^4.0.14
         version: 4.0.14
@@ -169,30 +187,33 @@ importers:
         specifier: ^5.8.2
         version: 5.8.2
 
-  packages/vyuh-react:
+  packages/react-feature-system:
     dependencies:
-      '@sanity/client':
-        specifier: ^6.28.3
-        version: 6.28.3(debug@4.4.0)
-      '@sanity/image-url':
-        specifier: ^1.1.0
-        version: 1.1.0
-      next-sanity:
-        specifier: ^9.9.4
-        version: 9.9.4(@emotion/is-prop-valid@1.2.2)(@sanity/client@6.28.3)(@sanity/icons@3.7.0(react@19.0.0))(@sanity/types@3.79.0(@types/react@19.0.10))(@sanity/ui@2.15.6(@emotion/is-prop-valid@1.2.2)(react-dom@19.0.0(react@19.0.0))(react-is@18.3.1)(react@19.0.0)(styled-components@6.1.15(react-dom@19.0.0(react@19.0.0))(react@19.0.0)))(next@15.3.0-canary.10(@babel/core@7.26.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react-is@18.3.1)(react@19.0.0)(sanity@3.79.0(@emotion/is-prop-valid@1.2.2)(@types/babel__core@7.20.5)(@types/node@22.13.10)(@types/react@19.0.10)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.15(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(terser@5.39.0)(typescript@5.8.2)(yaml@2.7.0))(styled-components@6.1.15(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
+      '@portabletext/react':
+        specifier: ^3.2.1
+        version: 3.2.1(react@19.0.0)
+      '@vyuh/react-core':
+        specifier: ^0.1.0
+        version: link:../react-core
+      '@vyuh/react-extension-content':
+        specifier: ^0.1.0
+        version: link:../react-extension-content
+      lucide-react:
+        specifier: ^0.482.0
+        version: 0.482.0(react@19.0.0)
       react:
         specifier: ^19.0.0
         version: 19.0.0
       react-dom:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
-      react-icons:
-        specifier: ^5.5.0
-        version: 5.5.0(react@19.0.0)
-      zustand:
-        specifier: ^5.0.3
-        version: 5.0.3(@types/react@19.0.10)(immer@10.1.1)(react@19.0.0)(use-sync-external-store@1.4.0(react@19.0.0))
     devDependencies:
+      '@tailwindcss/cli':
+        specifier: ^4.0.14
+        version: 4.0.14
+      '@tailwindcss/postcss':
+        specifier: ^4.0.14
+        version: 4.0.14
       '@types/react':
         specifier: ^19.0.10
         version: 19.0.10
@@ -214,6 +235,9 @@ importers:
       eslint-plugin-react-hooks:
         specifier: ^5.2.0
         version: 5.2.0(eslint@9.22.0(jiti@2.4.2))
+      tailwindcss:
+        specifier: ^4.0.14
+        version: 4.0.14
       tsup:
         specifier: ^8.4.0
         version: 8.4.0(@microsoft/api-extractor@7.48.1(@types/node@22.13.10))(jiti@2.4.2)(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
@@ -9261,7 +9285,7 @@ snapshots:
 
   '@types/follow-redirects@1.14.4':
     dependencies:
-      '@types/node': 22.13.10
+      '@types/node': 20.17.24
 
   '@types/hast@2.3.10':
     dependencies:
@@ -9282,6 +9306,7 @@ snapshots:
   '@types/node@22.13.10':
     dependencies:
       undici-types: 6.20.0
+    optional: true
 
   '@types/normalize-package-data@2.4.4': {}
 
@@ -9289,7 +9314,7 @@ snapshots:
 
   '@types/progress-stream@2.0.5':
     dependencies:
-      '@types/node': 22.13.10
+      '@types/node': 20.17.24
 
   '@types/react-dom@19.0.4(@types/react@19.0.10)':
     dependencies:
@@ -13521,7 +13546,8 @@ snapshots:
 
   undici-types@6.19.8: {}
 
-  undici-types@6.20.0: {}
+  undici-types@6.20.0:
+    optional: true
 
   undici@5.28.5:
     dependencies:
