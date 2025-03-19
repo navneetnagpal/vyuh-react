@@ -1,18 +1,11 @@
 import { ExtensionBuilder } from '@/core/extensions/extension-builder';
 import { ExtensionDescriptor } from '@/core/extensions/extension-descriptor';
-import { useVyuhStore } from '@/hooks/use-vyuh';
 import { FeatureDescriptor } from '@/core/feature-descriptor';
 import { PlatformComponentBuilder } from '@/core/platform-component-builder';
+import { InitState } from '@/core/platform-types';
 import { systemReadyEvent } from '@/core/plugins/event/default-event-plugin';
 import { PluginDescriptor } from '@/core/plugins/plugin-descriptor';
-
-export enum InitState {
-  notStarted = 'not_started',
-  plugins = 'plugins',
-  features = 'features',
-  ready = 'ready',
-  error = 'error',
-}
+import { useVyuhStore } from '@/hooks/use-vyuh';
 
 /**
  * Bootstrap options for the Vyuh platform

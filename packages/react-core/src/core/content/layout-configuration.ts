@@ -28,11 +28,6 @@ export abstract class LayoutConfiguration<
   readonly title: string;
 
   /**
-   * The content type this layout is designed for
-   */
-  readonly contentType: string;
-
-  /**
    * The feature that registered this layout
    */
   private _sourceFeature?: string;
@@ -50,15 +45,12 @@ export abstract class LayoutConfiguration<
   protected constructor({
     schemaType,
     title,
-    contentType,
   }: {
     schemaType: string;
     title: string;
-    contentType: string;
   }) {
     this.schemaType = schemaType;
     this.title = title;
-    this.contentType = contentType;
   }
 
   /**
@@ -72,7 +64,11 @@ export abstract class LayoutConfiguration<
    * Builds the layout component for the given content item
    *
    * @param content The content item to render
+   * @param layout The instance of layout configuration to use
    * @returns A React component representing the content with this layout
    */
-  abstract render(content: TContent): React.ReactNode;
+  abstract render(
+    content: TContent,
+    layout: LayoutConfiguration<TContent> | undefined,
+  ): React.ReactNode;
 }

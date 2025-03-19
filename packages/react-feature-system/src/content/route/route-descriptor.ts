@@ -1,7 +1,7 @@
+import { Route } from '@/content/route/route';
+import { RouteLifecycleConfiguration } from '@/content/route/route-lifecycle-configuration';
 import { LayoutConfiguration } from '@vyuh/react-core';
 import { ContentDescriptor } from '@vyuh/react-extension-content';
-import { Route } from '@/content/route';
-import { RouteLifecycleConfiguration } from '@/content/route-lifecycle-configuration';
 
 /**
  * Descriptor for configuring route content type in the system.

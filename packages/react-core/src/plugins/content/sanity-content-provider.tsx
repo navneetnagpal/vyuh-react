@@ -2,11 +2,18 @@ import { FileReference, ImageReference } from '@/core/content/reference';
 import { RouteBase } from '@/core/content/route-base';
 import {
   ContentProvider,
+  FieldKey,
   LiveContentProvider,
   NoOpLiveContentProvider,
 } from '@/core/plugins/content/content-provider';
 import { createClient, SanityClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
+
+const fieldKeyMap: Record<FieldKey, string> = {
+  [FieldKey.type]: '_type',
+  [FieldKey.id]: '_id',
+  [FieldKey.ref]: '_ref',
+};
 
 export interface SanityConfig {
   projectId: string;
@@ -174,9 +181,14 @@ export class SanityContentProvider extends ContentProvider {
       format?: string;
     },
   ): string | null {
-    if (!imageRef.asset?.ref) return null;
+    const ref = this.fieldValue(
+      FieldKey.ref,
+      imageRef.asset as Record<string, any>,
+    );
 
-    let builder = this.imageBuilder.image(imageRef.asset.ref);
+    if (!ref) return null;
+
+    let builder = this.imageBuilder.image(ref);
 
     if (options?.width) builder = builder.width(options.width);
     if (options?.height) builder = builder.height(options.height);
@@ -187,30 +199,28 @@ export class SanityContentProvider extends ContentProvider {
   }
 
   async fileUrl(fileRef: FileReference): Promise<string | null> {
-    if (!fileRef.asset?.ref) return null;
+    const ref = this.fieldValue(
+      FieldKey.ref,
+      fileRef.asset as Record<string, any>,
+    );
+
+    if (!ref) return null;
 
     return this.client
-      .getDocument(fileRef.asset.ref)
+      .getDocument(ref)
       .then((doc: any) => doc?.url)
       .catch(() => null);
   }
 
   // Override the fieldValue method to handle Sanity's specific field structure
-  fieldValue(key: string, json: Record<string, any>): string {
-    // Map common field names to Sanity's structure
-    const fieldMap: Record<string, string> = {
-      type: '_type',
-      id: '_id',
-      // Add more mappings as needed
-    };
-
-    const fieldKey = fieldMap[key] || key;
+  fieldValue(key: FieldKey, json: Record<string, any>): string {
+    const fieldKey = fieldKeyMap[key];
     return json[fieldKey];
   }
 
   // Override the schemaType method to handle Sanity's specific type field
   schemaType(json: Record<string, any>): string {
-    return this.fieldValue('type', json);
+    return this.fieldValue(FieldKey.type, json);
   }
 
   // Live content provider implementation

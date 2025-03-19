@@ -1,9 +1,9 @@
-import { DefaultContentPlugin } from '@vyuh/react-extension-content';
 import {
   FeatureDescriptor,
   PluginDescriptor,
   SanityContentProvider,
 } from '@vyuh/react-core';
+import { DefaultContentPlugin } from '@vyuh/react-extension-content';
 
 // Features
 import { feature as system } from '@vyuh/react-feature-system';

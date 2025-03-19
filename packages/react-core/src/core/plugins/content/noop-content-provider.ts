@@ -2,6 +2,7 @@ import { FileReference, ImageReference } from '@/core/content/reference';
 import { RouteBase } from '@/core/content/route-base';
 import {
   ContentProvider,
+  FieldKey,
   LiveContentProvider,
 } from '@/core/plugins/content/content-provider';
 import { NoOpLiveContentProvider } from '@/core/plugins/content/noop-live-content-provider';
@@ -55,8 +56,8 @@ export class NoOpContentProvider extends ContentProvider {
   /**
    * Get a field value from a JSON object
    */
-  fieldValue(key: string, json: Record<string, any>): string {
-    return json[key];
+  fieldValue(key: FieldKey, json: Record<string, any>): string {
+    return '';
   }
 
   /**

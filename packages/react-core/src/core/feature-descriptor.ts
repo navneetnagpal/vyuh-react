@@ -1,6 +1,6 @@
-import React from 'react';
 import { ExtensionBuilder } from '@/core/extensions/extension-builder';
 import { ExtensionDescriptor } from '@/core/extensions/extension-descriptor';
+import React from 'react';
 
 /**
  * Describes a feature in the Vyuh platform.

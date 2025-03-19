@@ -1,10 +1,10 @@
+import { ContentDescriptor } from '@/content-descriptor';
 import {
   ContentItem,
   LayoutConfiguration,
   useVyuhStore,
 } from '@vyuh/react-core';
 import React from 'react';
-import { ContentDescriptor } from '@/content-descriptor';
 
 /**
  * Builder for configuring and managing content types and their layouts.
@@ -76,19 +76,22 @@ export class ContentBuilder<TContent extends ContentItem = ContentItem> {
    */
   init(descriptors: ContentDescriptor[]): void {}
 
-  getLayout(content: TContent): string {
-    return content.layout?.schemaType || this.defaultLayout.schemaType;
+  private getLayout(content: TContent): LayoutConfiguration | undefined {
+    return Array.isArray(content.layout) ? content.layout[0] : undefined;
   }
 
   /**
    * Build a widget for the given content item
    */
   render(content: TContent): React.ReactNode {
-    // Get the layout from the content or use default
-    const layoutType = this.getLayout(content);
     const store = useVyuhStore.getState();
     const contentPlugin = store.plugins.content;
     const telemetry = store.plugins.telemetry;
+
+    const layoutConfig = this.getLayout(content);
+    const layoutType = layoutConfig
+      ? contentPlugin.provider.schemaType(layoutConfig)
+      : undefined;
 
     let layout = contentPlugin.getItem(LayoutConfiguration, layoutType);
 
@@ -97,10 +100,11 @@ export class ContentBuilder<TContent extends ContentItem = ContentItem> {
         `No layout found for ${this.schemaType}. Using default.`,
         'debug',
       );
+
       layout = this.defaultLayout;
     }
 
-    return layout.render(content);
+    return layout.render(content, layoutConfig);
   }
 
   /**

@@ -1,13 +1,19 @@
-import { PortableTextContentBuilder } from '@/content/portable-text-builder';
+import { CardContentBuilder } from '@/content/card/card-builder';
+import { CardDescriptor } from '@/content/card/card-descriptor';
+import { CarouselGroupLayout } from '@/content/group/carousel-group-layout';
+import { GridGroupLayout } from '@/content/group/grid-group-layout';
+import { GroupContentBuilder } from '@/content/group/group-builder';
+import { GroupDescriptor } from '@/content/group/group-descriptor';
+import { PortableTextContentBuilder } from '@/content/portable-text/portable-text-builder';
+import { RouteContentBuilder } from '@/content/route/route-builder';
+import { RouteDescriptor } from '@/content/route/route-descriptor';
 import { UnknownContentBuilder } from '@/content/unknown';
 import { FeatureDescriptor } from '@vyuh/react-core';
-import React from 'react';
 import {
   ContentExtensionBuilder,
   ContentExtensionDescriptor,
 } from '@vyuh/react-extension-content';
-import { RouteContentBuilder } from '@/content/route-builder';
-import { RouteDescriptor } from '@/content/route-descriptor';
+import React from 'react';
 
 /**
  * System feature for Vyuh React
@@ -21,11 +27,19 @@ export const feature = new FeatureDescriptor({
   icon: <span>🧩</span>, // Using emoji as a simple icon
   extensions: [
     new ContentExtensionDescriptor({
-      contents: [new RouteDescriptor()],
+      contents: [
+        new RouteDescriptor(),
+        new CardDescriptor(),
+        new GroupDescriptor({
+          layouts: [new CarouselGroupLayout(), new GridGroupLayout()],
+        }),
+      ],
       contentBuilders: [
         new RouteContentBuilder(),
         new UnknownContentBuilder(),
         new PortableTextContentBuilder(),
+        new CardContentBuilder(),
+        new GroupContentBuilder(),
       ],
     }),
   ],

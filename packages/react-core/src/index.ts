@@ -2,6 +2,7 @@
 export * from './core/vyuh-provider';
 export * from './core/feature-descriptor';
 export * from './hooks/use-vyuh';
+export * from './core/platform-types';
 
 // Content Providers
 export * from './plugins/content/sanity-content-provider';
@@ -36,4 +37,3 @@ export * from './core/content/condition-configuration';
 export * from './core/content/content-modifier-configuration';
 export * from './core/extensions/extension-descriptor';
 export * from './core/extensions/extension-builder';
-export * from './core/extensions/types';

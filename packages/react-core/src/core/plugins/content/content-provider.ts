@@ -6,6 +6,12 @@ export interface ContentProviderConfig {
   title: string;
 }
 
+export enum FieldKey {
+  type,
+  id,
+  ref,
+}
+
 /**
  * Base class for content providers in Vyuh
  *
@@ -100,16 +106,12 @@ export abstract class ContentProvider {
   /**
    * Extract a field value from a JSON object
    */
-  fieldValue(key: string, json: Record<string, any>): string {
-    return json[key];
-  }
+  abstract fieldValue(key: FieldKey, json: Record<string, any>): string;
 
   /**
    * Get the schema type from a JSON object
    */
-  schemaType(json: Record<string, any>): string {
-    return this.fieldValue('type', json);
-  }
+  abstract schemaType(json: Record<string, any>): string;
 
   /**
    * Check if this provider supports live updates

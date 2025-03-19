@@ -1,5 +1,5 @@
-import { NoOpContentPlugin } from '@/core/plugins/content/noop-content-plugin';
 import { ContentPlugin } from '@/core/plugins/content/content-plugin';
+import { NoOpContentPlugin } from '@/core/plugins/content/noop-content-plugin';
 import { DefaultEventPlugin } from '@/core/plugins/event/default-event-plugin';
 import { EventPlugin } from '@/core/plugins/event/event-plugin';
 import { Plugin } from '@/core/plugins/plugin';

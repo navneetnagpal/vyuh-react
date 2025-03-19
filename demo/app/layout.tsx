@@ -1,10 +1,10 @@
 'use client';
 
+import { getFeatures, plugins } from '@/app/setup';
 import { VyuhProvider } from '@vyuh/react-core';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import React from 'react';
-import { getFeatures, plugins } from '@/app/setup';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',

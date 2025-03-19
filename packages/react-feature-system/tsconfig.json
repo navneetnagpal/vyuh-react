@@ -18,9 +18,10 @@
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@ui/*": ["ui/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "ui"],
   "exclude": ["node_modules", "dist"]
 }

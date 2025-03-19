@@ -1,11 +1,12 @@
 'use client';
 
+import { FeatureDescriptor } from '@/core/feature-descriptor';
+import { bootstrap } from '@/core/platform-bootstrap';
+import { PlatformComponentBuilder } from '@/core/platform-component-builder';
+import { InitState } from '@/core/platform-types';
+import { PluginDescriptor } from '@/core/plugins/plugin-descriptor';
 import { useVyuhStore } from '@/hooks/use-vyuh';
 import React from 'react';
-import { FeatureDescriptor } from '@/core/feature-descriptor';
-import { bootstrap, InitState } from '@/core/platform-bootstrap';
-import { PlatformComponentBuilder } from '@/core/platform-component-builder';
-import { PluginDescriptor } from '@/core/plugins/plugin-descriptor';
 
 // Provider props
 interface VyuhProviderProps {

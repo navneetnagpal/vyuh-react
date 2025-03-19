@@ -28,10 +28,7 @@ export class DefaultContentPlugin extends ContentPlugin {
    * Build content from a JSON object
    */
   render(json: Record<string, any> | ContentItem): React.ReactNode {
-    const schemaType =
-      json instanceof ContentItem
-        ? json.schemaType
-        : this.provider.schemaType(json);
+    const schemaType = json.schemaType ?? this.provider.schemaType(json);
     const builder = this.getItem(ContentBuilder, schemaType);
     const telemetry = useVyuhStore.getState().plugins.telemetry;
 

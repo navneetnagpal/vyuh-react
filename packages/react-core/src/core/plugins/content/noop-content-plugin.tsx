@@ -1,6 +1,6 @@
 import { ContentItem } from '@/core/content/content-item';
 import { ExtensionBuilder } from '@/core/extensions/extension-builder';
-import { ItemType } from '@/core/extensions/types';
+import { ItemType } from '@/core/platform-types';
 import { ContentPlugin } from '@/core/plugins/content/content-plugin';
 import { NoOpContentProvider } from '@/core/plugins/content/noop-content-provider';
 import React from 'react';
@@ -25,9 +25,8 @@ export class NoOpContentPlugin extends ContentPlugin {
    */
   render(content: Record<string, any> | ContentItem): React.ReactNode {
     const schemaType =
-      content instanceof ContentItem
-        ? content.schemaType
-        : this.provider.schemaType(content as Record<string, any>);
+      content.schemaType ??
+      this.provider.schemaType(content as Record<string, any>);
 
     return (
       <div
