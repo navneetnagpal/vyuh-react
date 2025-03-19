@@ -1,6 +1,6 @@
 {
   "name": "@vyuh/react-core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The core package for the Vyuh Platform.",
   "type": "module",
   "main": "./dist/index.js",
@@ -50,7 +50,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "tsup": "^8.4.0",
     "typescript": "^5.8.2"
-    },
+  },
   "files": [
     "dist",
     "src"
