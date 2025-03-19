@@ -6,7 +6,7 @@ import {
 } from '@vyuh/react-core';
 
 // Features
-import * as system from '@vyuh/react-feature-system';
+import { feature as system } from '@vyuh/react-feature-system';
 
 /**
  * Counter feature definition
@@ -43,4 +43,4 @@ export const plugins = new PluginDescriptor({
  * Feature configuration
  * Returns all features used in the application
  */
-export const getFeatures = () => [counter, system.feature];
+export const getFeatures = () => [counter, system];

@@ -2,16 +2,36 @@
   "name": "@vyuh/react-extension-content",
   "version": "0.1.0",
   "description": "Content extension for the Vyuh Framework",
-  "main": "src/index.ts",
   "type": "module",
+  "main": "./src/index.ts",
+  "module": "./src/index.ts",
+  "types": "./src/index.ts",
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts",
-    "dev": "tailwindcss -i src/styles.css -o dist/styles.css --watch",
+    "build": "NODE_ENV=production tsup && pnpm build:tw",
+    "build:tw": "tailwindcss -i src/styles.css -o dist/styles.css",
+    "dev:tw": "pnpm build:tw --watch",
     "lint": "eslint \"src/**/*.ts*\"",
-    "lint:fix": "eslint \"src/**/*.ts*\" --fix",
-    "test": "jest"
+    "lint:fix": "eslint \"src/**/*.ts*\" --fix"
   },
-  "private": true,
+  "keywords": [
+    "vyuh",
+    "react",
+    "cms",
+    "extension",
+    "content"
+  ],
+  "homepage": "https://vyuh.tech",
+  "bugs": {
+    "url": "https://github.com/vyuh-tech/vyuh/issues"
+  },
+  "packageManager": "pnpm@10.6.3",
+  "contributors": [
+    {
+      "name": "Pavan Podila",
+      "email": "pavan@vyuh.tech",
+      "url": "https://github.com/pavanpodila"
+    }
+  ],
   "peerDependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -37,10 +57,25 @@
   },
   "exports": {
     ".": {
-      "import": "./src/index.ts",
-      "require": "./dist/index.js"
+      "import": "./src/index.ts"
     },
     "./styles.css": "./dist/styles.css"
+  },
+  "files": [
+    "*.md",
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "main": "./dist/index.js",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      },
+      "./styles.css": "./dist/styles.css"
+    }
   }
-
 }
