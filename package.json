@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "publish-packages": "changeset version && pnpm --recursive --filter \"./schemas/*\" build && changeset publish"
+    "changeset": "changeset",
+    "version": "changeset version",
+    "publish": "pnpm build && changeset publish",
+    "release": "pnpm build && changeset publish",
+    "build": "pnpm -r build"
   },
   "private": true,
   "keywords": [],

@@ -2,10 +2,22 @@
   "name": "@vyuh/react-core",
   "version": "0.1.0",
   "description": "The core package for the Vyuh Platform.",
-  "main": "src/index.ts",
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": {
+        "development": "./src/index.ts",
+        "default": "./dist/index.js"
+      }
+    },
+    "./styles.css": "./dist/styles.css"
+  },
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "build": "NODE_ENV=production tsup && pnpm build:tw",
+    "build:tw": "tailwindcss -i src/styles.css -o dist/styles.css",
     "dev": "tailwindcss -i src/styles.css -o dist/styles.css --watch",
     "lint": "eslint \"src/**/*.ts*\"",
     "lint:fix": "eslint \"src/**/*.ts*\" --fix",
@@ -28,6 +40,7 @@
     "lucide-react": "^0.482.0"
   },
   "devDependencies": {
+    "@types/node": "^22.13.10",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@typescript-eslint/eslint-plugin": "^8.26.1",
@@ -41,13 +54,5 @@
   "files": [
     "dist",
     "src"
-  ],
-  "exports": {
-    ".": {
-      "import": "./src/index.ts",
-      "require": "./dist/index.js"
-    },
-    "./styles.css": "./dist/styles.css"
-  }
-
+  ]
 }
