@@ -43,5 +43,7 @@ export abstract class ConditionConfiguration implements SchemaItem {
    * - null if the condition passes
    * - an error message string if the condition fails
    */
-  abstract execute(context: any): Promise<string | null> | string | null;
+  abstract execute(
+    params?: Record<string, any>,
+  ): Promise<string | null | undefined>;
 }

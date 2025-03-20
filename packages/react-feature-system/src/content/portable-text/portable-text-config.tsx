@@ -6,7 +6,7 @@ import {
   PortableTextMarkComponent,
   PortableTextTypeComponent,
 } from '@portabletext/react';
-import { Unknown, useVyuh } from '@vyuh/react-core';
+import { createUnknown, Unknown, useVyuh } from '@vyuh/react-core';
 import React from 'react';
 
 /**
@@ -19,7 +19,7 @@ export class PortableTextConfig {
   private readonly _defaultTypes: Record<string, PortableTextTypeComponent> = {
     image: ({ value }) => {
       const { plugins } = useVyuh();
-      const imageUrl = plugins.content.getImageUrl(value);
+      const imageUrl = plugins.content.provider.image(value);
       return (
         <img
           src={imageUrl}
@@ -103,25 +103,27 @@ export class PortableTextConfig {
   private _unknownMark: PortableTextMarkComponent = ({ value }) => {
     const { plugins } = useVyuh();
 
-    return plugins.content.render(new Unknown(value._type, 'Unknown Mark'));
+    return plugins.content.render(createUnknown(value._type, 'Unknown Mark'));
   };
 
   private _unknownType: PortableTextTypeComponent = ({ value }) => {
     const { plugins } = useVyuh();
 
-    return plugins.content.render(new Unknown(value._type, 'Unknown Type'));
+    return plugins.content.render(createUnknown(value._type, 'Unknown Type'));
   };
 
   private _unknownList: PortableTextListComponent = ({ value }) => {
     const { plugins } = useVyuh();
 
-    return plugins.content.render(new Unknown(value._type, 'Unknown List'));
+    return plugins.content.render(createUnknown(value._type, 'Unknown List'));
   };
 
   private _unknownListItem: PortableTextListItemComponent = ({ value }) => {
     const { plugins } = useVyuh();
 
-    return plugins.content.render(new Unknown(value._type, 'Unknown ListItem'));
+    return plugins.content.render(
+      createUnknown(value._type, 'Unknown ListItem'),
+    );
   };
 
   /**

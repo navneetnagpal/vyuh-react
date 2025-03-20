@@ -1,6 +1,3 @@
-import { PortableText } from '@/content/portable-text/portable-text';
-import { PortableTextConfig } from '@/content/portable-text/portable-text-config';
-import { PortableTextDescriptor } from '@/content/portable-text/portable-text-descriptor';
 import {
   PortableText as SanityPortableText,
   PortableTextBlockComponent,
@@ -15,6 +12,12 @@ import {
   ContentDescriptor,
 } from '@vyuh/react-extension-content';
 import React from 'react';
+import {
+  PORTABLE_TEXT_SCHEMA_TYPE,
+  PortableText,
+} from '@/content/portable-text/portable-text';
+import { PortableTextConfig } from '@/content/portable-text/portable-text-config';
+import { PortableTextDescriptor } from '@/content/portable-text/portable-text-descriptor';
 
 /**
  * Content builder for Portable Text content items
@@ -22,7 +25,7 @@ import React from 'react';
 export class PortableTextContentBuilder extends ContentBuilder<PortableText> {
   constructor() {
     super({
-      schemaType: PortableText.schemaName,
+      schemaType: PORTABLE_TEXT_SCHEMA_TYPE,
       defaultLayout: new DefaultPortableTextLayout(),
     });
   }

@@ -3,9 +3,9 @@ import { ExtensionDescriptor } from '@/core/extension-descriptor';
 import { FeatureDescriptor } from '@/core/feature-descriptor';
 import { PlatformComponentBuilder } from '@/core/platform-component-builder';
 import { InitState } from '@/core/platform-types';
-import { systemReadyEvent } from '@/plugins/event/default-event-plugin';
 import { PluginDescriptor } from '@/core/plugin-descriptor';
 import { useVyuhStore } from '@/hooks/use-vyuh';
+import { systemReadyEvent } from '@/plugins/event/default-event-plugin';
 
 /**
  * Bootstrap options for the Vyuh platform

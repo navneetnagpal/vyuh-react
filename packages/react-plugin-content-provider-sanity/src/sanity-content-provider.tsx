@@ -1,13 +1,14 @@
-import { FileReference, ImageReference } from '@vyuh/react-core';
-import { RouteBase } from '@vyuh/react-core';
+import { createClient, SanityClient } from '@sanity/client';
+import imageUrlBuilder from '@sanity/image-url';
 import {
   ContentProvider,
   FieldKey,
+  FileReference,
+  ImageReference,
   LiveContentProvider,
   NoOpLiveContentProvider,
+  RouteBase,
 } from '@vyuh/react-core';
-import { createClient, SanityClient } from '@sanity/client';
-import imageUrlBuilder from '@sanity/image-url';
 
 const fieldKeyMap: Record<FieldKey, string> = {
   [FieldKey.type]: '_type',
@@ -135,7 +136,7 @@ export class SanityContentProvider extends ContentProvider {
     useCache?: boolean;
   }): Promise<RouteBase | null> {
     let query: string;
-    let params: Record<string, any> = {};
+    let params: Record<string, string> = {};
 
     if (options.path) {
       // Match the Dart implementation's route query
@@ -165,7 +166,9 @@ export class SanityContentProvider extends ContentProvider {
       throw new Error('Either path or routeId must be provided');
     }
 
-    const result = await this.client.fetch(query, params);
+    const result = await this.fetchSingle<RouteBase>(query, {
+      queryParams: params,
+    });
 
     if (!result) return null;
     return result as RouteBase;
@@ -180,13 +183,13 @@ export class SanityContentProvider extends ContentProvider {
       quality?: number;
       format?: string;
     },
-  ): string | null {
+  ): string | undefined {
     const ref = this.fieldValue(
       FieldKey.ref,
       imageRef.asset as Record<string, any>,
     );
 
-    if (!ref) return null;
+    if (!ref) return undefined;
 
     let builder = this.imageBuilder.image(ref);
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { getFeatures, plugins } from '@/app/setup';
+import { getFeatures, plugins } from '~/app/setup';
 import { VyuhProvider } from '@vyuh/react-core';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';

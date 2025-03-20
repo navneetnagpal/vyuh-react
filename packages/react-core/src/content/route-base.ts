@@ -1,7 +1,5 @@
 import { Category } from '@/content/category';
 import { ContentItem } from '@/content/content-item';
-import { ContentModifierConfiguration } from '@/content/content-modifier-configuration';
-import { LayoutConfiguration } from '@/content/layout-configuration';
 
 /**
  * Base class for all route content items in Vyuh.
@@ -16,7 +14,7 @@ import { LayoutConfiguration } from '@/content/layout-configuration';
  * - Category-based organization
  * - Lifecycle management
  */
-export abstract class RouteBase extends ContentItem {
+export interface RouteBase extends ContentItem {
   /**
    * The title of the route, displayed in navigation UI.
    */
@@ -47,35 +45,4 @@ export abstract class RouteBase extends ContentItem {
    * When this route was created in the CMS.
    */
   readonly createdAt: Date;
-
-  protected constructor(data: {
-    schemaType: string;
-    title: string;
-    path: string;
-    id: string;
-    updatedAt: Date | string;
-    createdAt: Date | string;
-    category?: Category;
-    layout?: LayoutConfiguration;
-    modifiers?: ContentModifierConfiguration[];
-  }) {
-    super({
-      schemaType: data.schemaType,
-      layout: data.layout,
-      modifiers: data.modifiers,
-    });
-
-    this.title = data.title;
-    this.path = data.path;
-    this.id = data.id;
-    this.category = data.category;
-    this.updatedAt =
-      data.updatedAt instanceof Date
-        ? data.updatedAt
-        : new Date(data.updatedAt);
-    this.createdAt =
-      data.createdAt instanceof Date
-        ? data.createdAt
-        : new Date(data.createdAt);
-  }
 }

@@ -1,4 +1,8 @@
-import { LayoutConfiguration, Unknown } from '@vyuh/react-core';
+import {
+  LayoutConfiguration,
+  Unknown,
+  UNKNOWN_SCHEMA_TYPE,
+} from '@vyuh/react-core';
 import { ContentBuilder } from '@vyuh/react-extension-content';
 import { TriangleAlert } from 'lucide-react';
 import React from 'react';
@@ -13,12 +17,11 @@ import React from 'react';
  * - Themed error presentation
  */
 class DefaultUnknownLayout extends LayoutConfiguration<Unknown> {
-  static readonly schemaName = `${Unknown.schemaName}.layout.default`;
+  static readonly schemaName = `${UNKNOWN_SCHEMA_TYPE}.layout.default`;
 
   constructor() {
     super({
       schemaType: DefaultUnknownLayout.schemaName,
-      contentType: Unknown.schemaName,
       title: 'Default Unknown Layout',
     });
   }
@@ -48,7 +51,7 @@ class DefaultUnknownLayout extends LayoutConfiguration<Unknown> {
 export class UnknownContentBuilder extends ContentBuilder {
   constructor() {
     super({
-      schemaType: Unknown.schemaName,
+      schemaType: UNKNOWN_SCHEMA_TYPE,
       defaultLayout: new DefaultUnknownLayout(),
     });
   }

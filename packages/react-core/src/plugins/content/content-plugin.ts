@@ -1,9 +1,9 @@
+import React from 'react';
 import { ContentItem } from '@/content/content-item';
 import { ExtensionBuilder } from '@/core/extension-builder';
 import { ItemType } from '@/core/platform-types';
-import { ContentProvider } from '@/plugins/content/content-provider';
 import { Plugin } from '@/core/plugin';
-import React from 'react';
+import { ContentProvider } from '@/plugins/content/content-provider';
 
 /**
  * Plugin for managing content

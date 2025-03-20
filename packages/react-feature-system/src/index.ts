@@ -12,3 +12,6 @@ export * from './content/card/card-descriptor';
 
 export * from './content/group/group';
 export * from './content/group/group-descriptor';
+
+export * from './content/conditional-route/conditional-route';
+export * from './content/conditional-route/conditional-route-descriptor';

@@ -1,6 +1,5 @@
-import { Group } from '@/content/group/group';
-import { LayoutConfiguration } from '@vyuh/react-core';
 import { ContentDescriptor } from '@vyuh/react-extension-content';
+import { Group, GROUP_SCHEMA_TYPE } from '@/content/group/group';
 
 /**
  * Descriptor for the Group content type
@@ -25,7 +24,7 @@ export class GroupDescriptor extends ContentDescriptor<Group> {
    */
   constructor(options?: Partial<GroupDescriptor>) {
     super({
-      schemaType: Group.schemaName,
+      schemaType: GROUP_SCHEMA_TYPE,
       title: 'Group',
       layouts: options?.layouts,
     });

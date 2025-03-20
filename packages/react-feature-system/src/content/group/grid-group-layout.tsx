@@ -1,7 +1,7 @@
-import { Group } from '@/content/group/group';
-import { cn } from '@ui/lib/utils';
 import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
 import React from 'react';
+import { Group, GROUP_SCHEMA_TYPE } from '@/content/group/group';
+import { cn } from '@ui/lib/utils';
 
 /**
  * Grid layout for group content items using Tailwind CSS
@@ -12,7 +12,7 @@ import React from 'react';
  * - Configurable columns based on screen size
  */
 export class GridGroupLayout extends LayoutConfiguration<Group> {
-  static readonly schemaName = `${Group.schemaName}.layout.grid`;
+  static readonly schemaName = `${GROUP_SCHEMA_TYPE}.layout.grid`;
 
   static typeDescriptor = new TypeDescriptor<GridGroupLayout>(
     this.schemaName,

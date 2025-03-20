@@ -1,6 +1,5 @@
-import { RouteBase } from '@vyuh/react-core';
-import { LiveContentProvider } from '@vyuh/react-core';
 import { SanityClient } from '@sanity/client';
+import { LiveContentProvider, RouteBase } from '@vyuh/react-core';
 import { defineLive } from 'next-sanity';
 
 export class SanityLiveContentProvider implements LiveContentProvider {

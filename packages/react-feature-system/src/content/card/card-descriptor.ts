@@ -1,5 +1,5 @@
-import { Card } from '@/content/card/card';
 import { ContentDescriptor } from '@vyuh/react-extension-content';
+import { Card, CARD_SCHEMA_TYPE } from '@/content/card/card';
 
 /**
  * Descriptor for the Card content type
@@ -24,7 +24,7 @@ export class CardDescriptor extends ContentDescriptor<Card> {
    */
   constructor(options?: Partial<CardDescriptor>) {
     super({
-      schemaType: Card.schemaName,
+      schemaType: CARD_SCHEMA_TYPE,
       title: 'Card',
       layouts: options?.layouts,
     });

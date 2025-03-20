@@ -1,4 +1,7 @@
-import { Card } from '@/content/card/card';
+import { LayoutConfiguration, useVyuh } from '@vyuh/react-core';
+import { ContentBuilder } from '@vyuh/react-extension-content';
+import React from 'react';
+import { Card, CARD_SCHEMA_TYPE } from '@/content/card/card';
 import { Button } from '@ui/components/button';
 import {
   Card as ShadcnCard,
@@ -8,19 +11,14 @@ import {
   CardHeader,
   CardTitle,
 } from '@ui/components/card';
-import { LayoutConfiguration, useVyuh } from '@vyuh/react-core';
-import { ContentBuilder } from '@vyuh/react-extension-content';
-import React from 'react';
 
 /**
  * Content builder for Card content items
  */
 export class CardContentBuilder extends ContentBuilder<Card> {
-  static readonly schemaName: string = Card.schemaName;
-
   constructor() {
     super({
-      schemaType: CardContentBuilder.schemaName,
+      schemaType: CARD_SCHEMA_TYPE,
       defaultLayout: new DefaultCardLayout(),
     });
   }
@@ -36,7 +34,7 @@ export class CardContentBuilder extends ContentBuilder<Card> {
  * - Themed presentation
  */
 class DefaultCardLayout extends LayoutConfiguration<Card> {
-  static readonly schemaName = `${Card.schemaName}.layout.default`;
+  static readonly schemaName = `${CARD_SCHEMA_TYPE}.layout.default`;
 
   constructor() {
     super({

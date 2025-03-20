@@ -1,9 +1,6 @@
-import {
-  ContentItem,
-  ContentModifierConfiguration,
-  ImageReference,
-  LayoutConfiguration,
-} from '@vyuh/react-core';
+import { ContentItem, ImageReference } from '@vyuh/react-core';
+
+export const CARD_SCHEMA_TYPE = 'vyuh.card';
 
 /**
  * Card content item for displaying content in a card format
@@ -14,12 +11,7 @@ import {
  * - Content body
  * - Actions that can be configured with multiple action configurations
  */
-export class Card extends ContentItem {
-  /**
-   * Schema type identifier for cards
-   */
-  static readonly schemaName: string = 'vyuh.card';
-
+export interface Card extends ContentItem {
   /**
    * The title of the card
    */
@@ -59,32 +51,4 @@ export class Card extends ContentItem {
    * Tertiary action for the card
    */
   readonly tertiaryAction?: any;
-
-  constructor(data: {
-    title?: string;
-    description?: string;
-    imageUrl?: string;
-    image?: ImageReference;
-    content?: any;
-    action?: any;
-    secondaryAction?: any;
-    tertiaryAction?: any;
-    layout?: LayoutConfiguration;
-    modifiers?: ContentModifierConfiguration[];
-  }) {
-    super({
-      schemaType: Card.schemaName,
-      layout: data.layout,
-      modifiers: data.modifiers,
-    });
-
-    this.title = data.title;
-    this.description = data.description;
-    this.imageUrl = data.imageUrl;
-    this.image = data.image;
-    this.content = data.content;
-    this.action = data.action;
-    this.secondaryAction = data.secondaryAction;
-    this.tertiaryAction = data.tertiaryAction;
-  }
 }

@@ -1,17 +1,15 @@
-import { Route } from '@/content/route/route';
 import { LayoutConfiguration, useVyuh } from '@vyuh/react-core';
 import { ContentBuilder } from '@vyuh/react-extension-content';
 import React from 'react';
+import { Route, ROUTE_SCHEMA_TYPE } from '@/content/route/route';
 
 /**
  * Content builder for Route content items
  */
 export class RouteContentBuilder extends ContentBuilder<Route> {
-  static readonly schemaName: string = 'vyuh.route';
-
   constructor() {
     super({
-      schemaType: RouteContentBuilder.schemaName,
+      schemaType: ROUTE_SCHEMA_TYPE,
       defaultLayout: new DefaultRouteLayout(),
     });
   }
@@ -36,7 +34,7 @@ export class RouteContentBuilder extends ContentBuilder<Route> {
  * Default layout for routes when no specific layout is configured
  */
 class DefaultRouteLayout extends LayoutConfiguration<Route> {
-  static readonly schemaName: string = 'vyuh.route.layout.default';
+  static readonly schemaName: string = `${ROUTE_SCHEMA_TYPE}.layout.default`;
 
   constructor() {
     super({

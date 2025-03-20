@@ -15,7 +15,7 @@ import { SchemaItem } from '@/content/schema-item';
  * They combine data from the CMS with presentation logic to create
  * rich, interactive user interfaces.
  */
-export abstract class ContentItem implements SchemaItem {
+export interface ContentItem extends SchemaItem {
   /**
    * The schema type of the content item.
    */
@@ -38,12 +38,4 @@ export abstract class ContentItem implements SchemaItem {
    * Used internally by the content system for hierarchical content.
    */
   parent?: ContentItem;
-
-  protected constructor(
-    data: Partial<ContentItem> & Pick<ContentItem, 'schemaType'>,
-  ) {
-    this.schemaType = data.schemaType;
-    this.layout = data.layout;
-    this.modifiers = data.modifiers;
-  }
 }

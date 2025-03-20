@@ -4,9 +4,9 @@ import {
   ContentItem,
   ContentPlugin,
   ContentProvider,
+  createUnknown,
   ExtensionBuilder,
   type ItemType,
-  Unknown,
   useVyuhStore,
 } from '@vyuh/react-core';
 import React from 'react';
@@ -39,7 +39,7 @@ export class DefaultContentPlugin extends ContentPlugin {
       );
 
       // Create an Unknown content item to handle the missing builder
-      const unknownContent = new Unknown(
+      const unknownContent = createUnknown(
         schemaType,
         `No content builder registered for schema type: ${schemaType}`,
       );

@@ -1,5 +1,7 @@
 import { ContentItem } from '@/content/content-item';
 
+export const UNKNOWN_SCHEMA_TYPE = 'vyuh.unknown';
+
 /**
  * Unknown content item that provides a fallback for missing content types.
  *
@@ -8,9 +10,7 @@ import { ContentItem } from '@/content/content-item';
  * - Is missing from the content registry
  * - Has an invalid schema type
  */
-export class Unknown extends ContentItem {
-  static readonly schemaName = 'vyuh.unknown';
-
+export interface Unknown extends ContentItem {
   /**
    * The schema type that was missing or invalid
    */
@@ -20,14 +20,15 @@ export class Unknown extends ContentItem {
    * Description of the issue
    */
   readonly description: string;
+}
 
-  constructor(missingSchemaType: string, description: string) {
-    super({
-      schemaType: Unknown.schemaName,
-      layout: undefined,
-      modifiers: [],
-    });
-    this.missingSchemaType = missingSchemaType;
-    this.description = description;
-  }
+export function createUnknown(
+  missingSchemaType: string,
+  description: string,
+): Unknown {
+  return {
+    schemaType: UNKNOWN_SCHEMA_TYPE,
+    missingSchemaType,
+    description,
+  };
 }

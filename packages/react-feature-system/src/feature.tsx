@@ -1,5 +1,15 @@
+import { FeatureDescriptor } from '@vyuh/react-core';
+import {
+  ContentExtensionBuilder,
+  ContentExtensionDescriptor,
+} from '@vyuh/react-extension-content';
+import { Command } from 'lucide-react';
+import React from 'react';
 import { CardContentBuilder } from '@/content/card/card-builder';
 import { CardDescriptor } from '@/content/card/card-descriptor';
+import { ConditionalRouteBuilder } from '@/content/conditional-route/conditional-route-builder';
+import { ConditionalRouteDescriptor } from '@/content/conditional-route/conditional-route-descriptor';
+import { DefaultConditionalRouteLayout } from '@/content/conditional-route/default-layout';
 import { DividerContentBuilder } from '@/content/divider/divider-builder';
 import { DividerDescriptor } from '@/content/divider/divider-descriptor';
 import { CarouselGroupLayout } from '@/content/group/carousel-group-layout';
@@ -10,13 +20,6 @@ import { PortableTextContentBuilder } from '@/content/portable-text/portable-tex
 import { RouteContentBuilder } from '@/content/route/route-builder';
 import { RouteDescriptor } from '@/content/route/route-descriptor';
 import { UnknownContentBuilder } from '@/content/unknown';
-import { FeatureDescriptor } from '@vyuh/react-core';
-import {
-  ContentExtensionBuilder,
-  ContentExtensionDescriptor,
-} from '@vyuh/react-extension-content';
-import { Command } from 'lucide-react';
-import React from 'react';
 
 /**
  * System feature for Vyuh React
@@ -32,6 +35,9 @@ export const feature = new FeatureDescriptor({
     new ContentExtensionDescriptor({
       contents: [
         new RouteDescriptor(),
+        new ConditionalRouteDescriptor({
+          layouts: [DefaultConditionalRouteLayout.typeDescriptor],
+        }),
         new CardDescriptor(),
         new GroupDescriptor({
           layouts: [
@@ -43,6 +49,7 @@ export const feature = new FeatureDescriptor({
       ],
       contentBuilders: [
         new RouteContentBuilder(),
+        new ConditionalRouteBuilder(),
         new UnknownContentBuilder(),
         new PortableTextContentBuilder(),
         new CardContentBuilder(),

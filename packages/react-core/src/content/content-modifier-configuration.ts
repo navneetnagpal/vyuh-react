@@ -1,6 +1,6 @@
+import React from 'react';
 import { ContentItem } from '@/content/content-item';
 import { SchemaItem } from '@/content/schema-item';
-import React from 'react';
 
 /**
  * Configuration for modifying content presentation.

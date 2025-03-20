@@ -1,17 +1,15 @@
-import { Divider } from '@/content/divider/divider';
 import { LayoutConfiguration } from '@vyuh/react-core';
 import { ContentBuilder } from '@vyuh/react-extension-content';
 import React from 'react';
+import { Divider, DIVIDER_SCHEMA_TYPE } from '@/content/divider/divider';
 
 /**
  * Content builder for Divider content items
  */
 export class DividerContentBuilder extends ContentBuilder<Divider> {
-  static readonly schemaName: string = Divider.schemaName;
-
   constructor() {
     super({
-      schemaType: DividerContentBuilder.schemaName,
+      schemaType: DIVIDER_SCHEMA_TYPE,
       defaultLayout: new DefaultDividerLayout(),
     });
   }
@@ -25,7 +23,7 @@ export class DividerContentBuilder extends ContentBuilder<Divider> {
  * - Customizable indentation
  */
 class DefaultDividerLayout extends LayoutConfiguration<Divider> {
-  static readonly schemaName = `${Divider.schemaName}.layout.default`;
+  static readonly schemaName = `${DIVIDER_SCHEMA_TYPE}.layout.default`;
 
   constructor() {
     super({

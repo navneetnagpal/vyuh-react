@@ -1,8 +1,8 @@
+import { Plugin } from '@/core/plugin';
 import { ContentPlugin } from '@/plugins/content/content-plugin';
 import { NoOpContentPlugin } from '@/plugins/content/noop-content-plugin';
 import { DefaultEventPlugin } from '@/plugins/event/default-event-plugin';
 import { EventPlugin } from '@/plugins/event/event-plugin';
-import { Plugin } from '@/core/plugin';
 import { DefaultTelemetryPlugin } from '@/plugins/telemetry/default-telemetry-plugin';
 import { TelemetryPlugin } from '@/plugins/telemetry/telemetry-plugin';
 

@@ -1,4 +1,6 @@
-import { Group } from '@/content/group/group';
+import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
+import React from 'react';
+import { Group, GROUP_SCHEMA_TYPE } from '@/content/group/group';
 import {
   Carousel,
   CarouselContent,
@@ -6,8 +8,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@ui/components/carousel';
-import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
-import React from 'react';
 
 /**
  * Carousel layout for group content items using Shadcn UI components
@@ -18,7 +18,7 @@ import React from 'react';
  * - Navigation controls
  */
 export class CarouselGroupLayout extends LayoutConfiguration<Group> {
-  static readonly schemaName = `${Group.schemaName}.layout.carousel`;
+  static readonly schemaName = `${GROUP_SCHEMA_TYPE}.layout.carousel`;
 
   static typeDescriptor = new TypeDescriptor<CarouselGroupLayout>(
     this.schemaName,

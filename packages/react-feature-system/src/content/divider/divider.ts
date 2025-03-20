@@ -1,8 +1,6 @@
-import {
-  ContentItem,
-  ContentModifierConfiguration,
-  LayoutConfiguration,
-} from '@vyuh/react-core';
+import { ContentItem } from '@vyuh/react-core';
+
+export const DIVIDER_SCHEMA_TYPE = 'vyuh.divider';
 
 /**
  * Divider content item
@@ -10,9 +8,7 @@ import {
  * A visual separator that can be used between content sections
  * with configurable thickness and indentation.
  */
-export class Divider extends ContentItem {
-  static readonly schemaName = 'vyuh.divider';
-
+export interface Divider extends ContentItem {
   /**
    * The thickness of the divider in pixels
    */
@@ -22,18 +18,4 @@ export class Divider extends ContentItem {
    * Indent from the edges (in pixels or CSS units)
    */
   readonly indent?: string | number;
-
-  /**
-   * Creates a new divider content item
-   */
-  constructor(props?: Partial<Divider>) {
-    super({
-      schemaType: Divider.schemaName,
-      layout: props?.layout,
-      modifiers: props?.modifiers,
-    });
-
-    this.thickness = props?.thickness ?? 1;
-    this.indent = props?.indent;
-  }
 }

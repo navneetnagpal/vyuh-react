@@ -96,7 +96,7 @@ export abstract class ContentProvider {
       quality?: number;
       format?: string;
     },
-  ): string | null;
+  ): string | undefined;
 
   /**
    * Get a file URL from a file reference

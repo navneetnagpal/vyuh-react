@@ -1,9 +1,9 @@
+import React from 'react';
 import { ContentItem } from '@/content/content-item';
 import { ExtensionBuilder } from '@/core/extension-builder';
 import { ItemType } from '@/core/platform-types';
 import { ContentPlugin } from '@/plugins/content/content-plugin';
 import { NoOpContentProvider } from '@/plugins/content/noop-content-provider';
-import React from 'react';
 
 /**
  * No-op implementation of ContentPlugin.

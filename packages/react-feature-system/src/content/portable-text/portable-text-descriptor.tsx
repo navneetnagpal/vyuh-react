@@ -1,4 +1,3 @@
-import { PortableText } from '@/content/portable-text/portable-text';
 import {
   PortableTextBlockComponent,
   PortableTextListComponent,
@@ -6,8 +5,11 @@ import {
   PortableTextMarkComponent,
   PortableTextTypeComponent,
 } from '@portabletext/react';
-import { LayoutConfiguration } from '@vyuh/react-core';
 import { ContentDescriptor } from '@vyuh/react-extension-content';
+import {
+  PORTABLE_TEXT_SCHEMA_TYPE,
+  PortableText,
+} from '@/content/portable-text/portable-text';
 
 /**
  * Descriptor for a block type component
@@ -61,7 +63,7 @@ export class PortableTextDescriptor extends ContentDescriptor<PortableText> {
 
   constructor(props?: Partial<PortableTextDescriptor>) {
     super({
-      schemaType: PortableText.schemaName,
+      schemaType: PORTABLE_TEXT_SCHEMA_TYPE,
       title: 'Portable Text',
       layouts: props?.layouts,
     });

@@ -1,5 +1,6 @@
 import { FileReference, ImageReference } from '@/content/reference';
 import { RouteBase } from '@/content/route-base';
+import { UNKNOWN_SCHEMA_TYPE } from '@/content/unknown';
 import {
   ContentProvider,
   FieldKey,
@@ -33,9 +34,9 @@ export class NoOpContentProvider extends ContentProvider {
       quality?: number;
       format?: string;
     },
-  ): string | null {
+  ): string | undefined {
     console.warn('NoOpContentProvider: image method called');
-    return null;
+    return undefined;
   }
 
   /**
@@ -50,7 +51,7 @@ export class NoOpContentProvider extends ContentProvider {
    * Get the schema type from a JSON object
    */
   schemaType(json: Record<string, any>): string {
-    return json.type || 'unknown';
+    return json.type || UNKNOWN_SCHEMA_TYPE;
   }
 
   /**

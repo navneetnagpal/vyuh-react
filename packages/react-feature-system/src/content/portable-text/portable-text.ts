@@ -1,28 +1,10 @@
-import {
-  ContentItem,
-  ContentModifierConfiguration,
-  LayoutConfiguration,
-} from '@vyuh/react-core';
+import { ContentItem } from '@vyuh/react-core';
+
+export const PORTABLE_TEXT_SCHEMA_TYPE = 'vyuh.portableText';
 
 /**
  * Portable Text content item for rendering rich text content
  */
-export class PortableText extends ContentItem {
-  static readonly schemaName: string = 'vyuh.portableText';
-
+export interface PortableText extends ContentItem {
   readonly blocks: any[];
-
-  constructor(data: {
-    blocks: any[];
-    layout?: LayoutConfiguration;
-    modifiers?: ContentModifierConfiguration[];
-  }) {
-    super({
-      schemaType: PortableText.schemaName,
-      layout: data.layout,
-      modifiers: data.modifiers,
-    });
-
-    this.blocks = data.blocks || [];
-  }
 }

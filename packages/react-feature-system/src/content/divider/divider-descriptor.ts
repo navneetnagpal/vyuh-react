@@ -1,5 +1,5 @@
-import { Divider } from '@/content/divider/divider';
 import { ContentDescriptor } from '@vyuh/react-extension-content';
+import { Divider, DIVIDER_SCHEMA_TYPE } from '@/content/divider/divider';
 
 /**
  * Descriptor for the Divider content type
@@ -17,7 +17,7 @@ export class DividerDescriptor extends ContentDescriptor<Divider> {
    */
   constructor(options?: Partial<DividerDescriptor>) {
     super({
-      schemaType: Divider.schemaName,
+      schemaType: DIVIDER_SCHEMA_TYPE,
       title: 'Divider',
       layouts: options?.layouts,
     });
