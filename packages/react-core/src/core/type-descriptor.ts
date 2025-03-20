@@ -1,4 +1,4 @@
-import { SchemaItem } from '@/core/content/schema-item';
+import { SchemaItem } from '@/content/schema-item';
 
 export class TypeDescriptor<T extends SchemaItem> implements SchemaItem {
   private _sourceFeature?: string;

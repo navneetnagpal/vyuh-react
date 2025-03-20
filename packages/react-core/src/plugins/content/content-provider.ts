@@ -1,5 +1,5 @@
-import { FileReference, ImageReference } from '@/core/content/reference';
-import { RouteBase } from '@/core/content/route-base';
+import { FileReference, ImageReference } from '@/content/reference';
+import { RouteBase } from '@/content/route-base';
 
 export interface ContentProviderConfig {
   name: string;

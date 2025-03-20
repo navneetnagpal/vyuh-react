@@ -1,4 +1,4 @@
-import { ContentItem } from '@/core/content/content-item';
+import { ContentItem } from '@/content/content-item';
 
 /**
  * Unknown content item that provides a fallback for missing content types.

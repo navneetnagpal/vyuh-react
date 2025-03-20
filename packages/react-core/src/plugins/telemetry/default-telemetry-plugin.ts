@@ -1,5 +1,5 @@
-import { ConsoleProvider } from '@/core/plugins/telemetry/providers/console-provider';
-import { TelemetryPlugin } from '@/core/plugins/telemetry/telemetry-plugin';
+import { ConsoleProvider } from '@/plugins/telemetry/providers/console-provider';
+import { TelemetryPlugin } from '@/plugins/telemetry/telemetry-plugin';
 
 /**
  * Default implementation of TelemetryPlugin that uses console logging

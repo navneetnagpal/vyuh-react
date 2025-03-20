@@ -1,5 +1,5 @@
 import { Plugin } from '@/core/plugin';
-import { TelemetryProvider } from '@/core/plugins/telemetry/telemetry-provider';
+import { TelemetryProvider } from '@/plugins/telemetry/telemetry-provider';
 
 /**
  * Plugin for application telemetry and logging

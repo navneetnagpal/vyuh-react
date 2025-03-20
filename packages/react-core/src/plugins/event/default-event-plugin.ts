@@ -3,7 +3,7 @@ import {
   EventListener,
   EventPlugin,
   VyuhEvent,
-} from '@/core/plugins/event/event-plugin';
+} from '@/plugins/event/event-plugin';
 
 /**
  * Default implementation of EventPlugin

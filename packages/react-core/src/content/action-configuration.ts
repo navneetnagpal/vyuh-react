@@ -1,4 +1,4 @@
-import { SchemaItem } from '@/core/content/schema-item';
+import { SchemaItem } from '@/content/schema-item';
 
 /**
  * Base class for all action configurations.
@@ -31,18 +31,6 @@ export abstract class ActionConfiguration implements SchemaItem {
   readonly isAwaited?: boolean;
 
   /**
-   * The feature that registered this action configuration
-   */
-  private _sourceFeature?: string;
-
-  /**
-   * Get the source feature
-   */
-  get sourceFeature(): string | undefined {
-    return this._sourceFeature;
-  }
-
-  /**
    * Creates a new action configuration.
    */
   protected constructor({
@@ -57,13 +45,6 @@ export abstract class ActionConfiguration implements SchemaItem {
     this.schemaType = schemaType;
     this.title = title;
     this.isAwaited = isAwaited;
-  }
-
-  /**
-   * Set the source feature
-   */
-  setSourceFeature(featureName?: string): void {
-    this._sourceFeature = featureName;
   }
 
   /**

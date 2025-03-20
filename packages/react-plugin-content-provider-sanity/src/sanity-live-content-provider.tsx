@@ -1,5 +1,5 @@
-import { RouteBase } from '@/core/content/route-base';
-import { LiveContentProvider } from '@/core/plugins/content/content-provider';
+import { RouteBase } from '@vyuh/react-core';
+import { LiveContentProvider } from '@vyuh/react-core';
 import { SanityClient } from '@sanity/client';
 import { defineLive } from 'next-sanity';
 

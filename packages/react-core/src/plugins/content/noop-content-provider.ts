@@ -1,11 +1,11 @@
-import { FileReference, ImageReference } from '@/core/content/reference';
-import { RouteBase } from '@/core/content/route-base';
+import { FileReference, ImageReference } from '@/content/reference';
+import { RouteBase } from '@/content/route-base';
 import {
   ContentProvider,
   FieldKey,
   LiveContentProvider,
-} from '@/core/plugins/content/content-provider';
-import { NoOpLiveContentProvider } from '@/core/plugins/content/noop-live-content-provider';
+} from '@/plugins/content/content-provider';
+import { NoOpLiveContentProvider } from '@/plugins/content/noop-live-content-provider';
 
 /**
  * No-op implementation of ContentProvider.

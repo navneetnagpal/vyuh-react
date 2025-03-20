@@ -1,8 +1,8 @@
-import { ContentItem } from '@/core/content/content-item';
+import { ContentItem } from '@/content/content-item';
 import { ExtensionBuilder } from '@/core/extension-builder';
 import { ItemType } from '@/core/platform-types';
-import { ContentPlugin } from '@/core/plugins/content/content-plugin';
-import { NoOpContentProvider } from '@/core/plugins/content/noop-content-provider';
+import { ContentPlugin } from '@/plugins/content/content-plugin';
+import { NoOpContentProvider } from '@/plugins/content/noop-content-provider';
 import React from 'react';
 
 /**

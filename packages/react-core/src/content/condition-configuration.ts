@@ -1,4 +1,4 @@
-import { SchemaItem } from '@/core/content/schema-item';
+import { SchemaItem } from '@/content/schema-item';
 
 /**
  * Base class for all condition configurations.

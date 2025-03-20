@@ -1,7 +1,7 @@
-import { Category } from '@/core/content/category';
-import { ContentItem } from '@/core/content/content-item';
-import { ContentModifierConfiguration } from '@/core/content/content-modifier-configuration';
-import { LayoutConfiguration } from '@/core/content/layout-configuration';
+import { Category } from '@/content/category';
+import { ContentItem } from '@/content/content-item';
+import { ContentModifierConfiguration } from '@/content/content-modifier-configuration';
+import { LayoutConfiguration } from '@/content/layout-configuration';
 
 /**
  * Base class for all route content items in Vyuh.

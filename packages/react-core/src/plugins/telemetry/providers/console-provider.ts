@@ -1,4 +1,4 @@
-import { TelemetryProvider } from '@/core/plugins/telemetry/telemetry-provider';
+import { TelemetryProvider } from '@/plugins/telemetry/telemetry-provider';
 
 /**
  * A simple console-based telemetry provider that logs

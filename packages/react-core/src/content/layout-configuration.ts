@@ -1,4 +1,4 @@
-import { ContentItem } from '@/core/content/content-item';
+import { ContentItem } from '@/content/content-item';
 import React from 'react';
 
 /**

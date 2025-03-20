@@ -1,11 +1,11 @@
-import { FileReference, ImageReference } from '@/core/content/reference';
-import { RouteBase } from '@/core/content/route-base';
+import { FileReference, ImageReference } from '@vyuh/react-core';
+import { RouteBase } from '@vyuh/react-core';
 import {
   ContentProvider,
   FieldKey,
   LiveContentProvider,
   NoOpLiveContentProvider,
-} from '@/core/plugins/content/content-provider';
+} from '@vyuh/react-core';
 import { createClient, SanityClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
 

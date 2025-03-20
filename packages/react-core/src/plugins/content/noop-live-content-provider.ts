@@ -1,5 +1,5 @@
-import { RouteBase } from '@/core/content/route-base';
-import { LiveContentProvider } from '@/core/plugins/content/content-provider';
+import { RouteBase } from '@/content/route-base';
+import { LiveContentProvider } from '@/plugins/content/content-provider';
 
 /**
  * No-op implementation of LiveContentProvider.

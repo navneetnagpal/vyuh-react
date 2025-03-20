@@ -1,7 +1,7 @@
-import { ContentItem } from '@/core/content/content-item';
+import { ContentItem } from '@/content/content-item';
 import { ExtensionBuilder } from '@/core/extension-builder';
 import { ItemType } from '@/core/platform-types';
-import { ContentProvider } from '@/core/plugins/content/content-provider';
+import { ContentProvider } from '@/plugins/content/content-provider';
 import { Plugin } from '@/core/plugin';
 import React from 'react';
 
