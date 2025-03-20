@@ -1,4 +1,4 @@
-import { Plugin } from '@/core/plugins/plugin';
+import { Plugin } from '@/core/plugin';
 
 /**
  * Base class for all events in a Vyuh application

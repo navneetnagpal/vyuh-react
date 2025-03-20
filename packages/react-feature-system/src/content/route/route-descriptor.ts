@@ -10,7 +10,7 @@ import { ContentDescriptor } from '@vyuh/react-extension-content';
  * - Lifecycle handlers for route initialization and cleanup
  * - Available layouts for routes
  */
-export class RouteDescriptor extends ContentDescriptor {
+export class RouteDescriptor extends ContentDescriptor<Route> {
   /**
    * Lifecycle handlers available for routes
    */
@@ -19,19 +19,13 @@ export class RouteDescriptor extends ContentDescriptor {
   /**
    * Creates a new route descriptor
    */
-  constructor({
-    lifecycleHandlers,
-    layouts,
-  }: {
-    lifecycleHandlers?: RouteLifecycleConfiguration[];
-    layouts?: LayoutConfiguration[];
-  } = {}) {
+  constructor(props?: Partial<RouteDescriptor>) {
     super({
       schemaType: Route.schemaName,
       title: 'Route',
-      layouts,
+      layouts: props?.layouts,
     });
 
-    this.lifecycleHandlers = lifecycleHandlers;
+    this.lifecycleHandlers = props?.lifecycleHandlers;
   }
 }

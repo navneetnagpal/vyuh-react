@@ -28,18 +28,6 @@ export abstract class LayoutConfiguration<
   readonly title: string;
 
   /**
-   * The feature that registered this layout
-   */
-  private _sourceFeature?: string;
-
-  /**
-   * Get the source feature
-   */
-  get sourceFeature(): string | undefined {
-    return this._sourceFeature;
-  }
-
-  /**
    * Creates a new layout configuration
    */
   protected constructor({
@@ -54,21 +42,10 @@ export abstract class LayoutConfiguration<
   }
 
   /**
-   * Set the source feature
-   */
-  setSourceFeature(featureName?: string): void {
-    this._sourceFeature = featureName;
-  }
-
-  /**
    * Builds the layout component for the given content item
    *
    * @param content The content item to render
-   * @param layout The instance of layout configuration to use
    * @returns A React component representing the content with this layout
    */
-  abstract render(
-    content: TContent,
-    layout: LayoutConfiguration<TContent> | undefined,
-  ): React.ReactNode;
+  abstract render(content: TContent): React.ReactNode;
 }

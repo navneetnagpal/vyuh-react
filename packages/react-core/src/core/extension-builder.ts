@@ -1,4 +1,4 @@
-import { ExtensionDescriptor } from '@/core/extensions/extension-descriptor';
+import { ExtensionDescriptor } from '@/core/extension-descriptor';
 
 /**
  * Base class for extension builders.

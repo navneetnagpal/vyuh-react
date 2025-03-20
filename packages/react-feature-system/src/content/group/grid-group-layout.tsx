@@ -1,6 +1,6 @@
 import { Group } from '@/content/group/group';
 import { cn } from '@ui/lib/utils';
-import { LayoutConfiguration, useVyuh } from '@vyuh/react-core';
+import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
 import React from 'react';
 
 /**
@@ -14,25 +14,30 @@ import React from 'react';
 export class GridGroupLayout extends LayoutConfiguration<Group> {
   static readonly schemaName = `${Group.schemaName}.layout.grid`;
 
+  static typeDescriptor = new TypeDescriptor<GridGroupLayout>(
+    this.schemaName,
+    this,
+  );
+
   readonly columns: number;
   readonly aspectRatio: number;
   readonly scrollable: boolean;
 
-  constructor() {
+  constructor(props?: Partial<GridGroupLayout>) {
     super({
       schemaType: GridGroupLayout.schemaName,
       title: 'Grid Group Layout',
     });
 
-    this.columns = 3;
-    this.aspectRatio = 1;
-    this.scrollable = false;
+    this.columns = props?.columns ?? 2;
+    this.aspectRatio = props?.aspectRatio ?? 1;
+    this.scrollable = props?.scrollable ?? false;
   }
 
   /**
    * Render the group content as a responsive grid using Tailwind CSS
    */
-  render(content: Group, layout: GridGroupLayout): React.ReactNode {
+  render(content: Group): React.ReactNode {
     const { plugins } = useVyuh();
 
     return (
@@ -56,13 +61,13 @@ export class GridGroupLayout extends LayoutConfiguration<Group> {
           className={cn(
             'grid grid-cols-1 gap-4',
             {
-              'sm:grid-cols-2': layout.columns === 2,
+              'sm:grid-cols-2': this.columns === 2,
             },
             {
-              'sm:grid-cols-3': layout.columns === 3,
+              'sm:grid-cols-3': this.columns === 3,
             },
             {
-              'sm:grid-cols-4': layout.columns === 4,
+              'sm:grid-cols-4': this.columns === 4,
             },
           )}
         >

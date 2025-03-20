@@ -1,10 +1,10 @@
-import { ExtensionBuilder } from '@/core/extensions/extension-builder';
-import { ExtensionDescriptor } from '@/core/extensions/extension-descriptor';
+import { ExtensionBuilder } from '@/core/extension-builder';
+import { ExtensionDescriptor } from '@/core/extension-descriptor';
 import { FeatureDescriptor } from '@/core/feature-descriptor';
 import { PlatformComponentBuilder } from '@/core/platform-component-builder';
 import { InitState } from '@/core/platform-types';
 import { systemReadyEvent } from '@/core/plugins/event/default-event-plugin';
-import { PluginDescriptor } from '@/core/plugins/plugin-descriptor';
+import { PluginDescriptor } from '@/core/plugin-descriptor';
 import { useVyuhStore } from '@/hooks/use-vyuh';
 
 /**

@@ -13,6 +13,7 @@ import {
   ContentExtensionBuilder,
   ContentExtensionDescriptor,
 } from '@vyuh/react-extension-content';
+import { Command } from 'lucide-react';
 import React from 'react';
 
 /**
@@ -24,14 +25,17 @@ export const feature = new FeatureDescriptor({
   name: 'system',
   title: 'System',
   description: 'Core building blocks of the Vyuh React framework',
-  icon: <span>🧩</span>, // Using emoji as a simple icon
+  icon: <Command />, // Using emoji as a simple icon
   extensions: [
     new ContentExtensionDescriptor({
       contents: [
         new RouteDescriptor(),
         new CardDescriptor(),
         new GroupDescriptor({
-          layouts: [new CarouselGroupLayout(), new GridGroupLayout()],
+          layouts: [
+            CarouselGroupLayout.typeDescriptor,
+            GridGroupLayout.typeDescriptor,
+          ],
         }),
       ],
       contentBuilders: [

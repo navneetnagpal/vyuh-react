@@ -2,6 +2,8 @@ import { ContentDescriptor } from '@/content-descriptor';
 import {
   ContentItem,
   LayoutConfiguration,
+  SchemaItem,
+  TypeDescriptor,
   useVyuhStore,
 } from '@vyuh/react-core';
 import React from 'react';
@@ -13,7 +15,9 @@ import React from 'react';
  * - Managing layout configurations for content types
  * - Building content widgets
  */
-export class ContentBuilder<TContent extends ContentItem = ContentItem> {
+export class ContentBuilder<TContent extends ContentItem = ContentItem>
+  implements SchemaItem
+{
   /**
    * The schema type for this builder
    */
@@ -76,7 +80,7 @@ export class ContentBuilder<TContent extends ContentItem = ContentItem> {
    */
   init(descriptors: ContentDescriptor[]): void {}
 
-  private getLayout(content: TContent): LayoutConfiguration | undefined {
+  getLayout(content: TContent): LayoutConfiguration | undefined {
     return Array.isArray(content.layout) ? content.layout[0] : undefined;
   }
 
@@ -93,18 +97,20 @@ export class ContentBuilder<TContent extends ContentItem = ContentItem> {
       ? contentPlugin.provider.schemaType(layoutConfig)
       : undefined;
 
-    let layout = contentPlugin.getItem(LayoutConfiguration, layoutType);
+    const layoutDescriptor: TypeDescriptor<LayoutConfiguration> =
+      contentPlugin.getItem(TypeDescriptor<LayoutConfiguration>, layoutType);
 
-    if (!layout) {
+    if (!layoutDescriptor) {
       telemetry?.log(
         `No layout found for ${this.schemaType}. Using default.`,
         'debug',
       );
 
-      layout = this.defaultLayout;
+      return this.defaultLayout.render(content);
     }
 
-    return layout.render(content, layoutConfig);
+    const layout = new layoutDescriptor.fromJson(layoutConfig);
+    return layout.render(content);
   }
 
   /**

@@ -75,13 +75,4 @@ export abstract class ActionConfiguration implements SchemaItem {
     context: any,
     params?: Record<string, any>,
   ): Promise<void> | void;
-
-  /**
-   * Creates an action from a JSON object.
-   */
-  static fromJson(json: Record<string, any>): ActionConfiguration {
-    throw new Error(
-      'Method not implemented. Each subclass must implement fromJson.',
-    );
-  }
 }

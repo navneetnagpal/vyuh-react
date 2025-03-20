@@ -52,38 +52,24 @@ export interface ListItemDescriptor {
 /**
  * Descriptor for configuring portable text content type in the system
  */
-export class PortableTextDescriptor extends ContentDescriptor {
+export class PortableTextDescriptor extends ContentDescriptor<PortableText> {
   readonly blockTypes?: BlockTypeDescriptor[];
   readonly marks?: MarkDescriptor[];
   readonly blockStyles?: BlockStyleDescriptor[];
   readonly lists?: ListDescriptor[];
   readonly listItems?: ListItemDescriptor[];
 
-  constructor({
-    blockTypes,
-    marks,
-    blockStyles,
-    lists,
-    listItems,
-    layouts,
-  }: {
-    blockTypes?: BlockTypeDescriptor[];
-    marks?: MarkDescriptor[];
-    blockStyles?: BlockStyleDescriptor[];
-    lists?: ListDescriptor[];
-    listItems?: ListItemDescriptor[];
-    layouts?: LayoutConfiguration[];
-  }) {
+  constructor(props?: Partial<PortableTextDescriptor>) {
     super({
       schemaType: PortableText.schemaName,
       title: 'Portable Text',
-      layouts,
+      layouts: props?.layouts,
     });
 
-    this.blockTypes = blockTypes;
-    this.marks = marks;
-    this.blockStyles = blockStyles;
-    this.lists = lists;
-    this.listItems = listItems;
+    this.blockTypes = props?.blockTypes;
+    this.marks = props?.marks;
+    this.blockStyles = props?.blockStyles;
+    this.lists = props?.lists;
+    this.listItems = props?.listItems;
   }
 }

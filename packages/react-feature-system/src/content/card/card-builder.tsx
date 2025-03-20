@@ -41,7 +41,6 @@ class DefaultCardLayout extends LayoutConfiguration<Card> {
   constructor() {
     super({
       schemaType: DefaultCardLayout.schemaName,
-      contentType: Card.schemaName,
       title: 'Default Card Layout',
     });
   }

@@ -9,6 +9,8 @@ import {
   ExtensionDescriptor,
   ItemType,
   LayoutConfiguration,
+  SchemaItem,
+  TypeDescriptor,
   useVyuhStore,
 } from '@vyuh/react-core';
 
@@ -41,7 +43,7 @@ export class ContentExtensionBuilder extends ExtensionBuilder {
     this.initTypeMap(LayoutConfiguration);
 
     // Collect all content builders
-    this.collectItems(
+    this.collectItems<ContentBuilder>(
       extensionDescriptors,
       (descriptor) => descriptor.contentBuilders || [],
       ContentBuilder,
@@ -52,7 +54,7 @@ export class ContentExtensionBuilder extends ExtensionBuilder {
     this.collectItems(
       extensionDescriptors,
       (descriptor) => descriptor.contentModifiers || [],
-      ContentModifierConfiguration,
+      TypeDescriptor<ContentModifierConfiguration>,
       'ContentModifier',
     );
 
@@ -60,7 +62,7 @@ export class ContentExtensionBuilder extends ExtensionBuilder {
     this.collectItems(
       extensionDescriptors,
       (descriptor) => descriptor.actions || [],
-      ActionConfiguration,
+      TypeDescriptor<ActionConfiguration>,
       'Action',
     );
 
@@ -68,7 +70,7 @@ export class ContentExtensionBuilder extends ExtensionBuilder {
     this.collectItems(
       extensionDescriptors,
       (descriptor) => descriptor.conditions || [],
-      ConditionConfiguration,
+      TypeDescriptor<ConditionConfiguration>,
       'Condition',
     );
 
@@ -77,7 +79,7 @@ export class ContentExtensionBuilder extends ExtensionBuilder {
       extensionDescriptors,
       (descriptor) =>
         (descriptor.contents || []).flatMap((layout) => layout.layouts || []),
-      LayoutConfiguration,
+      TypeDescriptor<LayoutConfiguration>,
       'Layout',
     );
 
@@ -163,10 +165,10 @@ export class ContentExtensionBuilder extends ExtensionBuilder {
   /**
    * Collect items of a specific type from extension descriptors
    */
-  private collectItems<T extends { schemaType: string }>(
+  private collectItems<T extends SchemaItem>(
     descriptors: ContentExtensionDescriptor[],
     extractor: (descriptor: ContentExtensionDescriptor) => T[],
-    itemType: ItemType<T>,
+    itemType: ItemType<any>,
     itemTypeName: string,
   ): void {
     const telemetry = useVyuhStore.getState().plugins.telemetry;

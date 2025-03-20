@@ -3,7 +3,7 @@
 import { FeatureDescriptor } from '@/core/feature-descriptor';
 import { PlatformComponentBuilder } from '@/core/platform-component-builder';
 import { InitState } from '@/core/platform-types';
-import { PluginDescriptor } from '@/core/plugins/plugin-descriptor';
+import { PluginDescriptor } from '@/core/plugin-descriptor';
 import { create } from 'zustand/index';
 
 export interface VyuhPlatformState {

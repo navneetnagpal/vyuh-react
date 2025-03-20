@@ -1,8 +1,8 @@
 import { ContentItem } from '@/core/content/content-item';
-import { ExtensionBuilder } from '@/core/extensions/extension-builder';
+import { ExtensionBuilder } from '@/core/extension-builder';
 import { ItemType } from '@/core/platform-types';
 import { ContentProvider } from '@/core/plugins/content/content-provider';
-import { Plugin } from '@/core/plugins/plugin';
+import { Plugin } from '@/core/plugin';
 import React from 'react';
 
 /**
@@ -43,7 +43,7 @@ export abstract class ContentPlugin extends Plugin {
    * @param schemaType The schema type to get the item for
    * @returns The item for the schema type, or undefined if not found
    */
-  abstract getItem<T>(
+  abstract getItem<T extends object>(
     itemType: ItemType<T>,
     schemaType: string | undefined,
   ): T | undefined;

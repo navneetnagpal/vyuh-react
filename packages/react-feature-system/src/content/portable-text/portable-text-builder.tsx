@@ -144,7 +144,6 @@ class DefaultPortableTextLayout extends LayoutConfiguration<PortableText> {
     super({
       schemaType: DefaultPortableTextLayout.schemaName,
       title: 'Default Portable Text Layout',
-      contentType: PortableText.schemaName,
     });
   }
 

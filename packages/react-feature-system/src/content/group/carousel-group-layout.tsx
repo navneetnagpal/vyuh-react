@@ -1,6 +1,12 @@
 import { Group } from '@/content/group/group';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@ui/components/carousel';
-import { LayoutConfiguration, useVyuh } from '@vyuh/react-core';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@ui/components/carousel';
+import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
 import React from 'react';
 
 /**
@@ -14,10 +20,14 @@ import React from 'react';
 export class CarouselGroupLayout extends LayoutConfiguration<Group> {
   static readonly schemaName = `${Group.schemaName}.layout.carousel`;
 
+  static typeDescriptor = new TypeDescriptor<CarouselGroupLayout>(
+    this.schemaName,
+    this,
+  );
+
   constructor() {
     super({
       schemaType: CarouselGroupLayout.schemaName,
-      contentType: Group.schemaName,
       title: 'Carousel Group Layout',
     });
   }

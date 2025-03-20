@@ -1,10 +1,10 @@
 'use client';
 
 import { FeatureDescriptor } from '@/core/feature-descriptor';
-import { bootstrap } from '@/core/platform-bootstrap';
+import { bootstrap } from '@/core/bootstrap';
 import { PlatformComponentBuilder } from '@/core/platform-component-builder';
 import { InitState } from '@/core/platform-types';
-import { PluginDescriptor } from '@/core/plugins/plugin-descriptor';
+import { PluginDescriptor } from '@/core/plugin-descriptor';
 import { useVyuhStore } from '@/hooks/use-vyuh';
 import React from 'react';
 

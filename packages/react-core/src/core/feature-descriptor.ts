@@ -1,5 +1,5 @@
-import { ExtensionBuilder } from '@/core/extensions/extension-builder';
-import { ExtensionDescriptor } from '@/core/extensions/extension-descriptor';
+import { ExtensionBuilder } from '@/core/extension-builder';
+import { ExtensionDescriptor } from '@/core/extension-descriptor';
 import React from 'react';
 
 /**

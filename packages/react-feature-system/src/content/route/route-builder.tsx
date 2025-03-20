@@ -22,12 +22,13 @@ export class RouteContentBuilder extends ContentBuilder<Route> {
    * This uses the route's layout configuration or falls back to the category layout.
    * If no layout is found, it uses the default layout.
    */
-  override getLayout(content: Route): string {
-    return (
-      content.layout?.schemaType ||
-      content.category?.layout?.schemaType ||
-      this.defaultLayout.schemaType
-    );
+  override getLayout(content: Route): LayoutConfiguration | undefined {
+    const contentLayout = super.getLayout(content);
+    const categoryLayout = Array.isArray(content.category?.layout)
+      ? content.category?.layout[0]
+      : undefined;
+
+    return contentLayout || categoryLayout;
   }
 }
 
@@ -41,7 +42,6 @@ class DefaultRouteLayout extends LayoutConfiguration<Route> {
     super({
       schemaType: DefaultRouteLayout.schemaName,
       title: 'Default Route Layout',
-      contentType: Route.schemaName,
     });
   }
 

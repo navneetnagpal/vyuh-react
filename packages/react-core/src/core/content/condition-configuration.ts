@@ -23,18 +23,6 @@ export abstract class ConditionConfiguration implements SchemaItem {
   readonly title?: string;
 
   /**
-   * The feature that registered this condition configuration
-   */
-  private _sourceFeature?: string;
-
-  /**
-   * Get the source feature
-   */
-  get sourceFeature(): string | undefined {
-    return this._sourceFeature;
-  }
-
-  /**
    * Creates a new condition configuration.
    */
   protected constructor({
@@ -49,13 +37,6 @@ export abstract class ConditionConfiguration implements SchemaItem {
   }
 
   /**
-   * Set the source feature
-   */
-  setSourceFeature(featureName?: string): void {
-    this._sourceFeature = featureName;
-  }
-
-  /**
    * Evaluates this condition configuration.
    *
    * Returns:
@@ -63,13 +44,4 @@ export abstract class ConditionConfiguration implements SchemaItem {
    * - an error message string if the condition fails
    */
   abstract execute(context: any): Promise<string | null> | string | null;
-
-  /**
-   * Creates a condition from a JSON object.
-   */
-  static fromJson(json: Record<string, any>): ConditionConfiguration {
-    throw new Error(
-      'Method not implemented. Each subclass must implement fromJson.',
-    );
-  }
 }

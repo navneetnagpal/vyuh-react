@@ -37,17 +37,4 @@ export class Category extends ContentItem {
     this.title = data.title;
     this.slug = data.slug;
   }
-
-  /**
-   * Create a Category instance from JSON data
-   */
-  static fromJson(json: Record<string, any>): Category {
-    return new Category({
-      id: json.id || json._id,
-      title: json.title,
-      slug: json.slug,
-      layout: json.layout,
-      modifiers: json.modifiers,
-    });
-  }
 }

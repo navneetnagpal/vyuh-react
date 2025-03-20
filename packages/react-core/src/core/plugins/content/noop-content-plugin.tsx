@@ -1,5 +1,5 @@
 import { ContentItem } from '@/core/content/content-item';
-import { ExtensionBuilder } from '@/core/extensions/extension-builder';
+import { ExtensionBuilder } from '@/core/extension-builder';
 import { ItemType } from '@/core/platform-types';
 import { ContentPlugin } from '@/core/plugins/content/content-plugin';
 import { NoOpContentProvider } from '@/core/plugins/content/noop-content-provider';

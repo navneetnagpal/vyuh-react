@@ -1,4 +1,4 @@
-import { Plugin } from '@/core/plugins/plugin';
+import { Plugin } from '@/core/plugin';
 import { TelemetryProvider } from '@/core/plugins/telemetry/telemetry-provider';
 
 /**

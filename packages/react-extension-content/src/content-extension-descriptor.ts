@@ -5,6 +5,7 @@ import {
   ConditionConfiguration,
   ContentModifierConfiguration,
   ExtensionDescriptor,
+  TypeDescriptor,
 } from '@vyuh/react-core';
 
 /**
@@ -28,35 +29,29 @@ export class ContentExtensionDescriptor extends ExtensionDescriptor {
   /**
    * Action configurations
    */
-  readonly actions?: ActionConfiguration[];
+  readonly actions?: TypeDescriptor<ActionConfiguration>[];
 
   /**
    * Condition configurations
    */
-  readonly conditions?: ConditionConfiguration[];
+  readonly conditions?: TypeDescriptor<ConditionConfiguration>[];
 
   /**
    * Content modifier configurations
    */
-  readonly contentModifiers?: ContentModifierConfiguration[];
+  readonly contentModifiers?: TypeDescriptor<ContentModifierConfiguration>[];
 
   /**
    * Creates a new content extension descriptor
    */
-  constructor({
-    contents,
-    contentBuilders,
-    actions,
-    conditions,
-    contentModifiers,
-  }: Partial<ContentExtensionDescriptor>) {
+  constructor(props?: Partial<ContentExtensionDescriptor>) {
     super(ContentExtensionDescriptor.extensionType);
 
-    this.contents = contents;
-    this.contentBuilders = contentBuilders;
-    this.actions = actions;
-    this.conditions = conditions;
-    this.contentModifiers = contentModifiers;
+    this.contents = props?.contents;
+    this.contentBuilders = props?.contentBuilders;
+    this.actions = props?.actions;
+    this.conditions = props?.conditions;
+    this.contentModifiers = props?.contentModifiers;
   }
 
   /**

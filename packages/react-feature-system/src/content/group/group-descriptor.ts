@@ -17,13 +17,13 @@ import { ContentDescriptor } from '@vyuh/react-extension-content';
  * });
  * ```
  */
-export class GroupDescriptor extends ContentDescriptor {
+export class GroupDescriptor extends ContentDescriptor<Group> {
   /**
    * Creates a new Group descriptor
    *
    * @param options Configuration options for the descriptor
    */
-  constructor(options?: { layouts?: LayoutConfiguration[] }) {
+  constructor(options?: Partial<GroupDescriptor>) {
     super({
       schemaType: Group.schemaName,
       title: 'Group',

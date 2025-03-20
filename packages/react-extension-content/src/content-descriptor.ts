@@ -1,4 +1,5 @@
-import { LayoutConfiguration } from '@vyuh/react-core';
+import { ContentItem, LayoutConfiguration } from '@vyuh/react-core';
+import { TypeDescriptor } from '@vyuh/react-core';
 
 /**
  * Descriptor for content types in the Vyuh system.
@@ -10,7 +11,7 @@ import { LayoutConfiguration } from '@vyuh/react-core';
  * They are used by ContentBuilder to initialize content types
  * with their available configurations.
  */
-export class ContentDescriptor {
+export class ContentDescriptor<TContent extends ContentItem = ContentItem> {
   /**
    * The schema type of the content
    */
@@ -24,7 +25,7 @@ export class ContentDescriptor {
   /**
    * Available layouts for this content type
    */
-  readonly layouts?: LayoutConfiguration[];
+  readonly layouts?: TypeDescriptor<LayoutConfiguration<TContent>>[];
 
   /**
    * The feature that registered this content descriptor
@@ -48,7 +49,7 @@ export class ContentDescriptor {
   }: {
     schemaType: string;
     title: string;
-    layouts?: LayoutConfiguration[];
+    layouts?: TypeDescriptor<LayoutConfiguration<TContent>>[];
   }) {
     this.schemaType = schemaType;
     this.title = title;
@@ -74,14 +75,14 @@ export class ContentDescriptor {
   /**
    * Creates a default content descriptor with standard conventions
    */
-  static createDefault({
+  static createDefault<TContent extends ContentItem = ContentItem>({
     schemaType,
     title,
   }: {
     schemaType: string;
     title: string;
   }) {
-    return (layouts?: LayoutConfiguration[]) =>
+    return (layouts?: TypeDescriptor<LayoutConfiguration<TContent>>[]) =>
       new ContentDescriptor({
         schemaType,
         title,
