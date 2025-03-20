@@ -1,4 +1,4 @@
-import { LayoutConfiguration } from '@vyuh/react-core';
+import { LayoutConfiguration, TypeDescriptor } from '@vyuh/react-core';
 import { ContentBuilder } from '@vyuh/react-extension-content';
 import React from 'react';
 import { Divider, DIVIDER_SCHEMA_TYPE } from '@/content/divider/divider';
@@ -11,6 +11,7 @@ export class DividerContentBuilder extends ContentBuilder<Divider> {
     super({
       schemaType: DIVIDER_SCHEMA_TYPE,
       defaultLayout: new DefaultDividerLayout(),
+      defaultLayoutDescriptor: DefaultDividerLayout.typeDescriptor,
     });
   }
 }
@@ -24,6 +25,7 @@ export class DividerContentBuilder extends ContentBuilder<Divider> {
  */
 class DefaultDividerLayout extends LayoutConfiguration<Divider> {
   static readonly schemaName = `${DIVIDER_SCHEMA_TYPE}.layout.default`;
+  static typeDescriptor = new TypeDescriptor(this.schemaName, this);
 
   constructor() {
     super({

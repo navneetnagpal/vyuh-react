@@ -15,3 +15,6 @@ export * from './content/group/group-descriptor';
 
 export * from './content/conditional-route/conditional-route';
 export * from './content/conditional-route/conditional-route-descriptor';
+
+export * from './content/conditional-content/conditional-content';
+export * from './content/conditional-content/conditional-content-descriptor';

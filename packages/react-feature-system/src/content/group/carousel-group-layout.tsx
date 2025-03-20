@@ -20,10 +20,7 @@ import {
 export class CarouselGroupLayout extends LayoutConfiguration<Group> {
   static readonly schemaName = `${GROUP_SCHEMA_TYPE}.layout.carousel`;
 
-  static typeDescriptor = new TypeDescriptor<CarouselGroupLayout>(
-    this.schemaName,
-    this,
-  );
+  static typeDescriptor = new TypeDescriptor(this.schemaName, this);
 
   constructor() {
     super({

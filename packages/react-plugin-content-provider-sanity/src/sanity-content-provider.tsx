@@ -14,6 +14,7 @@ const fieldKeyMap: Record<FieldKey, string> = {
   [FieldKey.type]: '_type',
   [FieldKey.id]: '_id',
   [FieldKey.ref]: '_ref',
+  [FieldKey.key]: '_key',
 };
 
 export interface SanityConfig {
@@ -29,12 +30,11 @@ export class SanityContentProvider extends ContentProvider {
   // Explicitly declare inherited properties to satisfy TypeScript
   readonly name: string;
   readonly title: string;
-
   private readonly client: SanityClient;
+
   private imageBuilder: any;
   private cacheDuration: number;
   // private _live: SanityLiveContentProvider;
-
   constructor(config: SanityConfig, cacheDuration: number = 300000) {
     // Default 5 minutes
     super({
@@ -215,15 +215,20 @@ export class SanityContentProvider extends ContentProvider {
       .catch(() => null);
   }
 
-  // Override the fieldValue method to handle Sanity's specific field structure
-  fieldValue(key: FieldKey, json: Record<string, any>): string {
-    const fieldKey = fieldKeyMap[key];
-    return json[fieldKey];
-  }
-
   // Override the schemaType method to handle Sanity's specific type field
   schemaType(json: Record<string, any>): string {
     return this.fieldValue(FieldKey.type, json);
+  }
+
+  // Override the reference method to handle Sanity's specific reference field
+  reference(json: Record<string, any>): string | undefined {
+    return json._ref;
+  }
+  // Override the fieldValue method to handle Sanity's specific field structure
+
+  fieldValue(key: FieldKey, json: Record<string, any>): string {
+    const fieldKey = fieldKeyMap[key];
+    return json[fieldKey];
   }
 
   // Live content provider implementation

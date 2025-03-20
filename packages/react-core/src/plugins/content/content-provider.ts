@@ -10,6 +10,7 @@ export enum FieldKey {
   type,
   id,
   ref,
+  key,
 }
 
 /**
@@ -112,6 +113,11 @@ export abstract class ContentProvider {
    * Get the schema type from a JSON object
    */
   abstract schemaType(json: Record<string, any>): string;
+
+  /**
+   * Get the reference from a JSON object
+   */
+  abstract reference(json: Record<string, any>): string | undefined;
 
   /**
    * Check if this provider supports live updates

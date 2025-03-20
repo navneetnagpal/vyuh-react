@@ -1,3 +1,4 @@
+import { BooleanCondition } from '@/condition/boolean-condition';
 import { FeatureDescriptor } from '@vyuh/react-core';
 import {
   ContentExtensionBuilder,
@@ -7,6 +8,8 @@ import { Command } from 'lucide-react';
 import React from 'react';
 import { CardContentBuilder } from '@/content/card/card-builder';
 import { CardDescriptor } from '@/content/card/card-descriptor';
+import { ConditionalContentBuilder } from '@/content/conditional-content/conditional-content-builder';
+import { ConditionalContentDescriptor } from '@/content/conditional-content/conditional-content-descriptor';
 import { ConditionalRouteBuilder } from '@/content/conditional-route/conditional-route-builder';
 import { ConditionalRouteDescriptor } from '@/content/conditional-route/conditional-route-descriptor';
 import { DefaultConditionalRouteLayout } from '@/content/conditional-route/default-layout';
@@ -35,9 +38,8 @@ export const feature = new FeatureDescriptor({
     new ContentExtensionDescriptor({
       contents: [
         new RouteDescriptor(),
-        new ConditionalRouteDescriptor({
-          layouts: [DefaultConditionalRouteLayout.typeDescriptor],
-        }),
+        new ConditionalRouteDescriptor(),
+        new ConditionalContentDescriptor(),
         new CardDescriptor(),
         new GroupDescriptor({
           layouts: [
@@ -50,12 +52,14 @@ export const feature = new FeatureDescriptor({
       contentBuilders: [
         new RouteContentBuilder(),
         new ConditionalRouteBuilder(),
+        new ConditionalContentBuilder(),
         new UnknownContentBuilder(),
         new PortableTextContentBuilder(),
         new CardContentBuilder(),
         new GroupContentBuilder(),
         new DividerContentBuilder(),
       ],
+      conditions: [BooleanCondition.typeDescriptor],
     }),
   ],
   extensionBuilders: [new ContentExtensionBuilder()],

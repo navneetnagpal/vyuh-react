@@ -50,6 +50,17 @@ export class ContentExtensionBuilder extends ExtensionBuilder {
       'ContentBuilder',
     );
 
+    // Collect all default layouts for builders
+    this.collectItems(
+      extensionDescriptors,
+      (descriptor) =>
+        (descriptor.contentBuilders || []).flatMap((builder) => [
+          builder.defaultLayoutDescriptor,
+        ]),
+      TypeDescriptor<LayoutConfiguration>,
+      'Default Layouts',
+    );
+
     // Collect all content modifiers
     this.collectItems(
       extensionDescriptors,
@@ -121,10 +132,28 @@ export class ContentExtensionBuilder extends ExtensionBuilder {
    */
   getItemBySchemaType<T>(
     itemType: ItemType<T>,
-    schemaType: string,
+    schemaType: string | undefined,
   ): T | undefined {
+    if (!schemaType) {
+      return undefined;
+    }
+
+    const { telemetry } = useVyuhStore.getState().plugins;
+
     const itemMap = this.typeMap.get(itemType);
-    return itemMap?.get(schemaType);
+    const item = itemMap?.get(schemaType);
+
+    if (!item) {
+      telemetry?.log(`No item found with schemaType: ${schemaType}`, 'error');
+      throw new Error(
+        `
+No item found with schemaType: ${schemaType}. 
+Make sure you have registered a ${itemType.name} for this schema type.
+`.trim(),
+      );
+    }
+
+    return itemMap!.get(schemaType);
   }
 
   /**

@@ -12,6 +12,7 @@ export class GroupContentBuilder extends ContentBuilder<Group> {
     super({
       schemaType: GroupContentBuilder.schemaName,
       defaultLayout: new CarouselGroupLayout(),
+      defaultLayoutDescriptor: CarouselGroupLayout.typeDescriptor,
     });
   }
 }

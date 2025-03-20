@@ -1,4 +1,6 @@
 import { ConditionConfiguration } from '@/content/condition-configuration';
+import { TypeDescriptor } from '@/core/type-descriptor';
+import { useVyuhStore } from '@/hooks/use-vyuh';
 
 /**
  * A conditional expression that can be evaluated at runtime.
@@ -41,7 +43,18 @@ export class Condition {
    * Creates a new condition with the given configuration.
    */
   constructor(data?: Partial<Condition>) {
-    this.configuration = data?.configuration;
+    const { content } = useVyuhStore.getState().plugins;
+
+    const config = Array.isArray(data?.configuration)
+      ? data?.configuration[0]
+      : undefined;
+    const schemaType = config ? content.provider.schemaType(config) : undefined;
+
+    const TD = content.getItem(
+      TypeDescriptor<ConditionConfiguration>,
+      schemaType,
+    );
+    this.configuration = TD ? new TD.fromJson(config) : undefined;
   }
 
   async execute(

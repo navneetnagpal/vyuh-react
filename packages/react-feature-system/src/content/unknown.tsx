@@ -1,5 +1,6 @@
 import {
   LayoutConfiguration,
+  TypeDescriptor,
   Unknown,
   UNKNOWN_SCHEMA_TYPE,
 } from '@vyuh/react-core';
@@ -18,6 +19,7 @@ import React from 'react';
  */
 class DefaultUnknownLayout extends LayoutConfiguration<Unknown> {
   static readonly schemaName = `${UNKNOWN_SCHEMA_TYPE}.layout.default`;
+  static typeDescriptor = new TypeDescriptor(this.schemaName, this);
 
   constructor() {
     super({
@@ -53,6 +55,7 @@ export class UnknownContentBuilder extends ContentBuilder {
     super({
       schemaType: UNKNOWN_SCHEMA_TYPE,
       defaultLayout: new DefaultUnknownLayout(),
+      defaultLayoutDescriptor: DefaultUnknownLayout.typeDescriptor,
     });
   }
 }

@@ -67,6 +67,12 @@ export const CONDITIONAL_ROUTE_SCHEMA_TYPE = 'vyuh.conditionalRoute';
  */
 export interface ConditionalRoute extends RouteBase {
   /**
+   * The schema type for this content item
+   * This is required by ContentItem
+   */
+  readonly schemaType: typeof CONDITIONAL_ROUTE_SCHEMA_TYPE;
+
+  /**
    * The condition to evaluate
    */
   readonly condition?: Condition;
@@ -85,18 +91,21 @@ export interface ConditionalRoute extends RouteBase {
 /**
  * Evaluate the condition and return the appropriate route
  */
-async function evaluate(route: ConditionalRoute): Promise<RouteBase | null> {
-  const value =
-    (await route.condition?.configuration?.execute()) || route.defaultCase;
+export async function evaluateConditionalRoute(
+  route: ConditionalRoute,
+): Promise<RouteBase | null> {
+  if (!route.condition || !route.cases) return null;
+
+  const condition = new Condition(route.condition);
+  const value = (await condition.execute()) || route.defaultCase;
   const caseItem = route.cases?.find((x) => x.value === value);
 
-  const ref = caseItem?.item;
-  let leafRoute: RouteBase | null = null;
+  const { content } = useVyuhStore.getState().plugins;
+  const ref = content.provider.reference(caseItem?.item);
 
   if (ref) {
-    const { plugins } = useVyuhStore.getState();
-    return plugins.content.provider.fetchRoute({
-      routeId: ref.ref,
+    return content.provider.fetchRoute({
+      routeId: ref,
     });
   }
 

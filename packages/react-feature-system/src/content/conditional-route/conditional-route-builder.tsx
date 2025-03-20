@@ -22,6 +22,7 @@ export class ConditionalRouteBuilder extends ContentBuilder<ConditionalRoute> {
     super({
       schemaType: ConditionalRouteBuilder.schemaName,
       defaultLayout: new DefaultConditionalRouteLayout(),
+      defaultLayoutDescriptor: DefaultConditionalRouteLayout.typeDescriptor,
     });
   }
 

@@ -14,10 +14,7 @@ import { cn } from '@ui/lib/utils';
 export class GridGroupLayout extends LayoutConfiguration<Group> {
   static readonly schemaName = `${GROUP_SCHEMA_TYPE}.layout.grid`;
 
-  static typeDescriptor = new TypeDescriptor<GridGroupLayout>(
-    this.schemaName,
-    this,
-  );
+  static typeDescriptor = new TypeDescriptor(this.schemaName, this);
 
   readonly columns: number;
   readonly aspectRatio: number;

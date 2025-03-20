@@ -1,23 +1,22 @@
-import {
-  PortableText as SanityPortableText,
-  PortableTextBlockComponent,
-  PortableTextListComponent,
-  PortableTextListItemComponent,
-  PortableTextMarkComponent,
-  PortableTextTypeComponent,
-} from '@portabletext/react';
-import { LayoutConfiguration, useVyuhStore } from '@vyuh/react-core';
-import {
-  ContentBuilder,
-  ContentDescriptor,
-} from '@vyuh/react-extension-content';
-import React from 'react';
+import { DefaultPortableTextLayout } from '@/content/portable-text/default-portable-text-layout';
 import {
   PORTABLE_TEXT_SCHEMA_TYPE,
   PortableText,
 } from '@/content/portable-text/portable-text';
 import { PortableTextConfig } from '@/content/portable-text/portable-text-config';
 import { PortableTextDescriptor } from '@/content/portable-text/portable-text-descriptor';
+import {
+  PortableTextBlockComponent,
+  PortableTextListComponent,
+  PortableTextListItemComponent,
+  PortableTextMarkComponent,
+  PortableTextTypeComponent,
+} from '@portabletext/react';
+import { useVyuhStore } from '@vyuh/react-core';
+import {
+  ContentBuilder,
+  ContentDescriptor,
+} from '@vyuh/react-extension-content';
 
 /**
  * Content builder for Portable Text content items
@@ -27,6 +26,7 @@ export class PortableTextContentBuilder extends ContentBuilder<PortableText> {
     super({
       schemaType: PORTABLE_TEXT_SCHEMA_TYPE,
       defaultLayout: new DefaultPortableTextLayout(),
+      defaultLayoutDescriptor: DefaultPortableTextLayout.typeDescriptor,
     });
   }
 
@@ -135,48 +135,4 @@ export class PortableTextContentBuilder extends ContentBuilder<PortableText> {
       PortableTextConfig.shared.registerListItem(type, component);
     });
   }
-}
-
-/**
- * Default layout for Portable Text content
- */
-class DefaultPortableTextLayout extends LayoutConfiguration<PortableText> {
-  static readonly schemaName: string = 'vyuh.portableText.layout.default';
-
-  constructor() {
-    super({
-      schemaType: DefaultPortableTextLayout.schemaName,
-      title: 'Default Portable Text Layout',
-    });
-  }
-
-  render(content: PortableText): React.ReactNode {
-    return <DefaultPortableTextComponent portableText={content} />;
-  }
-}
-
-/**
- * Default component used by the DefaultPortableTextLayout
- */
-function DefaultPortableTextComponent({
-  portableText,
-}: {
-  portableText: PortableText;
-}) {
-  if (!portableText.blocks || portableText.blocks.length === 0) {
-    return null;
-  }
-
-  // Use the singleton components object
-  const components = PortableTextConfig.shared.components;
-
-  return (
-    <div className="portable-text-content">
-      <SanityPortableText
-        value={portableText.blocks}
-        components={components}
-        onMissingComponent={false}
-      />
-    </div>
-  );
 }

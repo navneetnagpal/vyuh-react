@@ -35,6 +35,15 @@ export class ContentBuilder<TContent extends ContentItem = ContentItem>
     return this._defaultLayout;
   }
 
+  private readonly _defaultLayoutDescriptor: TypeDescriptor<LayoutConfiguration>;
+
+  /**
+   * Get the default layout descriptor
+   */
+  get defaultLayoutDescriptor(): TypeDescriptor<LayoutConfiguration> {
+    return this._defaultLayoutDescriptor;
+  }
+
   /**
    * The feature that registered this content builder
    */
@@ -60,12 +69,15 @@ export class ContentBuilder<TContent extends ContentItem = ContentItem>
   constructor({
     schemaType,
     defaultLayout,
+    defaultLayoutDescriptor,
   }: {
     schemaType: string;
     defaultLayout: LayoutConfiguration;
+    defaultLayoutDescriptor: TypeDescriptor<LayoutConfiguration>;
   }) {
     this.schemaType = schemaType;
     this._defaultLayout = defaultLayout;
+    this._defaultLayoutDescriptor = defaultLayoutDescriptor;
   }
 
   /**
@@ -88,29 +100,37 @@ export class ContentBuilder<TContent extends ContentItem = ContentItem>
    * Build a widget for the given content item
    */
   render(content: TContent): React.ReactNode {
-    const store = useVyuhStore.getState();
-    const contentPlugin = store.plugins.content;
-    const telemetry = store.plugins.telemetry;
+    const { plugins, componentBuilder } = useVyuhStore.getState();
+    const contentPlugin = plugins.content;
+    const telemetry = plugins.telemetry;
 
-    const layoutConfig = this.getLayout(content);
-    const layoutType = layoutConfig
-      ? contentPlugin.provider.schemaType(layoutConfig)
-      : undefined;
+    try {
+      const layoutConfig = this.getLayout(content);
+      const layoutType = layoutConfig
+        ? contentPlugin.provider.schemaType(layoutConfig)
+        : undefined;
 
-    const layoutDescriptor: TypeDescriptor<LayoutConfiguration> =
-      contentPlugin.getItem(TypeDescriptor<LayoutConfiguration>, layoutType);
+      const layoutDescriptor: TypeDescriptor<LayoutConfiguration> = layoutType
+        ? contentPlugin.getItem(TypeDescriptor<LayoutConfiguration>, layoutType)
+        : undefined;
 
-    if (!layoutDescriptor) {
-      telemetry?.log(
-        `No layout found for ${this.schemaType}. Using default.`,
-        'debug',
-      );
+      if (!layoutDescriptor) {
+        telemetry?.log(
+          `No layout found for ${this.schemaType}. Using default.`,
+          'debug',
+        );
 
-      return this.defaultLayout.render(content);
+        return this.defaultLayout.render(content);
+      }
+
+      const layout = new layoutDescriptor.fromJson(layoutConfig);
+      return layout.render(content);
+    } catch (e) {
+      return componentBuilder.renderError({
+        title: `Failed to render: ${this.schemaType}`,
+        error: e as Error,
+      });
     }
-
-    const layout = new layoutDescriptor.fromJson(layoutConfig);
-    return layout.render(content);
   }
 
   /**

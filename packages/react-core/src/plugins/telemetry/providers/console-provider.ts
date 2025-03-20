@@ -82,19 +82,19 @@ export class ConsoleProvider implements TelemetryProvider {
     };
   }
 
+  static logMethod = {
+    debug: console.debug,
+    info: console.info,
+    warning: console.warn,
+    error: console.error,
+  };
+
   log(
     message: string,
     level: 'debug' | 'info' | 'warning' | 'error' = 'info',
     params?: Record<string, any>,
   ): void {
-    const logMethod =
-      {
-        debug: console.debug,
-        info: console.info,
-        warning: console.warn,
-        error: console.error,
-      }[level] || console.log;
-
+    const logMethod = ConsoleProvider.logMethod[level] ?? console.log;
     logMethod(`[${level.toUpperCase()}] ${message}`, params || '');
   }
 }
