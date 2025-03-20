@@ -1,5 +1,7 @@
 import { CardContentBuilder } from '@/content/card/card-builder';
 import { CardDescriptor } from '@/content/card/card-descriptor';
+import { DividerContentBuilder } from '@/content/divider/divider-builder';
+import { DividerDescriptor } from '@/content/divider/divider-descriptor';
 import { CarouselGroupLayout } from '@/content/group/carousel-group-layout';
 import { GridGroupLayout } from '@/content/group/grid-group-layout';
 import { GroupContentBuilder } from '@/content/group/group-builder';
@@ -37,6 +39,7 @@ export const feature = new FeatureDescriptor({
             GridGroupLayout.typeDescriptor,
           ],
         }),
+        new DividerDescriptor(),
       ],
       contentBuilders: [
         new RouteContentBuilder(),
@@ -44,6 +47,7 @@ export const feature = new FeatureDescriptor({
         new PortableTextContentBuilder(),
         new CardContentBuilder(),
         new GroupContentBuilder(),
+        new DividerContentBuilder(),
       ],
     }),
   ],
