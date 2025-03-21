@@ -12,11 +12,15 @@ export interface VyuhPlatformState {
   error: Error | null;
   plugins: PluginDescriptor;
   componentBuilder: PlatformComponentBuilder;
+  loader: {
+    isVisible: boolean;
+    message: string;
+  };
 }
 
 // Store actions
 export interface VyuhPlatformActions {
-  setInitState: (state: InitState) => void;
+  setInitState: (initState: InitState) => void;
   setFeatures: (features: FeatureDescriptor[]) => void;
   setError: (error: Error | null) => void;
   init: (options: {
@@ -24,6 +28,8 @@ export interface VyuhPlatformActions {
     components: PlatformComponentBuilder;
   }) => void;
   reset: () => void;
+  showLoader: (message?: string) => void;
+  hideLoader: () => void;
 }
 
 // Create Zustand store
@@ -34,6 +40,10 @@ export const useVyuhStore = create<VyuhPlatformState & VyuhPlatformActions>(
     error: null,
     plugins: new PluginDescriptor(),
     componentBuilder: PlatformComponentBuilder.system,
+    loader: {
+      isVisible: false,
+      message: 'Loading...',
+    },
 
     setInitState: (initState) => set({ initState }),
     setFeatures: (features) => set({ features }),
@@ -54,6 +64,9 @@ export const useVyuhStore = create<VyuhPlatformState & VyuhPlatformActions>(
         initState: InitState.notStarted,
         error: null,
       }),
+    showLoader: (message = 'Loading...') =>
+      set({ loader: { isVisible: true, message } }),
+    hideLoader: () => set({ loader: { isVisible: false, message: '' } }),
   }),
 );
 

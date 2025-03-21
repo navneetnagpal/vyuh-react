@@ -1,3 +1,5 @@
+import { SchemaItem } from '@/content/schema-item';
+import { TypeDescriptor } from '@/core/type-descriptor';
 import React from 'react';
 import { ContentItem } from '@/content/content-item';
 import { ExtensionBuilder } from '@/core/extension-builder';
@@ -85,7 +87,10 @@ export class NoOpContentPlugin extends ContentPlugin {
   /**
    * Always returns undefined as no items are registered
    */
-  getItem<T>(itemType: ItemType<T>, schemaType: string): T | undefined {
+  getItem<T extends SchemaItem>(
+    itemType: ItemType<T>,
+    schemaType: string,
+  ): TypeDescriptor<T> | undefined {
     return undefined;
   }
 

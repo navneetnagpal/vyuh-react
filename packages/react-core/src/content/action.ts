@@ -81,27 +81,3 @@ export class Action {
     }
   }
 }
-
-/**
- * Executes an action object by converting it to an Action class instance.
- *
- * @param actionObj The action object to execute
- * @param params Optional parameters for the action
- * @returns A promise that resolves when the action execution is complete
- */
-export async function executeAction(
-  actionObj: Record<string, any>,
-  params?: Record<string, any>,
-): Promise<void> {
-  if (!actionObj) {
-    console.warn('Attempted to execute undefined action');
-    return;
-  }
-
-  // Convert to Action instance if it's not already one
-  const action =
-    actionObj instanceof Action ? actionObj : new Action(actionObj);
-
-  // Execute the action
-  await action.execute(params);
-}

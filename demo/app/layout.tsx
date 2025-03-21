@@ -1,34 +1,11 @@
-'use client';
+import ClientApp from './client-app';
+import { ReactNode } from 'react';
 
-import { getFeatures, plugins } from '@/app/setup';
-import { VyuhProvider } from '@vyuh/react-core';
-import { Geist, Geist_Mono } from 'next/font/google';
-import './globals.css';
-import React from 'react';
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <VyuhProvider features={getFeatures} plugins={plugins}>
-          {children}
-        </VyuhProvider>
+      <body>
+        <ClientApp>{children}</ClientApp>
       </body>
     </html>
   );

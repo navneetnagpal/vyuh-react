@@ -1,6 +1,6 @@
-import { ContentBuilder } from '@vyuh/react-extension-content';
-import { CarouselGroupLayout } from '@/content/group/carousel-group-layout';
+import { DefaultGroupLayout } from '@/content/group/default-group-layout';
 import { Group, GROUP_SCHEMA_TYPE } from '@/content/group/group';
+import { ContentBuilder } from '@vyuh/react-extension-content';
 
 /**
  * Content builder for Group content items
@@ -11,8 +11,8 @@ export class GroupContentBuilder extends ContentBuilder<Group> {
   constructor() {
     super({
       schemaType: GroupContentBuilder.schemaName,
-      defaultLayout: new CarouselGroupLayout(),
-      defaultLayoutDescriptor: CarouselGroupLayout.typeDescriptor,
+      defaultLayout: new DefaultGroupLayout(),
+      defaultLayoutDescriptor: DefaultGroupLayout.typeDescriptor,
     });
   }
 }

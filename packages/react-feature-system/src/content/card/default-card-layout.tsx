@@ -9,10 +9,10 @@ import {
   CardTitle,
 } from '@ui/components/card';
 import {
+  Action,
   LayoutConfiguration,
   TypeDescriptor,
   useVyuh,
-  executeAction,
 } from '@vyuh/react-core';
 import React from 'react';
 
@@ -80,7 +80,7 @@ export class DefaultCardLayout extends LayoutConfiguration<Card> {
           <CardFooter className="flex flex-wrap gap-2">
             {content.action && (
               <Button
-                onClick={() => executeAction(content.action)}
+                onClick={() => new Action(content.action).execute()}
                 variant="default"
               >
                 {content.action.title || 'Primary'}
@@ -89,7 +89,7 @@ export class DefaultCardLayout extends LayoutConfiguration<Card> {
 
             {content.secondaryAction && (
               <Button
-                onClick={() => executeAction(content.secondaryAction)}
+                onClick={() => new Action(content.secondaryAction).execute()}
                 variant="outline"
               >
                 {content.secondaryAction.label || 'Secondary'}
@@ -98,7 +98,7 @@ export class DefaultCardLayout extends LayoutConfiguration<Card> {
 
             {content.tertiaryAction && (
               <Button
-                onClick={() => executeAction(content.tertiaryAction)}
+                onClick={() => new Action(content.tertiaryAction).execute()}
                 variant="link"
               >
                 {content.tertiaryAction.label || 'Tertiary'}

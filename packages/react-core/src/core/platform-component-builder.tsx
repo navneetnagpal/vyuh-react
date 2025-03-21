@@ -103,7 +103,7 @@ function DefaultContentLoader() {
 
 function DefaultRouteLoader() {
   return (
-    <div className={'flex flex-col justify-center items-center h-screen p-2'}>
+    <div className={'flex flex-col justify-center items-center p-4 bg-white'}>
       <Loader className={'animate-spin'} />
       <div>Loading route...</div>
       <PoweredByVyuh />

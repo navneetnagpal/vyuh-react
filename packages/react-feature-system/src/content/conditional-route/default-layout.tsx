@@ -4,7 +4,8 @@ import {
   TypeDescriptor,
   useVyuh,
 } from '@vyuh/react-core';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { AsyncContentContainer } from '@vyuh/react-extension-content';
 import {
   CONDITIONAL_ROUTE_SCHEMA_TYPE,
   ConditionalRoute,
@@ -57,55 +58,30 @@ function ConditionalRouteLayoutView({
 }: {
   content: ConditionalRoute;
 }) {
-  const { plugins, components } = useVyuh();
-  const [route, setRoute] = useState<any | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
+  const { plugins } = useVyuh();
 
-  useEffect(() => {
-    let mounted = true;
+  // Function to load the conditional route
+  const loadContent = async () => {
+    const result = await evaluateConditionalRoute(content);
+    if (!result) {
+      throw new Error('No matching route found');
+    }
+    return result;
+  };
 
-    const evaluateRoute = async () => {
-      try {
-        const result = await evaluateConditionalRoute(content);
+  // Function to render the resolved route
+  const renderContent = (resolvedRoute: any) => {
+    return plugins.content.render(resolvedRoute);
+  };
 
-        if (mounted) {
-          setRoute(result);
-          setLoading(false);
-        }
-      } catch (err) {
-        if (mounted) {
-          setError(
-            err instanceof Error ? err : new Error('Failed to evaluate route'),
-          );
-          setLoading(false);
-        }
-      }
-    };
-
-    evaluateRoute();
-
-    return () => {
-      mounted = false;
-    };
-  }, [content, plugins]);
-
-  if (loading) {
-    return process.env.NODE_ENV === 'development' ? (
-      <ConditionalRouteDebugView content={content} />
-    ) : (
-      components.renderRouteLoader()
-    );
-  }
-
-  if (error || !route) {
-    return components.renderError({
-      title: 'Failed to load Conditional Route',
-      error,
-    });
-  }
-
-  return plugins.content.render(route);
+  return (
+    <AsyncContentContainer
+      loadContent={loadContent}
+      renderContent={renderContent}
+      errorTitle="Failed to load Conditional Route"
+      contentKey={JSON.stringify(content)}
+    />
+  );
 }
 
 /**

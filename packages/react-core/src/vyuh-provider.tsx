@@ -7,6 +7,7 @@ import { PlatformComponentBuilder } from '@/core/platform-component-builder';
 import { InitState } from '@/core/platform-types';
 import { PluginDescriptor } from '@/core/plugin-descriptor';
 import { useVyuhStore } from '@/hooks/use-vyuh';
+import { LoadingOverlay } from '@/components/loading-overlay';
 
 // Provider props
 interface VyuhProviderProps {
@@ -92,5 +93,10 @@ export const VyuhProvider: React.FC<VyuhProviderProps> = ({
     return componentBuilder.renderAppLoader();
   }
 
-  return children;
+  return (
+    <>
+      {children}
+      <LoadingOverlay />
+    </>
+  );
 };

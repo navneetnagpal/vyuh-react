@@ -1,7 +1,5 @@
 import { ConditionConfiguration, TypeDescriptor } from '@vyuh/react-core';
 
-export const BOOLEAN_CONDITION_SCHEMA_TYPE = 'vyuh.condition.boolean';
-
 /**
  * A simple boolean condition that returns a fixed value.
  *
@@ -22,6 +20,8 @@ export const BOOLEAN_CONDITION_SCHEMA_TYPE = 'vyuh.condition.boolean';
  * ```
  */
 export class BooleanCondition extends ConditionConfiguration {
+  static readonly schemaType = 'vyuh.condition.boolean';
+
   /**
    * The boolean value this condition will return
    */
@@ -36,17 +36,14 @@ export class BooleanCondition extends ConditionConfiguration {
   /**
    * Type descriptor for the boolean condition
    */
-  static readonly typeDescriptor = new TypeDescriptor(
-    BOOLEAN_CONDITION_SCHEMA_TYPE,
-    this,
-  );
+  static readonly typeDescriptor = new TypeDescriptor(this.schemaType, this);
 
   /**
    * Creates a new boolean condition
    */
   constructor(data?: Partial<BooleanCondition>) {
     super({
-      schemaType: BOOLEAN_CONDITION_SCHEMA_TYPE,
+      schemaType: BooleanCondition.schemaType,
       title: 'Boolean Condition',
     });
 
