@@ -8,6 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@ui/components/card';
+import { cn } from '@ui/lib/utils';
 import {
   Action,
   LayoutConfiguration,
@@ -52,7 +53,12 @@ export class DefaultCardLayout extends LayoutConfiguration<Card> {
     const hasImage = !!imageUrl;
 
     return (
-      <ShadcnCard className="border-neutral-300">
+      <ShadcnCard
+        className={cn('border-neutral-300 h-full', {
+          'cursor-pointer': content.action,
+        })}
+        onClick={() => new Action(content.action).execute()}
+      >
         <CardHeader>
           {hasImage && (
             <div className="w-full h-48 overflow-hidden">
@@ -74,19 +80,8 @@ export class DefaultCardLayout extends LayoutConfiguration<Card> {
           <CardContent>{plugins.content.render(content.content)}</CardContent>
         )}
 
-        {(content.action ||
-          content.secondaryAction ||
-          content.tertiaryAction) && (
+        {(content.secondaryAction || content.tertiaryAction) && (
           <CardFooter className="flex flex-wrap gap-2">
-            {content.action && (
-              <Button
-                onClick={() => new Action(content.action).execute()}
-                variant="default"
-              >
-                {content.action.title || 'Primary'}
-              </Button>
-            )}
-
             {content.secondaryAction && (
               <Button
                 onClick={() => new Action(content.secondaryAction).execute()}

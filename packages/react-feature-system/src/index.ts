@@ -18,3 +18,11 @@ export * from './content/conditional-route/conditional-route-descriptor';
 
 export * from './content/conditional-content/conditional-content';
 export * from './content/conditional-content/conditional-content-descriptor';
+
+export * from './content/divider/divider';
+export * from './content/divider/divider-descriptor';
+
+export * from './content/video-player/video-player';
+export * from './content/video-player/video-player-descriptor';
+
+export * from './content/api-content/api-content';

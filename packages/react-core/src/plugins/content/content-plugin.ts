@@ -49,4 +49,15 @@ export abstract class ContentPlugin extends Plugin {
     itemType: ItemType<T>,
     schemaType: string | undefined,
   ): TypeDescriptor<T> | undefined;
+
+  /**
+   * Register an item with the given schema type
+   *
+   * @param itemType The component type
+   * @param descriptor The descriptor for the item
+   */
+  abstract registerItem<T extends SchemaItem>(
+    itemType: ItemType<T>,
+    descriptor: TypeDescriptor<T>,
+  ): void;
 }

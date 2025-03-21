@@ -127,6 +127,27 @@ export class ContentExtensionBuilder extends ExtensionBuilder {
     }
   }
 
+  registerItem<T extends SchemaItem>(
+    itemType: ItemType<T>,
+    descriptor: TypeDescriptor<T>,
+  ): void {
+    if (!this.typeMap.has(itemType)) {
+      this.typeMap.set(itemType, new Map());
+    }
+
+    const { telemetry } = useVyuhStore.getState().plugins;
+    const itemMap = this.typeMap.get(itemType)!;
+
+    if (itemMap.has(descriptor.schemaType)) {
+      telemetry?.log(
+        `Duplicate schemaType: ${descriptor.schemaType} is being registered.`,
+        'warning',
+      );
+    }
+
+    itemMap.set(descriptor.schemaType, descriptor);
+  }
+
   /**
    * Get a content builder by schema type
    */

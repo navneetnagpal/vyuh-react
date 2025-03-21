@@ -31,17 +31,12 @@ function DefaultRouteComponent({ route }: { route: Route }) {
   const { plugins } = useVyuh();
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 py-6">
-      <h1 className="text-3xl font-bold text-neutral-900 mb-6">
+    <div className="container max-w-5xl mx-auto p-4">
+      <h1 className="text-3xl font-bold text-neutral-100 mb-6 bg-neutral-600 px-4 py-2 shadow-md rounded">
         {route.title}
       </h1>
       {route.regions.map((region, index) => (
         <div key={region.identifier || index} className="mb-8">
-          {region.title && (
-            <h2 className="text-xl font-semibold text-neutral-800 mb-4">
-              {region.title}
-            </h2>
-          )}
           <div className="flex flex-col gap-6">
             {region.items.map((item, itemIndex) => (
               <div key={itemIndex} className="">

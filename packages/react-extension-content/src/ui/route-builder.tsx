@@ -1,9 +1,9 @@
 'use client';
 
-import { ErrorBoundary } from '@/ui/async-content-container';
+import { AsyncContentContainer } from '@/ui/async-content-container';
 import { RouteBase, useVyuh } from '@vyuh/react-core';
 import { RefreshCcw } from 'lucide-react';
-import React, { Suspense, useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 /**
  * Props for the RouteBuilder component
@@ -26,72 +26,6 @@ export interface RouteBuilderProps {
 }
 
 /**
- * Route content component that handles data fetching
- */
-function RouteContent({ url, routeId }: { url?: string; routeId?: string }) {
-  const { plugins } = useVyuh();
-  const [route, setRoute] = useState<RouteBase | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<Error | null>(null);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    async function loadRoute() {
-      try {
-        if (!url && !routeId) {
-          throw new Error('Either url or routeId must be provided');
-        }
-
-        setLoading(true);
-        setError(null);
-
-        const routeData = await plugins.content.provider.fetchRoute({
-          path: url,
-          routeId,
-        });
-
-        if (!isMounted) return;
-
-        setRoute(routeData);
-      } catch (err) {
-        if (!isMounted) return;
-        // Ensure we're working with an Error object
-        const errorObj = err instanceof Error ? err : new Error(String(err));
-        setError(errorObj);
-        // This will propagate to the error boundary
-        throw errorObj;
-      } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
-      }
-    }
-
-    loadRoute();
-
-    return () => {
-      isMounted = false;
-    };
-  }, [plugins.content, url, routeId]);
-
-  // If there's an error, throw it to be caught by the error boundary
-  if (error) {
-    throw error;
-  }
-
-  if (loading) {
-    return null; // Let Suspense handle the loading state
-  }
-
-  if (!route) {
-    throw new Error(`No route found for ${url || routeId}`);
-  }
-
-  return plugins.content.render(route);
-}
-
-/**
  * A component that builds a route from a URL or route ID
  */
 export function RouteBuilder({
@@ -99,18 +33,40 @@ export function RouteBuilder({
   routeId,
   allowRefresh = true,
 }: RouteBuilderProps) {
-  const { components } = useVyuh();
+  const { plugins } = useVyuh();
   const [key, setKey] = useState(0);
 
   const handleRefresh = useCallback(() => {
     setKey((prev) => prev + 1);
   }, []);
 
+  const loadContent = useCallback(async () => {
+    if (!url && !routeId) {
+      throw new Error('Either url or routeId must be provided');
+    }
+
+    return await plugins.content.provider.fetchRoute({
+      path: url,
+      routeId,
+    });
+  }, [plugins.content.provider, url, routeId]);
+
+  const renderContent = useCallback(
+    (route: RouteBase) => {
+      return plugins.content.render(route);
+    },
+    [plugins.content],
+  );
+
   return (
-    <ErrorBoundary title={`Failed to render route: ${url || routeId}`}>
-      <Suspense fallback={components.renderRouteLoader()}>
-        <RouteContent url={url} routeId={routeId} />
-      </Suspense>
+    <>
+      <AsyncContentContainer
+        key={key}
+        loadContent={loadContent}
+        renderContent={renderContent}
+        errorTitle={`Failed to render route: ${url || routeId}`}
+        contentKey={`${url || routeId}-${key}`}
+      />
 
       {allowRefresh && (
         <button
@@ -123,6 +79,6 @@ export function RouteBuilder({
           <RefreshCcw size={16} />
         </button>
       )}
-    </ErrorBoundary>
+    </>
   );
 }

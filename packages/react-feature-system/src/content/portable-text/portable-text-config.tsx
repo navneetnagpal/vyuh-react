@@ -30,6 +30,11 @@ export class PortableTextConfig {
     },
   };
 
+  renderContentItem: PortableTextTypeComponent = ({ value }) => {
+    const { plugins } = useVyuh();
+    return plugins.content.render(value);
+  };
+
   private readonly _defaultMarks: Record<string, PortableTextMarkComponent> = {
     link: ({ children, value }) => {
       const rel = value.href.startsWith('/')

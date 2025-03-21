@@ -7,6 +7,7 @@ import {
   createUnknown,
   ExtensionBuilder,
   type ItemType,
+  SchemaItem,
   TypeDescriptor,
   useVyuhStore,
 } from '@vyuh/react-core';
@@ -20,12 +21,18 @@ export class DefaultContentPlugin extends ContentPlugin {
   constructor(provider: ContentProvider) {
     super('vyuh.plugin.content.default', 'Default Content Plugin', provider);
   }
-
   getItem<T>(
     itemType: ItemType<T>,
     schemaType: string,
   ): TypeDescriptor<T> | undefined {
     return this.extensionBuilder?.getItem(itemType, schemaType);
+  }
+
+  registerItem<T extends SchemaItem>(
+    itemType: ItemType<T>,
+    descriptor: TypeDescriptor<T>,
+  ): void {
+    this.extensionBuilder?.registerItem(itemType, descriptor);
   }
 
   /**

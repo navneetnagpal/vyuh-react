@@ -1,6 +1,7 @@
 'use client';
 
 import { NextNavigationPlugin } from '@/app/plugins/next-navigation-plugin';
+import { misc } from '@/features/misc-feature';
 import {
   FeatureDescriptor,
   PluginDescriptor,
@@ -52,7 +53,7 @@ const plugins = new PluginDescriptor({
  * Feature configuration
  * Returns all features used in the application
  */
-const getFeatures = () => [counter, system];
+const getFeatures = () => [counter, system, misc];
 
 export default function ClientApp({ children }: { children: ReactNode }) {
   return (
