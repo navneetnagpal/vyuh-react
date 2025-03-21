@@ -1,3 +1,4 @@
+import { SanityLiveContentProvider } from '@/sanity-live-content-provider';
 import { createClient, SanityClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
 import {
@@ -6,7 +7,6 @@ import {
   FileReference,
   ImageReference,
   LiveContentProvider,
-  NoOpLiveContentProvider,
   RouteBase,
 } from '@vyuh/react-core';
 
@@ -34,7 +34,8 @@ export class SanityContentProvider extends ContentProvider {
 
   private imageBuilder: any;
   private cacheDuration: number;
-  // private _live: SanityLiveContentProvider;
+  private readonly _live: SanityLiveContentProvider;
+
   constructor(config: SanityConfig, cacheDuration: number = 300000) {
     // Default 5 minutes
     super({
@@ -57,7 +58,7 @@ export class SanityContentProvider extends ContentProvider {
 
     this.imageBuilder = imageUrlBuilder(this.client);
     this.cacheDuration = cacheDuration;
-    // this._live = new SanityLiveContentProvider(this.client);
+    this._live = new SanityLiveContentProvider(this.client);
   }
 
   static withConfig(config: {
@@ -69,12 +70,12 @@ export class SanityContentProvider extends ContentProvider {
 
   async init(): Promise<void> {
     // Initialize any resources needed
-    // return this._live.init();
+    return this._live.init();
   }
 
   async dispose(): Promise<void> {
     // Clean up any resources
-    // return this._live.dispose();
+    return this._live.dispose();
   }
 
   async fetchById<T>(
@@ -233,11 +234,10 @@ export class SanityContentProvider extends ContentProvider {
 
   // Live content provider implementation
   override get live(): LiveContentProvider {
-    return new NoOpLiveContentProvider();
-    // return this._live;
+    return this._live;
   }
 
   override get supportsLive(): boolean {
-    return false;
+    return true;
   }
 }
