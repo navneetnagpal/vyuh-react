@@ -1,4 +1,5 @@
 import { SanityLiveContentProvider } from '@/sanity-live-content-provider';
+import { buildFileUrl, getFile } from '@sanity/asset-utils';
 import { createClient, SanityClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
 import {
@@ -202,18 +203,20 @@ export class SanityContentProvider extends ContentProvider {
     return builder.url();
   }
 
-  async fileUrl(fileRef: FileReference): Promise<string | null> {
+  fileUrl(fileRef: FileReference): string | undefined {
     const ref = this.fieldValue(
       FieldKey.ref,
       fileRef.asset as Record<string, any>,
     );
 
-    if (!ref) return null;
+    if (!ref) return undefined;
 
-    return this.client
-      .getDocument(ref)
-      .then((doc: any) => doc?.url)
-      .catch(() => null);
+    const fileAsset = getFile(ref, {
+      projectId: this.client.config().projectId!,
+      dataset: this.client.config().dataset!,
+    });
+
+    return fileAsset.asset.url;
   }
 
   // Override the schemaType method to handle Sanity's specific type field

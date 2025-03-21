@@ -102,7 +102,7 @@ export abstract class ContentProvider {
   /**
    * Get a file URL from a file reference
    */
-  abstract fileUrl(fileRef: FileReference): Promise<string | null>;
+  abstract fileUrl(fileRef: FileReference): string | undefined;
 
   /**
    * Extract a field value from a JSON object

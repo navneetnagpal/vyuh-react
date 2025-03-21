@@ -16,6 +16,8 @@ import { PortableTextContentBuilder } from '@/content/portable-text/portable-tex
 import { RouteContentBuilder } from '@/content/route/route-builder';
 import { RouteDescriptor } from '@/content/route/route-descriptor';
 import { UnknownContentBuilder } from '@/content/unknown';
+import { VideoPlayerContentBuilder } from '@/content/video-player/video-player-builder';
+import { VideoPlayerDescriptor } from '@/content/video-player/video-player-descriptor';
 import { FeatureDescriptor } from '@vyuh/react-core';
 import {
   ContentExtensionBuilder,
@@ -48,6 +50,7 @@ export const feature = new FeatureDescriptor({
           ],
         }),
         new DividerDescriptor(),
+        new VideoPlayerDescriptor(),
       ],
       contentBuilders: [
         new RouteContentBuilder(),
@@ -58,6 +61,7 @@ export const feature = new FeatureDescriptor({
         new CardContentBuilder(),
         new GroupContentBuilder(),
         new DividerContentBuilder(),
+        new VideoPlayerContentBuilder(),
       ],
       actions: [NavigateAction.typeDescriptor],
       conditions: [BooleanCondition.typeDescriptor],

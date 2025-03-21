@@ -42,9 +42,9 @@ export class NoOpContentProvider extends ContentProvider {
   /**
    * Get a file URL from a file reference
    */
-  async fileUrl(fileRef: FileReference): Promise<string | null> {
+  fileUrl(fileRef: FileReference): string | undefined {
     console.warn('NoOpContentProvider: fileUrl method called');
-    return null;
+    return undefined;
   }
 
   reference(json: Record<string, any>): string | undefined {
