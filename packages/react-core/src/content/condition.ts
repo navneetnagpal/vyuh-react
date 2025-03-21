@@ -50,10 +50,7 @@ export class Condition {
       : undefined;
     const schemaType = config ? content.provider.schemaType(config) : undefined;
 
-    const TD = content.getItem(
-      TypeDescriptor<ConditionConfiguration>,
-      schemaType,
-    );
+    const TD = content.getItem(ConditionConfiguration, schemaType);
     this.configuration = TD ? new TD.fromJson(config) : undefined;
   }
 

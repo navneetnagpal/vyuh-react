@@ -1,3 +1,5 @@
+import { SchemaItem } from '@/content/schema-item';
+import { TypeDescriptor } from '@/core/type-descriptor';
 import React from 'react';
 import { ContentItem } from '@/content/content-item';
 import { ExtensionBuilder } from '@/core/extension-builder';
@@ -43,8 +45,8 @@ export abstract class ContentPlugin extends Plugin {
    * @param schemaType The schema type to get the item for
    * @returns The item for the schema type, or undefined if not found
    */
-  abstract getItem<T extends object>(
+  abstract getItem<T extends SchemaItem>(
     itemType: ItemType<T>,
     schemaType: string | undefined,
-  ): T | undefined;
+  ): TypeDescriptor<T> | undefined;
 }

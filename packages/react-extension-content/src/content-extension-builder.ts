@@ -57,7 +57,7 @@ export class ContentExtensionBuilder extends ExtensionBuilder {
         (descriptor.contentBuilders || []).flatMap((builder) => [
           builder.defaultLayoutDescriptor,
         ]),
-      TypeDescriptor<LayoutConfiguration>,
+      LayoutConfiguration,
       'Default Layouts',
     );
 
@@ -65,7 +65,7 @@ export class ContentExtensionBuilder extends ExtensionBuilder {
     this.collectItems(
       extensionDescriptors,
       (descriptor) => descriptor.contentModifiers || [],
-      TypeDescriptor<ContentModifierConfiguration>,
+      ContentModifierConfiguration,
       'ContentModifier',
     );
 
@@ -73,7 +73,7 @@ export class ContentExtensionBuilder extends ExtensionBuilder {
     this.collectItems(
       extensionDescriptors,
       (descriptor) => descriptor.actions || [],
-      TypeDescriptor<ActionConfiguration>,
+      ActionConfiguration,
       'Action',
     );
 
@@ -81,7 +81,7 @@ export class ContentExtensionBuilder extends ExtensionBuilder {
     this.collectItems(
       extensionDescriptors,
       (descriptor) => descriptor.conditions || [],
-      TypeDescriptor<ConditionConfiguration>,
+      ConditionConfiguration,
       'Condition',
     );
 
@@ -90,7 +90,7 @@ export class ContentExtensionBuilder extends ExtensionBuilder {
       extensionDescriptors,
       (descriptor) =>
         (descriptor.contents || []).flatMap((layout) => layout.layouts || []),
-      TypeDescriptor<LayoutConfiguration>,
+      LayoutConfiguration,
       'Layout',
     );
 
@@ -109,7 +109,7 @@ export class ContentExtensionBuilder extends ExtensionBuilder {
       schemaType,
       descriptors,
     ] of contentDescriptorsByType.entries()) {
-      if (!this.getItemBySchemaType(ContentBuilder, schemaType)) {
+      if (!this.getBuilder(schemaType)) {
         telemetry?.reportError(
           new Error(
             `Missing ContentBuilder for ContentDescriptor of schemaType: ${schemaType}`,
@@ -128,12 +128,33 @@ export class ContentExtensionBuilder extends ExtensionBuilder {
   }
 
   /**
-   * Get a item by its schema type
+   * Get a content builder by schema type
    */
-  getItemBySchemaType<T>(
+  getBuilder(schemaType: string): ContentBuilder | undefined {
+    const { telemetry } = useVyuhStore.getState().plugins;
+    const contentBuilderMap = this.typeMap.get(ContentBuilder);
+
+    const builder = contentBuilderMap?.get(schemaType);
+
+    if (!builder) {
+      telemetry?.log(
+        `No ContentBuilder found for schema type: ${schemaType}.`,
+        'warning',
+      );
+
+      return undefined;
+    }
+
+    return builder;
+  }
+
+  /**
+   * Get an item by its schema type
+   */
+  getItem<T>(
     itemType: ItemType<T>,
     schemaType: string | undefined,
-  ): T | undefined {
+  ): TypeDescriptor<T> | undefined {
     if (!schemaType) {
       return undefined;
     }
@@ -144,11 +165,12 @@ export class ContentExtensionBuilder extends ExtensionBuilder {
     const item = itemMap?.get(schemaType);
 
     if (!item) {
+      // For other types, throw an exception
       telemetry?.log(`No item found with schemaType: ${schemaType}`, 'error');
       throw new Error(
         `
 No item found with schemaType: ${schemaType}. 
-Make sure you have registered a ${itemType.name} for this schema type.
+Make sure you have registered a TypeDescriptor<${itemType.name}> for this schema type.
 `.trim(),
       );
     }

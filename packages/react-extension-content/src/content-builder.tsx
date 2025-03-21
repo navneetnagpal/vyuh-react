@@ -1,4 +1,5 @@
 import { ContentDescriptor } from '@/content-descriptor';
+import { ErrorBoundary } from '@/ui/async-content-container';
 import {
   ContentItem,
   LayoutConfiguration,
@@ -100,37 +101,34 @@ export class ContentBuilder<TContent extends ContentItem = ContentItem>
    * Build a widget for the given content item
    */
   render(content: TContent): React.ReactNode {
-    const { plugins, componentBuilder } = useVyuhStore.getState();
+    const { plugins } = useVyuhStore.getState();
     const contentPlugin = plugins.content;
     const telemetry = plugins.telemetry;
 
-    try {
-      const layoutConfig = this.getLayout(content);
-      const layoutType = layoutConfig
-        ? contentPlugin.provider.schemaType(layoutConfig)
-        : undefined;
+    const layoutConfig = this.getLayout(content);
+    const layoutType = layoutConfig
+      ? contentPlugin.provider.schemaType(layoutConfig)
+      : undefined;
 
-      const layoutDescriptor: TypeDescriptor<LayoutConfiguration> = layoutType
-        ? contentPlugin.getItem(TypeDescriptor<LayoutConfiguration>, layoutType)
-        : undefined;
+    const layoutDescriptor = layoutType
+      ? contentPlugin.getItem(LayoutConfiguration, layoutType)
+      : undefined;
 
-      if (!layoutDescriptor) {
-        telemetry?.log(
-          `No layout found for ${this.schemaType}. Using default.`,
-          'debug',
-        );
+    if (!layoutDescriptor) {
+      telemetry?.log(
+        `No layout found for ${this.schemaType}. Using default.`,
+        'debug',
+      );
 
-        return this.defaultLayout.render(content);
-      }
-
-      const layout = new layoutDescriptor.fromJson(layoutConfig);
-      return layout.render(content);
-    } catch (e) {
-      return componentBuilder.renderError({
-        title: `Failed to render: ${this.schemaType}`,
-        error: e as Error,
-      });
+      return this.defaultLayout.render(content);
     }
+
+    const layout = new layoutDescriptor.fromJson(layoutConfig);
+    return (
+      <ErrorBoundary title={`Failed to render: ${this.schemaType}`}>
+        {layout.render(content)}
+      </ErrorBoundary>
+    );
   }
 
   /**

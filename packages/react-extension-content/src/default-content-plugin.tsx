@@ -1,5 +1,5 @@
-import { ContentBuilder } from '@/content-builder';
 import { ContentExtensionBuilder } from '@/content-extension-builder';
+import { ErrorBoundary } from '@/ui/async-content-container';
 import {
   ContentItem,
   ContentPlugin,
@@ -7,6 +7,7 @@ import {
   createUnknown,
   ExtensionBuilder,
   type ItemType,
+  TypeDescriptor,
   useVyuhStore,
 } from '@vyuh/react-core';
 import React from 'react';
@@ -20,8 +21,11 @@ export class DefaultContentPlugin extends ContentPlugin {
     super('vyuh.plugin.content.default', 'Default Content Plugin', provider);
   }
 
-  getItem<T>(itemType: ItemType<T>, schemaType: string): T | undefined {
-    return this.extensionBuilder?.getItemBySchemaType(itemType, schemaType);
+  getItem<T>(
+    itemType: ItemType<T>,
+    schemaType: string,
+  ): TypeDescriptor<T> | undefined {
+    return this.extensionBuilder?.getItem(itemType, schemaType);
   }
 
   /**
@@ -29,7 +33,7 @@ export class DefaultContentPlugin extends ContentPlugin {
    */
   render(json: Record<string, any> | ContentItem): React.ReactNode {
     const schemaType = json.schemaType ?? this.provider.schemaType(json);
-    const builder = this.getItem(ContentBuilder, schemaType);
+    const builder = this.extensionBuilder?.getBuilder(schemaType);
     const telemetry = useVyuhStore.getState().plugins.telemetry;
 
     if (!builder) {
@@ -48,7 +52,11 @@ export class DefaultContentPlugin extends ContentPlugin {
       return this.render(unknownContent);
     }
 
-    return builder.render(json as ContentItem);
+    return (
+      <ErrorBoundary title={`Failed to render: ${schemaType}`}>
+        {builder.render(json as ContentItem)}
+      </ErrorBoundary>
+    );
   }
 
   /**

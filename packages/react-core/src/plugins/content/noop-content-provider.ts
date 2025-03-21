@@ -47,10 +47,16 @@ export class NoOpContentProvider extends ContentProvider {
     return null;
   }
 
+  reference(json: Record<string, any>): string | undefined {
+    console.warn('NoOpContentProvider: reference method called');
+    return undefined;
+  }
+
   /**
    * Get the schema type from a JSON object
    */
   schemaType(json: Record<string, any>): string {
+    console.debug('NoOpContentProvider: schemaType method called');
     return json.type || UNKNOWN_SCHEMA_TYPE;
   }
 
@@ -58,6 +64,9 @@ export class NoOpContentProvider extends ContentProvider {
    * Get a field value from a JSON object
    */
   fieldValue(key: FieldKey, json: Record<string, any>): string {
+    console.warn(
+      `NoOpContentProvider: fieldValue called for key ${String(key)}`,
+    );
     return '';
   }
 
@@ -65,6 +74,7 @@ export class NoOpContentProvider extends ContentProvider {
    * Initialize the content provider
    */
   async init(): Promise<void> {
+    console.log('NoOpContentProvider: initialized');
     return Promise.resolve();
   }
 
@@ -72,6 +82,7 @@ export class NoOpContentProvider extends ContentProvider {
    * Clean up resources used by the content provider
    */
   async dispose(): Promise<void> {
+    console.log('NoOpContentProvider: disposed');
     return Promise.resolve();
   }
 
@@ -136,6 +147,7 @@ export class NoOpContentProvider extends ContentProvider {
    * Get the live content provider
    */
   get live(): LiveContentProvider {
+    console.debug('NoOpContentProvider: live content provider requested');
     return new NoOpLiveContentProvider();
   }
 }

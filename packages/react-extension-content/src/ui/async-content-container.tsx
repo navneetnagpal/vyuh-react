@@ -15,11 +15,11 @@ import React, {
  */
 interface ErrorBoundaryProps {
   children: ReactNode;
-  FallbackComponent: React.ComponentType<{
+  title: string;
+  FallbackComponent?: React.ComponentType<{
     error: Error;
     resetErrorBoundary: () => void;
   }>;
-  onError?: (error: Error, info: ErrorInfo) => void;
 }
 
 /**
@@ -33,7 +33,10 @@ interface ErrorBoundaryState {
 /**
  * Error Boundary component to catch and handle errors in the component tree
  */
-class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+export class ErrorBoundary extends Component<
+  ErrorBoundaryProps,
+  ErrorBoundaryState
+> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false, error: null };
@@ -44,9 +47,9 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   }
 
   componentDidCatch(error: Error, info: ErrorInfo): void {
-    if (this.props.onError) {
-      this.props.onError(error, info);
-    }
+    const { plugins } = useVyuhStore.getState();
+
+    plugins.telemetry?.log(this.props.title, 'error', { error });
   }
 
   resetErrorBoundary = (): void => {
@@ -54,9 +57,14 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
   };
 
   render(): ReactNode {
+    const { componentBuilder } = useVyuhStore.getState();
+
     if (this.state.hasError && this.state.error) {
+      const Component =
+        this.props.FallbackComponent || this.defaultFallbackComponent;
+
       return (
-        <this.props.FallbackComponent
+        <Component
           error={this.state.error}
           resetErrorBoundary={this.resetErrorBoundary}
         />
@@ -65,6 +73,22 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
     return this.props.children;
   }
+
+  private defaultFallbackComponent = ({
+    error,
+    resetErrorBoundary,
+  }: {
+    error: Error;
+    resetErrorBoundary: () => void;
+  }) => {
+    const { componentBuilder } = useVyuhStore.getState();
+
+    return componentBuilder.renderError({
+      title: this.props.title,
+      error,
+      onRetry: resetErrorBoundary,
+    });
+  };
 }
 
 /**
@@ -153,32 +177,13 @@ export function AsyncContentContainer<T>({
   errorTitle = 'Failed to load content',
   contentKey = 'default',
 }: AsyncContentContainerProps<T>): React.ReactNode {
-  // Get componentBuilder directly from the store
   const { componentBuilder } = useVyuhStore.getState();
 
   // Create a new resource when the key changes
   const [resource] = useState(() => new AsyncResource(loadContent()));
 
-  // Default error component using componentBuilder
-  const DefaultErrorComponent = useCallback(
-    ({
-      error,
-      resetErrorBoundary,
-    }: {
-      error: Error;
-      resetErrorBoundary: () => void;
-    }) => {
-      return componentBuilder.renderError({
-        title: errorTitle,
-        error,
-        onRetry: resetErrorBoundary,
-      });
-    },
-    [componentBuilder, errorTitle],
-  );
-
   return (
-    <ErrorBoundary key={contentKey} FallbackComponent={DefaultErrorComponent}>
+    <ErrorBoundary key={contentKey} title={errorTitle}>
       <Suspense fallback={componentBuilder.renderContentLoader()}>
         <AsyncContentLoader resource={resource} renderContent={renderContent} />
       </Suspense>

@@ -1,16 +1,9 @@
 'use client';
 
+import { ErrorBoundary } from '@/ui/async-content-container';
 import { RouteBase, useVyuh } from '@vyuh/react-core';
 import { RefreshCcw } from 'lucide-react';
-import React, {
-  Component,
-  ErrorInfo,
-  ReactNode,
-  Suspense,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import React, { Suspense, useCallback, useEffect, useState } from 'react';
 
 /**
  * Props for the RouteBuilder component
@@ -30,63 +23,6 @@ export interface RouteBuilderProps {
    * Whether to allow refreshing the route
    */
   allowRefresh?: boolean;
-}
-
-/**
- * Error Boundary component props
- */
-interface ErrorBoundaryProps {
-  children: ReactNode;
-  FallbackComponent: React.ComponentType<{
-    error: Error;
-    resetErrorBoundary: () => void;
-  }>;
-  onError?: (error: Error, info: ErrorInfo) => void;
-}
-
-/**
- * Error Boundary component state
- */
-interface ErrorBoundaryState {
-  hasError: boolean;
-  error: Error | null;
-}
-
-/**
- * Error Boundary component to catch and handle errors in the component tree
- */
-class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  constructor(props: ErrorBoundaryProps) {
-    super(props);
-    this.state = { hasError: false, error: null };
-  }
-
-  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
-    return { hasError: true, error };
-  }
-
-  componentDidCatch(error: Error, info: ErrorInfo): void {
-    if (this.props.onError) {
-      this.props.onError(error, info);
-    }
-  }
-
-  resetErrorBoundary = (): void => {
-    this.setState({ hasError: false, error: null });
-  };
-
-  render(): ReactNode {
-    if (this.state.hasError && this.state.error) {
-      return (
-        <this.props.FallbackComponent
-          error={this.state.error}
-          resetErrorBoundary={this.resetErrorBoundary}
-        />
-      );
-    }
-
-    return this.props.children;
-  }
 }
 
 /**
@@ -152,30 +88,7 @@ function RouteContent({ url, routeId }: { url?: string; routeId?: string }) {
     throw new Error(`No route found for ${url || routeId}`);
   }
 
-  return <>{plugins.content.render(route)}</>;
-}
-
-/**
- * Error handler component for route errors
- */
-function RouteErrorHandler({
-  error,
-  resetErrorBoundary,
-  url,
-  routeId,
-}: {
-  error: Error;
-  resetErrorBoundary: () => void;
-  url?: string;
-  routeId?: string;
-}) {
-  const { components } = useVyuh();
-
-  return components.renderError({
-    title: `Failed to load route: ${url || routeId}`,
-    error,
-    onRetry: resetErrorBoundary,
-  });
+  return plugins.content.render(route);
 }
 
 /**
@@ -194,22 +107,10 @@ export function RouteBuilder({
   }, []);
 
   return (
-    <>
-      <ErrorBoundary
-        key={key}
-        FallbackComponent={({ error, resetErrorBoundary }) => (
-          <RouteErrorHandler
-            error={error}
-            resetErrorBoundary={resetErrorBoundary}
-            url={url}
-            routeId={routeId}
-          />
-        )}
-      >
-        <Suspense fallback={components.renderRouteLoader()}>
-          <RouteContent url={url} routeId={routeId} />
-        </Suspense>
-      </ErrorBoundary>
+    <ErrorBoundary title={`Failed to render route: ${url || routeId}`}>
+      <Suspense fallback={components.renderRouteLoader()}>
+        <RouteContent url={url} routeId={routeId} />
+      </Suspense>
 
       {allowRefresh && (
         <button
@@ -222,6 +123,6 @@ export function RouteBuilder({
           <RefreshCcw size={16} />
         </button>
       )}
-    </>
+    </ErrorBoundary>
   );
 }
