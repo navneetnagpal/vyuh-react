@@ -24,6 +24,7 @@ export * from './plugins/content/noop-content-provider';
 // Content System
 export * from './content/schema-item';
 export * from './content/content-item';
+export * from './content/action';
 export * from './content/condition';
 export * from './content/condition-configuration';
 export * from './content/reference';

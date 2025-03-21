@@ -52,8 +52,5 @@ export abstract class ActionConfiguration implements SchemaItem {
    *
    * The optional arguments object contains parameters for the execution.
    */
-  abstract execute(
-    context: any,
-    params?: Record<string, any>,
-  ): Promise<void> | void;
+  abstract execute(params?: Record<string, any>): Promise<void> | void;
 }
