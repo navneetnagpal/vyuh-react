@@ -1,6 +1,6 @@
-import { ContentDescriptor } from '@vyuh/react-extension-content';
 import { Route, ROUTE_SCHEMA_TYPE } from '@/content/route/route';
 import { RouteLifecycleConfiguration } from '@/content/route/route-lifecycle-configuration';
+import { ContentDescriptor } from '@vyuh/react-extension-content';
 
 /**
  * Descriptor for configuring route content type in the system.

@@ -1,5 +1,5 @@
 import { ContentDescriptor } from '@vyuh/react-extension-content';
-import { VideoPlayer, VIDEO_PLAYER_SCHEMA_TYPE } from './video-player';
+import { VIDEO_PLAYER_SCHEMA_TYPE, VideoPlayer } from './video-player';
 
 /**
  * Descriptor for the VideoPlayer content type

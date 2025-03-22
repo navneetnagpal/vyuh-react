@@ -1,5 +1,5 @@
-import { ContentDescriptor } from '@vyuh/react-extension-content';
 import { Divider, DIVIDER_SCHEMA_TYPE } from '@/content/divider/divider';
+import { ContentDescriptor } from '@vyuh/react-extension-content';
 
 /**
  * Descriptor for the Divider content type

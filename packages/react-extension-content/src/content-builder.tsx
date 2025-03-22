@@ -1,5 +1,4 @@
 import { ContentDescriptor } from '@/content-descriptor';
-import { ErrorBoundary } from '@/ui/async-content-container';
 import {
   ContentItem,
   LayoutConfiguration,
@@ -124,11 +123,7 @@ export class ContentBuilder<TContent extends ContentItem = ContentItem>
     }
 
     const layout = new layoutDescriptor.fromJson(layoutConfig);
-    return (
-      <ErrorBoundary title={`Failed to render: ${this.schemaType}`}>
-        {layout.render(content)}
-      </ErrorBoundary>
-    );
+    return layout.render(content);
   }
 
   /**

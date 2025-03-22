@@ -1,5 +1,5 @@
-import { ContentDescriptor } from '@vyuh/react-extension-content';
 import { Group, GROUP_SCHEMA_TYPE } from '@/content/group/group';
+import { ContentDescriptor } from '@vyuh/react-extension-content';
 
 /**
  * Descriptor for the Group content type

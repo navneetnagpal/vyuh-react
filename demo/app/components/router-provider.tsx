@@ -2,7 +2,7 @@
 
 import { useVyuhStore } from '@vyuh/react-core';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { NextNavigationPlugin } from '../plugins/next-navigation-plugin';
 
 /**
@@ -10,15 +10,21 @@ import { NextNavigationPlugin } from '../plugins/next-navigation-plugin';
  */
 export function RouterProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const plugins = useVyuhStore(state => state.plugins);
-  
+  const plugins = useVyuhStore((state) => state.plugins);
+  const routerInitialized = useRef(false);
+
   useEffect(() => {
     // Check if the navigation plugin is a NextNavigationPlugin
-    if (plugins.navigation instanceof NextNavigationPlugin) {
+    if (
+      plugins.navigation instanceof NextNavigationPlugin &&
+      !routerInitialized.current
+    ) {
       // Set the router instance
       (plugins.navigation as NextNavigationPlugin).setRouter(router);
+      routerInitialized.current = true;
+      console.log('Next.js router initialized for navigation plugin');
     }
   }, [router, plugins.navigation]);
-  
+
   return <>{children}</>;
 }

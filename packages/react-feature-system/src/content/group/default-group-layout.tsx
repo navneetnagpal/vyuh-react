@@ -1,6 +1,6 @@
+import { Group, GROUP_SCHEMA_TYPE } from '@/content/group/group';
 import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
 import React from 'react';
-import { Group, GROUP_SCHEMA_TYPE } from '@/content/group/group';
 
 /**
  * Default layout for group content items

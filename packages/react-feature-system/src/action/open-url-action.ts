@@ -1,7 +1,6 @@
 import {
   ActionConfiguration,
   TypeDescriptor,
-  useVyuh,
   useVyuhStore,
 } from '@vyuh/react-core';
 

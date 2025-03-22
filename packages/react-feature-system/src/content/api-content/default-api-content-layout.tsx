@@ -1,11 +1,11 @@
-import { LayoutConfiguration, TypeDescriptor } from '@vyuh/react-core';
-import { AsyncContentContainer } from '@vyuh/react-extension-content';
-import React from 'react';
 import {
   API_CONTENT_SCHEMA_TYPE,
-  ApiConfiguration,
+  APIConfiguration,
   APIContent,
 } from '@/content/api-content/api-content';
+import { LayoutConfiguration, TypeDescriptor } from '@vyuh/react-core';
+import { AsyncContentContainer } from '@vyuh/react-extension-content';
+import React, { useMemo, useRef } from 'react';
 
 /**
  * Default layout for API Content
@@ -23,7 +23,7 @@ export class DefaultAPIContentLayout extends LayoutConfiguration<APIContent> {
   }
 
   render(content: APIContent, children?: React.ReactNode): React.ReactNode {
-    const config = ApiConfiguration.fromJson(content);
+    const config = APIConfiguration.fromJson(content);
 
     return (
       <APIContentLayoutView content={content} config={config}>
@@ -38,20 +38,16 @@ export class DefaultAPIContentLayout extends LayoutConfiguration<APIContent> {
  */
 function APIContentLayoutView({
   content,
-  config,
   children,
+  config,
 }: {
   content: APIContent;
-  config?: ApiConfiguration;
   children?: React.ReactNode;
+  config?: APIConfiguration;
 }) {
   // Function to load the API data
   const loadContent = async () => {
-    if (!config) {
-      throw new Error('Missing API Configuration');
-    }
-
-    return await config.invoke();
+    return config?.invoke();
   };
 
   // Function to render the API data
@@ -59,6 +55,7 @@ function APIContentLayoutView({
     if (!data) {
       return null;
     }
+
     return config?.build(data);
   };
 
@@ -67,7 +64,7 @@ function APIContentLayoutView({
       <AsyncContentContainer
         loadContent={loadContent}
         renderContent={renderContent}
-        errorTitle={`API Error${content.configuration?.title ? `: ${content.configuration.title}` : ''}`}
+        errorTitle={`API Error ${content.configuration?.title ? `: ${content.configuration.title}` : ''}`}
         contentKey={content.configuration?.schemaType || 'api-content'}
       />
       {children}

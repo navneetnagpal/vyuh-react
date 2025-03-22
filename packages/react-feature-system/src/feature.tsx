@@ -19,11 +19,12 @@ import { PortableTextConfig } from '@/content/portable-text/portable-text-config
 import { PortableTextDescriptor } from '@/content/portable-text/portable-text-descriptor';
 import { RouteContentBuilder } from '@/content/route/route-builder';
 import { RouteDescriptor } from '@/content/route/route-descriptor';
+import { SingleItemLayout } from '@/content/route/single-item-layout';
 import { UnknownContentBuilder } from '@/content/unknown';
 import { VIDEO_PLAYER_SCHEMA_TYPE } from '@/content/video-player/video-player';
 import { VideoPlayerContentBuilder } from '@/content/video-player/video-player-builder';
 import { VideoPlayerDescriptor } from '@/content/video-player/video-player-descriptor';
-import { FeatureDescriptor, useVyuh } from '@vyuh/react-core';
+import { FeatureDescriptor } from '@vyuh/react-core';
 import {
   ContentExtensionBuilder,
   ContentExtensionDescriptor,
@@ -52,7 +53,9 @@ export const feature = new FeatureDescriptor({
   extensions: [
     new ContentExtensionDescriptor({
       contents: [
-        new RouteDescriptor(),
+        new RouteDescriptor({
+          layouts: [SingleItemLayout.typeDescriptor],
+        }),
         new ConditionalRouteDescriptor(),
         new ConditionalContentDescriptor(),
         new CardDescriptor(),

@@ -1,11 +1,6 @@
-import {
-  Condition,
-  LayoutConfiguration,
-  TypeDescriptor,
-  useVyuh,
-} from '@vyuh/react-core';
-import React from 'react';
+import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
 import { AsyncContentContainer } from '@vyuh/react-extension-content';
+import React from 'react';
 import {
   CONDITIONAL_CONTENT_SCHEMA_TYPE,
   ConditionalContent,

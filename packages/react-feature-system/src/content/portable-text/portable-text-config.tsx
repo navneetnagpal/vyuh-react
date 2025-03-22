@@ -6,7 +6,7 @@ import {
   PortableTextMarkComponent,
   PortableTextTypeComponent,
 } from '@portabletext/react';
-import { createUnknown, Unknown, useVyuh } from '@vyuh/react-core';
+import { createUnknown, useVyuh } from '@vyuh/react-core';
 import React from 'react';
 
 /**

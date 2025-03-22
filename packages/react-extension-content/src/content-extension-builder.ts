@@ -152,18 +152,17 @@ export class ContentExtensionBuilder extends ExtensionBuilder {
    * Get a content builder by schema type
    */
   getBuilder(schemaType: string): ContentBuilder | undefined {
-    const { telemetry } = useVyuhStore.getState().plugins;
     const contentBuilderMap = this.typeMap.get(ContentBuilder);
 
     const builder = contentBuilderMap?.get(schemaType);
 
     if (!builder) {
-      telemetry?.log(
-        `No ContentBuilder found for schema type: ${schemaType}.`,
-        'warning',
+      throw new Error(
+        `
+No ContentBuilder found with schemaType: ${schemaType}.
+Make sure you have registered a ContentBuilder for this schema type.
+`,
       );
-
-      return undefined;
     }
 
     return builder;
@@ -180,19 +179,15 @@ export class ContentExtensionBuilder extends ExtensionBuilder {
       return undefined;
     }
 
-    const { telemetry } = useVyuhStore.getState().plugins;
-
     const itemMap = this.typeMap.get(itemType);
     const item = itemMap?.get(schemaType);
 
     if (!item) {
-      // For other types, throw an exception
-      telemetry?.log(`No item found with schemaType: ${schemaType}`, 'error');
       throw new Error(
         `
-No item found with schemaType: ${schemaType}. 
+No ${itemType.name} found with schemaType: ${schemaType}.
 Make sure you have registered a TypeDescriptor<${itemType.name}> for this schema type.
-`.trim(),
+      `.trim(),
       );
     }
 

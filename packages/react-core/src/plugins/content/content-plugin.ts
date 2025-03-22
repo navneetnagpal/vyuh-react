@@ -1,11 +1,11 @@
-import { SchemaItem } from '@/content/schema-item';
-import { TypeDescriptor } from '@/core/type-descriptor';
-import React from 'react';
 import { ContentItem } from '@/content/content-item';
+import { SchemaItem } from '@/content/schema-item';
 import { ExtensionBuilder } from '@/core/extension-builder';
 import { ItemType } from '@/core/platform-types';
 import { Plugin } from '@/core/plugin';
+import { TypeDescriptor } from '@/core/type-descriptor';
 import { ContentProvider } from '@/plugins/content/content-provider';
+import React from 'react';
 
 /**
  * Plugin for managing content

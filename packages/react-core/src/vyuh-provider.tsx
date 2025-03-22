@@ -1,13 +1,13 @@
 'use client';
 
-import React from 'react';
+import { LoadingOverlay } from '@/components/loading-overlay';
 import { bootstrap } from '@/core/bootstrap';
 import { FeatureDescriptor } from '@/core/feature-descriptor';
 import { PlatformComponentBuilder } from '@/core/platform-component-builder';
 import { InitState } from '@/core/platform-types';
 import { PluginDescriptor } from '@/core/plugin-descriptor';
 import { useVyuhStore } from '@/hooks/use-vyuh';
-import { LoadingOverlay } from '@/components/loading-overlay';
+import React from 'react';
 
 // Provider props
 interface VyuhProviderProps {

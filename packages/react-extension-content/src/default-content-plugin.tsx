@@ -1,5 +1,4 @@
 import { ContentExtensionBuilder } from '@/content-extension-builder';
-import { ErrorBoundary } from '@/ui/async-content-container';
 import {
   ContentItem,
   ContentPlugin,
@@ -12,6 +11,7 @@ import {
   useVyuhStore,
 } from '@vyuh/react-core';
 import React from 'react';
+import { ErrorBoundary } from './ui/async-content-container';
 
 /**
  * Default implementation of ContentPlugin.
@@ -21,6 +21,7 @@ export class DefaultContentPlugin extends ContentPlugin {
   constructor(provider: ContentProvider) {
     super('vyuh.plugin.content.default', 'Default Content Plugin', provider);
   }
+
   getItem<T>(
     itemType: ItemType<T>,
     schemaType: string,
@@ -40,28 +41,15 @@ export class DefaultContentPlugin extends ContentPlugin {
    */
   render(json: Record<string, any> | ContentItem): React.ReactNode {
     const schemaType = json.schemaType ?? this.provider.schemaType(json);
-    const builder = this.extensionBuilder?.getBuilder(schemaType);
-    const telemetry = useVyuhStore.getState().plugins.telemetry;
 
-    if (!builder) {
-      telemetry?.log(
-        `No builder found for schema type: ${schemaType}`,
-        'warning',
-      );
-
-      // Create an Unknown content item to handle the missing builder
-      const unknownContent = createUnknown(
-        schemaType,
-        `No content builder registered for schema type: ${schemaType}`,
-      );
-
-      // Render the Unknown content directly
-      return this.render(unknownContent);
-    }
-
+    // Wrap the renderer in an error boundary to isolate rendering errors
     return (
       <ErrorBoundary title={`Failed to render: ${schemaType}`}>
-        {builder.render(json as ContentItem)}
+        <ContentRenderer
+          schemaType={schemaType}
+          extensionBuilder={this.extensionBuilder}
+          content={json as ContentItem}
+        />
       </ErrorBoundary>
     );
   }
@@ -92,4 +80,20 @@ export class DefaultContentPlugin extends ContentPlugin {
     // Initialize the content provider
     return this.provider.init();
   }
+}
+
+/**
+ * Component that handles the actual rendering of content in its own render phase
+ */
+function ContentRenderer({
+  schemaType,
+  content,
+  extensionBuilder,
+}: {
+  schemaType: string;
+  content: ContentItem;
+  extensionBuilder?: ContentExtensionBuilder;
+}) {
+  const builder = extensionBuilder?.getBuilder(schemaType);
+  return builder?.render(content);
 }

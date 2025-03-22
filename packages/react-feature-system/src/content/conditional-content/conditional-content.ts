@@ -1,4 +1,4 @@
-import { Condition, ContentItem, useVyuhStore } from '@vyuh/react-core';
+import { Condition, ContentItem } from '@vyuh/react-core';
 
 /**
  * A case item that pairs a condition value with its corresponding content.

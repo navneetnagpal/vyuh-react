@@ -1,16 +1,16 @@
 import {
+  CONDITIONAL_ROUTE_SCHEMA_TYPE,
+  ConditionalRoute,
+  evaluateConditionalRoute,
+} from '@/content/conditional-route/conditional-route';
+import {
   Condition,
   LayoutConfiguration,
   TypeDescriptor,
   useVyuh,
 } from '@vyuh/react-core';
-import React from 'react';
 import { AsyncContentContainer } from '@vyuh/react-extension-content';
-import {
-  CONDITIONAL_ROUTE_SCHEMA_TYPE,
-  ConditionalRoute,
-  evaluateConditionalRoute,
-} from '@/content/conditional-route/conditional-route';
+import React from 'react';
 
 /**
  * Default layout for conditional routes

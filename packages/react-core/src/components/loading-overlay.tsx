@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
 import { useVyuhStore } from '@/hooks/use-vyuh';
+import React from 'react';
 
 export function LoadingOverlay() {
   const { isVisible } = useVyuhStore((state) => state.loader);

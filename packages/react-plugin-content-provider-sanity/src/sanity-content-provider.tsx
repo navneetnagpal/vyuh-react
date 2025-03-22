@@ -1,5 +1,5 @@
 import { SanityLiveContentProvider } from '@/sanity-live-content-provider';
-import { buildFileUrl, getFile } from '@sanity/asset-utils';
+import { getFile } from '@sanity/asset-utils';
 import { createClient, SanityClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
 import {

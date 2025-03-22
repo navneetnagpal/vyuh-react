@@ -1,5 +1,3 @@
-import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
-import React from 'react';
 import { Group, GROUP_SCHEMA_TYPE } from '@/content/group/group';
 import {
   Carousel,
@@ -8,6 +6,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@ui/components/carousel';
+import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
+import React from 'react';
 
 /**
  * Carousel layout for group content items using Shadcn UI components

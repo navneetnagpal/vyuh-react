@@ -1,13 +1,13 @@
 import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
-import React, { Suspense } from 'react';
 import {
-  ErrorBoundary,
   AsyncContentContainer,
+  ErrorBoundary,
 } from '@vyuh/react-extension-content';
+import React from 'react';
 import {
   VIDEO_PLAYER_SCHEMA_TYPE,
-  VideoPlayer,
   VideoLinkType,
+  VideoPlayer,
 } from './video-player';
 
 /**

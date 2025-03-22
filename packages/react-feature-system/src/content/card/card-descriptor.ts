@@ -1,5 +1,5 @@
-import { ContentDescriptor } from '@vyuh/react-extension-content';
 import { Card, CARD_SCHEMA_TYPE } from '@/content/card/card';
+import { ContentDescriptor } from '@vyuh/react-extension-content';
 
 /**
  * Descriptor for the Card content type

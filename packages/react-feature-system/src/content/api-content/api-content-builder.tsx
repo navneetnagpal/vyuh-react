@@ -2,7 +2,7 @@ import { useVyuhStore } from '@vyuh/react-core';
 import { ContentBuilder } from '@vyuh/react-extension-content';
 import {
   API_CONTENT_SCHEMA_TYPE,
-  ApiConfiguration,
+  APIConfiguration,
   APIContent,
   APIContentDescriptor,
 } from './api-content';
@@ -33,7 +33,7 @@ export class APIContentBuilder extends ContentBuilder<APIContent> {
 
     const { content } = useVyuhStore.getState().plugins;
     for (const config of configs) {
-      content.registerItem(ApiConfiguration, config);
+      content.registerItem(APIConfiguration, config);
     }
   }
 }

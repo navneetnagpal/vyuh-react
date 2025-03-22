@@ -1,7 +1,7 @@
-import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
-import React from 'react';
 import { Group, GROUP_SCHEMA_TYPE } from '@/content/group/group';
 import { cn } from '@ui/lib/utils';
+import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
+import React from 'react';
 
 /**
  * Grid layout for group content items using Tailwind CSS

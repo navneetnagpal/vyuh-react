@@ -1,4 +1,8 @@
 import {
+  PORTABLE_TEXT_SCHEMA_TYPE,
+  PortableText,
+} from '@/content/portable-text/portable-text';
+import {
   PortableTextBlockComponent,
   PortableTextListComponent,
   PortableTextListItemComponent,
@@ -6,10 +10,6 @@ import {
   PortableTextTypeComponent,
 } from '@portabletext/react';
 import { ContentDescriptor } from '@vyuh/react-extension-content';
-import {
-  PORTABLE_TEXT_SCHEMA_TYPE,
-  PortableText,
-} from '@/content/portable-text/portable-text';
 
 /**
  * Descriptor for a block type component

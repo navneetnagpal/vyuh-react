@@ -1,3 +1,4 @@
+import { DefaultRouteContainer } from '@/content/route/default-route-container';
 import { Route, ROUTE_SCHEMA_TYPE } from '@/content/route/route';
 import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
 import React from 'react';
@@ -31,21 +32,16 @@ function DefaultRouteComponent({ route }: { route: Route }) {
   const { plugins } = useVyuh();
 
   return (
-    <div className="container max-w-5xl mx-auto p-4">
-      <h1 className="text-3xl font-bold text-neutral-100 mb-6 bg-neutral-600 px-4 py-2 shadow-md rounded">
-        {route.title}
-      </h1>
-      {route.regions.map((region, index) => (
-        <div key={region.identifier || index} className="mb-8">
+    <DefaultRouteContainer route={route}>
+      {route.regions.map((region) => (
+        <div key={region.identifier} className="mb-8">
           <div className="flex flex-col gap-6">
             {region.items.map((item, itemIndex) => (
-              <div key={itemIndex} className="">
-                {plugins.content.render(item)}
-              </div>
+              <div key={itemIndex}>{plugins.content.render(item)}</div>
             ))}
           </div>
         </div>
       ))}
-    </div>
+    </DefaultRouteContainer>
   );
 }

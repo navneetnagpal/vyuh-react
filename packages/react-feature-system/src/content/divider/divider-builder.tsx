@@ -1,7 +1,7 @@
+import { Divider, DIVIDER_SCHEMA_TYPE } from '@/content/divider/divider';
 import { LayoutConfiguration, TypeDescriptor } from '@vyuh/react-core';
 import { ContentBuilder } from '@vyuh/react-extension-content';
 import React from 'react';
-import { Divider, DIVIDER_SCHEMA_TYPE } from '@/content/divider/divider';
 
 /**
  * Content builder for Divider content items

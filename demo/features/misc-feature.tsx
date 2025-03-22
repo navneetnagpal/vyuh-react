@@ -1,7 +1,7 @@
 import { FeatureDescriptor, TypeDescriptor } from '@vyuh/react-core';
 import { ContentExtensionDescriptor } from '@vyuh/react-extension-content';
 import {
-  ApiConfiguration,
+  APIConfiguration,
   APIContentDescriptor,
 } from '@vyuh/react-feature-system';
 import { Boxes } from 'lucide-react';
@@ -48,7 +48,7 @@ const ProductGrid = ({ products }: { products: Product[] }) => {
   );
 };
 
-class DummyJsonApiConfiguration extends ApiConfiguration<Product[]> {
+class DummyJsonApiConfiguration extends APIConfiguration<Product[]> {
   static readonly schemaType = 'misc.apiContent.dummyJson';
   static readonly typeDescriptor = new TypeDescriptor(this.schemaType, this);
 

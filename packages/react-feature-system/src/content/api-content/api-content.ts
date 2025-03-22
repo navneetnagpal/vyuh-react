@@ -16,13 +16,13 @@ export interface APIContent extends ContentItem {
   readonly schemaType: string;
   readonly showPending: boolean;
   readonly showError: boolean;
-  readonly configuration?: ApiConfiguration;
+  readonly configuration?: APIConfiguration;
 }
 
 /**
  * Base class for API configuration
  */
-export abstract class ApiConfiguration<T = any> implements SchemaItem {
+export abstract class APIConfiguration<T = any> implements SchemaItem {
   readonly schemaType: string;
   readonly title?: string;
 
@@ -41,24 +41,28 @@ export abstract class ApiConfiguration<T = any> implements SchemaItem {
    */
   abstract build(data: T | undefined): React.ReactNode;
 
-  static fromJson(json: APIContent): ApiConfiguration | undefined {
+  static fromJson(json: APIContent): APIConfiguration | undefined {
     const config = Array.isArray(json.configuration)
       ? json.configuration[0]
       : undefined;
+
+    if (!config) {
+      return undefined;
+    }
 
     const { plugins } = useVyuhStore.getState();
     const schemaType = config
       ? plugins.content.provider.schemaType(config)
       : undefined;
     const TD = schemaType
-      ? plugins.content.getItem(ApiConfiguration, schemaType)
+      ? plugins.content.getItem(APIConfiguration, schemaType)
       : undefined;
 
     if (TD) {
       return new TD.fromJson(config);
     }
 
-    return undefined;
+    throw new Error(`No API Configuration found for schemaType: ${schemaType}`);
   }
 }
 
@@ -66,7 +70,7 @@ export abstract class ApiConfiguration<T = any> implements SchemaItem {
  * Descriptor for API Content
  */
 export class APIContentDescriptor extends ContentDescriptor<APIContent> {
-  readonly configurations?: TypeDescriptor<ApiConfiguration>[];
+  readonly configurations?: TypeDescriptor<APIConfiguration>[];
 
   constructor(props?: Partial<APIContentDescriptor>) {
     super({

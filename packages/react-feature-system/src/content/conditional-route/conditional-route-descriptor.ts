@@ -1,8 +1,8 @@
-import { ContentDescriptor } from '@vyuh/react-extension-content';
 import {
   CONDITIONAL_ROUTE_SCHEMA_TYPE,
   ConditionalRoute,
 } from '@/content/conditional-route/conditional-route';
+import { ContentDescriptor } from '@vyuh/react-extension-content';
 
 /**
  * Descriptor for configuring conditional route content type in the system.

@@ -1,5 +1,4 @@
 import { ConditionConfiguration } from '@/content/condition-configuration';
-import { TypeDescriptor } from '@/core/type-descriptor';
 import { useVyuhStore } from '@/hooks/use-vyuh';
 
 /**

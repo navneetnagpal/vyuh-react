@@ -6,7 +6,6 @@ import React, {
   ErrorInfo,
   ReactNode,
   Suspense,
-  useCallback,
   useState,
 } from 'react';
 
@@ -121,7 +120,7 @@ class AsyncResource<T> {
     } else if (this.status === 'error') {
       throw this.error;
     } else if (this.result === null) {
-      throw new Error('Resource resolved to null');
+      throw new Error('No Content found');
     } else {
       return this.result;
     }
