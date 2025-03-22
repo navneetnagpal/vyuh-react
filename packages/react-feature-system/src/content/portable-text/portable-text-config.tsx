@@ -24,7 +24,7 @@ export class PortableTextConfig {
         <img
           src={imageUrl}
           alt={value.alt || ''}
-          className="my-4 rounded-md max-w-full"
+          className="my-4 max-w-full rounded-md"
         />
       );
     },
@@ -51,7 +51,7 @@ export class PortableTextConfig {
       );
     },
     code: ({ children }) => (
-      <code className="bg-gray-100 p-1 rounded font-mono text-sm">
+      <code className="rounded bg-gray-100 p-1 font-mono text-sm">
         {children}
       </code>
     ),
@@ -62,20 +62,20 @@ export class PortableTextConfig {
     PortableTextBlockComponent
   > = {
     h1: ({ children }) => (
-      <h1 className="text-3xl font-bold mt-6 mb-4">{children}</h1>
+      <h1 className="mb-4 mt-6 text-3xl font-bold">{children}</h1>
     ),
     h2: ({ children }) => (
-      <h2 className="text-2xl font-bold mt-5 mb-3">{children}</h2>
+      <h2 className="mb-3 mt-5 text-2xl font-bold">{children}</h2>
     ),
     h3: ({ children }) => (
-      <h3 className="text-xl font-bold mt-4 mb-2">{children}</h3>
+      <h3 className="mb-2 mt-4 text-xl font-bold">{children}</h3>
     ),
     h4: ({ children }) => (
-      <h4 className="text-lg font-bold mt-3 mb-1">{children}</h4>
+      <h4 className="mb-1 mt-3 text-lg font-bold">{children}</h4>
     ),
     normal: ({ children }) => <div className="mb-4">{children}</div>,
     blockquote: ({ children }) => (
-      <blockquote className="border-l-4 border-gray-300 pl-4 italic my-4">
+      <blockquote className="my-4 border-l-4 border-gray-300 pl-4 italic">
         {children}
       </blockquote>
     ),
@@ -83,10 +83,10 @@ export class PortableTextConfig {
 
   private readonly _defaultLists: Record<string, PortableTextListComponent> = {
     bullet: ({ children }) => (
-      <ul className="list-disc pl-5 mb-4">{children}</ul>
+      <ul className="mb-4 list-disc pl-5">{children}</ul>
     ),
     number: ({ children }) => (
-      <ol className="list-decimal pl-5 mb-4">{children}</ol>
+      <ol className="mb-4 list-decimal pl-5">{children}</ol>
     ),
   };
 
@@ -106,29 +106,43 @@ export class PortableTextConfig {
   private _listItems: Record<string, PortableTextListItemComponent> = {};
 
   private _unknownMark: PortableTextMarkComponent = ({ value }) => {
-    const { plugins } = useVyuh();
+    const { components } = useVyuh();
 
-    return plugins.content.render(createUnknown(value._type, 'Unknown Mark'));
+    return components.renderError({
+      title: 'Unknown Mark',
+      error: new Error(`Missing MarkDescriptor for schemaType: ${value._type}`),
+    });
   };
 
   private _unknownType: PortableTextTypeComponent = ({ value }) => {
-    const { plugins } = useVyuh();
+    const { components } = useVyuh();
 
-    return plugins.content.render(createUnknown(value._type, 'Unknown Type'));
+    return components.renderError({
+      title: 'Unknown Type',
+      error: new Error(
+        `Missing BlockTypeDescriptor for schemaType: ${value._type}`,
+      ),
+    });
   };
 
   private _unknownList: PortableTextListComponent = ({ value }) => {
-    const { plugins } = useVyuh();
+    const { components } = useVyuh();
 
-    return plugins.content.render(createUnknown(value._type, 'Unknown List'));
+    return components.renderError({
+      title: 'Unknown List',
+      error: new Error(`Missing ListDescriptor for schemaType: ${value._type}`),
+    });
   };
 
   private _unknownListItem: PortableTextListItemComponent = ({ value }) => {
-    const { plugins } = useVyuh();
+    const { components } = useVyuh();
 
-    return plugins.content.render(
-      createUnknown(value._type, 'Unknown ListItem'),
-    );
+    return components.renderError({
+      title: 'Unknown List Item',
+      error: new Error(
+        `Missing ListItemDescriptor for schemaType: ${value._type}`,
+      ),
+    });
   };
 
   /**

@@ -29,11 +29,13 @@ export const DefaultRouteContainer = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div className="container max-w-5xl mx-auto p-4">
+    <div className="container mx-auto max-w-5xl p-4">
       {(title || actions?.length) && (
-        <h1 className="text-neutral-800 mb-6 px-4 py-2 border border-neutral-200 shadow-lg rounded flex items-center justify-between">
+        <h1 className="mb-16 flex items-center justify-between rounded border border-neutral-200 px-4 py-2 text-neutral-800 shadow-lg">
           {title && (
-            <span className={'text-3xl font-bold inline-block'}>{title}</span>
+            <span className={'inline-block text-xl font-bold md:text-3xl'}>
+              {title}
+            </span>
           )}
 
           {actions?.length && (

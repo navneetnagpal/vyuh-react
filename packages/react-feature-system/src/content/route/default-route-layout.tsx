@@ -32,7 +32,7 @@ function DefaultRouteComponent({ route }: { route: Route }) {
   const { plugins } = useVyuh();
 
   return (
-    <DefaultRouteContainer route={route}>
+    <DefaultRouteContainer title={route.title}>
       {route.regions.map((region) => (
         <div key={region.identifier} className="mb-8">
           <div className="flex flex-col gap-6">

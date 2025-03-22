@@ -1,8 +1,5 @@
 import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
-import {
-  AsyncContentContainer,
-  ErrorBoundary,
-} from '@vyuh/react-extension-content';
+import { AsyncContentContainer } from '@vyuh/react-extension-content';
 import React from 'react';
 import {
   VIDEO_PLAYER_SCHEMA_TYPE,
@@ -39,11 +36,7 @@ export class DefaultVideoPlayerLayout extends LayoutConfiguration<VideoPlayer> {
    * Render the video player with default styling
    */
   render(content: VideoPlayer): React.ReactNode {
-    return (
-      <ErrorBoundary title={`Failed to render video player`}>
-        <VideoPlayerComponent content={content} />
-      </ErrorBoundary>
-    );
+    return <VideoPlayerComponent content={content} />;
   }
 }
 
@@ -82,9 +75,9 @@ const VideoPlayerComponent: React.FC<VideoPlayerComponentProps> = ({
     return (
       <div className="w-full">
         {content.title && (
-          <div className="text-lg font-medium mb-2">{content.title}</div>
+          <div className="mb-2 text-lg font-medium">{content.title}</div>
         )}
-        <div className="relative rounded-lg overflow-hidden">
+        <div className="relative overflow-hidden rounded-lg">
           <VideoElement
             url={url}
             loop={content.loop}
@@ -143,7 +136,7 @@ const VideoElement: React.FC<VideoElementProps> = ({
   return (
     <video
       ref={videoRef}
-      className="w-full aspect-video object-cover"
+      className="aspect-video w-full object-cover"
       src={url}
       controls
       loop={loop}

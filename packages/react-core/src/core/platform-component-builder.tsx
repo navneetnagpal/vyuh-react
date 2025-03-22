@@ -83,7 +83,7 @@ export class PlatformComponentBuilder {
 
 function DefaultAppLoader() {
   return (
-    <div className={'flex flex-col justify-center items-center h-screen p-2'}>
+    <div className={'flex h-screen flex-col items-center justify-center p-2'}>
       <Loader className={'animate-spin'} />
       <div>Loading application...</div>
       <PoweredByVyuh />
@@ -93,7 +93,7 @@ function DefaultAppLoader() {
 
 function DefaultContentLoader() {
   return (
-    <div className={'flex flex-col justify-center items-center p-2'}>
+    <div className={'flex flex-col items-center justify-center p-2'}>
       <Loader className={'animate-spin'} />
       <div>Loading content...</div>
       <PoweredByVyuh />
@@ -103,7 +103,7 @@ function DefaultContentLoader() {
 
 function DefaultRouteLoader() {
   return (
-    <div className={'flex flex-col justify-center items-center p-4 bg-white'}>
+    <div className={'flex flex-col items-center justify-center bg-white p-4'}>
       <Loader className={'animate-spin'} />
       <div>Loading route...</div>
       <PoweredByVyuh />
@@ -121,17 +121,17 @@ function DefaultErrorView({
   onRetry?: () => void;
 }) {
   return (
-    <div className="p-4 mx-auto max-w-md bg-red-50 border border-red-200 rounded shadow-sm m-2">
-      <h2 className="text-xl font-semibold text-red-700 mb-4">{title}</h2>
+    <div className="m-2 mx-auto max-w-lg rounded border border-red-200 bg-red-50 p-4 text-sm shadow-sm">
+      <h2 className="mb-4 font-mono font-semibold text-red-700">{title}</h2>
       {error && (
-        <pre className="bg-white p-4 rounded text-red-600 text-sm overflow-auto max-h-48 mb-4">
+        <pre className="mb-4 max-h-48 overflow-auto rounded bg-white p-4 font-mono text-red-600">
           {error.message}
         </pre>
       )}
       {onRetry && (
         <button
           onClick={onRetry}
-          className="mt-2 px-2 py-1 bg-red-600 hover:bg-red-700 text-white font-medium rounded-md transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
+          className="mt-2 cursor-pointer rounded bg-red-500 px-2 py-1 font-medium text-white transition-colors hover:bg-red-800"
         >
           Retry
         </button>
@@ -149,7 +149,7 @@ function PoweredByVyuh({
 }) {
   return (
     <div
-      className={`text-xs text-neutral-500 mt-4 text-center ${showBackground && 'bg-neutral-100'} rounded px-1`}
+      className={`mt-4 text-center text-xs text-neutral-500 ${showBackground && 'bg-neutral-100'} rounded px-1`}
     >
       Powered by Vyuh
     </div>
