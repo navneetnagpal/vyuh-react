@@ -101,7 +101,9 @@ export async function evaluateConditionalRoute(
   const caseItem = route.cases?.find((x) => x.value === value);
 
   const { content } = useVyuhStore.getState().plugins;
-  const ref = content.provider.reference(caseItem?.item);
+  const ref = caseItem?.item
+    ? content.provider.reference(caseItem?.item)
+    : undefined;
 
   if (ref) {
     return content.provider.fetchRoute({
@@ -109,5 +111,9 @@ export async function evaluateConditionalRoute(
     });
   }
 
-  return null;
+  throw new Error(`
+No matching route found for conditional route: ${route.path}.
+Condition (${condition.configuration?.schemaType}) evaluated to: ${value}.
+${caseItem ? '' : 'No matching case defined.'}
+  `);
 }

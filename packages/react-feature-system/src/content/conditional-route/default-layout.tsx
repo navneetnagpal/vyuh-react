@@ -10,7 +10,7 @@ import {
   useVyuh,
 } from '@vyuh/react-core';
 import { AsyncContentContainer } from '@vyuh/react-extension-content';
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 
 /**
  * Default layout for conditional routes
@@ -61,18 +61,17 @@ function ConditionalRouteLayoutView({
   const { plugins } = useVyuh();
 
   // Function to load the conditional route
-  const loadContent = async () => {
-    const result = await evaluateConditionalRoute(content);
-    if (!result) {
-      throw new Error('No matching route found');
-    }
-    return result;
-  };
+  const loadContent = useCallback(async () => {
+    return evaluateConditionalRoute(content);
+  }, [content]);
 
   // Function to render the resolved route
-  const renderContent = (resolvedRoute: any) => {
-    return plugins.content.render(resolvedRoute);
-  };
+  const renderContent = useCallback(
+    (resolvedRoute: any) => {
+      return plugins.content.render(resolvedRoute);
+    },
+    [plugins.content],
+  );
 
   return (
     <AsyncContentContainer
@@ -80,39 +79,5 @@ function ConditionalRouteLayoutView({
       renderContent={renderContent}
       errorTitle="Failed to load Conditional Route"
     />
-  );
-}
-
-/**
- * Debug view for conditional routes (shown in development mode)
- */
-export function ConditionalRouteDebugView({
-  content,
-}: {
-  content: ConditionalRoute;
-}) {
-  const condition = new Condition(content.condition);
-
-  return (
-    <div className="flex h-screen items-center justify-center">
-      <div className="m-4 rounded-md border border-blue-200 bg-blue-50 p-4">
-        <h3 className="font-medium text-blue-800">Conditional Route</h3>
-        <div className="mt-2">
-          <div className="text-sm text-blue-600">
-            <p>Title: {content.title}</p>
-            <p>Path: {content.path}</p>
-            <p>Condition: {condition.configuration?.schemaType || 'None'}</p>
-            <p>Default Case: {content.defaultCase || 'None'}</p>
-            <p>Cases: {content.cases?.length || 0}</p>
-          </div>
-          <div className="mt-2">
-            <div className="h-1 w-full animate-pulse rounded bg-blue-200"></div>
-            <p className="mt-1 text-xs text-blue-500">
-              Evaluating condition...
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
   );
 }

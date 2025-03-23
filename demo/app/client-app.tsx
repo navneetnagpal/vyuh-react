@@ -1,30 +1,17 @@
 'use client';
 
-import { NextNavigationPlugin } from '@/plugins/next-navigation-plugin';
+import { RouterProvider } from '@/components/router-provider';
 import { misc } from '@/features/misc-feature';
-import {
-  FeatureDescriptor,
-  PluginDescriptor,
-  VyuhProvider,
-} from '@vyuh/react-core';
+import { NextNavigationPlugin } from '@/plugins/next-navigation-plugin';
+import { PluginDescriptor, VyuhProvider } from '@vyuh/react-core';
 import { DefaultContentPlugin } from '@vyuh/react-extension-content';
 
 // Features
 import { feature as system } from '@vyuh/react-feature-system';
 import { SanityContentProvider } from '@vyuh/react-plugin-content-provider-sanity';
 import { ReactNode } from 'react';
-import { RouterProvider } from '@/components/router-provider';
 
 import '@/app/globals.css';
-
-/**
- * Counter feature definition
- */
-const counter = new FeatureDescriptor({
-  name: 'counter',
-  title: 'Counter',
-  init: () => Promise.resolve(),
-});
 
 /**
  * Configure Sanity content provider
@@ -53,7 +40,7 @@ const plugins = new PluginDescriptor({
  * Feature configuration
  * Returns all features used in the application
  */
-const getFeatures = () => [counter, system, misc];
+const getFeatures = () => [system, misc];
 
 export default function ClientApp({ children }: { children: ReactNode }) {
   return (

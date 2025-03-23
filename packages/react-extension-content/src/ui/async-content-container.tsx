@@ -8,6 +8,7 @@ import React, {
   Suspense,
   useState,
   useEffect,
+  useCallback,
 } from 'react';
 
 /**
@@ -19,7 +20,7 @@ interface ErrorBoundaryProps {
   onRetry?: () => void;
   FallbackComponent?: React.ComponentType<{
     error: Error;
-    onRetry: () => void;
+    onRetry?: () => void;
   }>;
 }
 
@@ -63,7 +64,12 @@ export class ErrorBoundary extends Component<
       const Component =
         this.props.FallbackComponent || this.defaultFallbackComponent;
 
-      return <Component error={this.state.error} onRetry={this.invokeRetry} />;
+      return (
+        <Component
+          error={this.state.error}
+          onRetry={this.props.onRetry ? this.invokeRetry : undefined}
+        />
+      );
     }
 
     return this.props.children;
@@ -74,7 +80,7 @@ export class ErrorBoundary extends Component<
     onRetry,
   }: {
     error: Error;
-    onRetry: () => void;
+    onRetry?: () => void;
   }) => {
     const { componentBuilder } = useVyuhStore.getState();
 
@@ -174,6 +180,9 @@ export function AsyncContentContainer<T>({
 }: AsyncContentContainerProps<T>): React.ReactNode {
   const { componentBuilder } = useVyuhStore.getState();
 
+  // Add a key to force remounting of the ErrorBoundary when retrying
+  const [errorBoundaryKey, setErrorBoundaryKey] = useState(0);
+
   // Create a new resource only once on initial render
   const [resource, setResource] = useState(
     () => new AsyncResource(loadContent()),
@@ -186,13 +195,35 @@ export function AsyncContentContainer<T>({
   useEffect(() => {
     // Compare function references to avoid unnecessary reloads during HMR
     if (loadContentRef.current !== loadContent) {
-      setResource(new AsyncResource(loadContent()));
+      // Update the loadContent reference
       loadContentRef.current = loadContent;
+
+      // Create a new resource with the updated loadContent
+      setResource(new AsyncResource(loadContent()));
+
+      // Reset the error boundary by changing its key
+      setErrorBoundaryKey((prev) => prev + 1);
     }
   }, [loadContent]);
 
+  // Enhanced retry handler that resets both the error boundary and the resource
+  const handleRetry = useCallback(() => {
+    // Reset the error boundary by changing its key
+    setErrorBoundaryKey((prev) => prev + 1);
+
+    // Create a new resource with the current loadContent function
+    setResource(new AsyncResource(loadContentRef.current()));
+
+    // Call the provided onRetry if it exists
+    onRetry?.();
+  }, [onRetry]);
+
   return (
-    <ErrorBoundary title={errorTitle} onRetry={onRetry}>
+    <ErrorBoundary
+      key={errorBoundaryKey}
+      title={errorTitle}
+      onRetry={onRetry && handleRetry}
+    >
       <Suspense fallback={componentBuilder.renderContentLoader()}>
         <AsyncContentLoader resource={resource} renderContent={renderContent} />
       </Suspense>
