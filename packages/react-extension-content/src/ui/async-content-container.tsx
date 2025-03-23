@@ -174,13 +174,21 @@ export function AsyncContentContainer<T>({
 }: AsyncContentContainerProps<T>): React.ReactNode {
   const { componentBuilder } = useVyuhStore.getState();
 
-  // Create a new resource when the key changes
+  // Create a new resource only once on initial render
   const [resource, setResource] = useState(
     () => new AsyncResource(loadContent()),
   );
 
+  // Store the loadContent function reference
+  const loadContentRef = React.useRef(loadContent);
+
+  // Only update resource when loadContent function reference changes
   useEffect(() => {
-    setResource(new AsyncResource(loadContent()));
+    // Compare function references to avoid unnecessary reloads during HMR
+    if (loadContentRef.current !== loadContent) {
+      setResource(new AsyncResource(loadContent()));
+      loadContentRef.current = loadContent;
+    }
   }, [loadContent]);
 
   return (

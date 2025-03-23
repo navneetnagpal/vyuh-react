@@ -73,7 +73,7 @@ export function RouteBuilder({
       {allowRefresh && (
         <button
           onClick={handleRefresh}
-          className={`z-1000 fixed bottom-2 right-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-gray-400 text-white transition-colors ease-in-out hover:bg-gray-300 hover:text-gray-700`}
+          className={`z-1000 fixed bottom-2 right-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-gray-600 text-white transition-colors ease-in-out hover:bg-gray-300 hover:text-gray-700 hover:shadow-md`}
           title={'Refresh Route'}
         >
           <RefreshCcw size={16} />
