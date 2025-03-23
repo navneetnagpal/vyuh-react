@@ -10,6 +10,7 @@ import {
   LiveContentProvider,
   RouteBase,
 } from '@vyuh/react-core';
+import React from 'react';
 
 const fieldKeyMap: Record<FieldKey, string> = {
   [FieldKey.type]: '_type',
@@ -242,5 +243,11 @@ export class SanityContentProvider extends ContentProvider {
 
   override get supportsLive(): boolean {
     return true;
+  }
+
+  render({ children }: { children: React.ReactNode }): React.ReactNode {
+    return this.live.render({
+      children,
+    });
   }
 }

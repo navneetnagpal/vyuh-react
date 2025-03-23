@@ -1,9 +1,14 @@
 import { SanityClient } from '@sanity/client';
 import { LiveContentProvider, RouteBase } from '@vyuh/react-core';
+import { DefinedSanityFetchType, defineLive } from 'next-sanity';
+import React from 'react';
 
 export class SanityLiveContentProvider implements LiveContentProvider {
   private readonly client: SanityClient;
   readonly title: string = 'Sanity Live Content Provider';
+
+  private readonly sanityFetch: DefinedSanityFetchType;
+  private readonly SanityLive: React.ComponentType;
 
   constructor(client: SanityClient) {
     this.client = client;
@@ -118,5 +123,9 @@ export class SanityLiveContentProvider implements LiveContentProvider {
     if (!data) return null;
 
     return data as RouteBase;
+  }
+
+  render({ children }: { children: React.ReactNode }): React.ReactNode {
+    return <>{children}</>;
   }
 }

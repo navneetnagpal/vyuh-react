@@ -1,5 +1,5 @@
 import { Button } from '@ui/components/button';
-import { Action } from '@vyuh/react-core';
+import { Action, PoweredByVyuh } from '@vyuh/react-core';
 import {
   Blocks,
   CircleUser,
@@ -60,6 +60,10 @@ export const DefaultRouteContainer = ({
       )}
 
       <main>{children}</main>
+
+      <div className={'flex justify-center'}>
+        <PoweredByVyuh className={'bg-neutral-200'} />
+      </div>
     </div>
   );
 };

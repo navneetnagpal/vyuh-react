@@ -1,5 +1,6 @@
 import { FileReference, ImageReference } from '@/content/reference';
 import { RouteBase } from '@/content/route-base';
+import React from 'react';
 
 export interface ContentProviderConfig {
   name: string;
@@ -132,6 +133,8 @@ export abstract class ContentProvider {
   get live(): LiveContentProvider | undefined {
     return undefined;
   }
+
+  abstract render({ children }: { children: React.ReactNode }): React.ReactNode;
 }
 
 /**
@@ -191,6 +194,8 @@ export interface LiveContentProvider {
     routeId?: string;
     includeDrafts?: boolean;
   }): Promise<RouteBase | null>;
+
+  render({ children }: { children: React.ReactNode }): React.ReactNode;
 }
 
 /**
@@ -205,6 +210,10 @@ export class NoOpLiveContentProvider implements LiveContentProvider {
 
   async dispose(): Promise<void> {
     return Promise.resolve();
+  }
+
+  render({ children }: { children: React.ReactNode }): React.ReactNode {
+    return children;
   }
 
   async fetchById<T>(

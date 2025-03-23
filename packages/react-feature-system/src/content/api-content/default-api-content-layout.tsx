@@ -5,7 +5,7 @@ import {
 } from '@/content/api-content/api-content';
 import { LayoutConfiguration, TypeDescriptor } from '@vyuh/react-core';
 import { AsyncContentContainer } from '@vyuh/react-extension-content';
-import React, { useMemo, useRef } from 'react';
+import React from 'react';
 
 /**
  * Default layout for API Content
@@ -65,7 +65,6 @@ function APIContentLayoutView({
         loadContent={loadContent}
         renderContent={renderContent}
         errorTitle={`API Error ${content.configuration?.title ? `: ${content.configuration.title}` : ''}`}
-        contentKey={content.configuration?.schemaType || 'api-content'}
       />
       {children}
     </div>

@@ -79,7 +79,6 @@ function ConditionalRouteLayoutView({
       loadContent={loadContent}
       renderContent={renderContent}
       errorTitle="Failed to load Conditional Route"
-      contentKey={JSON.stringify(content)}
     />
   );
 }
@@ -95,8 +94,8 @@ export function ConditionalRouteDebugView({
   const condition = new Condition(content.condition);
 
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="p-4 border border-blue-200 rounded-md bg-blue-50 m-4">
+    <div className="flex h-screen items-center justify-center">
+      <div className="m-4 rounded-md border border-blue-200 bg-blue-50 p-4">
         <h3 className="font-medium text-blue-800">Conditional Route</h3>
         <div className="mt-2">
           <div className="text-sm text-blue-600">
@@ -107,8 +106,8 @@ export function ConditionalRouteDebugView({
             <p>Cases: {content.cases?.length || 0}</p>
           </div>
           <div className="mt-2">
-            <div className="w-full h-1 bg-blue-200 animate-pulse rounded"></div>
-            <p className="text-xs text-blue-500 mt-1">
+            <div className="h-1 w-full animate-pulse rounded bg-blue-200"></div>
+            <p className="mt-1 text-xs text-blue-500">
               Evaluating condition...
             </p>
           </div>

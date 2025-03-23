@@ -1,3 +1,4 @@
+import { PoweredByVyuh } from '@/components/powered-by-vyuh';
 import { Loader } from 'lucide-react';
 import React from 'react';
 
@@ -103,7 +104,9 @@ function DefaultContentLoader() {
 
 function DefaultRouteLoader() {
   return (
-    <div className={'flex flex-col items-center justify-center bg-white p-4'}>
+    <div
+      className={'flex flex-col items-center justify-center bg-white px-8 py-4'}
+    >
       <Loader className={'animate-spin'} />
       <div>Loading route...</div>
       <PoweredByVyuh />
@@ -137,21 +140,9 @@ function DefaultErrorView({
         </button>
       )}
 
-      <PoweredByVyuh showBackground={false} />
-    </div>
-  );
-}
-
-function PoweredByVyuh({
-  showBackground = true,
-}: {
-  showBackground?: boolean;
-}) {
-  return (
-    <div
-      className={`mt-4 text-center text-xs text-neutral-500 ${showBackground && 'bg-neutral-100'} rounded px-1`}
-    >
-      Powered by Vyuh
+      <div className="flex justify-center">
+        <PoweredByVyuh className={'inline-block'} />
+      </div>
     </div>
   );
 }

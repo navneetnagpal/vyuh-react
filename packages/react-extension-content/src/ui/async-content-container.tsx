@@ -7,6 +7,7 @@ import React, {
   ReactNode,
   Suspense,
   useState,
+  useEffect,
 } from 'react';
 
 /**
@@ -15,9 +16,10 @@ import React, {
 interface ErrorBoundaryProps {
   children: ReactNode;
   title: string;
+  onRetry?: () => void;
   FallbackComponent?: React.ComponentType<{
     error: Error;
-    resetErrorBoundary: () => void;
+    onRetry: () => void;
   }>;
 }
 
@@ -51,23 +53,17 @@ export class ErrorBoundary extends Component<
     plugins.telemetry?.log(this.props.title, 'error', { error });
   }
 
-  resetErrorBoundary = (): void => {
+  private invokeRetry = (): void => {
     this.setState({ hasError: false, error: null });
+    this.props.onRetry?.();
   };
 
   render(): ReactNode {
-    const { componentBuilder } = useVyuhStore.getState();
-
     if (this.state.hasError && this.state.error) {
       const Component =
         this.props.FallbackComponent || this.defaultFallbackComponent;
 
-      return (
-        <Component
-          error={this.state.error}
-          resetErrorBoundary={this.resetErrorBoundary}
-        />
-      );
+      return <Component error={this.state.error} onRetry={this.invokeRetry} />;
     }
 
     return this.props.children;
@@ -75,17 +71,17 @@ export class ErrorBoundary extends Component<
 
   private defaultFallbackComponent = ({
     error,
-    resetErrorBoundary,
+    onRetry,
   }: {
     error: Error;
-    resetErrorBoundary: () => void;
+    onRetry: () => void;
   }) => {
     const { componentBuilder } = useVyuhStore.getState();
 
     return componentBuilder.renderError({
       title: this.props.title,
       error,
-      onRetry: resetErrorBoundary,
+      onRetry,
     });
   };
 }
@@ -147,9 +143,9 @@ export interface AsyncContentContainerProps<T> {
   errorTitle?: string;
 
   /**
-   * Key to force reload content when changed
+   * Callback function to invoke when retrying after an error
    */
-  contentKey?: string | number;
+  onRetry?: () => void;
 }
 
 /**
@@ -174,15 +170,21 @@ export function AsyncContentContainer<T>({
   loadContent,
   renderContent,
   errorTitle = 'Failed to load content',
-  contentKey = 'default',
+  onRetry,
 }: AsyncContentContainerProps<T>): React.ReactNode {
   const { componentBuilder } = useVyuhStore.getState();
 
   // Create a new resource when the key changes
-  const [resource] = useState(() => new AsyncResource(loadContent()));
+  const [resource, setResource] = useState(
+    () => new AsyncResource(loadContent()),
+  );
+
+  useEffect(() => {
+    setResource(new AsyncResource(loadContent()));
+  }, [loadContent]);
 
   return (
-    <ErrorBoundary key={contentKey} title={errorTitle}>
+    <ErrorBoundary title={errorTitle} onRetry={onRetry}>
       <Suspense fallback={componentBuilder.renderContentLoader()}>
         <AsyncContentLoader resource={resource} renderContent={renderContent} />
       </Suspense>

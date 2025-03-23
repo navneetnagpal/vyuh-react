@@ -1,3 +1,5 @@
+'use client';
+
 import { NavigationPlugin } from '@vyuh/react-core';
 import { useRouter } from 'next/navigation';
 

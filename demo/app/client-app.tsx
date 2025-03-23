@@ -1,6 +1,6 @@
 'use client';
 
-import { NextNavigationPlugin } from '@/app/plugins/next-navigation-plugin';
+import { NextNavigationPlugin } from '@/plugins/next-navigation-plugin';
 import { misc } from '@/features/misc-feature';
 import {
   FeatureDescriptor,
@@ -13,14 +13,14 @@ import { DefaultContentPlugin } from '@vyuh/react-extension-content';
 import { feature as system } from '@vyuh/react-feature-system';
 import { SanityContentProvider } from '@vyuh/react-plugin-content-provider-sanity';
 import { ReactNode } from 'react';
-import { RouterProvider } from './components/router-provider';
+import { RouterProvider } from '@/components/router-provider';
 
 import '@/app/globals.css';
 
 /**
  * Counter feature definition
  */
-export const counter = new FeatureDescriptor({
+const counter = new FeatureDescriptor({
   name: 'counter',
   title: 'Counter',
   init: () => Promise.resolve(),

@@ -10,8 +10,8 @@ export function LoadingOverlay() {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 backdrop-grayscale">
-      <div className="rounded-lg overflow-hidden shadow-md">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-grayscale">
+      <div className="overflow-hidden rounded-lg shadow-md">
         {componentBuilder.renderRouteLoader()}
       </div>
     </div>

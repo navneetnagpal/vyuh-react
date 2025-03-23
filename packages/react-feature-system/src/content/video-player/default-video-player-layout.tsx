@@ -94,7 +94,6 @@ const VideoPlayerComponent: React.FC<VideoPlayerComponentProps> = ({
       loadContent={loadVideoUrl}
       renderContent={renderVideo}
       errorTitle="Failed to load video"
-      contentKey={`${content.linkType}-${content.url || content.file?.asset?.ref}`}
     />
   );
 };

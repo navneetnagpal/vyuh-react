@@ -80,4 +80,8 @@ export class NoOpLiveContentProvider implements LiveContentProvider {
       `Live content not supported: fetchRoute called with ${options.path || options.routeId}`,
     );
   }
+
+  render({ children }: { children: React.ReactNode }): React.ReactNode {
+    return children;
+  }
 }

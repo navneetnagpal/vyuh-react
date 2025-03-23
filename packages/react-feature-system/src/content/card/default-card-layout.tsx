@@ -52,20 +52,48 @@ export class DefaultCardLayout extends LayoutConfiguration<Card> {
     // Determine if we have an image to show
     const hasImage = !!imageUrl;
 
+    // Check if image is the only content
+    const hasOnlyImage =
+      hasImage &&
+      !content.title &&
+      !content.description &&
+      !content.content?.blocks &&
+      !content.secondaryAction &&
+      !content.tertiaryAction;
+
+    // If we only have an image, render a simplified card with full-height image
+    if (hasOnlyImage) {
+      return (
+        <ShadcnCard
+          className={cn('h-full overflow-hidden border-neutral-300 p-0', {
+            'cursor-pointer': content.action,
+          })}
+          onClick={() => content.action && new Action(content.action).execute()}
+        >
+          <img
+            src={imageUrl}
+            alt="Card image"
+            className="h-full w-full object-cover"
+          />
+        </ShadcnCard>
+      );
+    }
+
+    // Otherwise render the standard card layout
     return (
       <ShadcnCard
-        className={cn('border-neutral-300 h-full', {
+        className={cn('h-full border-neutral-300', {
           'cursor-pointer': content.action,
         })}
-        onClick={() => new Action(content.action).execute()}
+        onClick={() => content.action && new Action(content.action).execute()}
       >
         <CardHeader>
           {hasImage && (
-            <div className="w-full h-48 overflow-hidden">
+            <div className="h-48 w-full overflow-hidden">
               <img
                 src={imageUrl}
                 alt={content.title || 'Card image'}
-                className="w-full h-full object-cover"
+                className="h-full w-full object-cover"
               />
             </div>
           )}

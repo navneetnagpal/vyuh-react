@@ -34,12 +34,14 @@ export function RouteBuilder({
   allowRefresh = true,
 }: RouteBuilderProps) {
   const { plugins } = useVyuh();
-  const [key, setKey] = useState(0);
+  const [refreshCounter, setRefreshCounter] = useState(0);
 
+  // Simple function to trigger a refresh by incrementing the counter
   const handleRefresh = useCallback(() => {
-    setKey((prev) => prev + 1);
+    setRefreshCounter((prev) => prev + 1);
   }, []);
 
+  // This function will be called each time the component is mounted/refreshed
   const loadContent = useCallback(async () => {
     if (!url && !routeId) {
       throw new Error('Either url or routeId must be provided');
@@ -49,8 +51,9 @@ export function RouteBuilder({
       path: url,
       routeId,
     });
-  }, [plugins.content.provider, url, routeId]);
+  }, [plugins.content.provider, url, routeId, refreshCounter]);
 
+  // Render the route content
   const renderContent = useCallback(
     (route: RouteBase) => {
       return plugins.content.render(route);
@@ -61,19 +64,16 @@ export function RouteBuilder({
   return (
     <>
       <AsyncContentContainer
-        key={key}
         loadContent={loadContent}
         renderContent={renderContent}
         errorTitle={`Failed to render route: ${url || routeId}`}
-        contentKey={`${url || routeId}-${key}`}
+        onRetry={handleRefresh}
       />
 
       {allowRefresh && (
         <button
           onClick={handleRefresh}
-          className={`fixed bottom-2 right-2 z-1000 rounded-full w-8 h-8 flex items-center justify-center bg-gray-400 text-white
-          hover:bg-gray-300 hover:text-gray-700 transition-colors ease-in-out
-          cursor-pointer`}
+          className={`z-1000 fixed bottom-2 right-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-gray-400 text-white transition-colors ease-in-out hover:bg-gray-300 hover:text-gray-700`}
           title={'Refresh Route'}
         >
           <RefreshCcw size={16} />

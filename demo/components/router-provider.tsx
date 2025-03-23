@@ -3,7 +3,7 @@
 import { useVyuhStore } from '@vyuh/react-core';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef } from 'react';
-import { NextNavigationPlugin } from '../plugins/next-navigation-plugin';
+import { NextNavigationPlugin } from '@/plugins/next-navigation-plugin';
 
 /**
  * Component that initializes the Next.js router for the NavigationPlugin

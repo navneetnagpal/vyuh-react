@@ -35,6 +35,8 @@
     "@sanity/client": "^6.28.3",
     "@sanity/image-url": "^1.1.0",
     "@vyuh/react-core": "^0.1.1",
+    "@sanity/sdk-react": "^0.0.0-rc.1",
+    "@sanity/sdk": "^0.0.0-rc.1",
     "next-sanity": "^9.9.5"
   },
   "devDependencies": {

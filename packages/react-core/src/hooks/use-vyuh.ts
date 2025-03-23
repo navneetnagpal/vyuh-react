@@ -64,9 +64,12 @@ export const useVyuhStore = create<VyuhPlatformState & VyuhPlatformActions>(
         initState: InitState.notStarted,
         error: null,
       }),
-    showLoader: (message = 'Loading...') =>
-      set({ loader: { isVisible: true, message } }),
-    hideLoader: () => set({ loader: { isVisible: false, message: '' } }),
+    showLoader: (message = 'Loading...') => {
+      set({ loader: { isVisible: true, message } });
+    },
+    hideLoader: () => {
+      return set({ loader: { isVisible: false, message: '' } });
+    },
   }),
 );
 

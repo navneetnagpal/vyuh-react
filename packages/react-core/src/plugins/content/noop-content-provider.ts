@@ -150,4 +150,12 @@ export class NoOpContentProvider extends ContentProvider {
     console.debug('NoOpContentProvider: live content provider requested');
     return new NoOpLiveContentProvider();
   }
+
+  get supportsLive(): boolean {
+    return false;
+  }
+
+  render({ children }: { children: React.ReactNode }): React.ReactNode {
+    return children;
+  }
 }

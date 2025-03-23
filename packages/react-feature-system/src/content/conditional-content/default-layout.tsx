@@ -68,7 +68,6 @@ function ConditionalContentLayoutView({
       loadContent={loadContent}
       renderContent={renderContent}
       errorTitle="Failed to load Conditional Content"
-      contentKey={JSON.stringify(content)}
     />
   );
 }
