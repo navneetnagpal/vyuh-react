@@ -1,9 +1,4 @@
-import {
-  DisposeFunction,
-  EventListener,
-  EventPlugin,
-  VyuhEvent,
-} from '@/plugins/event/event-plugin';
+import { DisposeFunction, EventListener, EventPlugin, VyuhEvent } from '@/plugins/event/event-plugin';
 
 /**
  * Default implementation of EventPlugin

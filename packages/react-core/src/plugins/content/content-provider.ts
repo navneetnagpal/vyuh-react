@@ -1,6 +1,5 @@
 import { FileReference, ImageReference } from '@/content/reference';
 import { RouteBase } from '@/content/route-base';
-import React from 'react';
 import { Observable } from 'rxjs';
 
 export interface ContentProviderConfig {

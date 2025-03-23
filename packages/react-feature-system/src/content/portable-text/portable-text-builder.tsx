@@ -1,8 +1,5 @@
 import { DefaultPortableTextLayout } from '@/content/portable-text/default-portable-text-layout';
-import {
-  PORTABLE_TEXT_SCHEMA_TYPE,
-  PortableText,
-} from '@/content/portable-text/portable-text';
+import { PORTABLE_TEXT_SCHEMA_TYPE, PortableText } from '@/content/portable-text/portable-text';
 import { PortableTextConfig } from '@/content/portable-text/portable-text-config';
 import { PortableTextDescriptor } from '@/content/portable-text/portable-text-descriptor';
 import {
@@ -13,10 +10,7 @@ import {
   PortableTextTypeComponent,
 } from '@portabletext/react';
 import { useVyuhStore } from '@vyuh/react-core';
-import {
-  ContentBuilder,
-  ContentDescriptor,
-} from '@vyuh/react-extension-content';
+import { ContentBuilder, ContentDescriptor } from '@vyuh/react-extension-content';
 
 /**
  * Content builder for Portable Text content items
@@ -41,6 +35,7 @@ export class PortableTextContentBuilder extends ContentBuilder<PortableText> {
     super.init(descriptors);
 
     // Get telemetry from the store
+    // Using getState() here since this is not inside a React component's render function
     const telemetry = useVyuhStore.getState().plugins.telemetry;
 
     // Cast directly to PortableTextDescriptor since bootstrapping ensures correct types

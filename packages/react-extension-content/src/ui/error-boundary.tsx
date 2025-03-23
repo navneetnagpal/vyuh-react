@@ -1,4 +1,4 @@
-import { useVyuhStore } from '@vyuh/react-core';
+import { useVyuh, useVyuhStore } from '@vyuh/react-core';
 import React, { Component, ErrorInfo, ReactNode } from 'react';
 
 /**
@@ -72,9 +72,10 @@ export class ErrorBoundary extends Component<
     error: Error;
     onRetry?: () => void;
   }) => {
-    const { componentBuilder } = useVyuhStore.getState();
+    // This is inside a render function, so we can use useVyuh
+    const { components } = useVyuh();
 
-    return componentBuilder.renderError({
+    return components.renderError({
       title: this.props.title,
       error,
       onRetry,

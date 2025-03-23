@@ -1,11 +1,5 @@
 import { ContentDescriptor } from '@/content-descriptor';
-import {
-  ContentItem,
-  LayoutConfiguration,
-  SchemaItem,
-  TypeDescriptor,
-  useVyuhStore,
-} from '@vyuh/react-core';
+import { ContentItem, LayoutConfiguration, SchemaItem, TypeDescriptor, useVyuh } from '@vyuh/react-core';
 import React from 'react';
 
 /**
@@ -100,7 +94,8 @@ export class ContentBuilder<TContent extends ContentItem = ContentItem>
    * Build a widget for the given content item
    */
   render(content: TContent): React.ReactNode {
-    const { plugins } = useVyuhStore.getState();
+    // Using getState() here since this is not inside a React component's render function
+    const { plugins } = useVyuh();
     const contentPlugin = plugins.content;
     const telemetry = plugins.telemetry;
 

@@ -1,9 +1,4 @@
-import {
-  ActionConfiguration,
-  ObjectReference,
-  TypeDescriptor,
-  useVyuhStore,
-} from '@vyuh/react-core';
+import { ActionConfiguration, ObjectReference, TypeDescriptor, useVyuhStore } from '@vyuh/react-core';
 
 /**
  * Action configuration for navigating to a URL or route reference.

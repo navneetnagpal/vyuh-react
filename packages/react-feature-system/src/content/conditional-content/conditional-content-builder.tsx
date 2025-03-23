@@ -1,8 +1,5 @@
 import { ContentBuilder } from '@vyuh/react-extension-content';
-import {
-  CONDITIONAL_CONTENT_SCHEMA_TYPE,
-  ConditionalContent,
-} from './conditional-content';
+import { CONDITIONAL_CONTENT_SCHEMA_TYPE, ConditionalContent } from './conditional-content';
 import { DefaultConditionalContentLayout } from './default-layout';
 
 /**

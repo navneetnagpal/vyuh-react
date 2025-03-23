@@ -1,5 +1,5 @@
-import ClientApp from './client-app';
 import { ReactNode } from 'react';
+import ClientApp from './client-app';
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (

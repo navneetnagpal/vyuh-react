@@ -1,38 +1,42 @@
 'use client';
 
-import { Plus, Minus } from 'lucide-react';
+import { Minus, Plus } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Counter() {
   const [counter, setCounter] = useState(0);
 
   return (
-    <div className={'flex flex-col h-screen items-center justify-center gap-6'}>
+    <div className={'flex h-screen flex-col items-center justify-center gap-6'}>
       <div className="flex gap-4">
         <button
           onClick={() => setCounter(counter - 1)}
           disabled={counter <= 0}
-          className={`flex items-center justify-center gap-2 ${counter <= 0 ? 'bg-gray-400 cursor-not-allowed opacity-70' : 'bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 transform hover:scale-105 cursor-pointer'} text-white font-bold px-6 py-4 rounded-xl shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50`}
+          className={`flex items-center justify-center gap-2 ${counter <= 0 ? 'cursor-not-allowed bg-gray-400 opacity-70' : 'transform cursor-pointer bg-gradient-to-r from-indigo-500 to-purple-600 hover:scale-105 hover:from-indigo-600 hover:to-purple-700'} rounded-xl px-6 py-4 font-bold text-white shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50`}
           aria-label="Decrement counter"
           aria-disabled={counter <= 0}
         >
           <Minus className="h-7 w-7 text-white" />
-          <span className="text-white font-semibold">Decrement</span>
+          <span className="font-semibold text-white">Decrement</span>
         </button>
 
         <button
           onClick={() => setCounter(counter + 1)}
-          className={'flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-bold px-6 py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 cursor-pointer'}
+          className={
+            'flex transform cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-4 font-bold text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-indigo-600 hover:to-purple-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50'
+          }
           aria-label="Increment counter"
         >
           <Plus className="h-7 w-7 text-white" />
-          <span className="text-white font-semibold">Increment</span>
+          <span className="font-semibold text-white">Increment</span>
         </button>
       </div>
 
       <div className="text-center">
-        <p className="text-gray-600 text-sm font-medium uppercase tracking-wide">Current Count</p>
-        <p className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-600">
+        <p className="text-sm font-medium uppercase tracking-wide text-gray-600">
+          Current Count
+        </p>
+        <p className="bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-4xl font-bold text-transparent">
           {counter} {counter === 1 ? 'time' : 'times'}
         </p>
       </div>

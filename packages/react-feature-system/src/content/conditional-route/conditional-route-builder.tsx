@@ -1,7 +1,4 @@
-import {
-  CONDITIONAL_ROUTE_SCHEMA_TYPE,
-  ConditionalRoute,
-} from '@/content/conditional-route/conditional-route';
+import { CONDITIONAL_ROUTE_SCHEMA_TYPE, ConditionalRoute } from '@/content/conditional-route/conditional-route';
 import { DefaultConditionalRouteLayout } from '@/content/conditional-route/default-layout';
 import { LayoutConfiguration } from '@vyuh/react-core';
 import { ContentBuilder } from '@vyuh/react-extension-content';

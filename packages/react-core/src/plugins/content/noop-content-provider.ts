@@ -1,11 +1,7 @@
 import { FileReference, ImageReference } from '@/content/reference';
 import { RouteBase } from '@/content/route-base';
 import { UNKNOWN_SCHEMA_TYPE } from '@/content/unknown';
-import {
-  ContentProvider,
-  FieldKey,
-  LiveContentProvider,
-} from '@/plugins/content/content-provider';
+import { ContentProvider, FieldKey, LiveContentProvider } from '@/plugins/content/content-provider';
 import { NoOpLiveContentProvider } from '@/plugins/content/noop-live-content-provider';
 
 /**

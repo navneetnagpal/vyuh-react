@@ -1,8 +1,4 @@
-import {
-  ActionConfiguration,
-  TypeDescriptor,
-  useVyuhStore,
-} from '@vyuh/react-core';
+import { ActionConfiguration, TypeDescriptor, useVyuhStore } from '@vyuh/react-core';
 
 /**
  * Enum for URL launch modes

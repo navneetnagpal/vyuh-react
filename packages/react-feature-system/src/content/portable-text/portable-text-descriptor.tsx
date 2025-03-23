@@ -1,7 +1,4 @@
-import {
-  PORTABLE_TEXT_SCHEMA_TYPE,
-  PortableText,
-} from '@/content/portable-text/portable-text';
+import { PORTABLE_TEXT_SCHEMA_TYPE, PortableText } from '@/content/portable-text/portable-text';
 import {
   PortableTextBlockComponent,
   PortableTextListComponent,

@@ -1,11 +1,6 @@
 import { useVyuhStore } from '@vyuh/react-core';
 import { ContentBuilder } from '@vyuh/react-extension-content';
-import {
-  API_CONTENT_SCHEMA_TYPE,
-  APIConfiguration,
-  APIContent,
-  APIContentDescriptor,
-} from './api-content';
+import { API_CONTENT_SCHEMA_TYPE, APIConfiguration, APIContent, APIContentDescriptor } from './api-content';
 import { DefaultAPIContentLayout } from './default-api-content-layout';
 
 /**

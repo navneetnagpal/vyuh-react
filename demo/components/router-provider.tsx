@@ -1,16 +1,16 @@
 'use client';
 
-import { useVyuhStore } from '@vyuh/react-core';
+import { NextNavigationPlugin } from '@/plugins/next-navigation-plugin';
+import { useVyuh } from '@vyuh/react-core';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef } from 'react';
-import { NextNavigationPlugin } from '@/plugins/next-navigation-plugin';
 
 /**
  * Component that initializes the Next.js router for the NavigationPlugin
  */
 export function RouterProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
-  const plugins = useVyuhStore((state) => state.plugins);
+  const { plugins } = useVyuh();
   const routerInitialized = useRef(false);
 
   useEffect(() => {

@@ -3,14 +3,9 @@ import {
   ConditionalRoute,
   evaluateConditionalRoute,
 } from '@/content/conditional-route/conditional-route';
-import {
-  Condition,
-  LayoutConfiguration,
-  TypeDescriptor,
-  useVyuh,
-} from '@vyuh/react-core';
+import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
 import { AsyncContentContainer } from '@vyuh/react-extension-content';
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 
 /**
  * Default layout for conditional routes

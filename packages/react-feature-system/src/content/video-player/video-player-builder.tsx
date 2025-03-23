@@ -1,8 +1,5 @@
 import { DefaultVideoPlayerLayout } from '@/content/video-player/default-video-player-layout';
-import {
-  VIDEO_PLAYER_SCHEMA_TYPE,
-  VideoPlayer,
-} from '@/content/video-player/video-player';
+import { VIDEO_PLAYER_SCHEMA_TYPE, VideoPlayer } from '@/content/video-player/video-player';
 import { ContentBuilder } from '@vyuh/react-extension-content';
 
 /**

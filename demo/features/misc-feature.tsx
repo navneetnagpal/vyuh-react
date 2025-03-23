@@ -18,26 +18,26 @@ interface Product {
 const ProductGrid = ({ products }: { products: Product[] }) => {
   return (
     <div className="w-full p-4">
-      <h2 className="text-2xl font-bold mb-4">Products from DummyJSON API</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <h2 className="mb-4 text-2xl font-bold">Products from DummyJSON API</h2>
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
         {products.map((product) => (
           <div
             key={product.id}
-            className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+            className="overflow-hidden rounded-lg bg-white shadow-md transition-shadow hover:shadow-lg"
           >
             <img
               src={product.thumbnail}
               alt={product.title}
-              className="w-full h-48 object-cover"
+              className="h-48 w-full object-cover"
             />
             <div className="p-4">
-              <h3 className="font-semibold text-lg mb-1 truncate">
+              <h3 className="mb-1 truncate text-lg font-semibold">
                 {product.title}
               </h3>
-              <p className="text-gray-600 text-sm mb-2 line-clamp-2">
+              <p className="mb-2 line-clamp-2 text-sm text-gray-600">
                 {product.description}
               </p>
-              <p className="text-green-600 font-bold">
+              <p className="font-bold text-green-600">
                 ${product.price.toFixed(2)}
               </p>
             </div>

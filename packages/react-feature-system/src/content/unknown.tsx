@@ -1,9 +1,4 @@
-import {
-  LayoutConfiguration,
-  TypeDescriptor,
-  Unknown,
-  UNKNOWN_SCHEMA_TYPE,
-} from '@vyuh/react-core';
+import { LayoutConfiguration, TypeDescriptor, Unknown, UNKNOWN_SCHEMA_TYPE } from '@vyuh/react-core';
 import { ContentBuilder } from '@vyuh/react-extension-content';
 import { TriangleAlert } from 'lucide-react';
 import React from 'react';

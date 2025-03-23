@@ -1,11 +1,6 @@
 import { DefaultRouteContainer } from '@/content/route/default-route-container';
 import { Route, ROUTE_SCHEMA_TYPE } from '@/content/route/route';
-import {
-  Action,
-  LayoutConfiguration,
-  TypeDescriptor,
-  useVyuh,
-} from '@vyuh/react-core';
+import { Action, LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
 import React from 'react';
 
 /**

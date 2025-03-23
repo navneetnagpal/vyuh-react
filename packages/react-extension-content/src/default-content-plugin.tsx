@@ -4,7 +4,6 @@ import {
   ContentItem,
   ContentPlugin,
   ContentProvider,
-  createUnknown,
   ExtensionBuilder,
   type ItemType,
   SchemaItem,
@@ -58,6 +57,7 @@ export class DefaultContentPlugin extends ContentPlugin {
    * Attach an extension builder to this plugin
    */
   attach(extBuilder: ExtensionBuilder): void {
+    // Using getState() here since this is not inside a React component's render function
     const telemetry = useVyuhStore.getState().plugins.telemetry;
 
     if (!(extBuilder instanceof ContentExtensionBuilder)) {
