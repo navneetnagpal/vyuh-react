@@ -1,6 +1,7 @@
 import { FileReference, ImageReference } from '@/content/reference';
 import { RouteBase } from '@/content/route-base';
 import React from 'react';
+import { Observable } from 'rxjs';
 
 export interface ContentProviderConfig {
   name: string;
@@ -53,7 +54,7 @@ export abstract class ContentProvider {
     options: {
       useCache?: boolean;
     },
-  ): Promise<T | null>;
+  ): Promise<T | undefined>;
 
   /**
    * Fetch a single item using a query
@@ -61,10 +62,10 @@ export abstract class ContentProvider {
   abstract fetchSingle<T>(
     query: string,
     options: {
-      queryParams?: Record<string, any>;
+      params?: Record<string, any>;
       useCache?: boolean;
     },
-  ): Promise<T | null>;
+  ): Promise<T | undefined>;
 
   /**
    * Fetch multiple items using a query
@@ -72,10 +73,10 @@ export abstract class ContentProvider {
   abstract fetchMultiple<T>(
     query: string,
     options: {
-      queryParams?: Record<string, any>;
+      params?: Record<string, any>;
       useCache?: boolean;
     },
-  ): Promise<T[] | null>;
+  ): Promise<T[] | undefined>;
 
   /**
    * Fetch a route by path or ID
@@ -84,7 +85,7 @@ export abstract class ContentProvider {
     path?: string;
     routeId?: string;
     useCache?: boolean;
-  }): Promise<RouteBase | null>;
+  }): Promise<RouteBase | undefined>;
 
   /**
    * Get an image URL from an image reference
@@ -133,8 +134,6 @@ export abstract class ContentProvider {
   get live(): LiveContentProvider | undefined {
     return undefined;
   }
-
-  abstract render({ children }: { children: React.ReactNode }): React.ReactNode;
 }
 
 /**
@@ -162,7 +161,7 @@ export interface LiveContentProvider {
     options: {
       includeDrafts?: boolean;
     },
-  ): Promise<T | null>;
+  ): Observable<T | undefined>;
 
   /**
    * Fetch a single item using a query with draft support
@@ -170,10 +169,10 @@ export interface LiveContentProvider {
   fetchSingle<T>(
     query: string,
     options: {
-      queryParams?: Record<string, any>;
+      params?: Record<string, any>;
       includeDrafts?: boolean;
     },
-  ): Promise<T | null>;
+  ): Observable<T | undefined>;
 
   /**
    * Fetch multiple items using a query with draft support
@@ -181,10 +180,10 @@ export interface LiveContentProvider {
   fetchMultiple<T>(
     query: string,
     options: {
-      queryParams?: Record<string, any>;
+      params?: Record<string, any>;
       includeDrafts?: boolean;
     },
-  ): Promise<T[] | null>;
+  ): Observable<T[] | undefined>;
 
   /**
    * Fetch a route by path or ID with draft support
@@ -193,9 +192,7 @@ export interface LiveContentProvider {
     path?: string;
     routeId?: string;
     includeDrafts?: boolean;
-  }): Promise<RouteBase | null>;
-
-  render({ children }: { children: React.ReactNode }): React.ReactNode;
+  }): Observable<RouteBase | undefined>;
 }
 
 /**
@@ -212,44 +209,40 @@ export class NoOpLiveContentProvider implements LiveContentProvider {
     return Promise.resolve();
   }
 
-  render({ children }: { children: React.ReactNode }): React.ReactNode {
-    return children;
-  }
-
-  async fetchById<T>(
+  fetchById<T>(
     id: string,
     options: {
       includeDrafts?: boolean;
     },
-  ): Promise<T | null> {
+  ): Observable<T | undefined> {
     throw new Error('Live content not supported');
   }
 
-  async fetchSingle<T>(
+  fetchSingle<T>(
     query: string,
     options: {
       queryParams?: Record<string, any>;
       includeDrafts?: boolean;
     },
-  ): Promise<T | null> {
+  ): Observable<T | undefined> {
     throw new Error('Live content not supported');
   }
 
-  async fetchMultiple<T>(
+  fetchMultiple<T>(
     query: string,
     options: {
       queryParams?: Record<string, any>;
       includeDrafts?: boolean;
     },
-  ): Promise<T[] | null> {
+  ): Observable<T[] | undefined> {
     throw new Error('Live content not supported');
   }
 
-  async fetchRoute(options: {
+  fetchRoute(options: {
     path?: string;
     routeId?: string;
     includeDrafts?: boolean;
-  }): Promise<RouteBase | null> {
+  }): Observable<RouteBase | undefined> {
     throw new Error('Live content not supported');
   }
 }

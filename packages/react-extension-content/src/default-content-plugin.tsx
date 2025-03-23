@@ -1,4 +1,5 @@
 import { ContentExtensionBuilder } from '@/content-extension-builder';
+import { ErrorBoundary } from '@/ui/error-boundary';
 import {
   ContentItem,
   ContentPlugin,
@@ -11,7 +12,6 @@ import {
   useVyuhStore,
 } from '@vyuh/react-core';
 import React from 'react';
-import { ErrorBoundary } from './ui/async-content-container';
 
 /**
  * Default implementation of ContentPlugin.

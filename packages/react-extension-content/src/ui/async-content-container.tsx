@@ -1,133 +1,9 @@
 'use client';
 
+import { AsyncResource } from '@/ui/async-resource';
+import { ErrorBoundary } from '@/ui/error-boundary';
 import { useVyuhStore } from '@vyuh/react-core';
-import React, {
-  Component,
-  ErrorInfo,
-  ReactNode,
-  Suspense,
-  useState,
-  useEffect,
-  useCallback,
-} from 'react';
-
-/**
- * Error Boundary component props
- */
-interface ErrorBoundaryProps {
-  children: ReactNode;
-  title: string;
-  onRetry?: () => void;
-  FallbackComponent?: React.ComponentType<{
-    error: Error;
-    onRetry?: () => void;
-  }>;
-}
-
-/**
- * Error Boundary component state
- */
-interface ErrorBoundaryState {
-  hasError: boolean;
-  error: Error | null;
-}
-
-/**
- * Error Boundary component to catch and handle errors in the component tree
- */
-export class ErrorBoundary extends Component<
-  ErrorBoundaryProps,
-  ErrorBoundaryState
-> {
-  constructor(props: ErrorBoundaryProps) {
-    super(props);
-    this.state = { hasError: false, error: null };
-  }
-
-  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
-    return { hasError: true, error };
-  }
-
-  componentDidCatch(error: Error, info: ErrorInfo): void {
-    const { plugins } = useVyuhStore.getState();
-
-    plugins.telemetry?.log(this.props.title, 'error', { error });
-  }
-
-  private invokeRetry = (): void => {
-    this.setState({ hasError: false, error: null });
-    this.props.onRetry?.();
-  };
-
-  render(): ReactNode {
-    if (this.state.hasError && this.state.error) {
-      const Component =
-        this.props.FallbackComponent || this.defaultFallbackComponent;
-
-      return (
-        <Component
-          error={this.state.error}
-          onRetry={this.props.onRetry ? this.invokeRetry : undefined}
-        />
-      );
-    }
-
-    return this.props.children;
-  }
-
-  private defaultFallbackComponent = ({
-    error,
-    onRetry,
-  }: {
-    error: Error;
-    onRetry?: () => void;
-  }) => {
-    const { componentBuilder } = useVyuhStore.getState();
-
-    return componentBuilder.renderError({
-      title: this.props.title,
-      error,
-      onRetry,
-    });
-  };
-}
-
-/**
- * Resource for suspense-based data fetching
- */
-class AsyncResource<T> {
-  private readonly promise: Promise<T>;
-  private result: T | null = null;
-  private error: Error | null = null;
-  private status: 'pending' | 'success' | 'error' = 'pending';
-
-  constructor(promise: Promise<T>) {
-    this.promise = promise.then(
-      (data) => {
-        this.status = 'success';
-        this.result = data;
-        return data;
-      },
-      (error) => {
-        this.status = 'error';
-        this.error = error instanceof Error ? error : new Error(String(error));
-        throw this.error;
-      },
-    );
-  }
-
-  read(): T {
-    if (this.status === 'pending') {
-      throw this.promise;
-    } else if (this.status === 'error') {
-      throw this.error;
-    } else if (this.result === null) {
-      throw new Error('No Content found');
-    } else {
-      return this.result;
-    }
-  }
-}
+import React, { Suspense, useCallback, useEffect, useState } from 'react';
 
 /**
  * Props for AsyncContentContainer
@@ -164,9 +40,25 @@ function AsyncContentLoader<T>({
   resource: AsyncResource<T>;
   renderContent: (content: T) => React.ReactNode;
 }) {
+  // Force re-render when resource updates (only for Observable-backed resources)
+  const [, forceUpdate] = useState({});
+
+  // Subscribe to resource updates only if it's an Observable-backed resource
+  useEffect(() => {
+    // Only set up subscription for Observable-backed resources
+    if (resource.isLive()) {
+      // This will be called whenever the observable emits a new value
+      // Clean up subscription when component unmounts
+      return resource.subscribe(() => {
+        forceUpdate({});
+      });
+    }
+    return undefined;
+  }, [resource]);
+
   // This will either throw a promise (suspense) or return the content
   const content = resource.read();
-  return <>{renderContent(content)}</>;
+  return <>{content && renderContent(content)}</>;
 }
 
 /**
@@ -183,46 +75,77 @@ export function AsyncContentContainer<T>({
   // Add a key to force remounting of the ErrorBoundary when retrying
   const [errorBoundaryKey, setErrorBoundaryKey] = useState(0);
 
-  // Create a new resource only once on initial render
-  const [resource, setResource] = useState(
-    () => new AsyncResource(loadContent()),
-  );
-
-  // Store the loadContent function reference
+  // Store loadContent in a ref to detect actual changes
   const loadContentRef = React.useRef(loadContent);
 
-  // Only update resource when loadContent function reference changes
+  // Use useState to manage the resource, but initialize with null
+  const [resource, setResource] = useState<AsyncResource<T> | null>(null);
+
+  // Create the initial resource in an effect
   useEffect(() => {
-    // Compare function references to avoid unnecessary reloads during HMR
-    if (loadContentRef.current !== loadContent) {
-      // Update the loadContent reference
-      loadContentRef.current = loadContent;
+    // Create the initial resource
+    const initialResource = new AsyncResource(loadContent());
+    setResource(initialResource);
 
-      // Create a new resource with the updated loadContent
-      setResource(new AsyncResource(loadContent()));
+    // Cleanup function
+    return () => {
+      initialResource.dispose();
+    };
+  }, []); // Empty dependency array - only run once on mount
 
-      // Reset the error boundary by changing its key
-      setErrorBoundaryKey((prev) => prev + 1);
+  // Handle loadContent function changes
+  useEffect(() => {
+    // Skip if the function reference hasn't actually changed or if initial resource isn't created yet
+    if (loadContent === loadContentRef.current || !resource) {
+      return;
     }
-  }, [loadContent]);
 
-  // Enhanced retry handler that resets both the error boundary and the resource
-  const handleRetry = useCallback(() => {
-    // Reset the error boundary by changing its key
+    // Update the ref
+    loadContentRef.current = loadContent;
+
+    // Create a new resource with the updated loadContent
+    const newResource = new AsyncResource(loadContent());
+
+    // Dispose the old resource
+    resource.dispose();
+
+    // Update the resource state
+    setResource(newResource);
+
+    // Reset the error boundary
     setErrorBoundaryKey((prev) => prev + 1);
+  }, [loadContent, resource]);
 
-    // Create a new resource with the current loadContent function
-    setResource(new AsyncResource(loadContentRef.current()));
+  // Enhanced retry handler
+  const handleRetry = useCallback(() => {
+    if (!resource) return;
+
+    // Create a new resource
+    const newResource = new AsyncResource(loadContent());
+
+    // Dispose the old resource
+    resource.dispose();
+
+    // Update the resource state
+    setResource(newResource);
+
+    // Reset the error boundary
+    setErrorBoundaryKey((prev) => prev + 1);
 
     // Call the provided onRetry if it exists
     onRetry?.();
-  }, [onRetry]);
+  }, [loadContent, onRetry, resource]);
+
+  // If resource is null, show a loading state
+  if (!resource) {
+    return componentBuilder.renderContentLoader();
+  }
 
   return (
     <ErrorBoundary
       key={errorBoundaryKey}
       title={errorTitle}
-      onRetry={onRetry && handleRetry}
+      onRetry={handleRetry}
     >
       <Suspense fallback={componentBuilder.renderContentLoader()}>
         <AsyncContentLoader resource={resource} renderContent={renderContent} />

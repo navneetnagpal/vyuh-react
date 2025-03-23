@@ -23,6 +23,11 @@ export interface RouteBuilderProps {
    * Whether to allow refreshing the route
    */
   allowRefresh?: boolean;
+
+  /**
+   * Whether to use live updates (observable-based) instead of one-time loading
+   */
+  live?: boolean;
 }
 
 /**
@@ -32,6 +37,7 @@ export function RouteBuilder({
   url,
   routeId,
   allowRefresh = true,
+  live = false,
 }: RouteBuilderProps) {
   const { plugins } = useVyuh();
   const [refreshCounter, setRefreshCounter] = useState(0);
@@ -42,16 +48,25 @@ export function RouteBuilder({
   }, []);
 
   // This function will be called each time the component is mounted/refreshed
-  const loadContent = useCallback(async () => {
+  const loadContent = useCallback(() => {
     if (!url && !routeId) {
       throw new Error('Either url or routeId must be provided');
     }
 
-    return await plugins.content.provider.fetchRoute({
-      path: url,
-      routeId,
-    });
-  }, [plugins.content.provider, url, routeId, refreshCounter]);
+    if (live) {
+      // Return the observable directly for live updates
+      return plugins.content.provider.live.fetchRoute({
+        path: url,
+        routeId,
+      });
+    } else {
+      // Return a promise for one-time loading
+      return plugins.content.provider.fetchRoute({
+        path: url,
+        routeId,
+      });
+    }
+  }, [plugins.content.provider, url, routeId, refreshCounter, live]);
 
   // Render the route content
   const renderContent = useCallback(

@@ -1,7 +1,11 @@
 import { SanityLiveContentProvider } from '@/sanity-live-content-provider';
-import { getFile } from '@sanity/asset-utils';
-import { createClient, SanityClient } from '@sanity/client';
-import imageUrlBuilder from '@sanity/image-url';
+import { makeRouteQuery } from '@/utils';
+import { getFile, getImage } from '@sanity/asset-utils';
+import {
+  createSanityInstance,
+  resolveQuery,
+  SanityInstance,
+} from '@sanity/sdk';
 import {
   ContentProvider,
   FieldKey,
@@ -10,7 +14,6 @@ import {
   LiveContentProvider,
   RouteBase,
 } from '@vyuh/react-core';
-import React from 'react';
 
 const fieldKeyMap: Record<FieldKey, string> = {
   [FieldKey.type]: '_type',
@@ -29,12 +32,9 @@ export interface SanityConfig {
 }
 
 export class SanityContentProvider extends ContentProvider {
-  // Explicitly declare inherited properties to satisfy TypeScript
-  readonly name: string;
-  readonly title: string;
-  private readonly client: SanityClient;
+  private readonly config: SanityConfig;
+  private readonly sanityInstance: SanityInstance;
 
-  private imageBuilder: any;
   private cacheDuration: number;
   private readonly _live: SanityLiveContentProvider;
 
@@ -45,22 +45,17 @@ export class SanityContentProvider extends ContentProvider {
       title: 'Sanity Content Provider',
     });
 
-    // Reassign inherited properties to satisfy TypeScript
-    this.name = 'vyuh.plugin.content.provider.sanity';
-    this.title = 'Sanity Content Provider';
-
-    this.client = createClient({
+    this.config = config;
+    this.sanityInstance = createSanityInstance({
       projectId: config.projectId,
       dataset: config.dataset,
-      apiVersion: config.apiVersion || '2023-05-03',
-      useCdn: config.useCdn ?? true,
-      token: config.token,
-      perspective: config.perspective || 'published',
+      auth: {
+        token: config.token,
+      },
     });
 
-    this.imageBuilder = imageUrlBuilder(this.client);
     this.cacheDuration = cacheDuration;
-    this._live = new SanityLiveContentProvider(this.client);
+    this._live = new SanityLiveContentProvider(this.sanityInstance);
   }
 
   static withConfig(config: {
@@ -85,34 +80,30 @@ export class SanityContentProvider extends ContentProvider {
     options: {
       useCache?: boolean;
     },
-  ): Promise<T | null> {
-    try {
-      const query = `*[_id == $id][0]`;
-      const params = { id };
-      const result = await this.client.fetch(query, params);
-
-      if (!result) return null;
-      return result;
-    } catch (error) {
-      console.error('Error fetching document by ID:', error);
-      return null;
-    }
+  ): Promise<T | undefined> {
+    const query = `*[_id == $id][0]`;
+    const params = { id };
+    return resolveQuery<T>(this.sanityInstance, query, {
+      params,
+      useCdn: this.config.useCdn,
+      perspective: this.config.perspective,
+    });
   }
 
   async fetchSingle<T>(
     query: string,
     options: {
-      queryParams?: Record<string, any>;
+      params?: Record<string, any>;
       useCache?: boolean;
     },
-  ): Promise<T | null> {
-    try {
-      const result = await this.client.fetch(query, options.queryParams || {});
-      return result || null;
-    } catch (error) {
-      console.error('Error fetching single document:', error);
-      return null;
-    }
+  ): Promise<T | undefined> {
+    const result = await resolveQuery<T>(this.sanityInstance, query, {
+      params: options.params,
+      useCdn: this.config.useCdn,
+      perspective: this.config.perspective,
+    });
+
+    return result;
   }
 
   async fetchMultiple<T>(
@@ -121,60 +112,28 @@ export class SanityContentProvider extends ContentProvider {
       queryParams?: Record<string, any>;
       useCache?: boolean;
     },
-  ): Promise<T[] | null> {
-    try {
-      const results = await this.client.fetch(query, options.queryParams || {});
+  ): Promise<T[] | undefined> {
+    const results = await resolveQuery<T[]>(this.sanityInstance, query, {
+      params: options.queryParams,
+      useCdn: this.config.useCdn,
+      perspective: this.config.perspective,
+    });
 
-      if (!Array.isArray(results)) return null;
-      return results;
-    } catch (error) {
-      console.error('Error fetching multiple documents:', error);
-      return null;
-    }
+    if (!Array.isArray(results)) return undefined;
+
+    return results;
   }
 
   async fetchRoute(options: {
     path?: string;
     routeId?: string;
     useCache?: boolean;
-  }): Promise<RouteBase | null> {
-    let query: string;
-    let params: Record<string, string> = {};
+  }): Promise<RouteBase | undefined> {
+    const { query, params } = makeRouteQuery(options.path, options.routeId);
 
-    if (options.path) {
-      // Match the Dart implementation's route query
-      query = `*[_type in ["vyuh.route", "vyuh.conditionalRoute"] && path == $path] | order(_type asc, _updatedAt desc) {
-          ...,
-          "category": category->,
-          "regions": regions[] {
-            "identifier": region->identifier, 
-            "title": region->title,
-            items,
-          },
-        }[0]`;
-      params.path = options.path;
-    } else if (options.routeId) {
-      // Match the Dart implementation's route by ID query
-      query = `*[_id == $routeId] {
-          ...,
-          "category": category->,
-          "regions": regions[] {
-            "identifier": region->identifier, 
-            "title": region->title,
-            items,
-          },
-        }[0]`;
-      params.routeId = options.routeId;
-    } else {
-      throw new Error('Either path or routeId must be provided');
-    }
-
-    const result = await this.fetchSingle<RouteBase>(query, {
-      queryParams: params,
+    return this.fetchSingle<RouteBase>(query, {
+      params: params,
     });
-
-    if (!result) return null;
-    return result as RouteBase;
   }
 
   image(
@@ -194,14 +153,12 @@ export class SanityContentProvider extends ContentProvider {
 
     if (!ref) return undefined;
 
-    let builder = this.imageBuilder.image(ref);
+    const image = getImage(ref, {
+      projectId: this.config.projectId,
+      dataset: this.config.dataset,
+    });
 
-    if (options?.width) builder = builder.width(options.width);
-    if (options?.height) builder = builder.height(options.height);
-    if (options?.quality) builder = builder.quality(options.quality);
-    if (options?.format) builder = builder.format(options.format);
-
-    return builder.url();
+    return image.asset.url;
   }
 
   fileUrl(fileRef: FileReference): string | undefined {
@@ -213,8 +170,8 @@ export class SanityContentProvider extends ContentProvider {
     if (!ref) return undefined;
 
     const fileAsset = getFile(ref, {
-      projectId: this.client.config().projectId!,
-      dataset: this.client.config().dataset!,
+      projectId: this.config.projectId!,
+      dataset: this.config.dataset!,
     });
 
     return fileAsset.asset.url;
@@ -243,11 +200,5 @@ export class SanityContentProvider extends ContentProvider {
 
   override get supportsLive(): boolean {
     return true;
-  }
-
-  render({ children }: { children: React.ReactNode }): React.ReactNode {
-    return this.live.render({
-      children,
-    });
   }
 }

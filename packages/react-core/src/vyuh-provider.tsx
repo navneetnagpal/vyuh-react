@@ -95,8 +95,7 @@ export const VyuhProvider: React.FC<VyuhProviderProps> = ({
 
   return (
     <>
-      {pluginsRef.current &&
-        pluginsRef.current.content?.provider.render({ children })}
+      {children}
       <LoadingOverlay />
     </>
   );

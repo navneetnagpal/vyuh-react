@@ -50,7 +50,8 @@
   },
   "dependencies": {
     "@vyuh/react-core": "^0.1.1",
-    "lucide-react": "^0.482.0"
+    "lucide-react": "^0.482.0",
+    "rxjs": "^7.8.2"
   },
   "exports": {
     ".": {

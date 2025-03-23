@@ -6,3 +6,5 @@ export * from './content-descriptor';
 export * from './content-extension-descriptor';
 export * from './content-extension-builder';
 export * from './default-content-plugin';
+export * from '@/ui/error-boundary';
+export { AsyncResource } from '@/ui/async-resource';

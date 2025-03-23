@@ -9,5 +9,5 @@ export default function DynamicRoute() {
     ? `/${params.slug.join('/')}`
     : `/${params.slug}`;
 
-  return <RouteBuilder url={slug} allowRefresh={true} />;
+  return <RouteBuilder url={slug} allowRefresh={true} live={true} />;
 }
