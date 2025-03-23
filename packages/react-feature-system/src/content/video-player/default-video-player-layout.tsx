@@ -1,7 +1,11 @@
 import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
 import { AsyncContentContainer } from '@vyuh/react-extension-content';
 import React from 'react';
-import { VIDEO_PLAYER_SCHEMA_TYPE, VideoLinkType, VideoPlayer } from './video-player';
+import {
+  VIDEO_PLAYER_SCHEMA_TYPE,
+  VideoLinkType,
+  VideoPlayer,
+} from './video-player';
 
 /**
  * Default layout for video player content.
@@ -87,7 +91,7 @@ const VideoPlayerComponent: React.FC<VideoPlayerComponentProps> = ({
 
   return (
     <AsyncContentContainer
-      loadContent={loadVideoUrl}
+      fetchContent={loadVideoUrl}
       renderContent={renderVideo}
       errorTitle="Failed to load video"
     />

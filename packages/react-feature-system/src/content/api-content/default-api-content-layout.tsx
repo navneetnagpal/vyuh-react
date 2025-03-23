@@ -1,4 +1,8 @@
-import { API_CONTENT_SCHEMA_TYPE, APIConfiguration, APIContent } from '@/content/api-content/api-content';
+import {
+  API_CONTENT_SCHEMA_TYPE,
+  APIConfiguration,
+  APIContent,
+} from '@/content/api-content/api-content';
 import { LayoutConfiguration, TypeDescriptor } from '@vyuh/react-core';
 import { AsyncContentContainer } from '@vyuh/react-extension-content';
 import React from 'react';
@@ -42,7 +46,7 @@ function APIContentLayoutView({
   config?: APIConfiguration;
 }) {
   // Function to load the API data
-  const loadContent = async () => {
+  const fetchContent = async () => {
     return config?.invoke();
   };
 
@@ -58,7 +62,7 @@ function APIContentLayoutView({
   return (
     <div className="api-content">
       <AsyncContentContainer
-        loadContent={loadContent}
+        fetchContent={fetchContent}
         renderContent={renderContent}
         errorTitle={`API Error ${content.configuration?.title ? `: ${content.configuration.title}` : ''}`}
       />

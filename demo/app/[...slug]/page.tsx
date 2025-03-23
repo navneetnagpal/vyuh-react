@@ -1,6 +1,6 @@
 'use client';
 
-import { RouteBuilder } from '@vyuh/react-extension-content';
+import { RouteLoader } from '@vyuh/react-extension-content';
 import { useParams } from 'next/navigation';
 
 export default function DynamicRoute() {
@@ -9,5 +9,5 @@ export default function DynamicRoute() {
     ? `/${params.slug.join('/')}`
     : `/${params.slug}`;
 
-  return <RouteBuilder url={slug} allowRefresh={true} live={true} />;
+  return <RouteLoader url={slug} allowRefresh={true} live={true} />;
 }

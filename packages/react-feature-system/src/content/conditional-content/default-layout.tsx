@@ -50,7 +50,7 @@ function ConditionalContentLayoutView({
   const { plugins } = useVyuh();
 
   // Function to load the conditional content
-  const loadContent = async () => {
+  const fetchContent = async () => {
     const result = await evaluateConditionalContent(content);
     if (!result) {
       throw new Error('No matching content found');
@@ -65,7 +65,7 @@ function ConditionalContentLayoutView({
 
   return (
     <AsyncContentContainer
-      loadContent={loadContent}
+      fetchContent={fetchContent}
       renderContent={renderContent}
       errorTitle="Failed to load Conditional Content"
     />

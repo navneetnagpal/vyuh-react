@@ -1,6 +1,10 @@
 'use client';
 
-import { createAsyncResource, IAsyncResource, ILiveAsyncResource } from '@/ui/async-resource';
+import {
+  createAsyncResource,
+  IAsyncResource,
+  ILiveAsyncResource,
+} from '@/ui/async-resource';
 import { ErrorBoundary } from '@/ui/error-boundary';
 import { useVyuh } from '@vyuh/react-core';
 import React, { Suspense, useCallback, useEffect, useState } from 'react';
@@ -14,7 +18,7 @@ export interface AsyncContentContainerProps<T> {
    * Async function that loads the content
    * Can return either a Promise or an Observable
    */
-  loadContent: () => Promise<T> | Observable<T>;
+  fetchContent: () => Promise<T> | Observable<T>;
 
   /**
    * Function to render the loaded content
@@ -69,7 +73,7 @@ function AsyncContentLoader<T>({
  * Generic component for loading and rendering async content with error handling
  */
 export function AsyncContentContainer<T>({
-  loadContent,
+  fetchContent,
   renderContent,
   errorTitle = 'Failed to load content',
   onRetry,
@@ -79,8 +83,8 @@ export function AsyncContentContainer<T>({
   // Add a key to force remounting of the ErrorBoundary when retrying
   const [errorBoundaryKey, setErrorBoundaryKey] = useState(0);
 
-  // Store loadContent in a ref to detect actual changes
-  const loadContentRef = React.useRef(loadContent);
+  // Store fetchContent in a ref to detect actual changes
+  const fetchContentRef = React.useRef(fetchContent);
 
   // Use useState to manage the resource, but initialize with null
   const [resource, setResource] = useState<IAsyncResource<T> | null>(null);
@@ -88,7 +92,7 @@ export function AsyncContentContainer<T>({
   // Create the initial resource in an effect
   useEffect(() => {
     // Create the initial resource using the factory function
-    const initialResource = createAsyncResource(loadContent());
+    const initialResource = createAsyncResource(fetchContent());
     setResource(initialResource);
 
     // Cleanup function
@@ -97,18 +101,18 @@ export function AsyncContentContainer<T>({
     };
   }, []); // Empty dependency array - only run once on mount
 
-  // Handle loadContent function changes
+  // Handle fetchContent function changes
   useEffect(() => {
     // Skip if the function reference hasn't actually changed or if initial resource isn't created yet
-    if (loadContent === loadContentRef.current || !resource) {
+    if (fetchContent === fetchContentRef.current || !resource) {
       return;
     }
 
     // Update the ref
-    loadContentRef.current = loadContent;
+    fetchContentRef.current = fetchContent;
 
-    // Create a new resource with the updated loadContent using the factory function
-    const newResource = createAsyncResource(loadContent());
+    // Create a new resource with the updated fetchContent using the factory function
+    const newResource = createAsyncResource(fetchContent());
 
     // Dispose the old resource
     resource.dispose();
@@ -118,14 +122,14 @@ export function AsyncContentContainer<T>({
 
     // Reset the error boundary
     setErrorBoundaryKey((prev) => prev + 1);
-  }, [loadContent, resource]);
+  }, [fetchContent, resource]);
 
   // Enhanced retry handler
   const handleRetry = useCallback(() => {
     if (!resource) return;
 
     // Create a new resource using the factory function
-    const newResource = createAsyncResource(loadContent());
+    const newResource = createAsyncResource(fetchContent());
 
     // Dispose the old resource
     resource.dispose();
@@ -138,7 +142,7 @@ export function AsyncContentContainer<T>({
 
     // Call the provided onRetry if it exists
     onRetry?.();
-  }, [loadContent, onRetry, resource]);
+  }, [fetchContent, onRetry, resource]);
 
   // If resource is null, show a loading state
   if (!resource) {

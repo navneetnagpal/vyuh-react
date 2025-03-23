@@ -1,4 +1,4 @@
-export * from './ui/route-builder';
+export * from './ui/route-loader';
 export * from './ui/async-content-container';
 
 export * from './content-builder';

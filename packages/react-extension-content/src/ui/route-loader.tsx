@@ -8,7 +8,7 @@ import React, { useCallback, useState } from 'react';
 /**
  * Props for the RouteBuilder component
  */
-export interface RouteBuilderProps {
+export interface RouteLoaderProps {
   /**
    * The URL to fetch the route for
    */
@@ -33,12 +33,12 @@ export interface RouteBuilderProps {
 /**
  * A component that builds a route from a URL or route ID
  */
-export function RouteBuilder({
+export function RouteLoader({
   url,
   routeId,
   allowRefresh = true,
   live = false,
-}: RouteBuilderProps) {
+}: RouteLoaderProps) {
   const { plugins } = useVyuh();
   const [refreshCounter, setRefreshCounter] = useState(0);
 
@@ -48,7 +48,7 @@ export function RouteBuilder({
   }, []);
 
   // This function will be called each time the component is mounted/refreshed
-  const loadContent = useCallback(() => {
+  const fetchContent = useCallback(() => {
     if (!url && !routeId) {
       throw new Error('Either url or routeId must be provided');
     }
@@ -79,7 +79,7 @@ export function RouteBuilder({
   return (
     <>
       <AsyncContentContainer
-        loadContent={loadContent}
+        fetchContent={fetchContent}
         renderContent={renderContent}
         errorTitle={`Failed to render route: ${url || routeId}`}
         onRetry={handleRefresh}

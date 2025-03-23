@@ -56,7 +56,7 @@ function ConditionalRouteLayoutView({
   const { plugins } = useVyuh();
 
   // Function to load the conditional route
-  const loadContent = useCallback(async () => {
+  const fetchContent = useCallback(async () => {
     return evaluateConditionalRoute(content);
   }, [content]);
 
@@ -70,7 +70,7 @@ function ConditionalRouteLayoutView({
 
   return (
     <AsyncContentContainer
-      loadContent={loadContent}
+      fetchContent={fetchContent}
       renderContent={renderContent}
       errorTitle="Failed to load Conditional Route"
     />
