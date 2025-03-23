@@ -1,27 +1,25 @@
 import { Observable, Subscription } from 'rxjs';
 
 /**
- * Resource for suspense-based data fetching that supports both Promises and Observables
+ * Base interface for all async resources
  */
-export class AsyncResource<T> {
+export interface IAsyncResource<T> {
+  read(): T;
+  dispose(): void;
+  isLive(): boolean;
+}
+
+/**
+ * Resource for suspense-based data fetching with Promises
+ */
+export class AsyncResource<T> implements IAsyncResource<T> {
   private result: T | null = null;
   private error: Error | null = null;
   private status: 'pending' | 'success' | 'error' = 'pending';
   private promise: Promise<T> | null = null;
-  private subscription: Subscription | null = null;
-  private listeners: Set<() => void> = new Set();
-  private resolveInitialPromise: ((value: T) => void) | null = null;
-  private rejectInitialPromise: ((error: Error) => void) | null = null;
-  private readonly isObservable: boolean = false;
 
-  constructor(source: Promise<T> | Observable<T>) {
-    if (source instanceof Promise) {
-      this.handlePromise(source);
-      this.isObservable = false;
-    } else {
-      this.handleObservable(source);
-      this.isObservable = true;
-    }
+  constructor(source: Promise<T>) {
+    this.handlePromise(source);
   }
 
   private handlePromise(promise: Promise<T>) {
@@ -39,6 +37,54 @@ export class AsyncResource<T> {
     );
   }
 
+  read(): T {
+    if (this.status === 'pending') {
+      throw this.promise;
+    } else if (this.status === 'error') {
+      throw this.error;
+    } else if (this.result === null) {
+      throw new Error('No Content found');
+    } else {
+      return this.result;
+    }
+  }
+
+  dispose() {
+    // Nothing to dispose for Promise-based resources
+  }
+
+  /**
+   * Returns whether this resource is backed by an Observable (true) or a Promise (false)
+   */
+  isLive(): boolean {
+    return false;
+  }
+}
+
+/**
+ * Interface for resources that support live updates
+ */
+export interface ILiveAsyncResource<T> extends IAsyncResource<T> {
+  subscribe(listener: () => void): () => void;
+}
+
+/**
+ * Resource for suspense-based data fetching with Observables
+ */
+export class AsyncStreamResource<T> implements ILiveAsyncResource<T> {
+  private result: T | null = null;
+  private error: Error | null = null;
+  private status: 'pending' | 'success' | 'error' = 'pending';
+  private promise: Promise<T> | null = null;
+  private subscription: Subscription | null = null;
+  private listeners: Set<() => void> = new Set();
+  private resolveInitialPromise: ((value: T) => void) | null = null;
+  private rejectInitialPromise: ((error: Error) => void) | null = null;
+
+  constructor(source: Observable<T>) {
+    this.handleObservable(source);
+  }
+
   private handleObservable(observable: Observable<T>) {
     // Create a promise for the initial value (for Suspense)
     this.promise = new Promise<T>((resolve, reject) => {
@@ -46,7 +92,7 @@ export class AsyncResource<T> {
       this.rejectInitialPromise = reject;
     });
 
-    // Subscribe to the observable outside of the promise
+    // Subscribe to the observable
     this.subscription = observable.subscribe({
       next: (data) => {
         const wasInitialLoad = this.status === 'pending';
@@ -138,6 +184,19 @@ export class AsyncResource<T> {
    * Returns whether this resource is backed by an Observable (true) or a Promise (false)
    */
   isLive(): boolean {
-    return this.isObservable;
+    return true;
+  }
+}
+
+/**
+ * Factory function to create the appropriate resource based on the data source type
+ */
+export function createAsyncResource<T>(
+  source: Promise<T> | Observable<T>,
+): IAsyncResource<T> {
+  if (source instanceof Promise) {
+    return new AsyncResource<T>(source);
+  } else {
+    return new AsyncStreamResource<T>(source);
   }
 }

@@ -1,9 +1,14 @@
 'use client';
 
-import { AsyncResource } from '@/ui/async-resource';
+import {
+  IAsyncResource,
+  ILiveAsyncResource,
+  createAsyncResource,
+} from '@/ui/async-resource';
 import { ErrorBoundary } from '@/ui/error-boundary';
-import { useVyuhStore } from '@vyuh/react-core';
+import { useVyuh } from '@vyuh/react-core';
 import React, { Suspense, useCallback, useEffect, useState } from 'react';
+import { Observable } from 'rxjs';
 
 /**
  * Props for AsyncContentContainer
@@ -11,8 +16,9 @@ import React, { Suspense, useCallback, useEffect, useState } from 'react';
 export interface AsyncContentContainerProps<T> {
   /**
    * Async function that loads the content
+   * Can return either a Promise or an Observable
    */
-  loadContent: () => Promise<T>;
+  loadContent: () => Promise<T> | Observable<T>;
 
   /**
    * Function to render the loaded content
@@ -37,19 +43,21 @@ function AsyncContentLoader<T>({
   resource,
   renderContent,
 }: {
-  resource: AsyncResource<T>;
+  resource: IAsyncResource<T>;
   renderContent: (content: T) => React.ReactNode;
 }) {
   // Force re-render when resource updates (only for Observable-backed resources)
   const [, forceUpdate] = useState({});
 
-  // Subscribe to resource updates only if it's an Observable-backed resource
+  // Subscribe to resource updates only if it's a live resource
   useEffect(() => {
-    // Only set up subscription for Observable-backed resources
     if (resource.isLive()) {
+      // Cast to ILiveAsyncResource to access subscribe method
+      const liveResource = resource as ILiveAsyncResource<T>;
+
       // This will be called whenever the observable emits a new value
       // Clean up subscription when component unmounts
-      return resource.subscribe(() => {
+      return liveResource.subscribe(() => {
         forceUpdate({});
       });
     }
@@ -70,7 +78,7 @@ export function AsyncContentContainer<T>({
   errorTitle = 'Failed to load content',
   onRetry,
 }: AsyncContentContainerProps<T>): React.ReactNode {
-  const { componentBuilder } = useVyuhStore.getState();
+  const { components } = useVyuh();
 
   // Add a key to force remounting of the ErrorBoundary when retrying
   const [errorBoundaryKey, setErrorBoundaryKey] = useState(0);
@@ -79,12 +87,12 @@ export function AsyncContentContainer<T>({
   const loadContentRef = React.useRef(loadContent);
 
   // Use useState to manage the resource, but initialize with null
-  const [resource, setResource] = useState<AsyncResource<T> | null>(null);
+  const [resource, setResource] = useState<IAsyncResource<T> | null>(null);
 
   // Create the initial resource in an effect
   useEffect(() => {
-    // Create the initial resource
-    const initialResource = new AsyncResource(loadContent());
+    // Create the initial resource using the factory function
+    const initialResource = createAsyncResource(loadContent());
     setResource(initialResource);
 
     // Cleanup function
@@ -103,8 +111,8 @@ export function AsyncContentContainer<T>({
     // Update the ref
     loadContentRef.current = loadContent;
 
-    // Create a new resource with the updated loadContent
-    const newResource = new AsyncResource(loadContent());
+    // Create a new resource with the updated loadContent using the factory function
+    const newResource = createAsyncResource(loadContent());
 
     // Dispose the old resource
     resource.dispose();
@@ -120,8 +128,8 @@ export function AsyncContentContainer<T>({
   const handleRetry = useCallback(() => {
     if (!resource) return;
 
-    // Create a new resource
-    const newResource = new AsyncResource(loadContent());
+    // Create a new resource using the factory function
+    const newResource = createAsyncResource(loadContent());
 
     // Dispose the old resource
     resource.dispose();
@@ -138,7 +146,7 @@ export function AsyncContentContainer<T>({
 
   // If resource is null, show a loading state
   if (!resource) {
-    return componentBuilder.renderContentLoader();
+    return components.renderContentLoader();
   }
 
   return (
@@ -147,7 +155,7 @@ export function AsyncContentContainer<T>({
       title={errorTitle}
       onRetry={handleRetry}
     >
-      <Suspense fallback={componentBuilder.renderContentLoader()}>
+      <Suspense fallback={components.renderContentLoader()}>
         <AsyncContentLoader resource={resource} renderContent={renderContent} />
       </Suspense>
     </ErrorBoundary>
