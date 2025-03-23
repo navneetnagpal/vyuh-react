@@ -9,7 +9,12 @@ import {
   CardTitle,
 } from '@ui/components/card';
 import { cn } from '@ui/lib/utils';
-import { Action, LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
+import {
+  Action,
+  LayoutConfiguration,
+  TypeDescriptor,
+  useVyuh,
+} from '@vyuh/react-core';
 import React from 'react';
 
 /**
@@ -68,7 +73,7 @@ export class DefaultCardLayout extends LayoutConfiguration<Card> {
           <img
             src={imageUrl}
             alt="Card image"
-            className="h-full w-full object-cover"
+            className="h-fit w-full object-cover"
           />
         </ShadcnCard>
       );
