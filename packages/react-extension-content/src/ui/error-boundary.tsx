@@ -2,6 +2,27 @@ import { useVyuh, useVyuhStore } from '@vyuh/react-core';
 import React, { Component, ErrorInfo, ReactNode } from 'react';
 
 /**
+ * Default fallback component for error boundary
+ */
+const DefaultFallbackComponent = ({
+  error,
+  onRetry,
+  title,
+}: {
+  error: Error;
+  onRetry?: () => void;
+  title: string;
+}) => {
+  const { components } = useVyuh();
+
+  return components.renderError({
+    title,
+    error,
+    onRetry,
+  });
+};
+
+/**
  * Error Boundary component props
  */
 export interface ErrorBoundaryProps {
@@ -51,34 +72,25 @@ export class ErrorBoundary extends Component<
 
   render(): ReactNode {
     if (this.state.hasError && this.state.error) {
-      const Component =
-        this.props.FallbackComponent || this.defaultFallbackComponent;
+      if (this.props.FallbackComponent) {
+        const Component = this.props.FallbackComponent;
+        return (
+          <Component
+            error={this.state.error}
+            onRetry={this.props.onRetry ? this.invokeRetry : undefined}
+          />
+        );
+      }
 
       return (
-        <Component
+        <DefaultFallbackComponent
           error={this.state.error}
           onRetry={this.props.onRetry ? this.invokeRetry : undefined}
+          title={this.props.title}
         />
       );
     }
 
     return this.props.children;
   }
-
-  private defaultFallbackComponent = ({
-    error,
-    onRetry,
-  }: {
-    error: Error;
-    onRetry?: () => void;
-  }) => {
-    // This is inside a render function, so we can use useVyuh
-    const { components } = useVyuh();
-
-    return components.renderError({
-      title: this.props.title,
-      error,
-      onRetry,
-    });
-  };
 }

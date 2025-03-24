@@ -39,12 +39,10 @@ function DefaultPortableTextComponent({
   const components = PortableTextConfig.shared.components;
 
   return (
-    <div className="portable-text-content">
-      <SanityPortableText
-        value={portableText.blocks}
-        components={components}
-        onMissingComponent={false}
-      />
-    </div>
+    <SanityPortableText
+      value={portableText.blocks}
+      components={components}
+      onMissingComponent={false}
+    />
   );
 }

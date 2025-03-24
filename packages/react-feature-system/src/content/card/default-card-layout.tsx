@@ -41,95 +41,106 @@ export class DefaultCardLayout extends LayoutConfiguration<Card> {
    * Render the card content with Shadcn styling
    */
   render(content: Card): React.ReactNode {
-    const { plugins } = useVyuh();
+    return <CardView content={content} />;
+  }
+}
 
-    // Get image URL from either direct URL or ImageReference
-    let imageUrl = content.imageUrl;
-    if (!imageUrl && content.image) {
-      imageUrl = plugins.content.provider.image(content.image);
-    }
+/**
+ * CardRenderer component for rendering card content with Shadcn styling
+ */
+interface CardRendererProps {
+  content: Card;
+}
 
-    // Determine if we have an image to show
-    const hasImage = !!imageUrl;
+const CardView: React.FC<CardRendererProps> = ({ content }) => {
+  const { plugins } = useVyuh();
 
-    // Check if image is the only content
-    const hasOnlyImage =
-      hasImage &&
-      !content.title &&
-      !content.description &&
-      !content.content?.blocks &&
-      !content.secondaryAction &&
-      !content.tertiaryAction;
+  // Get image URL from either direct URL or ImageReference
+  let imageUrl = content.imageUrl;
+  if (!imageUrl && content.image) {
+    imageUrl = plugins.content.provider.image(content.image);
+  }
 
-    // If we only have an image, render a simplified card with full-height image
-    if (hasOnlyImage) {
-      return (
-        <ShadcnCard
-          className={cn('h-full overflow-hidden border-neutral-300 p-0', {
-            'cursor-pointer': content.action,
-          })}
-          onClick={() => content.action && new Action(content.action).execute()}
-        >
-          <img
-            src={imageUrl}
-            alt="Card image"
-            className="h-fit w-full object-cover"
-          />
-        </ShadcnCard>
-      );
-    }
+  // Determine if we have an image to show
+  const hasImage = !!imageUrl;
 
-    // Otherwise render the standard card layout
+  // Check if image is the only content
+  const hasOnlyImage =
+    hasImage &&
+    !content.title &&
+    !content.description &&
+    !content.content?.blocks &&
+    !content.secondaryAction &&
+    !content.tertiaryAction;
+
+  // If we only have an image, render a simplified card with full-height image
+  if (hasOnlyImage) {
     return (
       <ShadcnCard
-        className={cn('h-full border-neutral-300', {
+        className={cn('h-full overflow-hidden border-neutral-300 p-0', {
           'cursor-pointer': content.action,
         })}
         onClick={() => content.action && new Action(content.action).execute()}
       >
-        <CardHeader>
-          {hasImage && (
-            <div className="h-48 w-full overflow-hidden">
-              <img
-                src={imageUrl}
-                alt={content.title || 'Card image'}
-                className="h-full w-full object-cover"
-              />
-            </div>
-          )}
-
-          {content.title && <CardTitle>{content.title}</CardTitle>}
-          {content.description && (
-            <CardDescription>{content.description}</CardDescription>
-          )}
-        </CardHeader>
-
-        {content.content && (
-          <CardContent>{plugins.content.render(content.content)}</CardContent>
-        )}
-
-        {(content.secondaryAction || content.tertiaryAction) && (
-          <CardFooter className="flex flex-wrap gap-2">
-            {content.secondaryAction && (
-              <Button
-                onClick={() => new Action(content.secondaryAction).execute()}
-                variant="outline"
-              >
-                {content.secondaryAction.label || 'Secondary'}
-              </Button>
-            )}
-
-            {content.tertiaryAction && (
-              <Button
-                onClick={() => new Action(content.tertiaryAction).execute()}
-                variant="link"
-              >
-                {content.tertiaryAction.label || 'Tertiary'}
-              </Button>
-            )}
-          </CardFooter>
-        )}
+        <img
+          src={imageUrl}
+          alt="Card image"
+          className="h-fit w-full object-cover"
+        />
       </ShadcnCard>
     );
   }
-}
+
+  // Otherwise render the standard card layout
+  return (
+    <ShadcnCard
+      className={cn('h-full border-[6px] border-neutral-100', {
+        'cursor-pointer': content.action,
+      })}
+      onClick={() => content.action && new Action(content.action).execute()}
+    >
+      <CardHeader>
+        {hasImage && (
+          <div className="h-48 w-full overflow-hidden">
+            <img
+              src={imageUrl}
+              alt={content.title || 'Card image'}
+              className="h-full w-full object-cover"
+            />
+          </div>
+        )}
+
+        {content.title && <CardTitle>{content.title}</CardTitle>}
+        {content.description && (
+          <CardDescription>{content.description}</CardDescription>
+        )}
+      </CardHeader>
+
+      {content.content && (
+        <CardContent>{plugins.content.render(content.content)}</CardContent>
+      )}
+
+      {(content.secondaryAction || content.tertiaryAction) && (
+        <CardFooter className="flex flex-wrap gap-2">
+          {content.secondaryAction && (
+            <Button
+              onClick={() => new Action(content.secondaryAction).execute()}
+              variant="outline"
+            >
+              {content.secondaryAction.label || 'Secondary'}
+            </Button>
+          )}
+
+          {content.tertiaryAction && (
+            <Button
+              onClick={() => new Action(content.tertiaryAction).execute()}
+              variant="link"
+            >
+              {content.tertiaryAction.label || 'Tertiary'}
+            </Button>
+          )}
+        </CardFooter>
+      )}
+    </ShadcnCard>
+  );
+};

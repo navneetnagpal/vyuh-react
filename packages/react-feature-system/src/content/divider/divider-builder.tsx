@@ -38,20 +38,27 @@ class DefaultDividerLayout extends LayoutConfiguration<Divider> {
    * Render the divider content with the specified properties
    */
   render(content: Divider): React.ReactNode {
-    const style: React.CSSProperties = {
-      height: content.thickness ?? 1,
-      marginLeft: content.indent ?? 0,
-      marginRight: content.indent ?? 0,
-      width: 'auto',
-    };
-
-    return (
-      <div
-        className="bg-neutral-300"
-        style={style}
-        role="separator"
-        aria-orientation="horizontal"
-      />
-    );
+    return <DividerView content={content} />;
   }
 }
+
+/**
+ * Functional component for rendering divider content
+ */
+const DividerView: React.FC<{ content: Divider }> = ({ content }) => {
+  const style: React.CSSProperties = {
+    height: content.thickness ?? 1,
+    marginLeft: content.indent ?? 0,
+    marginRight: content.indent ?? 0,
+    width: 'auto',
+  };
+
+  return (
+    <div
+      className="bg-neutral-300"
+      style={style}
+      role="separator"
+      aria-orientation="horizontal"
+    />
+  );
+};
