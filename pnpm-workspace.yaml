@@ -1,6 +1,7 @@
 packages:
   - demo
   - packages/*
+  - '!packages/react-core'
 
 onlyBuiltDependencies:
   - esbuild

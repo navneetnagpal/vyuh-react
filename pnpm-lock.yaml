@@ -29,7 +29,7 @@ importers:
     dependencies:
       '@vyuh/react-core':
         specifier: ^0.1.1
-        version: link:../packages/react-core
+        version: 0.1.1(@types/react@19.0.12)(immer@10.1.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(use-sync-external-store@1.4.0(react@19.0.0))
       '@vyuh/react-extension-content':
         specifier: ^0.1.0
         version: link:../packages/react-extension-content
@@ -83,72 +83,11 @@ importers:
         specifier: ^5.8.2
         version: 5.8.2
 
-  packages/react-core:
-    dependencies:
-      '@sanity/client':
-        specifier: ^6.28.3
-        version: 6.28.3(debug@4.4.0)
-      '@tailwindcss/cli':
-        specifier: ^4.0.15
-        version: 4.0.15
-      '@tailwindcss/postcss':
-        specifier: ^4.0.15
-        version: 4.0.15
-      lucide-react:
-        specifier: ^0.482.0
-        version: 0.482.0(react@19.0.0)
-      react:
-        specifier: ^19.0.0
-        version: 19.0.0
-      react-dom:
-        specifier: ^19.0.0
-        version: 19.0.0(react@19.0.0)
-      rxjs:
-        specifier: ^7.8.2
-        version: 7.8.2
-      tailwindcss:
-        specifier: ^4.0.15
-        version: 4.0.15
-      zustand:
-        specifier: ^5.0.3
-        version: 5.0.3(@types/react@19.0.12)(immer@10.1.1)(react@19.0.0)(use-sync-external-store@1.4.0(react@19.0.0))
-    devDependencies:
-      '@types/node':
-        specifier: ^22.13.11
-        version: 22.13.11
-      '@types/react':
-        specifier: ^19.0.12
-        version: 19.0.12
-      '@types/react-dom':
-        specifier: ^19.0.4
-        version: 19.0.4(@types/react@19.0.12)
-      '@typescript-eslint/eslint-plugin':
-        specifier: ^8.27.0
-        version: 8.27.0(@typescript-eslint/parser@8.27.0(eslint@9.22.0(jiti@2.4.2))(typescript@5.8.2))(eslint@9.22.0(jiti@2.4.2))(typescript@5.8.2)
-      '@typescript-eslint/parser':
-        specifier: ^8.27.0
-        version: 8.27.0(eslint@9.22.0(jiti@2.4.2))(typescript@5.8.2)
-      eslint:
-        specifier: ^9.22.0
-        version: 9.22.0(jiti@2.4.2)
-      eslint-plugin-react:
-        specifier: ^7.37.4
-        version: 7.37.4(eslint@9.22.0(jiti@2.4.2))
-      eslint-plugin-react-hooks:
-        specifier: ^5.2.0
-        version: 5.2.0(eslint@9.22.0(jiti@2.4.2))
-      tsup:
-        specifier: ^8.4.0
-        version: 8.4.0(@microsoft/api-extractor@7.48.1(@types/node@22.13.11))(jiti@2.4.2)(postcss@8.5.3)(typescript@5.8.2)(yaml@2.7.0)
-      typescript:
-        specifier: ^5.8.2
-        version: 5.8.2
-
   packages/react-extension-content:
     dependencies:
       '@vyuh/react-core':
         specifier: ^0.1.1
-        version: link:../react-core
+        version: 0.1.1(@types/react@19.0.12)(immer@10.1.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(use-sync-external-store@1.4.0(react@19.0.0))
       lucide-react:
         specifier: ^0.482.0
         version: 0.482.0(react@19.0.0)
@@ -215,7 +154,7 @@ importers:
         version: 1.1.2(@types/react@19.0.12)(react@19.0.0)
       '@vyuh/react-core':
         specifier: ^0.1.1
-        version: link:../react-core
+        version: 0.1.1(@types/react@19.0.12)(immer@10.1.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(use-sync-external-store@1.4.0(react@19.0.0))
       '@vyuh/react-extension-content':
         specifier: ^0.1.0
         version: link:../react-extension-content
@@ -303,7 +242,7 @@ importers:
         version: 0.0.0-rc.1(@sanity/color@3.0.6)(@types/react@19.0.12)(immer@10.1.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(use-sync-external-store@1.4.0(react@19.0.0))
       '@vyuh/react-core':
         specifier: ^0.1.1
-        version: link:../react-core
+        version: 0.1.1(@types/react@19.0.12)(immer@10.1.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(use-sync-external-store@1.4.0(react@19.0.0))
       next-sanity:
         specifier: ^9.9.5
         version: 9.9.5(@emotion/is-prop-valid@1.2.2)(@sanity/client@6.28.3)(@sanity/icons@3.7.0(react@19.0.0))(@sanity/types@3.80.1(@types/react@19.0.12))(@sanity/ui@2.15.7(@emotion/is-prop-valid@1.2.2)(react-dom@19.0.0(react@19.0.0))(react-is@18.3.1)(react@19.0.0)(styled-components@6.1.16(react-dom@19.0.0(react@19.0.0))(react@19.0.0)))(next@15.2.3(@babel/core@7.26.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react-is@18.3.1)(react@19.0.0)(sanity@3.80.1(@emotion/is-prop-valid@1.2.2)(@types/node@22.13.11)(@types/react@19.0.12)(jiti@2.4.2)(lightningcss@1.29.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(styled-components@6.1.16(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(yaml@2.7.0))(styled-components@6.1.16(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
@@ -2818,6 +2757,12 @@ packages:
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       vite: ^4.2.0 || ^5.0.0 || ^6.0.0
+
+  '@vyuh/react-core@0.1.1':
+    resolution: {integrity: sha512-IMbX12uZcPKRL6D99xSwjV1BaCmjatHf2+yeLuM3npLGZCAr/RS40ykB/Gga+IWluR9RBEuMQRJ/uVRob+X+Pw==}
+    peerDependencies:
+      react: ^19.0.0
+      react-dom: ^19.0.0
 
   '@xstate/react@5.0.3':
     resolution: {integrity: sha512-Zdnn0VTPcVdoaAiW0OX6Nkvdoe7SNGjfaZqM61NKhjt2aNULqiicmDu2tOd1ChzlRWYDxGTdbzVqqVyMLpoHJw==}
@@ -9472,6 +9417,23 @@ snapshots:
       vite: 6.2.2(@types/node@22.13.11)(jiti@2.4.2)(lightningcss@1.29.2)(yaml@2.7.0)
     transitivePeerDependencies:
       - supports-color
+
+  '@vyuh/react-core@0.1.1(@types/react@19.0.12)(immer@10.1.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(use-sync-external-store@1.4.0(react@19.0.0))':
+    dependencies:
+      '@sanity/client': 6.28.3(debug@4.4.0)
+      '@tailwindcss/cli': 4.0.15
+      '@tailwindcss/postcss': 4.0.15
+      lucide-react: 0.482.0(react@19.0.0)
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
+      rxjs: 7.8.2
+      tailwindcss: 4.0.15
+      zustand: 5.0.3(@types/react@19.0.12)(immer@10.1.1)(react@19.0.0)(use-sync-external-store@1.4.0(react@19.0.0))
+    transitivePeerDependencies:
+      - '@types/react'
+      - debug
+      - immer
+      - use-sync-external-store
 
   '@xstate/react@5.0.3(@types/react@19.0.12)(react@19.0.0)(xstate@5.19.2)':
     dependencies:

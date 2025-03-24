@@ -16,6 +16,12 @@ import { ContentItem } from '@/content/content-item';
  */
 export interface RouteBase extends ContentItem {
   /**
+   * The schema type for this content item
+   * This is required by ContentItem
+   */
+  readonly schemaType: string;
+
+  /**
    * The title of the route, displayed in navigation UI.
    */
   readonly title: string;

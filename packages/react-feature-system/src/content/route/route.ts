@@ -10,6 +10,9 @@ export const ROUTE_SCHEMA_TYPE = 'vyuh.route';
  * content-driven navigation.
  */
 export interface Route extends RouteBase {
+  /**
+   * Regions containing content items for this route
+   */
   readonly regions: Region[];
 }
 

@@ -1,7 +1,11 @@
 import { FileReference, ImageReference } from '@/content/reference';
 import { RouteBase } from '@/content/route-base';
 import { UNKNOWN_SCHEMA_TYPE } from '@/content/unknown';
-import { ContentProvider, FieldKey, LiveContentProvider } from '@/plugins/content/content-provider';
+import {
+  ContentProvider,
+  FieldKey,
+  LiveContentProvider,
+} from '@/plugins/content/content-provider';
 import { NoOpLiveContentProvider } from '@/plugins/content/noop-live-content-provider';
 
 /**
@@ -90,9 +94,9 @@ export class NoOpContentProvider extends ContentProvider {
     options: {
       useCache?: boolean;
     },
-  ): Promise<T | null> {
+  ): Promise<T | undefined> {
     console.warn(`NoOpContentProvider: fetchById called with ID ${id}`);
-    return null;
+    return undefined;
   }
 
   /**
@@ -104,9 +108,9 @@ export class NoOpContentProvider extends ContentProvider {
       queryParams?: Record<string, any>;
       useCache?: boolean;
     },
-  ): Promise<T | null> {
+  ): Promise<T | undefined> {
     console.warn(`NoOpContentProvider: fetchSingle called with query ${query}`);
-    return null;
+    return undefined;
   }
 
   /**
@@ -118,11 +122,11 @@ export class NoOpContentProvider extends ContentProvider {
       queryParams?: Record<string, any>;
       useCache?: boolean;
     },
-  ): Promise<T[] | null> {
+  ): Promise<T[] | undefined> {
     console.warn(
       `NoOpContentProvider: fetchMultiple called with query ${query}`,
     );
-    return null;
+    return undefined;
   }
 
   /**
@@ -132,11 +136,11 @@ export class NoOpContentProvider extends ContentProvider {
     path?: string;
     routeId?: string;
     useCache?: boolean;
-  }): Promise<RouteBase | null> {
+  }): Promise<RouteBase | undefined> {
     console.warn(
       `NoOpContentProvider: fetchRoute called with ${options.path || options.routeId}`,
     );
-    return null;
+    return undefined;
   }
 
   /**
@@ -149,9 +153,5 @@ export class NoOpContentProvider extends ContentProvider {
 
   get supportsLive(): boolean {
     return false;
-  }
-
-  render({ children }: { children: React.ReactNode }): React.ReactNode {
-    return children;
   }
 }

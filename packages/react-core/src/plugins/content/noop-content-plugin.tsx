@@ -84,6 +84,11 @@ export class NoOpContentPlugin extends ContentPlugin {
     );
   }
 
+  registerItem<T extends SchemaItem>(
+    itemType: ItemType<T>,
+    descriptor: TypeDescriptor<T>,
+  ): void {}
+
   /**
    * Always returns undefined as no items are registered
    */

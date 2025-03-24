@@ -1,5 +1,7 @@
 import { RouteBase } from '@/content/route-base';
 import { LiveContentProvider } from '@/plugins/content/content-provider';
+import React from 'react';
+import { Observable } from 'rxjs';
 
 /**
  * No-op implementation of LiveContentProvider.
@@ -27,12 +29,12 @@ export class NoOpLiveContentProvider implements LiveContentProvider {
   /**
    * Fetch a single item by ID with draft support
    */
-  async fetchById<T>(
+  fetchById<T>(
     id: string,
     options: {
       includeDrafts?: boolean;
     },
-  ): Promise<T | null> {
+  ): Observable<T | undefined> {
     throw new Error(
       `Live content not supported: fetchById called with ID ${id}`,
     );
@@ -41,13 +43,13 @@ export class NoOpLiveContentProvider implements LiveContentProvider {
   /**
    * Fetch a single item using a query with draft support
    */
-  async fetchSingle<T>(
+  fetchSingle<T>(
     query: string,
     options: {
       queryParams?: Record<string, any>;
       includeDrafts?: boolean;
     },
-  ): Promise<T | null> {
+  ): Observable<T | undefined> {
     throw new Error(
       `Live content not supported: fetchSingle called with query ${query}`,
     );
@@ -56,13 +58,13 @@ export class NoOpLiveContentProvider implements LiveContentProvider {
   /**
    * Fetch multiple items using a query with draft support
    */
-  async fetchMultiple<T>(
+  fetchMultiple<T>(
     query: string,
     options: {
       queryParams?: Record<string, any>;
       includeDrafts?: boolean;
     },
-  ): Promise<T[] | null> {
+  ): Observable<T[] | undefined> {
     throw new Error(
       `Live content not supported: fetchMultiple called with query ${query}`,
     );
@@ -71,17 +73,13 @@ export class NoOpLiveContentProvider implements LiveContentProvider {
   /**
    * Fetch a route by path or ID with draft support
    */
-  async fetchRoute(options: {
+  fetchRoute(options: {
     path?: string;
     routeId?: string;
     includeDrafts?: boolean;
-  }): Promise<RouteBase | null> {
+  }): Observable<RouteBase | undefined> {
     throw new Error(
       `Live content not supported: fetchRoute called with ${options.path || options.routeId}`,
     );
-  }
-
-  render({ children }: { children: React.ReactNode }): React.ReactNode {
-    return children;
   }
 }
