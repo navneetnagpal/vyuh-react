@@ -57,9 +57,7 @@ const AccordionView: React.FC<{ content: ContentAccordion }> = ({
       {(content.title || content.description) && (
         <div className="mb-6">
           {content.title && (
-            <h3 className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-2xl font-bold text-transparent dark:from-blue-400 dark:to-indigo-400">
-              {content.title}
-            </h3>
+            <h3 className="text-2xl font-bold text-black">{content.title}</h3>
           )}
           {content.description && (
             <p className="text-muted-foreground mt-2 max-w-2xl text-sm">
