@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <strong>The core foundation for building modular, feature-rich React applications</strong>
+  <strong>The core foundation for building modular, CMS-driven React applications</strong>
 </p>
 
 <p align="center">
@@ -16,7 +16,7 @@
 
 ## Overview
 
-`@vyuh/react-core` is the foundation of the Vyuh platform for React
+`@vyuh/react-core` is the foundation of the Vyuh platform for CMS-driven React
 applications. It provides a robust architecture for building modular,
 feature-rich applications with a focus on:
 
