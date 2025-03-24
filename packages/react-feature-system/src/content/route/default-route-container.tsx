@@ -31,9 +31,9 @@ export const DefaultRouteContainer = ({
   return (
     <div className="container mx-auto max-w-5xl p-4">
       {(title || actions?.length) && (
-        <h1 className="mb-16 flex items-center justify-between rounded border border-neutral-200 px-4 py-2 text-neutral-800 shadow-lg">
+        <h1 className="mb-16 flex items-center justify-between border-b border-neutral-200 py-2">
           {title && (
-            <span className={'inline-block text-xl font-bold md:text-3xl'}>
+            <span className="inline-block bg-gradient-to-r from-purple-600 to-indigo-500 bg-clip-text text-xl font-bold text-transparent md:text-3xl">
               {title}
             </span>
           )}

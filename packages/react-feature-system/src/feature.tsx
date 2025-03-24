@@ -1,3 +1,6 @@
+import { ACCORDION_SCHEMA_TYPE } from '@/content/accordion/accordion';
+import { AccordionContentBuilder } from '@/content/accordion/accordion-builder';
+import { AccordionDescriptor } from '@/content/accordion/accordion-descriptor';
 import { CARD_SCHEMA_TYPE } from '@/content/card/card';
 import { CardContentBuilder } from '@/content/card/card-builder';
 import { CardDescriptor } from '@/content/card/card-descriptor';
@@ -59,6 +62,7 @@ export const feature = new FeatureDescriptor({
             GridGroupLayout.typeDescriptor,
           ],
         }),
+        new AccordionDescriptor(),
         new PortableTextDescriptor({
           blockTypes: [
             {
@@ -85,6 +89,10 @@ export const feature = new FeatureDescriptor({
               type: VIDEO_PLAYER_SCHEMA_TYPE,
               component: PortableTextConfig.shared.renderContentItem,
             },
+            {
+              type: ACCORDION_SCHEMA_TYPE,
+              component: PortableTextConfig.shared.renderContentItem,
+            },
           ],
         }),
         new DividerDescriptor(),
@@ -102,6 +110,7 @@ export const feature = new FeatureDescriptor({
         new DividerContentBuilder(),
         new VideoPlayerContentBuilder(),
         new APIContentBuilder(),
+        new AccordionContentBuilder(),
       ],
       actions: [
         NavigateAction.typeDescriptor,

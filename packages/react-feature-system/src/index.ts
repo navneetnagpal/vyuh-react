@@ -13,6 +13,9 @@ export * from './content/card/card-descriptor';
 export * from './content/group/group';
 export * from './content/group/group-descriptor';
 
+export * from './content/accordion/accordion';
+export * from './content/accordion/accordion-descriptor';
+
 export * from './content/conditional-route/conditional-route';
 export * from './content/conditional-route/conditional-route-descriptor';
 

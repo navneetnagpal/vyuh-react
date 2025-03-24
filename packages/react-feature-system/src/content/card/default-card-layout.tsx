@@ -77,7 +77,7 @@ const CardView: React.FC<CardRendererProps> = ({ content }) => {
   if (hasOnlyImage) {
     return (
       <ShadcnCard
-        className={cn('h-full overflow-hidden border-neutral-300 p-0', {
+        className={cn('overflow-hidden border-neutral-300 p-0', {
           'cursor-pointer': content.action,
         })}
         onClick={() => content.action && new Action(content.action).execute()}
@@ -85,7 +85,7 @@ const CardView: React.FC<CardRendererProps> = ({ content }) => {
         <img
           src={imageUrl}
           alt="Card image"
-          className="h-fit w-full object-cover"
+          className="max-h-[400px] w-full object-cover"
         />
       </ShadcnCard>
     );
