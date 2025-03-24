@@ -16,9 +16,12 @@
 
 ## Overview
 
-`@vyuh/react-core` is the foundation of the Vyuh platform for React applications. It provides a robust architecture for building modular, feature-rich applications with a focus on:
+`@vyuh/react-core` is the foundation of the Vyuh platform for React
+applications. It provides a robust architecture for building modular,
+feature-rich applications with a focus on:
 
-- **Feature-based architecture**: Organize your application into self-contained features
+- **Feature-based architecture**: Organize your application into self-contained
+  features
 - **Plugin system**: Extend functionality through a flexible plugin system
 - **Content management**: Seamlessly integrate with headless CMS platforms
 - **Type safety**: Built with TypeScript for enhanced developer experience
@@ -40,7 +43,8 @@ pnpm add @vyuh/react-core
 
 ### Features
 
-Features are the building blocks of your application. Each feature is a self-contained module that can:
+Features are the building blocks of your application. Each feature is a
+self-contained module that can:
 
 - Define its own UI components
 - Register content types
@@ -69,12 +73,12 @@ The content system provides a structured way to:
 
 The Vyuh ecosystem includes several packages that work together:
 
-| Package | Description |
-|---------|-------------|
-| `@vyuh/react-core` | Core platform and architecture |
-| `@vyuh/react-extension-content` | Content management system |
-| `@vyuh/react-feature-system` | System-level features and components |
-| `@vyuh/react-plugin-content-provider-sanity` | Sanity.io content provider |
+| Package                                      | Description                          |
+| -------------------------------------------- | ------------------------------------ |
+| `@vyuh/react-core`                           | Core platform and architecture       |
+| `@vyuh/react-extension-content`              | Content management system            |
+| `@vyuh/react-feature-system`                 | System-level features and components |
+| `@vyuh/react-plugin-content-provider-sanity` | Sanity.io content provider           |
 
 ## Getting Started
 
@@ -175,7 +179,10 @@ Features are the building blocks of your application:
 
 ```tsx
 import { FeatureDescriptor } from '@vyuh/react-core';
-import { ContentExtensionBuilder, ContentExtensionDescriptor } from '@vyuh/react-extension-content';
+import {
+  ContentExtensionBuilder,
+  ContentExtensionDescriptor,
+} from '@vyuh/react-extension-content';
 import { Command } from 'lucide-react';
 import React from 'react';
 
@@ -211,7 +218,6 @@ export const myFeature = new FeatureDescriptor({
     // Other extension descriptors
   ],
 
-
   // Initialization logic
   init: async () => {
     console.log('My feature initialized');
@@ -245,11 +251,11 @@ function MyComponent() {
 }
 ```
 
-
-
 ## Contributing
 
-We welcome contributions to the Vyuh platform! Please see our [contributing guidelines](https://github.com/vyuh-tech/vyuh/blob/main/CONTRIBUTING.md) for more information.
+We welcome contributions to the Vyuh platform! Please see our
+[contributing guidelines](https://github.com/vyuh-tech/vyuh/blob/main/CONTRIBUTING.md)
+for more information.
 
 ## License
 
