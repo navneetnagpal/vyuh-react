@@ -10,10 +10,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@vyuh/react-core": "^0.1.2",
-    "@vyuh/react-extension-content": "^0.1.2",
-    "@vyuh/react-feature-system": "^0.1.2",
-    "@vyuh/react-plugin-content-provider-sanity": "^0.1.2",
+    "@vyuh/react-core": "^0.1.3",
+    "@vyuh/react-extension-content": "^0.1.3",
+    "@vyuh/react-feature-system": "^0.1.3",
+    "@vyuh/react-plugin-content-provider-sanity": "^0.1.3",
     "lucide-react": "^0.482.0",
     "next": "^15.2.3",
     "react": "^19.0.0",

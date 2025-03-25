@@ -14,6 +14,8 @@
   <a href="https://github.com/vyuh-tech/vyuh">GitHub</a>
 </p>
 
+[![npm version](https://img.shields.io/npm/v/@vyuh/react-feature-system.svg?style=for-the-badge)](https://www.npmjs.com/package/@vyuh/react-feature-system)
+
 ## Overview ✨
 
 `@vyuh/react-feature-system` provides a comprehensive set of content components

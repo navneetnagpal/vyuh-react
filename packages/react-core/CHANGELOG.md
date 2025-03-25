@@ -1,5 +1,11 @@
 # @vyuh/react-core
 
+## 0.1.3
+
+### Patch Changes
+
+- Updated readme
+
 ## 0.1.2
 
 ### Patch Changes

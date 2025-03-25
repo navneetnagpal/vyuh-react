@@ -14,6 +14,8 @@
   <a href="https://github.com/vyuh-tech/vyuh">GitHub</a>
 </p>
 
+[![npm version](https://img.shields.io/npm/v/@vyuh/react-plugin-content-provider-sanity.svg?style=for-the-badge)](https://www.npmjs.com/package/@vyuh/react-plugin-content-provider-sanity)
+
 ## Overview ✨
 
 `@vyuh/react-plugin-content-provider-sanity` connects your Vyuh application to

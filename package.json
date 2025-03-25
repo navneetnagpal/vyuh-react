@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "changeset": "changeset",
-    "publish": "pnpm build && changeset version && changeset publish",
+    "publish": "changeset version && pnpm build && changeset publish",
     "build": "pnpm --recursive --filter \"./packages/*\" build"
   },
   "private": true,

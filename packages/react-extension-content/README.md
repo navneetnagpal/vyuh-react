@@ -18,6 +18,8 @@ An extension for integrating CMS content into Vyuh applications. This package
 provides the core building blocks that can be leveraged by specific CMS
 integrations.
 
+[![npm version](https://img.shields.io/npm/v/@vyuh/react-extension-content.svg?style=for-the-badge)](https://www.npmjs.com/package/@vyuh/react-extension-content)
+
 ## Overview ✨
 
 The content extension provides a flexible architecture for managing CMS-driven
