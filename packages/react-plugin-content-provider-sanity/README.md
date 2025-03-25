@@ -162,14 +162,17 @@ When using live updates:
 - Updates are efficient, only sending the changed data
 - Perfect for preview environments and collaborative editing
 
-> **Tip:** The [`@vyuh/react-extension-content`](https://github.com/vyuh-tech/vyuh/tree/main/packages/react-extension-content) package provides a `RouteProvider` component that simplifies working with live routes. Simply set the `live` prop to `true`:
+> **Tip:** The
+> [`@vyuh/react-extension-content`](https://github.com/vyuh-tech/vyuh/tree/main/packages/react-extension-content)
+> package provides a `RouteLoader` component that simplifies working with live
+> routes. Simply set the `live` prop to `true`:
 >
 > ```tsx
-> import { RouteProvider } from '@vyuh/react-extension-content';
+> import { RouteLoader } from '@vyuh/react-extension-content';
 >
 > function LiveRoutePage() {
 >   return (
->     <RouteProvider
+>     <RouteLoader
 >       path="/about"
 >       live={true} // Enable live updates for this route
 >     />
@@ -181,34 +184,58 @@ When using live updates:
 
 ### Image URL Generation
 
-Generate image URLs with transformations:
+Generate image URLs for rendering images from Sanity:
 
 ```tsx
 function ImageComponent({ imageRef }) {
   const { plugins } = useVyuh();
 
-  const imageUrl = plugins.content.provider.image(imageRef, {
-    width: 800,
-    height: 600,
-    quality: 80,
-    format: 'webp',
-  });
+  // imageRef is a Sanity image reference object from your content
+  // Example: { _type: 'image', asset: { _ref: 'image-abc123-1200x800-jpg' } }
+  const imageUrl = plugins.content.provider.image(imageRef);
 
-  return <img src={imageUrl} alt="My image" />;
+  return (
+    <img
+      src={imageUrl}
+      alt="My image"
+      loading="lazy"
+    />
+  );
 }
 ```
 
 ### File URL Generation
 
-Generate file URLs:
+Generate file URLs for videos and other files stored in Sanity:
 
 ```tsx
-function FileComponent({ fileRef }) {
+function VideoPlayer({ videoRef }) {
   const { plugins } = useVyuh();
 
+  // videoRef is a Sanity file reference object from your content
+  // Example: { _type: 'file', asset: { _ref: 'file-abc123-mp4' } }
+  const videoUrl = plugins.content.provider.fileUrl(videoRef);
+
+  return (
+    <video controls>
+      <source src={videoUrl} type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  );
+}
+
+// For other file types like PDFs
+function DocumentViewer({ fileRef }) {
+  const { plugins } = useVyuh();
   const fileUrl = plugins.content.provider.fileUrl(fileRef);
 
-  return <a href={fileUrl}>Download file</a>;
+  return (
+    <div>
+      <a href={fileUrl} target="_blank" rel="noopener noreferrer">
+        View Document
+      </a>
+    </div>
+  );
 }
 ```
 
