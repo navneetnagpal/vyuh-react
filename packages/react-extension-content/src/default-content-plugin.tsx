@@ -21,7 +21,7 @@ export class DefaultContentPlugin extends ContentPlugin {
     super('vyuh.plugin.content.default', 'Default Content Plugin', provider);
   }
 
-  getItem<T>(
+  getItem<T extends SchemaItem>(
     itemType: ItemType<T>,
     schemaType: string,
   ): TypeDescriptor<T> | undefined {

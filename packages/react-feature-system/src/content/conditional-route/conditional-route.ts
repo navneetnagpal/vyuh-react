@@ -1,4 +1,9 @@
-import { Condition, ObjectReference, RouteBase, useVyuhStore } from '@vyuh/react-core';
+import {
+  Condition,
+  ObjectReference,
+  RouteBase,
+  useVyuhStore,
+} from '@vyuh/react-core';
 
 /**
  * A case item that pairs a condition value with its corresponding route reference.
@@ -88,8 +93,8 @@ export interface ConditionalRoute extends RouteBase {
  */
 export async function evaluateConditionalRoute(
   route: ConditionalRoute,
-): Promise<RouteBase | null> {
-  if (!route.condition || !route.cases) return null;
+): Promise<RouteBase | undefined> {
+  if (!route.condition || !route.cases) return undefined;
 
   const condition = new Condition(route.condition);
   const value = (await condition.execute()) || route.defaultCase;

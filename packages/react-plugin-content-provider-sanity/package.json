@@ -1,6 +1,6 @@
 {
   "name": "@vyuh/react-plugin-content-provider-sanity",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Vyuh React Content Provider Sanity Plugin",
   "type": "module",
   "scripts": {

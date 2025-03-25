@@ -18,7 +18,7 @@ export interface AsyncContentContainerProps<T> {
    * Async function that loads the content
    * Can return either a Promise or an Observable
    */
-  fetchContent: () => Promise<T> | Observable<T>;
+  fetchContent: () => Promise<T | undefined> | Observable<T | undefined>;
 
   /**
    * Function to render the loaded content
@@ -43,7 +43,7 @@ function AsyncContentLoader<T>({
   resource,
   renderContent,
 }: {
-  resource: IAsyncResource<T>;
+  resource: IAsyncResource<T | undefined>;
   renderContent: (content: T) => React.ReactNode;
 }) {
   // Force re-render when resource updates (only for Observable-backed resources)
@@ -87,7 +87,9 @@ export function AsyncContentContainer<T>({
   const fetchContentRef = React.useRef(fetchContent);
 
   // Use useState to manage the resource, but initialize with null
-  const [resource, setResource] = useState<IAsyncResource<T> | null>(null);
+  const [resource, setResource] = useState<IAsyncResource<
+    T | undefined
+  > | null>(null);
 
   // Create the initial resource in an effect
   useEffect(() => {

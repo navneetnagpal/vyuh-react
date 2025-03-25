@@ -1,6 +1,6 @@
 {
   "name": "@vyuh/react-extension-content",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Content extension for the Vyuh Framework",
   "type": "module",
   "scripts": {

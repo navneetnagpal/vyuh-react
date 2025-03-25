@@ -7,7 +7,7 @@
     "changeset:version": "changeset version",
     "publish": "pnpm build && changeset publish",
     "release": "pnpm build && changeset publish",
-    "build": "pnpm --recursive build"
+    "build": "pnpm --recursive build --filter \"./packages/*\""
   },
   "private": true,
   "keywords": [],

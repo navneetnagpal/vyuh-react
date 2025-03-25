@@ -171,7 +171,7 @@ Make sure you have registered a ContentBuilder for this schema type.
   /**
    * Get an item by its schema type
    */
-  getItem<T>(
+  getItem<T extends SchemaItem>(
     itemType: ItemType<T>,
     schemaType: string | undefined,
   ): TypeDescriptor<T> | undefined {

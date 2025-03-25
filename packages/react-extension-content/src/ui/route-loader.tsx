@@ -54,8 +54,14 @@ export function RouteLoader({
     }
 
     if (live) {
+      const supportsLive = plugins.content.provider.supportsLive;
+      const liveProvider = plugins.content.provider.live;
+      if (!supportsLive || !liveProvider) {
+        throw new Error('Live updates not supported');
+      }
+
       // Return the observable directly for live updates
-      return plugins.content.provider.live.fetchRoute({
+      return liveProvider.fetchRoute({
         path: url,
         routeId,
       });
