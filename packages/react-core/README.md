@@ -93,14 +93,11 @@ import { SanityContentProvider } from '@vyuh/react-plugin-content-provider-sanit
 import { feature as systemFeature } from '@vyuh/react-feature-system';
 
 // Configure your content provider
-const contentProvider = SanityContentProvider.withConfig({
-  config: {
-    projectId: 'your-project-id',
-    dataset: 'production',
-    perspective: 'published',
-    useCdn: true,
-  },
-  cacheDuration: 300000, // 5 minutes
+const contentProvider = new SanityContentProvider({
+  projectId: 'your-project-id',
+  dataset: 'production',
+  perspective: 'published',
+  useCdn: true,
 });
 
 // Configure plugins

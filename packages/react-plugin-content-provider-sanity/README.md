@@ -50,15 +50,12 @@ import { DefaultContentPlugin } from '@vyuh/react-extension-content';
 import { VyuhProvider, PluginDescriptor } from '@vyuh/react-core';
 
 // Configure Sanity provider
-const contentProvider = SanityContentProvider.withConfig({
-  config: {
-    projectId: 'your-project-id',
-    dataset: 'production',
-    perspective: 'published', // or 'drafts' for preview mode
-    useCdn: true, // Set to false for real-time preview
-    token: 'your-sanity-token', // Optional: for authenticated requests
-  },
-  cacheDuration: 300000, // 5 minutes cache (in milliseconds)
+const contentProvider = new SanityContentProvider({
+  projectId: 'your-project-id',
+  dataset: 'production',
+  perspective: 'published', // or 'drafts' for preview mode
+  useCdn: true, // Set to false for real-time preview
+  token: 'your-sanity-token', // Optional: for authenticated requests
 });
 
 // Create content plugin with Sanity provider
@@ -194,13 +191,7 @@ function ImageComponent({ imageRef }) {
   // Example: { _type: 'image', asset: { _ref: 'image-abc123-1200x800-jpg' } }
   const imageUrl = plugins.content.provider.image(imageRef);
 
-  return (
-    <img
-      src={imageUrl}
-      alt="My image"
-      loading="lazy"
-    />
-  );
+  return <img src={imageUrl} alt="My image" loading="lazy" />;
 }
 ```
 

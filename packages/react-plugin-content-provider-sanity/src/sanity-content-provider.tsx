@@ -35,10 +35,9 @@ export class SanityContentProvider extends ContentProvider {
   private readonly config: SanityConfig;
   private readonly sanityInstance: SanityInstance;
 
-  private cacheDuration: number;
   private readonly _live: SanityLiveContentProvider;
 
-  constructor(config: SanityConfig, cacheDuration: number = 300000) {
+  constructor(config: SanityConfig) {
     // Default 5 minutes
     super({
       name: 'vyuh.plugin.content.provider.sanity',
@@ -54,15 +53,7 @@ export class SanityContentProvider extends ContentProvider {
       },
     });
 
-    this.cacheDuration = cacheDuration;
     this._live = new SanityLiveContentProvider(this.sanityInstance);
-  }
-
-  static withConfig(config: {
-    config: SanityConfig;
-    cacheDuration?: number;
-  }): SanityContentProvider {
-    return new SanityContentProvider(config.config, config.cacheDuration);
   }
 
   async init(): Promise<void> {

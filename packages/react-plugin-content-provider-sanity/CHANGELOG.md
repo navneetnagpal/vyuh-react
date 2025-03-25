@@ -1,5 +1,16 @@
 # @vyuh/react-plugin-content-provider-sanity
 
+## 0.2.0
+
+### Minor Changes
+
+- Removed the withConfig static constructor
+
+### Patch Changes
+
+- Updated dependencies
+  - @vyuh/react-core@0.2.0
+
 ## 0.1.3
 
 ### Patch Changes

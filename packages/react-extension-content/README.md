@@ -122,9 +122,13 @@ Provides a ready-to-use implementation of the ContentPlugin interface:
 import { DefaultContentPlugin } from '@vyuh/react-extension-content';
 import { SanityContentProvider } from '@vyuh/react-plugin-content-provider-sanity';
 
-const contentProvider = SanityContentProvider.withConfig({
+const contentProvider = new SanityContentProvider(
   // Sanity configuration
-});
+  {
+    projectId: 'your-project-id',
+    dataset: 'production'
+  }
+);
 
 const contentPlugin = new DefaultContentPlugin(contentProvider);
 ```
