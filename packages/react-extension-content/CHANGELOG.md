@@ -1,5 +1,13 @@
 # @vyuh/react-extension-content
 
+## 0.1.2
+
+### Patch Changes
+
+- including fixes
+- Updated dependencies
+  - @vyuh/react-core@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes

@@ -1,9 +1,13 @@
 name: Release
 
 on:
-  push:
-    branches:
-      - main
+  # Comment out or remove the push trigger
+  # push:
+  #   branches:
+  #     - main
+  
+  # Optional: Replace with manual trigger
+  workflow_dispatch:
 
 jobs:
   release:
