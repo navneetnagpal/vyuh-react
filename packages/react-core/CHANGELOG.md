@@ -1,5 +1,11 @@
 # @vyuh/react-core
 
+## 0.2.2
+
+### Patch Changes
+
+- Adding title to Action
+
 ## 0.2.1
 
 ### Patch Changes

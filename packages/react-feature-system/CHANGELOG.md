@@ -1,5 +1,14 @@
 # @vyuh/react-feature-system
 
+## 0.2.2
+
+### Patch Changes
+
+- Adding title to Action
+- Updated dependencies
+  - @vyuh/react-core@0.2.2
+  - @vyuh/react-extension-content@0.2.2
+
 ## 0.2.1
 
 ### Patch Changes

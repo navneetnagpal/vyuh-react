@@ -64,7 +64,7 @@ export function HeroActions({
         <button
           key={index}
           onClick={(e) => handleActionClick(e, action)}
-          className="cursor-pointer rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          className="cursor-pointer rounded-md bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-indigo-700 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           {actionTitle}
         </button>
@@ -76,7 +76,7 @@ export function HeroActions({
         <button
           key={index}
           onClick={(e) => handleActionClick(e, action)}
-          className="cursor-pointer rounded-md border border-gray-300 px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-50"
+          className="cursor-pointer rounded-lg bg-gradient-to-r from-indigo-100 to-purple-100 px-4 py-2.5 text-sm font-semibold text-indigo-800 shadow-sm transition-all duration-200 hover:from-indigo-200 hover:to-purple-200 hover:shadow-md"
         >
           {actionTitle}
         </button>
@@ -88,7 +88,7 @@ export function HeroActions({
         <button
           key={index}
           onClick={(e) => handleActionClick(e, action)}
-          className="cursor-pointer text-sm font-semibold leading-6 text-gray-900"
+          className="cursor-pointer inline-flex items-center gap-1 text-sm font-semibold text-indigo-600 underline-offset-2 hover:text-indigo-800 hover:underline"
         >
           {actionTitle} <span aria-hidden="true">→</span>
         </button>
@@ -100,7 +100,7 @@ export function HeroActions({
       <button
         key={index}
         onClick={(e) => handleActionClick(e, action)}
-        className="cursor-pointer text-sm font-semibold leading-6 text-gray-900"
+        className="cursor-pointer rounded-md border-2 border-indigo-200 bg-white px-4 py-2.5 text-sm font-semibold text-indigo-700 shadow-sm transition-all duration-200 hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-800 hover:shadow-md"
       >
         {actionTitle} <span aria-hidden="true">→</span>
       </button>

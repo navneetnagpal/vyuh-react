@@ -1,5 +1,13 @@
 # @vyuh/react-plugin-content-provider-sanity
 
+## 0.2.2
+
+### Patch Changes
+
+- Adding title to Action
+- Updated dependencies
+  - @vyuh/react-core@0.2.2
+
 ## 0.2.1
 
 ### Patch Changes
