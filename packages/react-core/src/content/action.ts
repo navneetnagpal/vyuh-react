@@ -31,6 +31,11 @@ import { useVyuhStore } from '@/hooks/use-vyuh';
  */
 export class Action {
   /**
+   * Optional title for the action.
+   */
+  readonly title?: string;
+
+  /**
    * The configurations that define the action's logic.
    *
    * Multiple configurations can be provided to execute a series of operations

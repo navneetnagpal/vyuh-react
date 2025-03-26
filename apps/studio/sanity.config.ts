@@ -1,6 +1,7 @@
 import { vyuh } from '@vyuh/sanity-plugin-structure';
 import { system } from '@vyuh/sanity-schema-system';
 import { defineConfig } from 'sanity';
+import { marketing } from './features/marketing';
 
 export default defineConfig({
   name: 'default',
@@ -11,7 +12,7 @@ export default defineConfig({
 
   plugins: [
     vyuh({
-      features: [system],
+      features: [system, marketing],
     }),
   ],
 });

@@ -1,5 +1,13 @@
 # @vyuh/react-extension-content
 
+## 0.2.1
+
+### Patch Changes
+
+- Restructuring and bringing more consistency in type definitions
+- Updated dependencies
+  - @vyuh/react-core@0.2.1
+
 ## 0.2.0
 
 ### Patch Changes

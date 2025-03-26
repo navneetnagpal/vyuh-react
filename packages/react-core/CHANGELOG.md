@@ -1,5 +1,11 @@
 # @vyuh/react-core
 
+## 0.2.1
+
+### Patch Changes
+
+- Restructuring and bringing more consistency in type definitions
+
 ## 0.2.0
 
 ### Patch Changes

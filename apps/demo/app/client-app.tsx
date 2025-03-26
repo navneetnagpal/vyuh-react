@@ -1,6 +1,7 @@
 'use client';
 
 import { RouterProvider } from '@/components/router-provider';
+import { marketing } from '@/features/marketing';
 import { misc } from '@/features/misc-feature';
 import { NextNavigationPlugin } from '@/plugins/next-navigation-plugin';
 import { PluginDescriptor, VyuhProvider } from '@vyuh/react-core';
@@ -17,12 +18,12 @@ import '@/app/globals.css';
  * Configure Sanity content provider
  */
 const sanityProvider = new SanityContentProvider({
-  projectId: '8b76lu9s',
+  projectId: 'm8cqo9kc',
   dataset: 'production',
   perspective: 'drafts',
   useCdn: false,
   token:
-    'skt2tSTitRob9TonNNubWg09bg0dACmwE0zHxSePlJisRuF1mWJOvgg3ZF68CAWrqtSIOzewbc56dGavACyznDTsjm30ws874WoSH3E5wPMFrqVW8C0Hc0pJGzpYQiehfL9GTRrIyoO3y2aBQIxHpegGspzxAevZcchleelaH5uM6LAnOJT1',
+    'skk8YG2dC0Zo6J6L2QUK0kwNk4HWbTPSCRyJazFDLwuPXvBGC3d1eYpkycCtCkUxbOHG9QA0PSQhBuoHRU2wIJ3sWvArJWbY4ggVlC3c6oLWGzvNe9AHVKfM1DfFs4qVokeFVY3IlSSgqrOp69c9IjEMy5tO1ifLPJlr9vhyAdHsCTbz9tlQ',
 });
 
 /**
@@ -37,7 +38,7 @@ const plugins = new PluginDescriptor({
  * Feature configuration
  * Returns all features used in the application
  */
-const getFeatures = () => [system, misc];
+const getFeatures = () => [system, misc, marketing];
 
 export default function ClientApp({ children }: { children: ReactNode }) {
   return (
