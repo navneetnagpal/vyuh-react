@@ -8,16 +8,11 @@ import { ContentBuilder } from '@vyuh/react-extension-content';
  */
 export class ConditionalRouteBuilder extends ContentBuilder<ConditionalRoute> {
   /**
-   * Schema type for the conditional route builder
-   */
-  static readonly schemaName: string = CONDITIONAL_ROUTE_SCHEMA_TYPE;
-
-  /**
    * Creates a new conditional route builder
    */
   constructor() {
     super({
-      schemaType: ConditionalRouteBuilder.schemaName,
+      schemaType: CONDITIONAL_ROUTE_SCHEMA_TYPE,
       defaultLayout: new DefaultConditionalRouteLayout(),
       defaultLayoutDescriptor: DefaultConditionalRouteLayout.typeDescriptor,
     });

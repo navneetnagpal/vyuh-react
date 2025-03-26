@@ -6,11 +6,9 @@ import { ContentBuilder } from '@vyuh/react-extension-content';
  * Content builder for Accordion content items
  */
 export class AccordionContentBuilder extends ContentBuilder<Accordion> {
-  static readonly schemaName: string = ACCORDION_SCHEMA_TYPE;
-
   constructor() {
     super({
-      schemaType: AccordionContentBuilder.schemaName,
+      schemaType: ACCORDION_SCHEMA_TYPE,
       defaultLayout: new DefaultAccordionLayout(),
       defaultLayoutDescriptor: DefaultAccordionLayout.typeDescriptor,
     });

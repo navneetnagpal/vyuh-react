@@ -6,11 +6,9 @@ import { ContentBuilder } from '@vyuh/react-extension-content';
  * Content builder for Group content items
  */
 export class GroupContentBuilder extends ContentBuilder<Group> {
-  static readonly schemaName: string = GROUP_SCHEMA_TYPE;
-
   constructor() {
     super({
-      schemaType: GroupContentBuilder.schemaName,
+      schemaType: GROUP_SCHEMA_TYPE,
       defaultLayout: new DefaultGroupLayout(),
       defaultLayoutDescriptor: DefaultGroupLayout.typeDescriptor,
     });

@@ -1,3 +1,5 @@
+'use client';
+
 import { useVyuh, useVyuhStore } from '@vyuh/react-core';
 import React, { Component, ErrorInfo, ReactNode } from 'react';
 

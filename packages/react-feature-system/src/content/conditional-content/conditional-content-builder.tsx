@@ -7,16 +7,11 @@ import { DefaultConditionalContentLayout } from './default-layout';
  */
 export class ConditionalContentBuilder extends ContentBuilder<ConditionalContent> {
   /**
-   * Schema type for the conditional content builder
-   */
-  static readonly schemaName: string = CONDITIONAL_CONTENT_SCHEMA_TYPE;
-
-  /**
    * Creates a new conditional content builder
    */
   constructor() {
     super({
-      schemaType: ConditionalContentBuilder.schemaName,
+      schemaType: CONDITIONAL_CONTENT_SCHEMA_TYPE,
       defaultLayout: new DefaultConditionalContentLayout(),
       defaultLayoutDescriptor: DefaultConditionalContentLayout.typeDescriptor,
     });
