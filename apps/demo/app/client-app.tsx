@@ -17,7 +17,16 @@ import '@/app/globals.css';
 /**
  * Configure Sanity content provider
  */
-const sanityProvider = new SanityContentProvider({
+const oldSanityProvider = new SanityContentProvider({
+  projectId: '8b76lu9s',
+  dataset: 'production',
+  perspective: 'drafts',
+  useCdn: false,
+  token:
+    'skt2tSTitRob9TonNNubWg09bg0dACmwE0zHxSePlJisRuF1mWJOvgg3ZF68CAWrqtSIOzewbc56dGavACyznDTsjm30ws874WoSH3E5wPMFrqVW8C0Hc0pJGzpYQiehfL9GTRrIyoO3y2aBQIxHpegGspzxAevZcchleelaH5uM6LAnOJT1',
+});
+
+const newSanityProvider = new SanityContentProvider({
   projectId: 'm8cqo9kc',
   dataset: 'production',
   perspective: 'drafts',
@@ -30,7 +39,8 @@ const sanityProvider = new SanityContentProvider({
  * Plugin configuration
  */
 const plugins = new PluginDescriptor({
-  content: new DefaultContentPlugin(sanityProvider),
+  // content: new DefaultContentPlugin(oldSanityProvider),
+  content: new DefaultContentPlugin(newSanityProvider),
   navigation: new NextNavigationPlugin(),
 });
 

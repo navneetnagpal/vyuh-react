@@ -29,7 +29,7 @@ export const DefaultRouteContainer = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div className="container mx-auto max-w-5xl p-4">
+    <div className="container mx-auto p-4">
       {(title || actions?.length) && (
         <h1 className="mb-16 flex items-center justify-between border-b border-neutral-200 py-2">
           {title && (
