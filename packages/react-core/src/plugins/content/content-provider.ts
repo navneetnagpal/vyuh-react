@@ -108,12 +108,15 @@ export abstract class ContentProvider {
   /**
    * Extract a field value from a JSON object
    */
-  abstract fieldValue(key: FieldKey, json: Record<string, any>): string;
+  abstract fieldValue(
+    key: FieldKey,
+    json: Record<string, any>,
+  ): string | undefined;
 
   /**
    * Get the schema type from a JSON object
    */
-  abstract schemaType(json: Record<string, any>): string;
+  abstract schemaType(json: Record<string, any>): string | undefined;
 
   /**
    * Get the reference from a JSON object

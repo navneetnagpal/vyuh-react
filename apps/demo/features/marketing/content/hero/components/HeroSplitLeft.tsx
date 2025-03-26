@@ -1,23 +1,17 @@
 import React from 'react';
 import { Hero } from '../hero';
 import {
-  getBackgroundStyles,
-  getImageUrl,
+  useBackgroundStyles,
   HeroActions,
   HeroSubtitle,
   HeroTitle,
 } from './HeroUtils';
+import { HeroMedia } from './HeroMedia';
 
 export function HeroSplitLeft(props: Hero) {
   const { title, subtitle, background, media, actions } = props;
-  const bgStyles = getBackgroundStyles(background);
-  const hasImage = media?.type === 'image' && media.image;
-  const imageUrl = hasImage
-    ? getImageUrl(
-        media.image,
-        'https://via.placeholder.com/640x360?text=Hero+Image',
-      )
-    : '';
+  const bgStyles = useBackgroundStyles(background);
+  const hasMedia = media && media.type !== 'none';
 
   return (
     <div className="relative isolate overflow-hidden" style={bgStyles}>
@@ -43,19 +37,13 @@ export function HeroSplitLeft(props: Hero) {
                 aria-hidden="true"
               />
               <div className="relative px-6 pt-8 sm:pt-16 md:pl-16 md:pr-0">
-                {hasImage ? (
-                  <div className="mx-auto max-w-2xl md:mx-0 md:max-w-none">
-                    <img
-                      src={imageUrl}
-                      alt=""
-                      className="w-full rounded-xl shadow-xl ring-1 ring-white/10 md:w-auto"
-                    />
-                  </div>
-                ) : (
-                  <div className="mx-auto max-w-2xl md:mx-0 md:max-w-none">
-                    <div className="h-80 w-full rounded-xl bg-gray-200 md:w-auto"></div>
-                  </div>
-                )}
+                <div className="mx-auto max-w-2xl md:mx-0 md:max-w-none">
+                  <HeroMedia
+                    media={media}
+                    className={media?.type === 'image' ? 'w-full rounded-xl shadow-xl ring-1 ring-white/10 md:w-auto' : 'rounded-xl'}
+                    containerClassName="w-full md:w-auto"
+                  />
+                </div>
                 <div
                   className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/10 md:rounded-3xl"
                   aria-hidden="true"

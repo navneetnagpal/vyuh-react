@@ -166,6 +166,19 @@ export const heroSchema = defineType({
               type: 'vyuh.action',
             }),
           ],
+          preview: {
+            select: {
+              title: 'action.title',
+              configTitle: 'action.configurations.0.title',
+              variant: 'variant',
+            },
+            prepare({ title, configTitle, variant }) {
+              return {
+                title: title || configTitle || 'Unnamed Action',
+                subtitle: variant,
+              };
+            },
+          },
         },
       ],
     }),
@@ -188,7 +201,12 @@ export const heroSchema = defineType({
 
       return {
         title: title || 'Hero Section',
-        subtitle: subtitleText.length > 0 ? subtitleText.join(' | ') : (subtitle ? subtitle.substring(0, 50) : 'No content'),
+        subtitle:
+          subtitleText.length > 0
+            ? subtitleText.join(' | ')
+            : subtitle
+              ? subtitle.substring(0, 50)
+              : 'No content',
       };
     },
   },

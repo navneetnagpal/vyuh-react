@@ -1,5 +1,5 @@
 import {
-  getBackgroundStyles,
+  useBackgroundStyles,
   HeroActions,
   HeroSubtitle,
   HeroTitle,
@@ -9,7 +9,7 @@ import React from 'react';
 
 export function HeroCentered(props: Hero) {
   const { title, subtitle, background, actions } = props;
-  const bgStyles = getBackgroundStyles(background);
+  const bgStyles = useBackgroundStyles(background);
 
   return (
     <div className="relative isolate px-6 pt-14 lg:px-8" style={bgStyles}>

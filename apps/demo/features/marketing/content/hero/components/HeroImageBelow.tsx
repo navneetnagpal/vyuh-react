@@ -1,23 +1,17 @@
 import React from 'react';
 import { Hero } from '../hero';
 import {
-  getBackgroundStyles,
-  getImageUrl,
+  useBackgroundStyles,
   HeroActions,
   HeroSubtitle,
   HeroTitle,
 } from './HeroUtils';
+import { HeroMedia } from './HeroMedia';
 
 export function HeroImageBelow(props: Hero) {
   const { title, subtitle, background, media, actions } = props;
-  const bgStyles = getBackgroundStyles(background);
-  const hasImage = media?.type === 'image' && media.image;
-  const imageUrl = hasImage
-    ? getImageUrl(
-        media.image,
-        'https://via.placeholder.com/2432x1442?text=App+Screenshot',
-      )
-    : '';
+  const bgStyles = useBackgroundStyles(background);
+  const hasMedia = media && media.type !== 'none';
 
   return (
     <div className="relative isolate overflow-hidden" style={bgStyles}>
@@ -28,19 +22,16 @@ export function HeroImageBelow(props: Hero) {
             <HeroSubtitle subtitle={subtitle} />
             <HeroActions actions={actions} className="justify-center" />
           </div>
-          <div className="mt-16 flow-root sm:mt-24">
-            <div className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
-              {hasImage ? (
-                <img
-                  src={imageUrl}
-                  alt="Hero Image"
-                  className="rounded-md shadow-2xl ring-1 ring-gray-900/10"
+          {hasMedia && (
+            <div className="mt-16 flow-root sm:mt-24">
+              <div className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
+                <HeroMedia
+                  media={media}
+                  className={media?.type === 'image-tiles' ? '' : 'w-full'}
                 />
-              ) : (
-                <div className="h-[600px] w-full rounded-md bg-gray-200 shadow-2xl ring-1 ring-gray-900/10"></div>
-              )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

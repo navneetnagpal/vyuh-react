@@ -1,5 +1,6 @@
 import { Hero } from '@/features/marketing/content/hero/hero';
-import { Action, ImageReference } from '@vyuh/react-core';
+import { Action } from '@vyuh/react-core';
+import { useVyuh } from '@vyuh/react-core';
 import React from 'react';
 
 export function HeroTitle({
@@ -116,7 +117,11 @@ export function HeroActions({
   );
 }
 
-export function getBackgroundStyles(background?: Hero['background']) {
+// Convert to a hook so we can use the useVyuh hook
+export function useBackgroundStyles(background?: Hero['background']) {
+  const { plugins } = useVyuh();
+  const { content } = plugins;
+
   if (!background) return {};
 
   switch (background.type) {
@@ -125,21 +130,18 @@ export function getBackgroundStyles(background?: Hero['background']) {
     case 'gradient':
       return { backgroundImage: background.gradient };
     case 'image':
-      // Use Vyuh's ImageReference to get the URL
-      return background.image
-        ? {
-            backgroundImage: `url(${background.image.url})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }
-        : {};
+      // Use Vyuh's Content Provider to get the image URL
+      if (!background.image) return {};
+
+      const imageUrl = content.provider.image(background.image);
+      if (!imageUrl) return {};
+
+      return {
+        backgroundImage: `url(${imageUrl})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      };
     default:
       return {};
   }
-}
-
-// Helper function to get image URL from ImageReference
-export function getImageUrl(image?: ImageReference, fallback?: string): string {
-  if (!image) return fallback || '';
-  return image.url || fallback || '';
 }

@@ -1,16 +1,19 @@
 import React from 'react';
 import { Hero } from '../hero';
-import { getImageUrl, HeroActions, HeroSubtitle, HeroTitle } from './HeroUtils';
+import { HeroActions, HeroSubtitle, HeroTitle } from './HeroUtils';
+import { useVyuh } from '@vyuh/react-core';
 
 export function HeroBackgroundImage(props: Hero) {
   const { title, subtitle, background, actions } = props;
+  const { plugins } = useVyuh();
+  const { content } = plugins;
+
+  const fallbackImage = 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2830&q=80&blend=111827&blend-mode=multiply&sat=-100&exp=15';
+
   const bgImageUrl =
     background?.type === 'image' && background.image
-      ? getImageUrl(
-          background.image,
-          'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2830&q=80&blend=111827&blend-mode=multiply&sat=-100&exp=15',
-        )
-      : 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2830&q=80&blend=111827&blend-mode=multiply&sat=-100&exp=15';
+      ? content.provider.image(background.image) || fallbackImage
+      : fallbackImage;
 
   return (
     <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">

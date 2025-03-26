@@ -1,51 +1,17 @@
 import React from 'react';
 import { Hero } from '../hero';
 import {
-  getBackgroundStyles,
-  getImageUrl,
+  useBackgroundStyles,
   HeroActions,
   HeroSubtitle,
   HeroTitle,
 } from './HeroUtils';
+import { HeroMedia } from './HeroMedia';
 
 export function HeroImageTiles(props: Hero) {
   const { title, subtitle, background, media, actions } = props;
-  const bgStyles = getBackgroundStyles(background);
-  const hasImageTiles =
-    media?.type === 'image-tiles' &&
-    media.imageTiles &&
-    media.imageTiles.length > 0;
-
-  // Create placeholder tiles if no images are provided
-  const placeholderTiles = [
-    {
-      url: 'https://via.placeholder.com/280x320?text=Image+1',
-      alt: 'Placeholder 1',
-    },
-    {
-      url: 'https://via.placeholder.com/280x320?text=Image+2',
-      alt: 'Placeholder 2',
-    },
-    {
-      url: 'https://via.placeholder.com/280x320?text=Image+3',
-      alt: 'Placeholder 3',
-    },
-    {
-      url: 'https://via.placeholder.com/280x320?text=Image+4',
-      alt: 'Placeholder 4',
-    },
-    {
-      url: 'https://via.placeholder.com/280x320?text=Image+5',
-      alt: 'Placeholder 5',
-    },
-  ];
-
-  const tiles = hasImageTiles
-    ? media.imageTiles.map((img) => ({
-        url: getImageUrl(img, 'https://via.placeholder.com/280x320?text=Image'),
-        alt: img.alt || 'Image',
-      }))
-    : placeholderTiles;
+  const bgStyles = useBackgroundStyles(background);
+  const hasMedia = media && media.type !== 'none';
 
   return (
     <div className="relative isolate overflow-hidden" style={bgStyles}>
@@ -56,24 +22,16 @@ export function HeroImageTiles(props: Hero) {
             <HeroSubtitle subtitle={subtitle} />
             <HeroActions actions={actions} />
           </div>
-          <div className="mt-16 sm:mt-24 lg:mt-32">
-            <div className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
-              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
-                {tiles.map((tile, index) => (
-                  <div
-                    key={index}
-                    className={`${index === 0 ? 'col-span-2 row-span-2 sm:col-span-1 sm:row-span-1 md:col-span-2 md:row-span-2' : ''}`}
-                  >
-                    <img
-                      src={tile.url}
-                      alt={tile.alt || `Image ${index + 1}`}
-                      className="h-full w-full rounded-lg object-cover"
-                    />
-                  </div>
-                ))}
+          {hasMedia && (
+            <div className="mt-16 sm:mt-24 lg:mt-32">
+              <div className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">
+                <HeroMedia
+                  media={media}
+                  containerClassName="w-full"
+                />
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

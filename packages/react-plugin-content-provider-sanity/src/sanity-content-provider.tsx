@@ -169,7 +169,7 @@ export class SanityContentProvider extends ContentProvider {
   }
 
   // Override the schemaType method to handle Sanity's specific type field
-  schemaType(json: Record<string, any>): string {
+  schemaType(json: Record<string, any>): string | undefined {
     return this.fieldValue(FieldKey.type, json);
   }
 
@@ -179,9 +179,9 @@ export class SanityContentProvider extends ContentProvider {
   }
   // Override the fieldValue method to handle Sanity's specific field structure
 
-  fieldValue(key: FieldKey, json: Record<string, any>): string {
+  fieldValue(key: FieldKey, json: Record<string, any>): string | undefined {
     const fieldKey = fieldKeyMap[key];
-    return json[fieldKey];
+    return json ? json[fieldKey] : undefined;
   }
 
   // Live content provider implementation

@@ -1,18 +1,17 @@
 import React from 'react';
 import { Hero } from '../hero';
 import {
-  getBackgroundStyles,
-  getImageUrl,
+  useBackgroundStyles,
   HeroActions,
   HeroSubtitle,
   HeroTitle,
 } from './HeroUtils';
+import { HeroMedia } from './HeroMedia';
 
 export function HeroOffsetImage(props: Hero) {
   const { title, subtitle, background, media, actions } = props;
-  const bgStyles = getBackgroundStyles(background);
-  const hasImage = media?.type === 'image' && media.image;
-  const imageUrl = hasImage ? getImageUrl(media.image) : '';
+  const bgStyles = useBackgroundStyles(background);
+  const hasMedia = media && media.type !== 'none';
 
   return (
     <div className="relative isolate overflow-hidden" style={bgStyles}>
@@ -77,8 +76,11 @@ export function HeroOffsetImage(props: Hero) {
               transform="translate(24 24)"
               clipPath="url(#2ade4387-9c63-4fc4-b754-10e687a0d332)"
             >
-              {hasImage ? (
-                <img src={imageUrl} alt="" />
+              {hasMedia && media?.type === 'image' ? (
+                <img
+                  src={media.image ? (plugins.content.provider.image(media.image) || '') : ''}
+                  alt={media.image?.alt || ''}
+                />
               ) : (
                 <div className="flex h-full w-full items-center justify-center bg-gray-200 text-gray-500">
                   App Screenshot

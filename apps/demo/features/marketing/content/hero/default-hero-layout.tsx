@@ -65,50 +65,23 @@ interface HeroViewProps {
 const HeroView: React.FC<HeroViewProps> = ({ content, variant }) => {
   const { plugins } = useVyuh();
 
-  // Process image URLs if needed
-  const processedContent = {
-    ...content,
-    background: content.background && {
-      ...content.background,
-      image: content.background.image && {
-        ...content.background.image,
-        url:
-          content.background.image.url ||
-          plugins.content.provider.image(content.background.image),
-      },
-    },
-    media: content.media && {
-      ...content.media,
-      image: content.media.image && {
-        ...content.media.image,
-        url:
-          content.media.image.url ||
-          plugins.content.provider.image(content.media.image),
-      },
-      imageTiles: content.media.imageTiles?.map((img) => ({
-        ...img,
-        url: img.url || plugins.content.provider.image(img),
-      })),
-    },
-  };
-
   // Render the appropriate variant
   switch (variant) {
     case 'centered':
-      return <HeroCentered {...processedContent} />;
+      return <HeroCentered {...content} />;
     case 'split-right':
-      return <HeroSplitRight {...processedContent} />;
+      return <HeroSplitRight {...content} />;
     case 'split-left':
-      return <HeroSplitLeft {...processedContent} />;
+      return <HeroSplitLeft {...content} />;
     case 'bg-image':
-      return <HeroBackgroundImage {...processedContent} />;
+      return <HeroBackgroundImage {...content} />;
     case 'image-below':
-      return <HeroImageBelow {...processedContent} />;
+      return <HeroImageBelow {...content} />;
     case 'image-tiles':
-      return <HeroImageTiles {...processedContent} />;
+      return <HeroImageTiles {...content} />;
     case 'offset-image':
-      return <HeroOffsetImage {...processedContent} />;
+      return <HeroOffsetImage {...content} />;
     default:
-      return <HeroCentered {...processedContent} />;
+      return <HeroCentered {...content} />;
   }
 };
