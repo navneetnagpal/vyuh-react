@@ -1,15 +1,17 @@
+import { useVyuh } from '@vyuh/react-core';
 import React from 'react';
-import { Hero } from '../hero';
+import { HeroComponentProps } from './HeroTypes';
 import {
-  useBackgroundStyles,
   HeroActions,
   HeroSubtitle,
   HeroTitle,
+  useBackgroundStyles,
 } from './HeroUtils';
-import { HeroMedia } from './HeroMedia';
 
-export function HeroOffsetImage(props: Hero) {
-  const { title, subtitle, background, media, actions } = props;
+export function HeroOffsetImage({ content, layout }: HeroComponentProps) {
+  const { title, subtitle, media, actions } = content;
+  const { background } = layout;
+  const { plugins } = useVyuh();
   const bgStyles = useBackgroundStyles(background);
   const hasMedia = media && media.type !== 'none';
 
@@ -78,7 +80,11 @@ export function HeroOffsetImage(props: Hero) {
             >
               {hasMedia && media?.type === 'image' ? (
                 <img
-                  src={media.image ? (plugins.content.provider.image(media.image) || '') : ''}
+                  src={
+                    media.image
+                      ? plugins.content.provider.image(media.image) || ''
+                      : ''
+                  }
                   alt={media.image?.alt || ''}
                 />
               ) : (

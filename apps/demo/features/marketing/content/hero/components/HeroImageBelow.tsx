@@ -1,5 +1,4 @@
 import React from 'react';
-import { Hero } from '../hero';
 import {
   useBackgroundStyles,
   HeroActions,
@@ -7,9 +6,11 @@ import {
   HeroTitle,
 } from './HeroUtils';
 import { HeroMedia } from './HeroMedia';
+import { HeroComponentProps } from './HeroTypes';
 
-export function HeroImageBelow(props: Hero) {
-  const { title, subtitle, background, media, actions } = props;
+export function HeroImageBelow({ content, layout }: HeroComponentProps) {
+  const { title, subtitle, media, actions } = content;
+  const { background } = layout;
   const bgStyles = useBackgroundStyles(background);
   const hasMedia = media && media.type !== 'none';
 
@@ -20,7 +21,11 @@ export function HeroImageBelow(props: Hero) {
           <div className="mx-auto max-w-2xl text-center">
             <HeroTitle title={title} />
             <HeroSubtitle subtitle={subtitle} />
-            <HeroActions actions={actions} className="justify-center" />
+            <HeroActions
+              actions={actions}
+              className="justify-center"
+              centered={true}
+            />
           </div>
           {hasMedia && (
             <div className="mt-16 flow-root sm:mt-24">

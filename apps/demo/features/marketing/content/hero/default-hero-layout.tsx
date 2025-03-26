@@ -8,7 +8,7 @@ import {
   HeroSplitRight,
 } from '@/features/marketing/content/hero/components';
 import { Hero, HERO_SCHEMA_TYPE } from '@/features/marketing/content/hero/hero';
-import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
+import { ImageReference, LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
 import React from 'react';
 
 /**
@@ -36,6 +36,12 @@ export class DefaultHeroLayout extends LayoutConfiguration<Hero> {
   static readonly typeDescriptor = new TypeDescriptor(this.schemaName, this);
 
   readonly variant: HeroVariant;
+  readonly background?: {
+    type: 'none' | 'color' | 'image' | 'gradient';
+    color?: string;
+    image?: ImageReference;
+    gradient?: string;
+  };
 
   constructor(props?: Partial<DefaultHeroLayout>) {
     super({
@@ -44,13 +50,20 @@ export class DefaultHeroLayout extends LayoutConfiguration<Hero> {
     });
 
     this.variant = props?.variant ?? 'centered';
+    this.background = props?.background;
   }
 
   /**
    * Render the hero content based on the selected variant
    */
   render(content: Hero): React.ReactNode {
-    return <HeroView content={content} variant={this.variant} />;
+    return <HeroView
+      content={content}
+      layout={{
+        variant: this.variant,
+        background: this.background
+      }}
+    />;
   }
 }
 
@@ -59,29 +72,33 @@ export class DefaultHeroLayout extends LayoutConfiguration<Hero> {
  */
 interface HeroViewProps {
   content: Hero;
-  variant: HeroVariant;
+  layout: {
+    variant: HeroVariant;
+    background?: DefaultHeroLayout['background'];
+  };
 }
 
-const HeroView: React.FC<HeroViewProps> = ({ content, variant }) => {
+const HeroView: React.FC<HeroViewProps> = ({ content, layout }) => {
   const { plugins } = useVyuh();
+  const { variant, background } = layout;
 
   // Render the appropriate variant
   switch (variant) {
     case 'centered':
-      return <HeroCentered {...content} />;
+      return <HeroCentered content={content} layout={layout} />;
     case 'split-right':
-      return <HeroSplitRight {...content} />;
+      return <HeroSplitRight content={content} layout={layout} />;
     case 'split-left':
-      return <HeroSplitLeft {...content} />;
+      return <HeroSplitLeft content={content} layout={layout} />;
     case 'bg-image':
-      return <HeroBackgroundImage {...content} />;
+      return <HeroBackgroundImage content={content} layout={layout} />;
     case 'image-below':
-      return <HeroImageBelow {...content} />;
+      return <HeroImageBelow content={content} layout={layout} />;
     case 'image-tiles':
-      return <HeroImageTiles {...content} />;
+      return <HeroImageTiles content={content} layout={layout} />;
     case 'offset-image':
-      return <HeroOffsetImage {...content} />;
+      return <HeroOffsetImage content={content} layout={layout} />;
     default:
-      return <HeroCentered {...content} />;
+      return <HeroCentered content={content} layout={layout} />;
   }
 };

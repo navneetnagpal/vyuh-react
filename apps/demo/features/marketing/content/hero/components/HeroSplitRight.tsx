@@ -1,5 +1,5 @@
 import React from 'react';
-import { Hero } from '../hero';
+import { HeroComponentProps } from './HeroTypes';
 import {
   useBackgroundStyles,
   HeroActions,
@@ -8,8 +8,9 @@ import {
 } from './HeroUtils';
 import { HeroMedia } from './HeroMedia';
 
-export function HeroSplitRight(props: Hero) {
-  const { title, subtitle, background, media, actions } = props;
+export function HeroSplitRight({ content, layout }: HeroComponentProps) {
+  const { title, subtitle, media, actions } = content;
+  const { background } = layout;
   const bgStyles = useBackgroundStyles(background);
   const hasMedia = media && media.type !== 'none';
 
@@ -36,11 +37,15 @@ export function HeroSplitRight(props: Hero) {
                 className="absolute -inset-y-px left-1/2 -z-10 ml-10 w-[200%] skew-x-[-30deg] bg-indigo-100 opacity-20 ring-1 ring-inset ring-white md:ml-20 lg:ml-36"
                 aria-hidden="true"
               />
-              <div className="relative px-6 pt-8 sm:pt-16 md:pl-16 md:pr-0">
+              <div className="relative px-6 py-8 sm:py-16 md:pl-16 md:pr-0">
                 <div className="mx-auto max-w-2xl md:mx-0 md:max-w-none">
                   <HeroMedia
                     media={media}
-                    className={media?.type === 'image' ? 'w-full rounded-xl shadow-xl ring-1 ring-white/10 md:w-auto' : 'rounded-xl'}
+                    className={
+                      media?.type === 'image'
+                        ? 'w-full rounded-xl shadow-xl ring-1 ring-white/10 md:w-auto'
+                        : 'rounded-xl'
+                    }
                     containerClassName="w-full md:w-auto"
                   />
                 </div>

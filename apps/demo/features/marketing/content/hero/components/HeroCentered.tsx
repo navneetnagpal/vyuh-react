@@ -4,11 +4,12 @@ import {
   HeroSubtitle,
   HeroTitle,
 } from '@/features/marketing/content/hero/components/HeroUtils';
-import { Hero } from '@/features/marketing/content/hero/hero';
+import { HeroComponentProps } from './HeroTypes';
 import React from 'react';
 
-export function HeroCentered(props: Hero) {
-  const { title, subtitle, background, actions } = props;
+export function HeroCentered({ content, layout }: HeroComponentProps) {
+  const { title, subtitle, actions, media } = content;
+  const { background } = layout;
   const bgStyles = useBackgroundStyles(background);
 
   return (
@@ -30,7 +31,7 @@ export function HeroCentered(props: Hero) {
         <div className="text-center">
           <HeroTitle title={title} />
           <HeroSubtitle subtitle={subtitle} />
-          <HeroActions actions={actions} />
+          <HeroActions actions={actions} centered={true} />
         </div>
       </div>
 

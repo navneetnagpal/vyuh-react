@@ -28,67 +28,7 @@ export const heroSchema = defineType({
       type: 'text',
       description: 'A supporting text that appears below the title',
     }),
-    defineField({
-      name: 'background',
-      title: 'Background',
-      type: 'object',
-      fields: [
-        defineField({
-          name: 'type',
-          title: 'Background Type',
-          type: 'string',
-          options: {
-            list: [
-              { title: 'None', value: 'none' },
-              { title: 'Color', value: 'color' },
-              { title: 'Image', value: 'image' },
-              { title: 'Gradient', value: 'gradient' },
-            ],
-          },
-          initialValue: 'none',
-        }),
-        defineField({
-          name: 'color',
-          title: 'Background Color',
-          type: 'string',
-          description: 'Hex color code or Tailwind color class',
-          hidden: ({ parent }) => parent?.type !== 'color',
-        }),
-        defineField({
-          name: 'image',
-          title: 'Background Image',
-          type: 'image',
-          options: {
-            hotspot: true,
-          },
-          hidden: ({ parent }) => parent?.type !== 'image',
-        }),
-        defineField({
-          name: 'gradient',
-          title: 'Gradient',
-          type: 'string',
-          description: 'The type of gradient to use',
-          options: {
-            list: [
-              // should be based on various gradient color choices
-              {
-                title: 'Linear Indigo to Purple',
-                value: 'linear-indigo-to-purple',
-              },
-              {
-                title: 'Linear Indigo to Blue',
-                value: 'linear-indigo-to-blue',
-              },
-              {
-                title: 'Linear Indigo to Orange',
-                value: 'linear-indigo-to-orange',
-              },
-            ],
-          },
-          hidden: ({ parent }) => parent?.type !== 'gradient',
-        }),
-      ],
-    }),
+
     defineField({
       name: 'media',
       title: 'Media',
@@ -251,5 +191,86 @@ export const defaultHeroLayout = defineType({
         ],
       },
     }),
+    defineField({
+      name: 'background',
+      title: 'Background',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'type',
+          title: 'Background Type',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'None', value: 'none' },
+              { title: 'Color', value: 'color' },
+              { title: 'Image', value: 'image' },
+              { title: 'Gradient', value: 'gradient' },
+            ],
+          },
+          initialValue: 'none',
+        }),
+        defineField({
+          name: 'color',
+          title: 'Background Color',
+          type: 'string',
+          description: 'Hex color code or Tailwind color class',
+          hidden: ({ parent }) => parent?.type !== 'color',
+        }),
+        defineField({
+          name: 'gradient',
+          title: 'Gradient',
+          type: 'string',
+          description: 'The type of gradient to use',
+          hidden: ({ parent }) => parent?.type !== 'gradient',
+        }),
+        defineField({
+          name: 'image',
+          title: 'Background Image',
+          type: 'image',
+          options: {
+            hotspot: true,
+          },
+          hidden: ({ parent }) => parent?.type !== 'image',
+        }),
+      ],
+    }),
   ],
+  preview: {
+    select: {
+      variant: 'variant',
+      bgType: 'background.type',
+      bgColor: 'background.color',
+      bgGradient: 'background.gradient',
+      bgImage: 'background.image',
+    },
+    prepare({ variant, bgType, bgColor, bgGradient, bgImage }) {
+      // Format the variant name for display
+      const variantDisplay = variant
+        ? variant.split('-')
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ')
+        : 'Centered';
+
+      // Create a descriptive subtitle based on background settings
+      let bgDisplay = '';
+      if (bgType && bgType !== 'none') {
+        if (bgType === 'color' && bgColor) {
+          bgDisplay = `Background: ${bgColor}`;
+        } else if (bgType === 'gradient' && bgGradient) {
+          bgDisplay = `Background: ${bgGradient} Gradient`;
+        } else if (bgType === 'image' && bgImage) {
+          bgDisplay = 'With Background Image';
+        } else {
+          bgDisplay = `Background: ${bgType}`;
+        }
+      }
+
+      return {
+        title: `Hero Layout: ${variantDisplay}`,
+        subtitle: bgDisplay || 'No background',
+        media: Icon,
+      };
+    },
+  },
 });

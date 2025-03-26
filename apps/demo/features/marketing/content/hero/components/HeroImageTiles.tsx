@@ -1,5 +1,4 @@
 import React from 'react';
-import { Hero } from '../hero';
 import {
   useBackgroundStyles,
   HeroActions,
@@ -7,9 +6,11 @@ import {
   HeroTitle,
 } from './HeroUtils';
 import { HeroMedia } from './HeroMedia';
+import { HeroComponentProps } from './HeroTypes';
 
-export function HeroImageTiles(props: Hero) {
-  const { title, subtitle, background, media, actions } = props;
+export function HeroImageTiles({ content, layout }: HeroComponentProps) {
+  const { title, subtitle, media, actions } = content;
+  const { background } = layout;
   const bgStyles = useBackgroundStyles(background);
   const hasMedia = media && media.type !== 'none';
 

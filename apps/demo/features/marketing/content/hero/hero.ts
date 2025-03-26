@@ -28,16 +28,6 @@ export interface Hero extends ContentItem {
   readonly subtitle?: string;
 
   /**
-   * Background configuration for the hero section
-   */
-  readonly background?: {
-    type: 'none' | 'color' | 'image' | 'gradient';
-    color?: string;
-    image?: ImageReference;
-    gradient?: string;
-  };
-
-  /**
    * Media content for the hero section
    */
   readonly media?: {

@@ -1,3 +1,4 @@
+import { DefaultHeroLayout } from '@/features/marketing/content/hero/default-hero-layout';
 import { Hero } from '@/features/marketing/content/hero/hero';
 import { Action } from '@vyuh/react-core';
 import { useVyuh } from '@vyuh/react-core';
@@ -35,9 +36,11 @@ type ActionVariant = 'primary' | 'secondary' | 'tertiary' | 'link';
 export function HeroActions({
   actions,
   className = '',
+  centered = false,
 }: {
   actions?: Array<{ variant: ActionVariant; action: Action }>;
   className?: string;
+  centered?: boolean;
 }) {
   if (!actions || actions.length === 0) return null;
 
@@ -89,7 +92,7 @@ export function HeroActions({
         <button
           key={index}
           onClick={(e) => handleActionClick(e, action)}
-          className="cursor-pointer inline-flex items-center gap-1 text-sm font-semibold text-indigo-600 underline-offset-2 hover:text-indigo-800 hover:underline"
+          className="inline-flex cursor-pointer items-center gap-1 text-sm font-semibold text-indigo-600 underline-offset-2 hover:text-indigo-800 hover:underline"
         >
           {actionTitle} <span aria-hidden="true">→</span>
         </button>
@@ -109,7 +112,9 @@ export function HeroActions({
   };
 
   return (
-    <div className={`mt-10 flex items-center gap-x-6 ${className}`}>
+    <div
+      className={`mt-10 flex items-center ${centered ? 'justify-center' : 'justify-start'} gap-x-6 ${className}`}
+    >
       {actions.map((actionItem, index) =>
         renderActionButton(actionItem, index),
       )}
@@ -118,7 +123,9 @@ export function HeroActions({
 }
 
 // Convert to a hook so we can use the useVyuh hook
-export function useBackgroundStyles(background?: Hero['background']) {
+export function useBackgroundStyles(
+  background?: DefaultHeroLayout['background'],
+) {
   const { plugins } = useVyuh();
   const { content } = plugins;
 
