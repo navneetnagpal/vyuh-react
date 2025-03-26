@@ -1,7 +1,7 @@
 import React from 'react';
 import { Hero } from '../hero';
 import { ImageReference, ObjectReference } from '@vyuh/react-core';
-import { useVyuh } from '@vyuh/react-core';
+import { MediaImage, MediaVideo, useMediaUtils } from '@/features/marketing/content/shared/MediaUtils';
 
 type HeroMediaProps = {
   media?: Hero['media'];
@@ -14,24 +14,11 @@ export function HeroMedia({
   className = '',
   containerClassName = '',
 }: HeroMediaProps) {
-  const { plugins } = useVyuh();
-  const { content } = plugins;
+  const { getImageUrl } = useMediaUtils();
 
   if (!media || media.type === 'none') {
     return null;
   }
-
-  // Helper function to get image URL using Vyuh Content Provider
-  const getImageUrl = (image?: ImageReference, fallback?: string): string => {
-    if (!image) return fallback || '';
-    return content.provider.image(image) || fallback || '';
-  };
-
-  // Helper function to get file URL using Vyuh Content Provider
-  const getFileUrl = (file?: ObjectReference, fallback?: string): string => {
-    if (!file) return fallback || '';
-    return content.provider.fileUrl(file) || fallback || '';
-  };
 
   // Container with optional styling
   const Container = ({ children }: { children: React.ReactNode }) => (
@@ -43,17 +30,12 @@ export function HeroMedia({
     case 'image':
       if (!media.image) return null;
 
-      // Get image URL using Vyuh Content Provider
-      const imageUrl = getImageUrl(
-        media.image,
-        'https://via.placeholder.com/1200x800?text=Hero+Image',
-      );
-
       return (
         <Container>
-          <img
-            src={imageUrl}
-            alt={'Hero Image'}
+          <MediaImage
+            image={media.image}
+            fallback="https://via.placeholder.com/1200x800?text=Hero+Image"
+            alt="Hero Image"
             className={`rounded-md shadow-2xl ring-1 ring-gray-900/10 ${className}`}
           />
         </Container>
@@ -62,23 +44,19 @@ export function HeroMedia({
     case 'video':
       if (!media.video) return null;
 
-      const videoUrl = getFileUrl(media.video, '');
-
       return (
         <Container>
           <div
             className={`relative overflow-hidden rounded-md shadow-2xl ring-1 ring-gray-900/10 ${className}`}
           >
-            <video
+            <MediaVideo
+              video={media.video}
               autoPlay
               muted
               loop
-              playsInline
+              controls={false}
               className="h-full w-full object-cover"
-            >
-              <source src={videoUrl} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+            />
           </div>
         </Container>
       );
@@ -95,12 +73,6 @@ export function HeroMedia({
             className={`grid ${useSpecialLayout ? 'grid-cols-2 sm:grid-cols-3 md:grid-cols-5' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'} gap-4 ${className}`}
           >
             {media.imageTiles.map((image, index) => {
-              // Get image URL using Vyuh Content Provider
-              const tileImageUrl = getImageUrl(
-                image,
-                `https://via.placeholder.com/400x300?text=Tile+${index + 1}`,
-              );
-
               // Special class for the first tile in special layout
               const specialFirstTileClass =
                 useSpecialLayout && index === 0
@@ -112,8 +84,9 @@ export function HeroMedia({
                   key={index}
                   className={`overflow-hidden rounded-md shadow-md ring-1 ring-gray-900/10 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl ${specialFirstTileClass}`}
                 >
-                  <img
-                    src={tileImageUrl}
+                  <MediaImage
+                    image={image}
+                    fallback={`https://via.placeholder.com/400x300?text=Tile+${index + 1}`}
                     alt={`Image Tile ${index + 1}`}
                     className="h-full w-full object-cover"
                   />

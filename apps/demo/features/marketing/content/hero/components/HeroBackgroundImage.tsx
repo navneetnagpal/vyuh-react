@@ -1,19 +1,18 @@
 import React from 'react';
 import { HeroActions, HeroSubtitle, HeroTitle } from './HeroUtils';
-import { useVyuh } from '@vyuh/react-core';
 import { HeroComponentProps } from './HeroTypes';
+import { useMediaUtils } from '@/features/marketing/content/shared/MediaUtils';
 
 export function HeroBackgroundImage({ content, layout }: HeroComponentProps) {
   const { title, subtitle, actions } = content;
   const { background } = layout;
-  const { plugins } = useVyuh();
-  const contentProvider = plugins.content;
+  const { getImageUrl } = useMediaUtils();
 
   const fallbackImage = 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2830&q=80&blend=111827&blend-mode=multiply&sat=-100&exp=15';
 
   const bgImageUrl =
     background?.type === 'image' && background.image
-      ? contentProvider.provider.image(background.image) || fallbackImage
+      ? getImageUrl(background.image, fallbackImage)
       : fallbackImage;
 
   return (

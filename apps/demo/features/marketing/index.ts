@@ -1,3 +1,4 @@
+import { FeatureContentBuilder } from '@/features/marketing/content/feature/feature-builder';
 import { HeroContentBuilder } from '@/features/marketing/content/hero/hero-builder';
 import { HeroDescriptor } from '@/features/marketing/content/hero/hero-descriptor';
 import { FeatureDescriptor } from '@vyuh/react-core';
@@ -18,7 +19,7 @@ export const marketing = new FeatureDescriptor({
   extensions: [
     new ContentExtensionDescriptor({
       contents: [new HeroDescriptor()],
-      contentBuilders: [new HeroContentBuilder()],
+      contentBuilders: [new HeroContentBuilder(), new FeatureContentBuilder()],
     }),
   ],
 });

@@ -1,5 +1,6 @@
 import { DefaultHeroLayout } from '@/features/marketing/content/hero/default-hero-layout';
 import { Hero } from '@/features/marketing/content/hero/hero';
+import { useMediaUtils } from '@/features/marketing/content/shared/MediaUtils';
 import { Action } from '@vyuh/react-core';
 import { useVyuh } from '@vyuh/react-core';
 import React from 'react';
@@ -126,8 +127,7 @@ export function HeroActions({
 export function useBackgroundStyles(
   background?: DefaultHeroLayout['background'],
 ) {
-  const { plugins } = useVyuh();
-  const { content } = plugins;
+  const { getImageUrl } = useMediaUtils();
 
   if (!background) return {};
 
@@ -137,10 +137,10 @@ export function useBackgroundStyles(
     case 'gradient':
       return { backgroundImage: background.gradient };
     case 'image':
-      // Use Vyuh's Content Provider to get the image URL
+      // Use MediaUtils to get the image URL
       if (!background.image) return {};
 
-      const imageUrl = content.provider.image(background.image);
+      const imageUrl = getImageUrl(background.image);
       if (!imageUrl) return {};
 
       return {

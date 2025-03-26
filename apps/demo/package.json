@@ -14,10 +14,13 @@
     "@vyuh/react-extension-content": "^0.2.2",
     "@vyuh/react-feature-system": "^0.2.2",
     "@vyuh/react-plugin-content-provider-sanity": "^0.2.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "lucide-react": "^0.482.0",
     "next": "^15.2.3",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^3.0.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.0",

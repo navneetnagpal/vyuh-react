@@ -5,7 +5,11 @@ import {
 import { RouteDescriptor } from '@vyuh/sanity-schema-system';
 import { defaultHeroLayout, HeroDescriptor, heroSchema } from './hero';
 import { logoSchema } from './logo';
-import { featureSchema } from './feature';
+import {
+  defaultFeatureLayout,
+  featureSchema,
+  FeatureSectionDescriptor,
+} from './feature';
 import { ctaSchema } from './cta';
 import { bentoSchema } from './bento';
 import { pricingSchema } from './pricing';
@@ -28,6 +32,9 @@ export const marketing = new FeatureDescriptor({
   contents: [
     new HeroDescriptor({
       layouts: [defaultHeroLayout],
+    }),
+    new FeatureSectionDescriptor({
+      layouts: [defaultFeatureLayout],
     }),
     new RouteDescriptor({
       regionItems: [
