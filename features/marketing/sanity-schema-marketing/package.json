@@ -1,0 +1,69 @@
+{
+  "name": "@vyuh/sanity-schema-marketing",
+  "version": "0.1.0",
+  "description": "The Sanity schema package for the Marketing content blocks",
+  "type": "module",
+  "scripts": {
+    "build": "NODE_ENV=production tsup",
+    "lint": "eslint \"src/**/*.ts*\"",
+    "lint:fix": "eslint \"src/**/*.ts*\" --fix"
+  },
+  "keywords": [
+    "vyuh",
+    "sanity",
+    "schema",
+    "marketing"
+  ],
+  "homepage": "https://vyuh.tech",
+  "bugs": {
+    "url": "https://github.com/vyuh-tech/vyuh/issues"
+  },
+  "packageManager": "pnpm@10.6.3",
+  "contributors": [
+    {
+      "name": "Pavan Podila",
+      "email": "pavan@vyuh.tech",
+      "url": "https://github.com/pavanpodila"
+    }
+  ],
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "dependencies": {
+    "@sanity/client": "^6.28.3",
+    "react-icons": "^5.5.0"
+  },
+  "devDependencies": {
+    "sanity": "^3.81.0",
+    "@types/node": "^22.13.11",
+    "@types/react": "^19.0.12",
+    "@types/react-dom": "^19.0.4",
+    "@typescript-eslint/eslint-plugin": "^8.27.0",
+    "@typescript-eslint/parser": "^8.27.0",
+    "eslint": "^9.22.0",
+    "eslint-plugin-react": "^7.37.4",
+    "@vyuh/sanity-schema-core": "^2.0.0",
+    "@vyuh/sanity-schema-system": "^2.0.0",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.2"
+  },
+  "exports": {
+    ".": {
+      "import": "./src/index.ts"
+    }
+  },
+  "files": [
+    "*.md",
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      }
+    }
+  }
+}

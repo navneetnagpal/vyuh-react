@@ -1,0 +1,77 @@
+{
+  "name": "@vyuh/react-feature-marketing",
+  "version": "0.2.3",
+  "description": "The Marketing feature package for the Vyuh React framework",
+  "type": "module",
+  "scripts": {
+    "build": "NODE_ENV=production tsup && pnpm build:tw",
+    "build:tw": "tailwindcss -i src/styles.css -o dist/styles.css",
+    "dev:tw": "pnpm build:tw --watch",
+    "lint": "eslint \"src/**/*.ts*\"",
+    "lint:fix": "eslint \"src/**/*.ts*\" --fix"
+  },
+  "keywords": [
+    "vyuh",
+    "react",
+    "feature",
+    "marketing"
+  ],
+  "homepage": "https://vyuh.tech",
+  "bugs": {
+    "url": "https://github.com/vyuh-tech/vyuh/issues"
+  },
+  "packageManager": "pnpm@10.6.3",
+  "contributors": [
+    {
+      "name": "Pavan Podila",
+      "email": "pavan@vyuh.tech",
+      "url": "https://github.com/pavanpodila"
+    }
+  ],
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.0.15",
+    "@tailwindcss/postcss": "^4.0.15",
+    "@vyuh/react-core": "^0.2.3",
+    "@vyuh/react-extension-content": "^0.2.3",
+    "lucide-react": "^0.482.0",
+    "tailwindcss": "^4.0.15",
+    "zustand": "^5.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.11",
+    "@types/react": "^19.0.12",
+    "@types/react-dom": "^19.0.4",
+    "@typescript-eslint/eslint-plugin": "^8.27.0",
+    "@typescript-eslint/parser": "^8.27.0",
+    "clsx": "^2.1.1",
+    "eslint": "^9.22.0",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.2"
+  },
+  "exports": {
+    ".": {
+      "import": "./src/index.ts"
+    },
+    "./styles.css": "./dist/styles.css"
+  },
+  "files": [
+    "*.md",
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      },
+      "./styles.css": "./dist/styles.css"
+    }
+  }
+}

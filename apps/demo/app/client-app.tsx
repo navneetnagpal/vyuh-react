@@ -1,7 +1,7 @@
 'use client';
 
 import { RouterProvider } from '@/components/router-provider';
-import { marketing } from '@/features/marketing';
+import { marketing } from '@vyuh/react-feature-marketing';
 import { misc } from '@/features/misc-feature';
 import { NextNavigationPlugin } from '@/plugins/next-navigation-plugin';
 import { PluginDescriptor, VyuhProvider } from '@vyuh/react-core';

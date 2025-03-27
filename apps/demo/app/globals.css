@@ -1,9 +1,10 @@
 @import 'tailwindcss';
 
 @source ".";
-@source "../../../packages/react-core";
-@source "../../../packages/react-feature-system";
-@source "../../../packages/react-extension-content";
+@source "../../../packages";
+
+/* Features */
+@source "../../../features";
 
 :root {
   --background: hsl(0 0% 100%);

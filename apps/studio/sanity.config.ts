@@ -1,7 +1,7 @@
 import { vyuh } from '@vyuh/sanity-plugin-structure';
+import { marketing } from '@vyuh/sanity-schema-marketing';
 import { system } from '@vyuh/sanity-schema-system';
 import { defineConfig } from 'sanity';
-import { marketing } from './features/marketing';
 
 export default defineConfig({
   name: 'default',
