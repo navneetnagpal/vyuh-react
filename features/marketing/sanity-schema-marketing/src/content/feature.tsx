@@ -51,7 +51,15 @@ export const featureSchema = defineType({
               name: 'icon',
               title: 'Icon',
               type: 'string',
-              description: 'Icon identifier or emoji',
+              description: (
+                <div>
+                  Icon identifier from the{' '}
+                  <a href="https://lucide.dev/icons/" target="_blank">
+                    lucide-react
+                  </a>{' '}
+                  library
+                </div>
+              ),
             }),
           ],
         },
@@ -221,13 +229,13 @@ export const defaultFeatureLayout = defineType({
       initialValue: 'with-screenshot',
       options: {
         list: [
-          { title: 'With Screenshot', value: 'with-screenshot' },
-          { title: 'Centered Grid', value: 'centered-grid' },
-          { title: 'With Screenshot (Dark)', value: 'with-screenshot-dark' },
-          { title: 'Three Column', value: 'three-column' },
-          { title: 'With Left Screenshot', value: 'with-left-screenshot' },
-          { title: 'With Code Example', value: 'with-code-example' },
           { title: 'Simple', value: 'simple' },
+          { title: 'Centered Grid', value: 'centered-grid' },
+          { title: 'Three Column', value: 'three-column' },
+          { title: 'With Screenshot', value: 'with-screenshot' },
+          { title: 'With Screenshot (Dark)', value: 'with-screenshot-dark' },
+          { title: 'With Media Left', value: 'with-media-left' },
+          { title: 'With Media Right', value: 'with-media-right' },
         ],
       },
     }),
@@ -271,4 +279,41 @@ export const defaultFeatureLayout = defineType({
       ],
     }),
   ],
+  preview: {
+    select: {
+      variant: 'variant',
+      bgType: 'background.type',
+      bgColor: 'background.color',
+      bgImage: 'background.image',
+      bgGradient: 'background.gradient',
+    },
+    prepare({ variant, bgType, bgColor, bgGradient, bgImage }) {
+      // Format the variant name for display
+      const variantDisplay = variant
+        ? variant
+            .split('-')
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ')
+        : 'With Screenshot';
+
+      // Create a descriptive subtitle based on background settings
+      let bgDisplay = '';
+      if (bgType && bgType !== 'none') {
+        if (bgType === 'color' && bgColor) {
+          bgDisplay = `Background: ${bgColor}`;
+        } else if (bgType === 'gradient' && bgGradient) {
+          bgDisplay = `Background: ${bgGradient} Gradient`;
+        } else if (bgType === 'image' && bgImage) {
+          bgDisplay = 'With Background Image';
+        } else {
+          bgDisplay = `Background: ${bgType}`;
+        }
+      }
+      return {
+        title: `Feature Layout: ${variantDisplay}`,
+        subtitle: bgDisplay || 'No background',
+        media: Icon,
+      };
+    },
+  },
 });

@@ -1,11 +1,12 @@
+import { DefaultFeatureLayout } from '@/content/feature/default-feature-layout';
 import {
   MediaImage,
   MediaVideo,
   useMediaUtils,
 } from '@/content/shared/MediaUtils';
 import { cn } from '@/content/shared/utils';
+import { DynamicIcon, IconName } from 'lucide-react/dynamic';
 import React from 'react';
-import { DefaultFeatureLayout } from '@/content/feature/default-feature-layout';
 import { FeatureComponentProps } from './FeatureTypes';
 
 /**
@@ -48,7 +49,7 @@ export const FeatureItem: React.FC<{
   <div className={`relative ${className}`}>
     {icon && (
       <div className="absolute flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white">
-        <span className="h-6 w-6">{icon}</span>
+        <DynamicIcon className="h-6 w-6" name={icon as IconName} />
       </div>
     )}
     <div className={icon ? 'ml-16' : ''}>
@@ -133,18 +134,20 @@ export const FeatureMedia: React.FC<{
   switch (media.type) {
     case 'image':
       return (
-        <div className={`overflow-hidden rounded-lg ${className}`}>
+        <div className={`h-full overflow-hidden rounded-lg ${className}`}>
           <MediaImage
             image={media.image}
             fallback="https://via.placeholder.com/1200x800?text=Feature+Image"
             alt="Feature illustration"
-            className="h-screen w-full"
+            className="h-full w-full object-cover"
           />
         </div>
       );
     case 'video':
       return (
-        <div className={`overflow-hidden rounded-lg ${className}`}>
+        <div
+          className={`flex items-center overflow-hidden rounded-lg bg-black ${className}`}
+        >
           <MediaVideo video={media.video} className="h-auto w-full" controls />
         </div>
       );

@@ -3,6 +3,7 @@ import { FeatureComponentProps } from './FeatureTypes';
 import {
   FeatureActions,
   FeatureDescription,
+  FeatureItem,
   FeatureTitle,
 } from './FeatureUtils';
 
@@ -30,19 +31,12 @@ export const FeatureCenteredGrid: React.FC<FeatureComponentProps> = ({
           <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
             <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
               {features.map((feature, index) => (
-                <div key={index} className="relative pl-16">
-                  {feature.icon && (
-                    <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
-                      <span className="h-6 w-6 text-white">{feature.icon}</span>
-                    </div>
-                  )}
-                  <dt className="text-base font-semibold leading-7 text-gray-900">
-                    {feature.title}
-                  </dt>
-                  <dd className="mt-2 text-base leading-7 text-gray-600">
-                    {feature.description}
-                  </dd>
-                </div>
+                <FeatureItem
+                  title={feature.title}
+                  description={feature.description}
+                  icon={feature.icon}
+                  key={index}
+                />
               ))}
             </dl>
           </div>
