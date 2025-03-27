@@ -80,16 +80,15 @@ export const defaultBannerLayout = defineType({
       name: 'variant',
       title: 'Variant',
       type: 'string',
-      initialValue: 'simple',
+      description: 'The style variant for the banner',
       options: {
         list: [
           { title: 'Simple', value: 'simple' },
-          { title: 'With action button', value: 'with-action' },
           { title: 'Floating', value: 'floating' },
-          { title: 'Sticky top', value: 'sticky-top' },
-          { title: 'Sticky bottom', value: 'sticky-bottom' },
         ],
       },
+      initialValue: 'simple',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'colorScheme',

@@ -1,18 +1,15 @@
-import { Banner, BANNER_SCHEMA_TYPE } from '@/content/banner/banner';
+import {
+  Banner as BannerContent,
+  BANNER_SCHEMA_TYPE,
+} from '@/content/banner/banner';
+import { Banner } from '@/content/banner/components/Banner';
 import { LayoutConfiguration, TypeDescriptor } from '@vyuh/react-core';
 import React from 'react';
-import { BannerSimple } from './components/BannerSimple';
 
 /**
  * Banner layout variant type
  */
-export type BannerVariant =
-  | 'simple'
-  | 'with-dismiss'
-  | 'with-action'
-  | 'floating'
-  | 'sticky-top'
-  | 'sticky-bottom';
+export type BannerVariant = 'simple' | 'floating';
 
 /**
  * The color scheme for the banner
@@ -27,13 +24,8 @@ export type BannerColorScheme =
 
 /**
  * Default layout for banner content items
- *
- * Features:
- * - Support for multiple variants
- * - Different color schemes
- * - Dismissible options
  */
-export class DefaultBannerLayout extends LayoutConfiguration<Banner> {
+export class DefaultBannerLayout extends LayoutConfiguration<BannerContent> {
   static readonly schemaName = `${BANNER_SCHEMA_TYPE}.layout.default`;
   static readonly typeDescriptor = new TypeDescriptor(this.schemaName, this);
 
@@ -50,14 +42,19 @@ export class DefaultBannerLayout extends LayoutConfiguration<Banner> {
     this.colorScheme = props?.colorScheme || 'default';
   }
 
-  render(content: Banner): React.ReactNode {
-    // Default to simple banner if no variant is specified
+  render(content: BannerContent): React.ReactNode {
     const variant = this.variant || 'simple';
 
     switch (variant) {
+      case 'floating':
+        return (
+          <div className="fixed bottom-4 right-4 z-50 max-w-md">
+            <Banner content={content} layout={this} />
+          </div>
+        );
       case 'simple':
       default:
-        return <BannerSimple content={content} layout={this} />;
+        return <Banner content={content} layout={this} />;
     }
   }
 }
