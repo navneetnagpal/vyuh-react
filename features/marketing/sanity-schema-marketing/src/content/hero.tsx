@@ -1,3 +1,4 @@
+import { backgroundField } from '../object/background';
 import {
   ContentDescriptor,
   ContentSchemaBuilder,
@@ -189,81 +190,24 @@ export const defaultHeroLayout = defineType({
         ],
       },
     }),
-    defineField({
-      name: 'background',
-      title: 'Background',
-      type: 'object',
-      fields: [
-        defineField({
-          name: 'type',
-          title: 'Background Type',
-          type: 'string',
-          options: {
-            list: [
-              { title: 'None', value: 'none' },
-              { title: 'Color', value: 'color' },
-              { title: 'Image', value: 'image' },
-              { title: 'Gradient', value: 'gradient' },
-            ],
-          },
-          initialValue: 'none',
-        }),
-        defineField({
-          name: 'color',
-          title: 'Background Color',
-          type: 'string',
-          description: 'Hex color code or Tailwind color class',
-          hidden: ({ parent }) => parent?.type !== 'color',
-        }),
-        defineField({
-          name: 'gradient',
-          title: 'Gradient',
-          type: 'string',
-          description: 'The type of gradient to use',
-          hidden: ({ parent }) => parent?.type !== 'gradient',
-        }),
-        defineField({
-          name: 'image',
-          title: 'Background Image',
-          type: 'image',
-          options: {
-            hotspot: true,
-          },
-          hidden: ({ parent }) => parent?.type !== 'image',
-        }),
-      ],
-    }),
+    backgroundField(),
   ],
   preview: {
     select: {
       variant: 'variant',
-      bgType: 'background.type',
-      bgColor: 'background.color',
-      bgGradient: 'background.gradient',
-      bgImage: 'background.image',
+      background: 'background.type',
     },
-    prepare({ variant, bgType, bgColor, bgGradient, bgImage }) {
+    prepare({ variant, background }) {
       // Format the variant name for display
       const variantDisplay = variant
         ? variant
             .split('-')
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
             .join(' ')
         : 'Centered';
 
       // Create a descriptive subtitle based on background settings
-      let bgDisplay = '';
-      if (bgType && bgType !== 'none') {
-        if (bgType === 'color' && bgColor) {
-          bgDisplay = `Background: ${bgColor}`;
-        } else if (bgType === 'gradient' && bgGradient) {
-          bgDisplay = `Background: ${bgGradient} Gradient`;
-        } else if (bgType === 'image' && bgImage) {
-          bgDisplay = 'With Background Image';
-        } else {
-          bgDisplay = `Background: ${bgType}`;
-        }
-      }
+      let bgDisplay = `Background: ${background ?? 'None'}`;
 
       return {
         title: `Hero Layout: ${variantDisplay}`,

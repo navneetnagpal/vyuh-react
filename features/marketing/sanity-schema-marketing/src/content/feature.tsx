@@ -1,3 +1,4 @@
+import { backgroundField } from '../object/background';
 import {
   ContentDescriptor,
   ContentSchemaBuilder,
@@ -239,76 +240,24 @@ export const defaultFeatureLayout = defineType({
         ],
       },
     }),
-    defineField({
-      name: 'background',
-      title: 'Background',
-      type: 'object',
-      fields: [
-        defineField({
-          name: 'type',
-          title: 'Background Type',
-          type: 'string',
-          options: {
-            list: [
-              { title: 'None', value: 'none' },
-              { title: 'Color', value: 'color' },
-              { title: 'Image', value: 'image' },
-              { title: 'Gradient', value: 'gradient' },
-            ],
-          },
-          initialValue: 'none',
-        }),
-        defineField({
-          name: 'color',
-          title: 'Color',
-          type: 'string',
-          hidden: ({ parent }) => parent?.type !== 'color',
-        }),
-        defineField({
-          name: 'image',
-          title: 'Image',
-          type: 'image',
-          hidden: ({ parent }) => parent?.type !== 'image',
-        }),
-        defineField({
-          name: 'gradient',
-          title: 'Gradient',
-          type: 'string',
-          hidden: ({ parent }) => parent?.type !== 'gradient',
-        }),
-      ],
-    }),
+    backgroundField(),
   ],
   preview: {
     select: {
       variant: 'variant',
-      bgType: 'background.type',
-      bgColor: 'background.color',
-      bgImage: 'background.image',
-      bgGradient: 'background.gradient',
+      background: 'background.type',
     },
-    prepare({ variant, bgType, bgColor, bgGradient, bgImage }) {
+    prepare({ variant, background }) {
       // Format the variant name for display
       const variantDisplay = variant
         ? variant
             .split('-')
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
             .join(' ')
         : 'With Screenshot';
 
-      // Create a descriptive subtitle based on background settings
-      let bgDisplay = '';
-      if (bgType && bgType !== 'none') {
-        if (bgType === 'color' && bgColor) {
-          bgDisplay = `Background: ${bgColor}`;
-        } else if (bgType === 'gradient' && bgGradient) {
-          bgDisplay = `Background: ${bgGradient} Gradient`;
-        } else if (bgType === 'image' && bgImage) {
-          bgDisplay = 'With Background Image';
-        } else {
-          bgDisplay = `Background: ${bgType}`;
-        }
-      }
+      let bgDisplay = `Background: ${background ?? 'None'}`;
+
       return {
         title: `Feature Layout: ${variantDisplay}`,
         subtitle: bgDisplay || 'No background',

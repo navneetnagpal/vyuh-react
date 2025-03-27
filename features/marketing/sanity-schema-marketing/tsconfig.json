@@ -5,8 +5,8 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "rootDir": "src"
+    "rootDir": "."
   },
-  "include": ["src"],
+  "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules", "dist"]
 }

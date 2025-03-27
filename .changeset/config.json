@@ -7,5 +7,11 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["demo", "studio"]
+  "ignore": [
+    "demo",
+    "studio",
+    "@vyuh/sanity-schema-*",
+    "@vyuh/react-feature-*",
+    "!@vyuh/react-feature-system"
+  ]
 }
