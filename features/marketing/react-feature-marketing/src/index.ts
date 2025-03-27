@@ -1,4 +1,5 @@
 import { BannerContentBuilder } from '@/content/banner/banner-builder';
+import { FAQContentBuilder } from '@/content/faq/faq-builder';
 import { FeatureContentBuilder } from '@/content/feature/feature-builder';
 import { HeroContentBuilder } from '@/content/hero/hero-builder';
 import { HeroDescriptor } from '@/content/hero/hero-descriptor';
@@ -24,6 +25,7 @@ export const marketing = new FeatureDescriptor({
         new HeroContentBuilder(),
         new FeatureContentBuilder(),
         new BannerContentBuilder(),
+        new FAQContentBuilder(),
       ],
     }),
   ],

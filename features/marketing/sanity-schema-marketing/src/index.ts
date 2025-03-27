@@ -3,30 +3,30 @@ import {
   FeatureDescriptor,
 } from '@vyuh/sanity-schema-core';
 import { RouteDescriptor } from '@vyuh/sanity-schema-system';
-import { defaultHeroLayout, HeroDescriptor, heroSchema } from './content/hero';
-import { logoSchema } from './content/logo';
-import {
-  defaultFeatureLayout,
-  featureSchema,
-  FeatureSectionDescriptor,
-} from './content/feature';
-import { ctaSchema } from './content/cta';
-import { bentoSchema } from './content/bento';
-import { pricingSchema } from './content/pricing';
-import { headerSchema } from './content/header';
-import { newsletterSchema } from './content/newsletter';
-import { statsSchema } from './content/stats';
-import { testimonialsSchema } from './content/testimonials';
-import { blogSchema } from './content/blog';
-import { teamSchema } from './content/team';
-import { logoCloudsSchema } from './content/logo-clouds';
-import { faqSchema } from './content/faq';
-import { footerSchema } from './content/footer';
 import {
   BannerDescriptor,
   bannerSchema,
   defaultBannerLayout,
 } from './content/banner';
+import { bentoSchema } from './content/bento';
+import { blogSchema } from './content/blog';
+import { ctaSchema } from './content/cta';
+import { defaultFaqLayout, FAQDescriptor, faqSchema } from './content/faq';
+import {
+  defaultFeatureLayout,
+  featureSchema,
+  FeatureSectionDescriptor,
+} from './content/feature';
+import { footerSchema } from './content/footer';
+import { headerSchema } from './content/header';
+import { defaultHeroLayout, HeroDescriptor, heroSchema } from './content/hero';
+import { logoSchema } from './content/logo';
+import { logoCloudsSchema } from './content/logo-clouds';
+import { newsletterSchema } from './content/newsletter';
+import { pricingSchema } from './content/pricing';
+import { statsSchema } from './content/stats';
+import { teamSchema } from './content/team';
+import { testimonialsSchema } from './content/testimonials';
 
 export const marketing = new FeatureDescriptor({
   name: 'marketing',
@@ -42,6 +42,9 @@ export const marketing = new FeatureDescriptor({
     }),
     new BannerDescriptor({
       layouts: [defaultBannerLayout],
+    }),
+    new FAQDescriptor({
+      layouts: [defaultFaqLayout],
     }),
     new RouteDescriptor({
       regionItems: [

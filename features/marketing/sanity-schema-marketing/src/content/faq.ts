@@ -1,3 +1,4 @@
+import { ContentDescriptor } from '@vyuh/sanity-schema-core';
 import { defineField, defineType } from 'sanity';
 import { TbQuestionMark as Icon } from 'react-icons/tb';
 
@@ -24,29 +25,7 @@ export const faqSchema = defineType({
       type: 'text',
       description: 'A supporting text that appears below the title',
     }),
-    defineField({
-      name: 'variant',
-      title: 'Variant',
-      type: 'string',
-      description: 'The style variant for the FAQ section',
-      options: {
-        list: [
-          { title: 'Simple with wide questions', value: 'simple-wide' },
-          { title: 'Two columns', value: 'two-columns' },
-          { title: 'Offset with supporting content', value: 'offset-supporting' },
-          { title: 'With contact details', value: 'with-contact' },
-          { title: 'Centered accordion', value: 'centered-accordion' },
-        ],
-      },
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'darkMode',
-      title: 'Dark Mode',
-      type: 'boolean',
-      description: 'Whether this section should be displayed in dark mode',
-      initialValue: false,
-    }),
+
     defineField({
       name: 'questions',
       title: 'Questions',
@@ -83,14 +62,16 @@ export const faqSchema = defineType({
       title: 'Categories',
       type: 'array',
       of: [{ type: 'string' }],
-      description: 'Categories for grouping questions (if using categorized questions)',
+      description:
+        'Categories for grouping questions (if using categorized questions)',
     }),
     defineField({
       name: 'contactInfo',
       title: 'Contact Information',
       type: 'object',
-      description: 'Contact details for variants that include contact information',
-      hidden: ({ parent }) => parent?.variant !== 'with-contact',
+      description:
+        'Contact details for variants that include contact information',
+      // Note: Variant is now in layout, not in content schema
       fields: [
         defineField({
           name: 'title',
@@ -102,7 +83,8 @@ export const faqSchema = defineType({
           name: 'description',
           title: 'Description',
           type: 'text',
-          description: 'E.g., "Can\'t find the answer you\'re looking for? Please contact our support team."',
+          description:
+            'E.g., "Can\'t find the answer you\'re looking for? Please contact our support team."',
         }),
         defineField({
           name: 'email',
@@ -122,48 +104,78 @@ export const faqSchema = defineType({
         }),
       ],
     }),
-    defineField({
-      name: 'supportingContent',
-      title: 'Supporting Content',
-      type: 'object',
-      description: 'Additional content for variants with supporting content',
-      hidden: ({ parent }) => parent?.variant !== 'offset-supporting',
-      fields: [
-        defineField({
-          name: 'title',
-          title: 'Title',
-          type: 'string',
-        }),
-        defineField({
-          name: 'content',
-          title: 'Content',
-          type: 'vyuh.portableText',
-        }),
-        defineField({
-          name: 'action',
-          title: 'Action',
-          type: 'vyuh.action',
-        }),
-      ],
-    }),
-    defineField({
-      name: 'action',
-      title: 'Action',
-      type: 'vyuh.action',
-      description: 'Optional call-to-action button for the FAQ section',
-    }),
   ],
   preview: {
     select: {
       title: 'title',
-      subtitle: 'variant',
       questionCount: 'questions.length',
     },
-    prepare({ title, subtitle, questionCount = 0 }) {
+    prepare({ title, questionCount = 0 }) {
       return {
         title: title || 'FAQ Section',
-        subtitle: `Variant: ${subtitle || 'None'} • ${questionCount} question${questionCount === 1 ? '' : 's'}`,
+        subtitle: `${questionCount} question${questionCount === 1 ? '' : 's'}`,
+        media: Icon,
       };
     },
   },
 });
+
+export const defaultFaqLayout = defineType({
+  name: `${faqSchema.name}.layout.default`,
+  title: 'Default',
+  type: 'object',
+  icon: Icon,
+  fields: [
+    defineField({
+      name: 'variant',
+      title: 'Variant',
+      type: 'string',
+      initialValue: 'simple-wide',
+      options: {
+        list: [
+          { title: 'Simple with wide questions', value: 'simple-wide' },
+          { title: 'Two columns', value: 'two-columns' },
+          { title: 'With contact details', value: 'with-contact' },
+          { title: 'Centered accordion', value: 'centered-accordion' },
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'darkMode',
+      title: 'Dark Mode',
+      type: 'boolean',
+      description: 'Whether this section should be displayed in dark mode',
+      initialValue: false,
+    }),
+  ],
+  preview: {
+    select: {
+      variant: 'variant',
+      darkMode: 'darkMode',
+    },
+    prepare({ variant, darkMode }) {
+      // Format the variant name for display
+      const variantDisplay = variant
+        ? variant
+            .split('-')
+            .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ')
+        : 'Simple Wide';
+
+      return {
+        title: `FAQ Layout: ${variantDisplay}`,
+        subtitle: darkMode ? 'Dark Mode' : undefined,
+        media: Icon,
+      };
+    },
+  },
+});
+
+export class FAQDescriptor extends ContentDescriptor {
+  static readonly schemaName = faqSchema.name;
+
+  constructor(props: Partial<FAQDescriptor>) {
+    super(FAQDescriptor.schemaName, props);
+  }
+}
