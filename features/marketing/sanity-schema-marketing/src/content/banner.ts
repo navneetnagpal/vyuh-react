@@ -1,5 +1,7 @@
+import { ContentDescriptor } from '@vyuh/sanity-schema-core';
 import { defineField, defineType } from 'sanity';
 import { TbFlag as Icon } from 'react-icons/tb';
+import { backgroundField } from '@/object/background';
 
 /**
  * Banner element schema for marketing pages
@@ -19,21 +21,75 @@ export const bannerSchema = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'icon',
+      title: 'Icon',
+      type: 'string',
+      description: 'Optional icon name from your icon library',
+    }),
+    defineField({
+      name: 'action',
+      title: 'Action',
+      type: 'vyuh.action',
+      description: 'Call-to-action button for the banner',
+    }),
+    defineField({
+      name: 'dismissible',
+      title: 'Dismissible',
+      type: 'boolean',
+      description: 'Whether the banner can be dismissed by the user',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'dismissText',
+      title: 'Dismiss Text',
+      type: 'string',
+      description: 'Text for the dismiss button (e.g., "Dismiss" or "Close")',
+      initialValue: 'Dismiss',
+      hidden: ({ parent }) => !parent?.dismissible,
+    }),
+    defineField({
+      name: 'cookieId',
+      title: 'Cookie ID',
+      type: 'string',
+      description: 'Unique identifier for storing dismiss state in cookies',
+      hidden: ({ parent }) => !parent?.dismissible,
+    }),
+  ],
+  preview: {
+    select: {
+      title: 'text',
+      dismissible: 'dismissible',
+    },
+    prepare({ title, dismissible }) {
+      return {
+        title: title || 'Banner',
+        subtitle: dismissible ? 'Dismissible' : undefined,
+        media: Icon,
+      };
+    },
+  },
+});
+
+export const defaultBannerLayout = defineType({
+  name: `${bannerSchema.name}.layout.default`,
+  title: 'Default',
+  type: 'object',
+  icon: Icon,
+  fields: [
+    defineField({
       name: 'variant',
       title: 'Variant',
       type: 'string',
-      description: 'The style variant for the banner',
+      initialValue: 'simple',
       options: {
         list: [
           { title: 'Simple', value: 'simple' },
-          { title: 'With dismiss button', value: 'with-dismiss' },
           { title: 'With action button', value: 'with-action' },
           { title: 'Floating', value: 'floating' },
           { title: 'Sticky top', value: 'sticky-top' },
           { title: 'Sticky bottom', value: 'sticky-bottom' },
         ],
       },
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'colorScheme',
@@ -52,59 +108,38 @@ export const bannerSchema = defineType({
       },
       initialValue: 'default',
     }),
-    defineField({
-      name: 'icon',
-      title: 'Icon',
-      type: 'string',
-      description: 'Optional icon name from your icon library',
-    }),
-    defineField({
-      name: 'action',
-      title: 'Action',
-      type: 'vyuh.action',
-      description: 'Call-to-action button for the banner',
-      hidden: ({ parent }) => parent?.variant !== 'with-action',
-      validation: (Rule) => Rule.custom((value, context) => {
-        if (context.parent?.variant === 'with-action' && !value) {
-          return 'Action is required for the "with-action" variant';
-        }
-        return true;
-      }),
-    }),
-    defineField({
-      name: 'dismissible',
-      title: 'Dismissible',
-      type: 'boolean',
-      description: 'Whether the banner can be dismissed by the user',
-      initialValue: false,
-      hidden: ({ parent }) => parent?.variant !== 'with-dismiss',
-    }),
-    defineField({
-      name: 'dismissText',
-      title: 'Dismiss Text',
-      type: 'string',
-      description: 'Text for the dismiss button (e.g., "Dismiss" or "Close")',
-      initialValue: 'Dismiss',
-      hidden: ({ parent }) => parent?.variant !== 'with-dismiss' || !parent?.dismissible,
-    }),
-    defineField({
-      name: 'cookieId',
-      title: 'Cookie ID',
-      type: 'string',
-      description: 'Unique identifier for storing dismiss state in cookies',
-      hidden: ({ parent }) => parent?.variant !== 'with-dismiss' || !parent?.dismissible,
-    }),
+    backgroundField(),
   ],
   preview: {
     select: {
-      title: 'text',
-      subtitle: 'variant',
+      variant: 'variant',
+      colorScheme: 'colorScheme',
+      background: 'background.type',
     },
-    prepare({ title, subtitle }) {
+    prepare({ variant, colorScheme, background }) {
+      // Format the variant name for display
+      const variantDisplay = variant
+        ? variant
+            .split('-')
+            .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ')
+        : 'Simple';
+
+      let bgDisplay = `Background: ${background ?? 'None'}`;
+
       return {
-        title: title || 'Banner',
-        subtitle: `Variant: ${subtitle || 'None'}`,
+        title: `Banner Layout: ${variantDisplay}`,
+        subtitle: `Color: ${colorScheme || 'Default'}, ${bgDisplay}`,
+        media: Icon,
       };
     },
   },
 });
+
+export class BannerDescriptor extends ContentDescriptor {
+  static readonly schemaName = bannerSchema.name;
+
+  constructor(props: Partial<BannerDescriptor>) {
+    super(BannerDescriptor.schemaName, props);
+  }
+}

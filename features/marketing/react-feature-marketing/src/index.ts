@@ -1,3 +1,4 @@
+import { BannerContentBuilder } from '@/content/banner/banner-builder';
 import { FeatureContentBuilder } from '@/content/feature/feature-builder';
 import { HeroContentBuilder } from '@/content/hero/hero-builder';
 import { HeroDescriptor } from '@/content/hero/hero-descriptor';
@@ -19,7 +20,11 @@ export const marketing = new FeatureDescriptor({
   extensions: [
     new ContentExtensionDescriptor({
       contents: [new HeroDescriptor()],
-      contentBuilders: [new HeroContentBuilder(), new FeatureContentBuilder()],
+      contentBuilders: [
+        new HeroContentBuilder(),
+        new FeatureContentBuilder(),
+        new BannerContentBuilder(),
+      ],
     }),
   ],
 });

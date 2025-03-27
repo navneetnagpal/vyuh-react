@@ -1,4 +1,4 @@
-import { backgroundField } from '../object/background';
+import { backgroundField } from '@/object/background';
 import {
   ContentDescriptor,
   ContentSchemaBuilder,

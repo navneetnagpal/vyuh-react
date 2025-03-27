@@ -22,7 +22,11 @@ import { teamSchema } from './content/team';
 import { logoCloudsSchema } from './content/logo-clouds';
 import { faqSchema } from './content/faq';
 import { footerSchema } from './content/footer';
-import { bannerSchema } from './content/banner';
+import {
+  BannerDescriptor,
+  bannerSchema,
+  defaultBannerLayout,
+} from './content/banner';
 
 export const marketing = new FeatureDescriptor({
   name: 'marketing',
@@ -35,6 +39,9 @@ export const marketing = new FeatureDescriptor({
     }),
     new FeatureSectionDescriptor({
       layouts: [defaultFeatureLayout],
+    }),
+    new BannerDescriptor({
+      layouts: [defaultBannerLayout],
     }),
     new RouteDescriptor({
       regionItems: [
