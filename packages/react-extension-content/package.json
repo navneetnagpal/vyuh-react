@@ -1,6 +1,6 @@
 {
   "name": "@vyuh/react-extension-content",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Content extension for the Vyuh Framework",
   "type": "module",
   "scripts": {
@@ -49,7 +49,7 @@
     "typescript": "^5.8.2"
   },
   "dependencies": {
-    "@vyuh/react-core": "^0.2.2",
+    "@vyuh/react-core": "^0.2.3",
     "lucide-react": "^0.482.0",
     "rxjs": "^7.8.2"
   },

@@ -1,5 +1,12 @@
 # @vyuh/react-feature-system
 
+## 0.2.3
+
+### Patch Changes
+
+- @vyuh/react-core@0.2.3
+- @vyuh/react-extension-content@0.2.3
+
 ## 0.2.2
 
 ### Patch Changes

@@ -31,22 +31,6 @@ export class SanityLiveContentProvider implements LiveContentProvider {
       params,
     });
 
-    // Create the Sanity subscription
-    // const sanitySubscription = source.subscribe();
-
-    // Return a new observable that wraps the source.observable
-    // and handles cleanup of both subscriptions
-    // return new Observable<T>((observer) => {
-    //   // Subscribe to the source observable with explicit handlers
-    //   const subscription = source.observable.subscribe(observer);
-    //
-    //   // Return a teardown function that cleans up both subscriptions
-    //   return () => {
-    //     sanitySubscription();
-    //     subscription.unsubscribe();
-    //   };
-    // });
-
     return source.observable;
   }
 

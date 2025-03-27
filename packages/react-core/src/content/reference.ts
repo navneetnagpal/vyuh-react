@@ -25,7 +25,7 @@ export class ObjectReference {
   constructor(json: Record<string, any>) {
     const { content } = useVyuhStore.getState().plugins;
 
-    this.type = content.provider.schemaType(json);
+    this.type = content.provider.schemaType(json) || 'reference';
     this.ref = content.provider.reference(json) || '';
   }
 }

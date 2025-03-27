@@ -1,5 +1,12 @@
 # @vyuh/react-plugin-content-provider-sanity
 
+## 0.2.3
+
+### Patch Changes
+
+- Simplifying the use of sanity sdk for live queries
+  - @vyuh/react-core@0.2.3
+
 ## 0.2.2
 
 ### Patch Changes
