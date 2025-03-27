@@ -4,6 +4,4 @@ export * from './FeatureWithScreenshot';
 export * from './FeatureCenteredGrid';
 export * from './FeatureWithScreenshotDark';
 export * from './FeatureThreeColumn';
-export * from './FeatureWithLeftScreenshot';
-export * from './FeatureWithCodeExample';
 export * from './FeatureSimple';

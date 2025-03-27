@@ -17,7 +17,7 @@ export const FeatureSimple: React.FC<FeatureComponentProps> = ({
   const { title, description, features, actions } = content;
 
   return (
-    <div className="flex max-w-7xl items-center justify-center bg-white py-24 sm:py-32">
+    <div className="mx-auto flex max-w-7xl items-center justify-center bg-white py-24 sm:py-32">
       <div className="mx-auto">
         <FeatureTitle title={title} />
         <FeatureDescription description={description} />
