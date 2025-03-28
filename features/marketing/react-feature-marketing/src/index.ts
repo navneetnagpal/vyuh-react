@@ -4,6 +4,8 @@ import { CTAContentBuilder } from '@/content/cta/cta-builder';
 import { CTADescriptor } from '@/content/cta/cta-descriptor';
 import { FAQContentBuilder } from '@/content/faq/faq-builder';
 import { FeatureContentBuilder } from '@/content/feature/feature-builder';
+import { HeaderContentBuilder } from '@/content/header/header-builder';
+import { HeaderDescriptor } from '@/content/header/header-descriptor';
 import { HeroContentBuilder } from '@/content/hero/hero-builder';
 import { HeroDescriptor } from '@/content/hero/hero-descriptor';
 import { FeatureDescriptor } from '@vyuh/react-core';
@@ -23,13 +25,14 @@ export const marketing = new FeatureDescriptor({
   icon: 'layout-grid',
   extensions: [
     new ContentExtensionDescriptor({
-      contents: [new HeroDescriptor(), new BannerDescriptor(), new CTADescriptor()],
+      contents: [new HeroDescriptor(), new BannerDescriptor(), new CTADescriptor(), new HeaderDescriptor()],
       contentBuilders: [
         new HeroContentBuilder(),
         new FeatureContentBuilder(),
         new BannerContentBuilder(),
         new FAQContentBuilder(),
         new CTAContentBuilder(),
+        new HeaderContentBuilder(),
       ],
     }),
   ],

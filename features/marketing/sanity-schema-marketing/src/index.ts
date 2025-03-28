@@ -18,7 +18,13 @@ import {
   FeatureSectionDescriptor,
 } from './content/feature';
 import { footerSchema } from './content/footer';
-import { headerSchema } from './content/header';
+import {
+  defaultHeaderLayout,
+  HeaderDescriptor,
+  headerSchema,
+  navigationItemSchema,
+  navigationDropdownItemSchema
+} from './content/header';
 import { defaultHeroLayout, HeroDescriptor, heroSchema } from './content/hero';
 import { logoSchema } from './content/logo';
 import { logoCloudsSchema } from './content/logo-clouds';
@@ -49,6 +55,9 @@ export const marketing = new FeatureDescriptor({
     new FAQDescriptor({
       layouts: [defaultFaqLayout],
     }),
+    new HeaderDescriptor({
+      layouts: [defaultHeaderLayout],
+    }),
     new RouteDescriptor({
       regionItems: [
         { type: bannerSchema.name },
@@ -73,6 +82,9 @@ export const marketing = new FeatureDescriptor({
   contentSchemaBuilders: [
     new BuiltContentSchemaBuilder(bannerSchema),
     new BuiltContentSchemaBuilder(headerSchema),
+    new BuiltContentSchemaBuilder(defaultHeaderLayout),
+    new BuiltContentSchemaBuilder(navigationItemSchema),
+    new BuiltContentSchemaBuilder(navigationDropdownItemSchema),
     new BuiltContentSchemaBuilder(heroSchema),
     new BuiltContentSchemaBuilder(logoSchema),
     new BuiltContentSchemaBuilder(logoCloudsSchema),
