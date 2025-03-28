@@ -1,5 +1,6 @@
 import { defineField, defineType } from 'sanity';
 import { TbChartBar as Icon } from 'react-icons/tb';
+import { ContentDescriptor } from '@vyuh/sanity-schema-core';
 
 /**
  * Stats section schema for marketing pages
@@ -23,35 +24,13 @@ export const statsSchema = defineType({
       type: 'text',
       description: 'A supporting text that appears with the title',
     }),
-    defineField({
-      name: 'variant',
-      title: 'Variant',
-      type: 'string',
-      description: 'The style variant for the stats section',
-      options: {
-        list: [
-          { title: 'Simple', value: 'simple' },
-          { title: 'With description', value: 'with-description' },
-          { title: 'Grid with heading', value: 'grid-with-heading' },
-          { title: 'With image', value: 'with-image' },
-          { title: 'Card grid', value: 'card-grid' },
-        ],
-      },
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'darkMode',
-      title: 'Dark Mode',
-      type: 'boolean',
-      description: 'Whether this section should be displayed in dark mode',
-      initialValue: false,
-    }),
+
     defineField({
       name: 'description',
       title: 'Description',
       type: 'text',
       description: 'Detailed description for variants that include descriptions',
-      hidden: ({ parent }) => !['with-description', 'grid-with-heading'].includes(parent?.variant),
+
     }),
     defineField({
       name: 'image',
@@ -61,7 +40,7 @@ export const statsSchema = defineType({
       options: {
         hotspot: true,
       },
-      hidden: ({ parent }) => parent?.variant !== 'with-image',
+
     }),
     defineField({
       name: 'stats',
@@ -112,14 +91,83 @@ export const statsSchema = defineType({
   preview: {
     select: {
       title: 'title',
-      subtitle: 'variant',
       statCount: 'stats.length',
     },
-    prepare({ title, subtitle, statCount = 0 }) {
+    prepare({ title, statCount = 0 }) {
       return {
         title: title || 'Stats Section',
-        subtitle: `Variant: ${subtitle || 'None'} • ${statCount} stat${statCount === 1 ? '' : 's'}`,
+        subtitle: `${statCount} stat${statCount === 1 ? '' : 's'}`,
       };
     },
   },
 });
+
+/**
+ * Default layout schema for stats content items
+ */
+export const defaultStatsLayout = defineType({
+  name: `${statsSchema.name}.layout.default`,
+  title: 'Default',
+  type: 'object',
+  icon: Icon,
+  fields: [
+    defineField({
+      name: 'variant',
+      title: 'Variant',
+      type: 'string',
+      description: 'The style variant for the stats section',
+      options: {
+        list: [
+          { title: 'Simple', value: 'simple' },
+          { title: 'With description', value: 'with-description' },
+          { title: 'Grid with heading', value: 'grid-with-heading' },
+          { title: 'With image', value: 'with-image' },
+          { title: 'Card grid', value: 'card-grid' },
+        ],
+      },
+      initialValue: 'simple',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'darkMode',
+      title: 'Dark Mode',
+      type: 'boolean',
+      description: 'Whether this section should be displayed in dark mode',
+      initialValue: false,
+    }),
+  ],
+  preview: {
+    select: {
+      variant: 'variant',
+      darkMode: 'darkMode',
+    },
+    prepare({ variant, darkMode }) {
+      const variantDisplay = variant
+        ? variant
+            .split('-')
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ')
+        : 'Simple';
+
+      const features = [];
+      if (darkMode) features.push('Dark Mode');
+
+      return {
+        title: `Stats Layout: ${variantDisplay}`,
+        subtitle: features.length > 0 ? features.join(', ') : 'Default',
+        media: Icon,
+      };
+    },
+  },
+});
+
+/**
+ * Content descriptor for stats content items
+ */
+export class StatsDescriptor extends ContentDescriptor {
+  static readonly schemaName = statsSchema.name;
+
+  constructor(props: Partial<StatsDescriptor>) {
+    super(StatsDescriptor.schemaName, props);
+  }
+}

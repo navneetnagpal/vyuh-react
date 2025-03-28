@@ -1,5 +1,6 @@
 import { defineField, defineType } from 'sanity';
 import { TbQuote as Icon } from 'react-icons/tb';
+import { ContentDescriptor } from '@vyuh/sanity-schema-core';
 
 /**
  * Testimonials section schema for marketing pages
@@ -23,30 +24,7 @@ export const testimonialsSchema = defineType({
       type: 'text',
       description: 'A supporting text that appears with the title',
     }),
-    defineField({
-      name: 'variant',
-      title: 'Variant',
-      type: 'string',
-      description: 'The style variant for the testimonials section',
-      options: {
-        list: [
-          { title: 'Simple centered', value: 'simple-centered' },
-          { title: 'Side by side', value: 'side-by-side' },
-          { title: 'With large avatar', value: 'with-large-avatar' },
-          { title: 'With company logos', value: 'with-company-logos' },
-          { title: 'Card grid', value: 'card-grid' },
-          { title: 'With background image', value: 'with-background-image' },
-        ],
-      },
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'darkMode',
-      title: 'Dark Mode',
-      type: 'boolean',
-      description: 'Whether this section should be displayed in dark mode',
-      initialValue: false,
-    }),
+
     defineField({
       name: 'backgroundImage',
       title: 'Background Image',
@@ -115,7 +93,7 @@ export const testimonialsSchema = defineType({
               title: 'Company Logo',
               type: 'image',
               description: 'Logo of the company for variants that display logos',
-              hidden: ({ parent }) => parent?.variant !== 'with-company-logos',
+
             }),
           ],
         },
@@ -132,14 +110,84 @@ export const testimonialsSchema = defineType({
   preview: {
     select: {
       title: 'title',
-      subtitle: 'variant',
       testimonialCount: 'testimonials.length',
     },
-    prepare({ title, subtitle, testimonialCount = 0 }) {
+    prepare({ title, testimonialCount = 0 }) {
       return {
         title: title || 'Testimonials Section',
-        subtitle: `Variant: ${subtitle || 'None'} • ${testimonialCount} testimonial${testimonialCount === 1 ? '' : 's'}`,
+        subtitle: `${testimonialCount} testimonial${testimonialCount === 1 ? '' : 's'}`,
       };
     },
   },
 });
+
+/**
+ * Default layout schema for testimonials content items
+ */
+export const defaultTestimonialsLayout = defineType({
+  name: `${testimonialsSchema.name}.layout.default`,
+  title: 'Default',
+  type: 'object',
+  icon: Icon,
+  fields: [
+    defineField({
+      name: 'variant',
+      title: 'Variant',
+      type: 'string',
+      description: 'The style variant for the testimonials section',
+      options: {
+        list: [
+          { title: 'Simple centered', value: 'simple-centered' },
+          { title: 'Side by side', value: 'side-by-side' },
+          { title: 'With large avatar', value: 'with-large-avatar' },
+          { title: 'With company logos', value: 'with-company-logos' },
+          { title: 'Card grid', value: 'card-grid' },
+          { title: 'With background image', value: 'with-background-image' },
+        ],
+      },
+      initialValue: 'simple-centered',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'darkMode',
+      title: 'Dark Mode',
+      type: 'boolean',
+      description: 'Whether this section should be displayed in dark mode',
+      initialValue: false,
+    }),
+  ],
+  preview: {
+    select: {
+      variant: 'variant',
+      darkMode: 'darkMode',
+    },
+    prepare({ variant, darkMode }) {
+      const variantDisplay = variant
+        ? variant
+            .split('-')
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ')
+        : 'Simple Centered';
+
+      const features = [];
+      if (darkMode) features.push('Dark Mode');
+
+      return {
+        title: `Testimonials Layout: ${variantDisplay}`,
+        subtitle: features.length > 0 ? features.join(', ') : 'Default',
+        media: Icon,
+      };
+    },
+  },
+});
+
+/**
+ * Content descriptor for testimonials content items
+ */
+export class TestimonialsDescriptor extends ContentDescriptor {
+  static readonly schemaName = testimonialsSchema.name;
+
+  constructor(props: Partial<TestimonialsDescriptor>) {
+    super(TestimonialsDescriptor.schemaName, props);
+  }
+}

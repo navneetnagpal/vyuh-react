@@ -118,16 +118,18 @@ export const defaultLogoLayout = defineType({
       columns: 'columns',
     },
     prepare({ variant, darkMode, columns }) {
-      const variantDisplay = {
-        'simple-grid': 'Simple Grid',
-        'with-borders': 'With Borders',
-        'grayscale': 'Grayscale',
-        'carousel': 'Carousel',
-      }[variant] || 'Default';
+      const variantDisplay: string =
+        {
+          'simple-grid': 'Simple Grid',
+          'with-borders': 'With Borders',
+          grayscale: 'Grayscale',
+          carousel: 'Carousel',
+        }[variant as string] || 'Default';
 
       const features = [];
       if (darkMode) features.push('Dark Mode');
-      if (columns && variant !== 'carousel') features.push(`${columns} columns`);
+      if (columns && variant !== 'carousel')
+        features.push(`${columns} columns`);
 
       return {
         title: `Logo Layout: ${variantDisplay}`,

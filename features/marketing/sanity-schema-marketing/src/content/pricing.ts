@@ -1,5 +1,6 @@
 import { defineField, defineType } from 'sanity';
 import { TbCurrencyDollar as Icon } from 'react-icons/tb';
+import { ContentDescriptor } from '@vyuh/sanity-schema-core';
 
 /**
  * Pricing section schema for marketing pages
@@ -24,29 +25,7 @@ export const pricingSchema = defineType({
       type: 'text',
       description: 'A supporting text that appears below the title',
     }),
-    defineField({
-      name: 'variant',
-      title: 'Variant',
-      type: 'string',
-      description: 'The style variant for the pricing section',
-      options: {
-        list: [
-          { title: 'Simple three tiers', value: 'simple-three-tiers' },
-          { title: 'Two tiers with highlighted tier', value: 'two-tiers-highlighted' },
-          { title: 'Three tiers with emphasized tier', value: 'three-tiers-emphasized' },
-          { title: 'Single tier with feature list', value: 'single-tier-features' },
-          { title: 'Two tiers with feature comparison', value: 'two-tiers-comparison' },
-        ],
-      },
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'darkMode',
-      title: 'Dark Mode',
-      type: 'boolean',
-      description: 'Whether this section should be displayed in dark mode',
-      initialValue: false,
-    }),
+
     defineField({
       name: 'frequency',
       title: 'Billing Frequency Toggle',
@@ -149,14 +128,83 @@ export const pricingSchema = defineType({
   preview: {
     select: {
       title: 'title',
-      subtitle: 'variant',
       planCount: 'plans.length',
     },
-    prepare({ title, subtitle, planCount = 0 }) {
+    prepare({ title, planCount = 0 }) {
       return {
         title: title || 'Pricing Section',
-        subtitle: `Variant: ${subtitle || 'None'} • ${planCount} plan${planCount === 1 ? '' : 's'}`,
+        subtitle: `${planCount} plan${planCount === 1 ? '' : 's'}`,
       };
     },
   },
 });
+
+/**
+ * Default layout schema for pricing content items
+ */
+export const defaultPricingLayout = defineType({
+  name: `${pricingSchema.name}.layout.default`,
+  title: 'Default',
+  type: 'object',
+  icon: Icon,
+  fields: [
+    defineField({
+      name: 'variant',
+      title: 'Variant',
+      type: 'string',
+      description: 'The style variant for the pricing section',
+      options: {
+        list: [
+          { title: 'Simple three tiers', value: 'simple-three-tiers' },
+          { title: 'Two tiers highlighted', value: 'two-tiers-highlighted' },
+          { title: 'Three tiers emphasized', value: 'three-tiers-emphasized' },
+          { title: 'Single tier features', value: 'single-tier-features' },
+          { title: 'Two tiers comparison', value: 'two-tiers-comparison' },
+        ],
+      },
+      initialValue: 'simple-three-tiers',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'darkMode',
+      title: 'Dark Mode',
+      type: 'boolean',
+      description: 'Whether this section should be displayed in dark mode',
+      initialValue: false,
+    }),
+  ],
+  preview: {
+    select: {
+      variant: 'variant',
+      darkMode: 'darkMode',
+    },
+    prepare({ variant, darkMode }) {
+      const variantDisplay = variant
+        ? variant
+            .split('-')
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ')
+        : 'Simple Three Tiers';
+
+      const features = [];
+      if (darkMode) features.push('Dark Mode');
+
+      return {
+        title: `Pricing Layout: ${variantDisplay}`,
+        subtitle: features.length > 0 ? features.join(', ') : 'Default',
+        media: Icon,
+      };
+    },
+  },
+});
+
+/**
+ * Content descriptor for pricing content items
+ */
+export class PricingDescriptor extends ContentDescriptor {
+  static readonly schemaName = pricingSchema.name;
+
+  constructor(props: Partial<PricingDescriptor>) {
+    super(PricingDescriptor.schemaName, props);
+  }
+}

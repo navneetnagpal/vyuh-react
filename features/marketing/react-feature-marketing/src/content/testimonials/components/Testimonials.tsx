@@ -34,15 +34,15 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
 
     return (
       <div className="mt-10 flex justify-center">
-        <a
-          href={content.action.url}
+        <button
+          onClick={() => content.action?.execute()}
           className={cn(
             'rounded-md px-3.5 py-2.5 text-sm font-semibold shadow-sm',
             buttonClasses
           )}
         >
-          {content.action.label}
-        </a>
+          {content.action.title || 'Learn more'}
+        </button>
       </div>
     );
   };
@@ -59,7 +59,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
         >
           <div className="mx-auto max-w-7xl">
             <TestimonialsHeader content={content} />
-            
+
             <div className="mx-auto mt-10 max-w-2xl">
               {content.testimonials.map((testimonial, index) => (
                 <TestimonialItem
@@ -71,7 +71,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
                 />
               ))}
             </div>
-            
+
             {renderAction()}
           </div>
         </div>
@@ -88,7 +88,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
         >
           <div className="mx-auto max-w-7xl">
             <TestimonialsHeader content={content} />
-            
+
             <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-2">
               {content.testimonials.map((testimonial, index) => (
                 <TestimonialItem
@@ -99,7 +99,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
                 />
               ))}
             </div>
-            
+
             {renderAction()}
           </div>
         </div>
@@ -116,7 +116,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
         >
           <div className="mx-auto max-w-7xl">
             <TestimonialsHeader content={content} />
-            
+
             <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-2">
               {content.testimonials.map((testimonial, index) => (
                 <TestimonialItem
@@ -127,7 +127,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
                 />
               ))}
             </div>
-            
+
             {renderAction()}
           </div>
         </div>
@@ -144,7 +144,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
         >
           <div className="mx-auto max-w-7xl">
             <TestimonialsHeader content={content} />
-            
+
             <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
               {content.testimonials.map((testimonial, index) => (
                 <TestimonialItem
@@ -155,7 +155,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
                 />
               ))}
             </div>
-            
+
             {renderAction()}
           </div>
         </div>
@@ -172,7 +172,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
         >
           <div className="mx-auto max-w-7xl">
             <TestimonialsHeader content={content} />
-            
+
             <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
               {content.testimonials.map((testimonial, index) => (
                 <TestimonialItem
@@ -183,7 +183,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
                 />
               ))}
             </div>
-            
+
             {renderAction()}
           </div>
         </div>
@@ -202,13 +202,13 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
               <div className={`absolute inset-0 ${darkMode ? 'bg-gray-900/90' : 'bg-white/80'}`} />
             </div>
           )}
-          
+
           <div className="mx-auto max-w-7xl px-6 py-16">
             <TestimonialsHeader
               content={content}
               className={darkMode ? 'text-white' : 'text-gray-900'}
             />
-            
+
             <div className="mx-auto mt-10 max-w-2xl">
               {content.testimonials.map((testimonial, index) => (
                 <TestimonialItem
@@ -220,7 +220,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
                 />
               ))}
             </div>
-            
+
             {renderAction()}
           </div>
         </div>
@@ -237,7 +237,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
         >
           <div className="mx-auto max-w-7xl">
             <TestimonialsHeader content={content} />
-            
+
             <div className="mx-auto mt-10 max-w-2xl">
               {content.testimonials.map((testimonial, index) => (
                 <TestimonialItem
@@ -249,7 +249,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
                 />
               ))}
             </div>
-            
+
             {renderAction()}
           </div>
         </div>

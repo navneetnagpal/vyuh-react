@@ -1,5 +1,6 @@
 import { defineField, defineType } from 'sanity';
 import { TbMail as Icon } from 'react-icons/tb';
+import { ContentDescriptor } from '@vyuh/sanity-schema-core';
 
 /**
  * Newsletter section schema for marketing pages
@@ -24,29 +25,7 @@ export const newsletterSchema = defineType({
       type: 'text',
       description: 'A supporting text that appears below the title',
     }),
-    defineField({
-      name: 'variant',
-      title: 'Variant',
-      type: 'string',
-      description: 'The style variant for the newsletter section',
-      options: {
-        list: [
-          { title: 'Simple centered', value: 'simple-centered' },
-          { title: 'Simple card', value: 'simple-card' },
-          { title: 'With background image', value: 'with-background-image' },
-          { title: 'Split with image', value: 'split-with-image' },
-          { title: 'With description', value: 'with-description' },
-        ],
-      },
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'darkMode',
-      title: 'Dark Mode',
-      type: 'boolean',
-      description: 'Whether this section should be displayed in dark mode',
-      initialValue: false,
-    }),
+
     defineField({
       name: 'image',
       title: 'Image',
@@ -55,7 +34,7 @@ export const newsletterSchema = defineType({
       options: {
         hotspot: true,
       },
-      hidden: ({ parent }) => !['with-background-image', 'split-with-image'].includes(parent?.variant),
+
     }),
     defineField({
       name: 'formAction',
@@ -91,19 +70,87 @@ export const newsletterSchema = defineType({
       type: 'array',
       of: [{ type: 'string' }],
       description: 'Optional list of features or benefits to display',
-      hidden: ({ parent }) => parent?.variant !== 'with-description',
+
     }),
   ],
   preview: {
     select: {
       title: 'title',
-      subtitle: 'variant',
     },
-    prepare({ title, subtitle }) {
+    prepare({ title }) {
       return {
         title: title || 'Newsletter Section',
-        subtitle: `Variant: ${subtitle || 'None'}`,
       };
     },
   },
 });
+
+/**
+ * Default layout schema for newsletter content items
+ */
+export const defaultNewsletterLayout = defineType({
+  name: `${newsletterSchema.name}.layout.default`,
+  title: 'Default',
+  type: 'object',
+  icon: Icon,
+  fields: [
+    defineField({
+      name: 'variant',
+      title: 'Variant',
+      type: 'string',
+      description: 'The style variant for the newsletter section',
+      options: {
+        list: [
+          { title: 'Simple centered', value: 'simple-centered' },
+          { title: 'Simple card', value: 'simple-card' },
+          { title: 'With background image', value: 'with-background-image' },
+          { title: 'Split with image', value: 'split-with-image' },
+          { title: 'With description', value: 'with-description' },
+        ],
+      },
+      initialValue: 'simple-centered',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'darkMode',
+      title: 'Dark Mode',
+      type: 'boolean',
+      description: 'Whether this section should be displayed in dark mode',
+      initialValue: false,
+    }),
+  ],
+  preview: {
+    select: {
+      variant: 'variant',
+      darkMode: 'darkMode',
+    },
+    prepare({ variant, darkMode }) {
+      const variantDisplay = variant
+        ? variant
+            .split('-')
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ')
+        : 'Simple Centered';
+
+      const features = [];
+      if (darkMode) features.push('Dark Mode');
+
+      return {
+        title: `Newsletter Layout: ${variantDisplay}`,
+        subtitle: features.length > 0 ? features.join(', ') : 'Default',
+        media: Icon,
+      };
+    },
+  },
+});
+
+/**
+ * Content descriptor for newsletter content items
+ */
+export class NewsletterDescriptor extends ContentDescriptor {
+  static readonly schemaName = newsletterSchema.name;
+
+  constructor(props: Partial<NewsletterDescriptor>) {
+    super(NewsletterDescriptor.schemaName, props);
+  }
+}

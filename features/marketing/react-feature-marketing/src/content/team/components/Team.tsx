@@ -32,15 +32,15 @@ export const Team: React.FC<TeamProps> = ({
 
     return (
       <div className="mt-10 flex justify-center">
-        <a
-          href={content.action.url}
+        <button
+          onClick={() => content.action?.execute()}
           className={cn(
             'rounded-md px-3.5 py-2.5 text-sm font-semibold shadow-sm',
             buttonClasses
           )}
         >
-          {content.action.label}
-        </a>
+          {content.action.title || 'Learn more'}
+        </button>
       </div>
     );
   };
@@ -57,7 +57,7 @@ export const Team: React.FC<TeamProps> = ({
         >
           <div className="mx-auto max-w-7xl">
             <TeamHeader content={content} />
-            
+
             <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-4">
               {content.members.map((member, index) => (
                 <TeamMember
@@ -68,7 +68,7 @@ export const Team: React.FC<TeamProps> = ({
                 />
               ))}
             </div>
-            
+
             {renderAction()}
           </div>
         </div>
@@ -85,7 +85,7 @@ export const Team: React.FC<TeamProps> = ({
         >
           <div className="mx-auto max-w-7xl">
             <TeamHeader content={content} />
-            
+
             <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
               {content.members.map((member, index) => (
                 <TeamMember
@@ -96,7 +96,7 @@ export const Team: React.FC<TeamProps> = ({
                 />
               ))}
             </div>
-            
+
             {renderAction()}
           </div>
         </div>
@@ -113,7 +113,7 @@ export const Team: React.FC<TeamProps> = ({
         >
           <div className="mx-auto max-w-7xl">
             <TeamHeader content={content} />
-            
+
             <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
               {content.members.map((member, index) => (
                 <TeamMember
@@ -124,7 +124,7 @@ export const Team: React.FC<TeamProps> = ({
                 />
               ))}
             </div>
-            
+
             {renderAction()}
           </div>
         </div>
@@ -141,7 +141,7 @@ export const Team: React.FC<TeamProps> = ({
         >
           <div className="mx-auto max-w-7xl">
             <TeamHeader content={content} />
-            
+
             <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
               {content.members.map((member, index) => (
                 <TeamMember
@@ -152,7 +152,7 @@ export const Team: React.FC<TeamProps> = ({
                 />
               ))}
             </div>
-            
+
             {renderAction()}
           </div>
         </div>
@@ -169,7 +169,7 @@ export const Team: React.FC<TeamProps> = ({
         >
           <div className="mx-auto max-w-7xl">
             <TeamHeader content={content} />
-            
+
             <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-4">
               {content.members.map((member, index) => (
                 <TeamMember
@@ -180,7 +180,7 @@ export const Team: React.FC<TeamProps> = ({
                 />
               ))}
             </div>
-            
+
             {renderAction()}
           </div>
         </div>
@@ -197,7 +197,7 @@ export const Team: React.FC<TeamProps> = ({
         >
           <div className="mx-auto max-w-7xl">
             <TeamHeader content={content} />
-            
+
             <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-4">
               {content.members.map((member, index) => (
                 <TeamMember
@@ -208,7 +208,7 @@ export const Team: React.FC<TeamProps> = ({
                 />
               ))}
             </div>
-            
+
             {renderAction()}
           </div>
         </div>

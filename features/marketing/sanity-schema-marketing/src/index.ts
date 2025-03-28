@@ -35,11 +35,31 @@ import {
 } from './content/header';
 import { defaultHeroLayout, HeroDescriptor, heroSchema } from './content/hero';
 import { LogoDescriptor, logoSchema, defaultLogoLayout } from './content/logo';
-import { newsletterSchema } from './content/newsletter';
-import { pricingSchema } from './content/pricing';
-import { statsSchema } from './content/stats';
-import { teamSchema } from './content/team';
-import { testimonialsSchema } from './content/testimonials';
+import {
+  newsletterSchema,
+  defaultNewsletterLayout,
+  NewsletterDescriptor,
+} from './content/newsletter';
+import {
+  pricingSchema,
+  defaultPricingLayout,
+  PricingDescriptor,
+} from './content/pricing';
+import {
+  statsSchema,
+  defaultStatsLayout,
+  StatsDescriptor,
+} from './content/stats';
+import {
+  teamSchema,
+  defaultTeamLayout,
+  TeamDescriptor,
+} from './content/team';
+import {
+  testimonialsSchema,
+  defaultTestimonialsLayout,
+  TestimonialsDescriptor,
+} from './content/testimonials';
 
 export const marketing = new FeatureDescriptor({
   name: 'marketing',
@@ -76,6 +96,21 @@ export const marketing = new FeatureDescriptor({
     }),
     new BentoDescriptor({
       layouts: [defaultBentoLayout],
+    }),
+    new NewsletterDescriptor({
+      layouts: [defaultNewsletterLayout],
+    }),
+    new PricingDescriptor({
+      layouts: [defaultPricingLayout],
+    }),
+    new StatsDescriptor({
+      layouts: [defaultStatsLayout],
+    }),
+    new TeamDescriptor({
+      layouts: [defaultTeamLayout],
+    }),
+    new TestimonialsDescriptor({
+      layouts: [defaultTestimonialsLayout],
     }),
     new RouteDescriptor({
       regionItems: [

@@ -1,5 +1,6 @@
 import { defineField, defineType } from 'sanity';
 import { TbUsers as Icon } from 'react-icons/tb';
+import { ContentDescriptor } from '@vyuh/sanity-schema-core';
 
 /**
  * Team section schema for marketing pages
@@ -24,29 +25,7 @@ export const teamSchema = defineType({
       type: 'text',
       description: 'A supporting text that appears below the title',
     }),
-    defineField({
-      name: 'variant',
-      title: 'Variant',
-      type: 'string',
-      description: 'The style variant for the team section',
-      options: {
-        list: [
-          { title: 'Simple grid', value: 'simple-grid' },
-          { title: 'With large images', value: 'with-large-images' },
-          { title: 'With roles and social links', value: 'with-roles-social' },
-          { title: 'Card grid', value: 'card-grid' },
-          { title: 'With background', value: 'with-background' },
-        ],
-      },
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'darkMode',
-      title: 'Dark Mode',
-      type: 'boolean',
-      description: 'Whether this section should be displayed in dark mode',
-      initialValue: false,
-    }),
+
     defineField({
       name: 'members',
       title: 'Team Members',
@@ -138,14 +117,83 @@ export const teamSchema = defineType({
   preview: {
     select: {
       title: 'title',
-      subtitle: 'variant',
       memberCount: 'members.length',
     },
-    prepare({ title, subtitle, memberCount = 0 }) {
+    prepare({ title, memberCount = 0 }) {
       return {
         title: title || 'Team Section',
-        subtitle: `Variant: ${subtitle || 'None'} • ${memberCount} member${memberCount === 1 ? '' : 's'}`,
+        subtitle: `${memberCount} member${memberCount === 1 ? '' : 's'}`,
       };
     },
   },
 });
+
+/**
+ * Default layout schema for team content items
+ */
+export const defaultTeamLayout = defineType({
+  name: `${teamSchema.name}.layout.default`,
+  title: 'Default',
+  type: 'object',
+  icon: Icon,
+  fields: [
+    defineField({
+      name: 'variant',
+      title: 'Variant',
+      type: 'string',
+      description: 'The style variant for the team section',
+      options: {
+        list: [
+          { title: 'Simple grid', value: 'simple-grid' },
+          { title: 'With large images', value: 'with-large-images' },
+          { title: 'With roles social', value: 'with-roles-social' },
+          { title: 'Card grid', value: 'card-grid' },
+          { title: 'With background', value: 'with-background' },
+        ],
+      },
+      initialValue: 'simple-grid',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'darkMode',
+      title: 'Dark Mode',
+      type: 'boolean',
+      description: 'Whether this section should be displayed in dark mode',
+      initialValue: false,
+    }),
+  ],
+  preview: {
+    select: {
+      variant: 'variant',
+      darkMode: 'darkMode',
+    },
+    prepare({ variant, darkMode }) {
+      const variantDisplay = variant
+        ? variant
+            .split('-')
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ')
+        : 'Simple Grid';
+
+      const features = [];
+      if (darkMode) features.push('Dark Mode');
+
+      return {
+        title: `Team Layout: ${variantDisplay}`,
+        subtitle: features.length > 0 ? features.join(', ') : 'Default',
+        media: Icon,
+      };
+    },
+  },
+});
+
+/**
+ * Content descriptor for team content items
+ */
+export class TeamDescriptor extends ContentDescriptor {
+  static readonly schemaName = teamSchema.name;
+
+  constructor(props: Partial<TeamDescriptor>) {
+    super(TeamDescriptor.schemaName, props);
+  }
+}

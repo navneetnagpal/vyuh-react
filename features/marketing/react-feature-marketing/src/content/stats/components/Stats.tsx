@@ -33,15 +33,15 @@ export const Stats: React.FC<StatsProps> = ({
 
     return (
       <div className="mt-8 flex justify-center">
-        <a
-          href={content.action.url}
+        <button
+          onClick={() => content.action?.execute()}
           className={cn(
             'rounded-md px-3.5 py-2.5 text-sm font-semibold shadow-sm',
             buttonClasses
           )}
         >
-          {content.action.label}
-        </a>
+          {content.action.title || 'Learn more'}
+        </button>
       </div>
     );
   };
@@ -58,7 +58,7 @@ export const Stats: React.FC<StatsProps> = ({
         >
           <div className="mx-auto max-w-7xl">
             <StatsHeader content={content} />
-            
+
             <dl className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
               {content.stats.map((stat, index) => (
                 <StatItem
@@ -69,7 +69,7 @@ export const Stats: React.FC<StatsProps> = ({
                 />
               ))}
             </dl>
-            
+
             {renderAction()}
           </div>
         </div>
@@ -205,7 +205,7 @@ export const Stats: React.FC<StatsProps> = ({
         >
           <div className="mx-auto max-w-7xl">
             <StatsHeader content={content} />
-            
+
             <dl className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
               {content.stats.map((stat, index) => (
                 <StatItem
@@ -216,7 +216,7 @@ export const Stats: React.FC<StatsProps> = ({
                 />
               ))}
             </dl>
-            
+
             {renderAction()}
           </div>
         </div>
@@ -233,7 +233,7 @@ export const Stats: React.FC<StatsProps> = ({
         >
           <div className="mx-auto max-w-7xl">
             <StatsHeader content={content} />
-            
+
             <dl className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
               {content.stats.map((stat, index) => (
                 <StatItem
@@ -244,7 +244,7 @@ export const Stats: React.FC<StatsProps> = ({
                 />
               ))}
             </dl>
-            
+
             {renderAction()}
           </div>
         </div>

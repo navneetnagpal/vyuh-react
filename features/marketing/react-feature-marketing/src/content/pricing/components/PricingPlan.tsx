@@ -56,15 +56,15 @@ export const PricingPlan: React.FC<PricingPlanProps> = ({
         </span>
         <span className={cn('text-sm font-semibold leading-6', featureColor)}>{period}</span>
       </p>
-      <a
-        href={plan.action.url}
+      <button
+        onClick={() => plan.action.execute()}
         className={cn(
-          'mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 shadow-sm',
+          'mt-6 block w-full rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 shadow-sm',
           buttonColor
         )}
       >
-        {plan.action.label}
-      </a>
+        {plan.action.title || 'Get started'}
+      </button>
       <ul className="mt-8 space-y-3 text-sm leading-6">
         {plan.features.map((feature, index) => (
           <li key={index} className="flex gap-x-3">
