@@ -1,6 +1,6 @@
 import { Bento as BentoContent } from '@/content/bento/bento';
 import { DefaultBentoLayout } from '@/content/bento/default-bento-layout';
-import { cn } from '@/content/shared/utils';
+import { cn } from '@/shared/utils';
 import React from 'react';
 import { BentoHeader } from './BentoHeader';
 import { BentoGrid } from './BentoGrid';
@@ -32,11 +32,7 @@ export const Bento: React.FC<BentoProps> = ({ content, layout, className }) => {
     <section className={cn('px-6 py-12', backgroundClasses, className)}>
       <div className="container mx-auto">
         {/* Section header */}
-        <BentoHeader
-          content={content}
-          darkMode={darkMode}
-          className="mb-10"
-        />
+        <BentoHeader content={content} darkMode={darkMode} className="mb-10" />
 
         {/* Bento grid */}
         <BentoGrid

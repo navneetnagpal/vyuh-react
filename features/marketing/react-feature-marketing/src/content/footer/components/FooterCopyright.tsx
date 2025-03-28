@@ -1,4 +1,4 @@
-import { cn } from '@/content/shared/utils';
+import { cn } from '@/shared/utils';
 import React from 'react';
 
 interface FooterCopyrightProps {
@@ -17,8 +17,6 @@ export const FooterCopyright: React.FC<FooterCopyrightProps> = ({
   }
 
   return (
-    <div className={cn('text-sm', textClasses, className)}>
-      {copyright}
-    </div>
+    <div className={cn('text-sm', textClasses, className)}>{copyright}</div>
   );
 };

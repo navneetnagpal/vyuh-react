@@ -53,6 +53,19 @@ export const faqSchema = defineType({
               description: 'Optional category for grouping questions',
             }),
           ],
+          preview: {
+            select: {
+              question: 'question',
+              category: 'category',
+            },
+            prepare({ question, category }) {
+              return {
+                title: `Q: ${question || 'Untitled'}`,
+                subtitle: category ? `Category: ${category}` : undefined,
+                media: Icon,
+              };
+            },
+          },
         },
       ],
       validation: (Rule) => Rule.required().min(1),

@@ -1,5 +1,5 @@
 import { Newsletter } from '@/content/newsletter/newsletter';
-import { cn } from '@/content/shared/utils';
+import { cn } from '@/shared/utils';
 import React from 'react';
 
 interface NewsletterFormProps {
@@ -23,7 +23,7 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({
 
   return (
     <form action={content.formAction} method="POST" className={className}>
-      <div className="flex flex-col sm:flex-row gap-3">
+      <div className="flex flex-col gap-3 sm:flex-row">
         <label htmlFor="email-address" className="sr-only">
           Email address
         </label>
@@ -35,7 +35,7 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({
           required
           className={cn(
             'min-w-0 flex-auto rounded-md border px-3.5 py-2',
-            inputClasses
+            inputClasses,
           )}
           placeholder={content.placeholderText || 'Enter your email'}
         />
@@ -43,14 +43,19 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({
           type="submit"
           className={cn(
             'flex-none rounded-md px-3.5 py-2.5 text-sm font-semibold shadow-sm',
-            buttonClasses
+            buttonClasses,
           )}
         >
           {content.buttonText}
         </button>
       </div>
       {content.privacyText && (
-        <p className={cn('mt-4 text-sm', darkMode ? 'text-gray-400' : 'text-gray-500')}>
+        <p
+          className={cn(
+            'mt-4 text-sm',
+            darkMode ? 'text-gray-400' : 'text-gray-500',
+          )}
+        >
           {content.privacyText}
         </p>
       )}

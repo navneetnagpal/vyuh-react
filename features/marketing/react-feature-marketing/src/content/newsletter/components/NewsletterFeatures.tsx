@@ -1,4 +1,4 @@
-import { cn } from '@/content/shared/utils';
+import { cn } from '@/shared/utils';
 import { CheckIcon } from 'lucide-react';
 import React from 'react';
 
@@ -25,11 +25,13 @@ export const NewsletterFeatures: React.FC<NewsletterFeaturesProps> = ({
             <CheckIcon
               className={cn(
                 'h-6 w-5 flex-none',
-                darkMode ? 'text-indigo-400' : 'text-indigo-600'
+                darkMode ? 'text-indigo-400' : 'text-indigo-600',
               )}
               aria-hidden="true"
             />
-            <span className={darkMode ? 'text-gray-300' : 'text-gray-600'}>{feature}</span>
+            <span className={darkMode ? 'text-gray-300' : 'text-gray-600'}>
+              {feature}
+            </span>
           </li>
         ))}
       </ul>

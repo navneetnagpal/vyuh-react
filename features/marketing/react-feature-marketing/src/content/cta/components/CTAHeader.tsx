@@ -1,5 +1,5 @@
 import { CTA } from '@/content/cta/cta';
-import { cn } from '@/content/shared/utils';
+import { cn } from '@/shared/utils';
 import React from 'react';
 
 interface CTAHeaderProps {
@@ -31,11 +31,21 @@ export const CTAHeader: React.FC<CTAHeaderProps> = ({
 
   return (
     <div className={cn('text-center', className)}>
-      <h2 className={cn('text-3xl font-bold sm:text-4xl', textClasses[background as keyof typeof textClasses])}>
+      <h2
+        className={cn(
+          'text-3xl font-bold sm:text-4xl',
+          textClasses[background as keyof typeof textClasses],
+        )}
+      >
         {content.title}
       </h2>
       {content.subtitle && (
-        <p className={cn('mx-auto mt-4 max-w-2xl text-lg', subtitleClasses[background as keyof typeof subtitleClasses])}>
+        <p
+          className={cn(
+            'mx-auto mt-4 max-w-2xl text-lg',
+            subtitleClasses[background as keyof typeof subtitleClasses],
+          )}
+        >
           {content.subtitle}
         </p>
       )}

@@ -1,5 +1,5 @@
 import { Action } from '@vyuh/react-core';
-import { cn } from '@/content/shared/utils';
+import { cn } from '@/shared/utils';
 import React from 'react';
 
 interface BlogActionProps {
@@ -18,8 +18,8 @@ export const BlogAction: React.FC<BlogActionProps> = ({
   return (
     <button
       className={cn(
-        'rounded-md bg-primary px-4 py-2 text-white shadow-sm hover:bg-primary/90',
-        className
+        'bg-primary hover:bg-primary/90 rounded-md px-4 py-2 text-white shadow-sm',
+        className,
       )}
       onClick={() => action.execute()}
     >

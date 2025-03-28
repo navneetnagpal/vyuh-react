@@ -77,6 +77,20 @@ export const statsSchema = defineType({
               description: 'Optional icon name from your icon library',
             }),
           ],
+          preview: {
+            select: {
+              value: 'value',
+              label: 'label',
+              icon: 'icon',
+            },
+            prepare({ value, label, icon }) {
+              return {
+                title: `Stat: ${value || 'Untitled'}`,
+                subtitle: label,
+                media: icon ? Icon : undefined,
+              };
+            },
+          },
         },
       ],
       validation: (Rule) => Rule.required().min(1),

@@ -99,10 +99,38 @@ export const teamSchema = defineType({
                       validation: (Rule) => Rule.required(),
                     }),
                   ],
+                  preview: {
+                    select: {
+                      platform: 'platform',
+                      title: 'action.title',
+                      url: 'action.url',
+                    },
+                    prepare({ platform, title, url }) {
+                      return {
+                        title: `${platform ? platform.charAt(0).toUpperCase() + platform.slice(1) : 'Social'}: ${title || url || 'Untitled'}`,
+                      };
+                    },
+                  },
                 },
               ],
             }),
           ],
+          preview: {
+            select: {
+              name: 'name',
+              role: 'role',
+              featured: 'featured',
+              media: 'image',
+              socialCount: 'socialLinks.length',
+            },
+            prepare({ name, role, featured, media, socialCount = 0 }) {
+              return {
+                title: `Member: ${name || 'Untitled'}`,
+                subtitle: `${role || 'No role'}${featured ? ' • Featured' : ''}${socialCount > 0 ? ` • ${socialCount} social link${socialCount === 1 ? '' : 's'}` : ''}`,
+                media,
+              };
+            },
+          },
         },
       ],
       validation: (Rule) => Rule.required().min(1),

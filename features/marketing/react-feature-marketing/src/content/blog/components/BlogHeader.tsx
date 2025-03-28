@@ -1,5 +1,5 @@
 import { Blog } from '@/content/blog/blog';
-import { cn } from '@/content/shared/utils';
+import { cn } from '@/shared/utils';
 import React from 'react';
 
 interface BlogHeaderProps {
@@ -20,7 +20,7 @@ export const BlogHeader: React.FC<BlogHeaderProps> = ({
         <p
           className={cn(
             'mx-auto max-w-2xl text-lg',
-            darkMode ? 'text-gray-300' : 'text-gray-600'
+            darkMode ? 'text-gray-300' : 'text-gray-600',
           )}
         >
           {content.subtitle}

@@ -1,5 +1,5 @@
 import { Team } from '@/content/team/team';
-import { cn } from '@/content/shared/utils';
+import { cn } from '@/shared/utils';
 import React from 'react';
 
 interface TeamHeaderProps {
@@ -13,9 +13,13 @@ export const TeamHeader: React.FC<TeamHeaderProps> = ({
 }) => {
   return (
     <div className={cn('text-center', className)}>
-      <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{content.title}</h2>
+      <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+        {content.title}
+      </h2>
       {content.subtitle && (
-        <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">{content.subtitle}</p>
+        <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
+          {content.subtitle}
+        </p>
       )}
     </div>
   );

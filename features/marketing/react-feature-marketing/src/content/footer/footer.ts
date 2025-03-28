@@ -34,11 +34,11 @@ export interface Footer extends ContentItem {
     /**
      * Links in this navigation group
      */
-    readonly links: {
+    readonly links?: {
       /**
        * The navigation link
        */
-      readonly action: Action;
+      readonly action?: Action;
     }[];
   }[];
 

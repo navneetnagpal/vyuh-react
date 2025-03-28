@@ -1,5 +1,5 @@
 import { Logo } from '@/content/logo/logo';
-import { cn } from '@/content/shared/utils';
+import { cn } from '@/shared/utils';
 import React from 'react';
 import { LogoItem } from './LogoItem';
 
@@ -25,21 +25,13 @@ export const LogoGrid: React.FC<LogoGridProps> = ({
         <div className="animate-marquee flex space-x-8 py-4">
           {items.map((item, index) => (
             <div key={index} className="flex-shrink-0">
-              <LogoItem 
-                item={item} 
-                variant={variant} 
-                darkMode={darkMode} 
-              />
+              <LogoItem item={item} variant={variant} darkMode={darkMode} />
             </div>
           ))}
           {/* Duplicate items for continuous scrolling effect */}
           {items.map((item, index) => (
             <div key={`dup-${index}`} className="flex-shrink-0">
-              <LogoItem 
-                item={item} 
-                variant={variant} 
-                darkMode={darkMode} 
-              />
+              <LogoItem item={item} variant={variant} darkMode={darkMode} />
             </div>
           ))}
         </div>
@@ -50,19 +42,23 @@ export const LogoGrid: React.FC<LogoGridProps> = ({
   // For grid layouts
   return (
     <div
-      className={cn('grid gap-6', {
-        'grid-cols-2 md:grid-cols-3 lg:grid-cols-4': columns === 4,
-        'grid-cols-2 md:grid-cols-3': columns === 3,
-        'grid-cols-1 md:grid-cols-2': columns === 2,
-        'grid-cols-1': columns === 1,
-      }, className)}
+      className={cn(
+        'grid gap-6',
+        {
+          'grid-cols-2 md:grid-cols-3 lg:grid-cols-4': columns === 4,
+          'grid-cols-2 md:grid-cols-3': columns === 3,
+          'grid-cols-1 md:grid-cols-2': columns === 2,
+          'grid-cols-1': columns === 1,
+        },
+        className,
+      )}
     >
       {items.map((item, index) => (
-        <LogoItem 
-          key={index} 
-          item={item} 
-          variant={variant} 
-          darkMode={darkMode} 
+        <LogoItem
+          key={index}
+          item={item}
+          variant={variant}
+          darkMode={darkMode}
         />
       ))}
     </div>

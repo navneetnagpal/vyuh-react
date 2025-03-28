@@ -1,5 +1,5 @@
 import { Footer } from '@/content/footer/footer';
-import { cn } from '@/content/shared/utils';
+import { cn } from '@/shared/utils';
 import { Action } from '@vyuh/react-core';
 import React from 'react';
 

@@ -1,6 +1,6 @@
 import { Header as HeaderItem } from '@/content/header/header';
 import { DefaultHeaderLayout } from '@/content/header/default-header-layout';
-import { cn } from '@/content/shared/utils';
+import { cn } from '@/shared/utils';
 import { Action, useVyuh } from '@vyuh/react-core';
 import React from 'react';
 

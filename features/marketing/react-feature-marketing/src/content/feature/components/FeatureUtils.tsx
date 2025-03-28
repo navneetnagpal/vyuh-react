@@ -1,10 +1,6 @@
 import { DefaultFeatureLayout } from '@/content/feature/default-feature-layout';
-import {
-  MediaImage,
-  MediaVideo,
-  useMediaUtils,
-} from '@/content/shared/MediaUtils';
-import { cn } from '@/content/shared/utils';
+import { MediaImage, MediaVideo, useMediaUtils } from '@/shared/MediaUtils';
+import { cn } from '@/shared/utils';
 import { DynamicIcon, IconName } from 'lucide-react/dynamic';
 import React from 'react';
 import { FeatureComponentProps } from './FeatureTypes';

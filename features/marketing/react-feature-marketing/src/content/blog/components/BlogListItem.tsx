@@ -1,6 +1,6 @@
 import { Blog } from '@/content/blog/blog';
-import { cn } from '@/content/shared/utils';
-import { useMediaUtils } from '@/content/shared/MediaUtils';
+import { cn } from '@/shared/utils';
+import { useMediaUtils } from '@/shared/MediaUtils';
 import { Action } from '@vyuh/react-core';
 import React from 'react';
 
@@ -32,7 +32,7 @@ export const BlogListItem: React.FC<BlogListItemProps> = ({
       className={cn(
         'flex cursor-pointer flex-col border-b py-4 last:border-b-0 md:flex-row md:items-center',
         darkMode ? 'border-gray-700' : 'border-gray-200',
-        className
+        className,
       )}
       onClick={() => new Action(post.action).execute()}
     >
@@ -40,7 +40,7 @@ export const BlogListItem: React.FC<BlogListItemProps> = ({
       <div
         className={cn(
           'mb-2 w-24 shrink-0 text-sm md:mb-0',
-          darkMode ? 'text-gray-400' : 'text-gray-500'
+          darkMode ? 'text-gray-400' : 'text-gray-500',
         )}
       >
         {formatDate(post.date)}
@@ -58,7 +58,7 @@ export const BlogListItem: React.FC<BlogListItemProps> = ({
                   'inline-block rounded-full px-2 py-0.5 text-xs',
                   darkMode
                     ? 'bg-gray-700 text-gray-200'
-                    : 'bg-gray-200 text-gray-700'
+                    : 'bg-gray-200 text-gray-700',
                 )}
               >
                 {category}
@@ -73,7 +73,7 @@ export const BlogListItem: React.FC<BlogListItemProps> = ({
         <div
           className={cn(
             'mt-2 flex items-center md:mt-0 md:w-40 md:justify-end',
-            darkMode ? 'text-gray-400' : 'text-gray-500'
+            darkMode ? 'text-gray-400' : 'text-gray-500',
           )}
         >
           {post.author.avatar && (

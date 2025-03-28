@@ -1,6 +1,6 @@
 import { Blog as BlogContent } from '@/content/blog/blog';
 import { DefaultBlogLayout } from '@/content/blog/default-blog-layout';
-import { cn } from '@/content/shared/utils';
+import { cn } from '@/shared/utils';
 import React from 'react';
 import { BlogHeader } from './BlogHeader';
 import { BlogGrid } from './BlogGrid';
@@ -12,11 +12,7 @@ interface BlogProps {
   className?: string;
 }
 
-export const Blog: React.FC<BlogProps> = ({
-  content,
-  layout,
-  className,
-}) => {
+export const Blog: React.FC<BlogProps> = ({ content, layout, className }) => {
   const variant = layout.variant || 'simple-grid';
   const darkMode = layout.darkMode || false;
   const columns = layout.columns || 3;
@@ -27,20 +23,10 @@ export const Blog: React.FC<BlogProps> = ({
     : 'bg-white text-gray-900';
 
   return (
-    <section
-      className={cn(
-        'px-6 py-12',
-        backgroundClasses,
-        className
-      )}
-    >
+    <section className={cn('px-6 py-12', backgroundClasses, className)}>
       <div className="container mx-auto">
         {/* Section header */}
-        <BlogHeader
-          content={content}
-          darkMode={darkMode}
-          className="mb-10"
-        />
+        <BlogHeader content={content} darkMode={darkMode} className="mb-10" />
 
         {/* Blog posts */}
         <BlogGrid

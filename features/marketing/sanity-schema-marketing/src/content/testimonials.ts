@@ -79,6 +79,25 @@ export const testimonialsSchema = defineType({
                   },
                 }),
               ],
+              preview: {
+                select: {
+                  name: 'name',
+                  role: 'role',
+                  company: 'company',
+                  media: 'avatar',
+                },
+                prepare({ name, role, company, media }) {
+                  const subtitle = [];
+                  if (role) subtitle.push(role);
+                  if (company) subtitle.push(company);
+
+                  return {
+                    title: `Author: ${name || 'Untitled'}`,
+                    subtitle: subtitle.length > 0 ? subtitle.join(', ') : undefined,
+                    media,
+                  };
+                },
+              },
               validation: (Rule) => Rule.required(),
             }),
             defineField({
@@ -92,10 +111,25 @@ export const testimonialsSchema = defineType({
               name: 'companyLogo',
               title: 'Company Logo',
               type: 'image',
-              description: 'Logo of the company for variants that display logos',
-
+              description:
+                'Logo of the company for variants that display logos',
             }),
           ],
+          preview: {
+            select: {
+              quote: 'quote',
+              authorName: 'author.name',
+              featured: 'featured',
+              media: 'author.avatar',
+            },
+            prepare({ quote, authorName, featured, media }) {
+              return {
+                title: `Testimonial: ${authorName || 'Untitled'}`,
+                subtitle: `${quote ? (quote.length > 40 ? quote.substring(0, 40) + '...' : quote) : 'No quote'}${featured ? ' • Featured' : ''}`,
+                media,
+              };
+            },
+          },
         },
       ],
       validation: (Rule) => Rule.required().min(1),
@@ -166,7 +200,7 @@ export const defaultTestimonialsLayout = defineType({
       const variantDisplay = variant
         ? variant
             .split('-')
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
             .join(' ')
         : 'Simple Centered';
 

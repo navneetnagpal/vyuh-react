@@ -1,6 +1,6 @@
 import { Banner as BannerItem } from '@/content/banner/banner';
 import { DefaultBannerLayout } from '@/content/banner/default-banner-layout';
-import { cn } from '@/content/shared/utils';
+import { cn } from '@/shared/utils';
 import React from 'react';
 import { BannerIcon } from './BannerIcon';
 import { BannerContent } from './BannerContent';
@@ -38,10 +38,7 @@ export const Banner: React.FC<BannerProps> = ({
     >
       <div className="flex">
         {content.icon && (
-          <BannerIcon
-            icon={content.icon}
-            className="mr-3 flex-shrink-0"
-          />
+          <BannerIcon icon={content.icon} className="mr-3 flex-shrink-0" />
         )}
         <BannerContent text={content.text} />
       </div>

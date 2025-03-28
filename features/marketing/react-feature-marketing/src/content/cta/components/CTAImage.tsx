@@ -1,5 +1,5 @@
-import { useMediaUtils } from '@/content/shared/MediaUtils';
-import { cn } from '@/content/shared/utils';
+import { useMediaUtils } from '@/shared/MediaUtils';
+import { cn } from '@/shared/utils';
 import { ImageReference } from '@vyuh/react-core';
 import React from 'react';
 

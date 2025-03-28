@@ -1,5 +1,5 @@
 import { Blog } from '@/content/blog/blog';
-import { cn } from '@/content/shared/utils';
+import { cn } from '@/shared/utils';
 import React from 'react';
 import { BlogPostCard } from './BlogPostCard';
 import { BlogFeaturedPost } from './BlogFeaturedPost';
@@ -28,10 +28,7 @@ export const BlogGrid: React.FC<BlogGridProps> = ({
     return (
       <div className={className}>
         {featuredPost && (
-          <BlogFeaturedPost 
-            post={featuredPost} 
-            darkMode={darkMode} 
-          />
+          <BlogFeaturedPost post={featuredPost} darkMode={darkMode} />
         )}
         <div
           className={cn('grid gap-6', {
@@ -42,11 +39,7 @@ export const BlogGrid: React.FC<BlogGridProps> = ({
           })}
         >
           {regularPosts.map((post, index) => (
-            <BlogPostCard 
-              key={index} 
-              post={post} 
-              darkMode={darkMode} 
-            />
+            <BlogPostCard key={index} post={post} darkMode={darkMode} />
           ))}
         </div>
       </div>
@@ -56,19 +49,19 @@ export const BlogGrid: React.FC<BlogGridProps> = ({
   if (variant === 'card-grid') {
     return (
       <div
-        className={cn('grid gap-6', {
-          'grid-cols-1': columns === 1,
-          'grid-cols-1 md:grid-cols-2': columns === 2,
-          'grid-cols-1 md:grid-cols-2 lg:grid-cols-3': columns === 3,
-          'grid-cols-1 md:grid-cols-2 lg:grid-cols-4': columns === 4,
-        }, className)}
+        className={cn(
+          'grid gap-6',
+          {
+            'grid-cols-1': columns === 1,
+            'grid-cols-1 md:grid-cols-2': columns === 2,
+            'grid-cols-1 md:grid-cols-2 lg:grid-cols-3': columns === 3,
+            'grid-cols-1 md:grid-cols-2 lg:grid-cols-4': columns === 4,
+          },
+          className,
+        )}
       >
         {posts.map((post, index) => (
-          <BlogPostCard 
-            key={index} 
-            post={post} 
-            darkMode={darkMode} 
-          />
+          <BlogPostCard key={index} post={post} darkMode={darkMode} />
         ))}
       </div>
     );
@@ -78,11 +71,7 @@ export const BlogGrid: React.FC<BlogGridProps> = ({
     return (
       <div className={cn('space-y-8', className)}>
         {posts.map((post, index) => (
-          <BlogImageListItem 
-            key={index} 
-            post={post} 
-            darkMode={darkMode} 
-          />
+          <BlogImageListItem key={index} post={post} darkMode={darkMode} />
         ))}
       </div>
     );
@@ -94,15 +83,11 @@ export const BlogGrid: React.FC<BlogGridProps> = ({
         className={cn(
           'rounded-lg',
           darkMode ? 'bg-gray-800' : 'bg-gray-50',
-          className
+          className,
         )}
       >
         {posts.map((post, index) => (
-          <BlogListItem 
-            key={index} 
-            post={post} 
-            darkMode={darkMode} 
-          />
+          <BlogListItem key={index} post={post} darkMode={darkMode} />
         ))}
       </div>
     );
@@ -111,19 +96,19 @@ export const BlogGrid: React.FC<BlogGridProps> = ({
   // Default to simple-grid
   return (
     <div
-      className={cn('grid gap-6', {
-        'grid-cols-1': columns === 1,
-        'grid-cols-1 md:grid-cols-2': columns === 2,
-        'grid-cols-1 md:grid-cols-2 lg:grid-cols-3': columns === 3,
-        'grid-cols-1 md:grid-cols-2 lg:grid-cols-4': columns === 4,
-      }, className)}
+      className={cn(
+        'grid gap-6',
+        {
+          'grid-cols-1': columns === 1,
+          'grid-cols-1 md:grid-cols-2': columns === 2,
+          'grid-cols-1 md:grid-cols-2 lg:grid-cols-3': columns === 3,
+          'grid-cols-1 md:grid-cols-2 lg:grid-cols-4': columns === 4,
+        },
+        className,
+      )}
     >
       {posts.map((post, index) => (
-        <BlogPostCard 
-          key={index} 
-          post={post} 
-          darkMode={darkMode} 
-        />
+        <BlogPostCard key={index} post={post} darkMode={darkMode} />
       ))}
     </div>
   );

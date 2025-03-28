@@ -1,4 +1,4 @@
-import { cn } from '@/content/shared/utils';
+import { cn } from '@/shared/utils';
 import React from 'react';
 
 interface FooterDescriptionProps {

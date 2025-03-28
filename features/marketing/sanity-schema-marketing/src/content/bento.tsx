@@ -87,6 +87,23 @@ export const bentoSchema = defineType({
               description: 'Background color for this grid item',
             }),
           ],
+          preview: {
+            select: {
+              title: 'title',
+              description: 'description',
+              span: 'span',
+              media: 'image',
+              icon: 'icon',
+            },
+            prepare({ title, description, span, media, icon }) {
+              const spanText = span ? ` (${span})` : '';
+              return {
+                title: `Item: ${title || 'Untitled'}${spanText}`,
+                subtitle: description ? (description.length > 40 ? description.substring(0, 40) + '...' : description) : 'No description',
+                media: media || (icon ? Icon : undefined),
+              };
+            },
+          },
         },
       ],
       validation: (Rule) => Rule.required().min(3),

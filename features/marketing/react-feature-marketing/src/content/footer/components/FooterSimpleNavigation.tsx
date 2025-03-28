@@ -1,5 +1,5 @@
 import { Footer } from '@/content/footer/footer';
-import { cn } from '@/content/shared/utils';
+import { cn } from '@/shared/utils';
 import { Action } from '@vyuh/react-core';
 import React from 'react';
 
@@ -14,19 +14,22 @@ export const FooterSimpleNavigation: React.FC<FooterSimpleNavigationProps> = ({
   linkClasses,
   className,
 }) => {
-  if (navigationGroups.length === 0 || navigationGroups[0].links.length === 0) {
+  if (
+    navigationGroups.length === 0 ||
+    (navigationGroups[0].links || []).length === 0
+  ) {
     return null;
   }
 
   return (
     <div className={cn('flex flex-wrap justify-center gap-6', className)}>
-      {navigationGroups[0].links.map((link, index) => (
+      {navigationGroups[0].links!.map((link, index) => (
         <button
           key={index}
           className={cn('text-sm', linkClasses)}
           onClick={() => new Action(link.action).execute()}
         >
-          {link.action.title}
+          {link.action && link.action.title && link.action.title}
         </button>
       ))}
     </div>

@@ -1,11 +1,7 @@
 import { Hero } from '@/content/hero';
 import { HeroComponentProps } from '@/content/hero/components/HeroTypes';
 import { DefaultHeroLayout } from '@/content/hero/default-hero-layout';
-import {
-  MediaImage,
-  MediaVideo,
-  useMediaUtils,
-} from '@/content/shared/MediaUtils';
+import { MediaImage, MediaVideo, useMediaUtils } from '@/shared/MediaUtils';
 import { Action } from '@vyuh/react-core';
 import React from 'react';
 

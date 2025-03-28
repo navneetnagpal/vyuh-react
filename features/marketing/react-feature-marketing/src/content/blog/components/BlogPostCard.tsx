@@ -1,6 +1,6 @@
 import { Blog } from '@/content/blog/blog';
-import { cn } from '@/content/shared/utils';
-import { useMediaUtils } from '@/content/shared/MediaUtils';
+import { cn } from '@/shared/utils';
+import { useMediaUtils } from '@/shared/MediaUtils';
 import { Action } from '@vyuh/react-core';
 import React from 'react';
 
@@ -33,7 +33,7 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
         'flex flex-col overflow-hidden rounded-lg transition-all hover:shadow-md',
         darkMode ? 'bg-gray-800' : 'bg-gray-50',
         'cursor-pointer',
-        className
+        className,
       )}
       onClick={() => new Action(post.action).execute()}
     >
@@ -60,7 +60,7 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
                   'inline-block rounded-full px-3 py-1 text-xs font-medium',
                   darkMode
                     ? 'bg-gray-700 text-gray-200'
-                    : 'bg-gray-200 text-gray-700'
+                    : 'bg-gray-200 text-gray-700',
                 )}
               >
                 {category}
@@ -76,7 +76,7 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
         <div
           className={cn(
             'mb-3 flex items-center text-sm',
-            darkMode ? 'text-gray-400' : 'text-gray-600'
+            darkMode ? 'text-gray-400' : 'text-gray-600',
           )}
         >
           <span>{formatDate(post.date)}</span>
@@ -107,7 +107,7 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
           <p
             className={cn(
               'mb-4 flex-1 text-sm',
-              darkMode ? 'text-gray-300' : 'text-gray-600'
+              darkMode ? 'text-gray-300' : 'text-gray-600',
             )}
           >
             {post.excerpt}
@@ -119,7 +119,7 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
           <span
             className={cn(
               'inline-flex items-center text-sm font-medium',
-              darkMode ? 'text-blue-400' : 'text-blue-600'
+              darkMode ? 'text-blue-400' : 'text-blue-600',
             )}
           >
             Read more

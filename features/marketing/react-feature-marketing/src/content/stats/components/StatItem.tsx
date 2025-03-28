@@ -1,5 +1,5 @@
 import { Stats } from '@/content/stats/stats';
-import { cn } from '@/content/shared/utils';
+import { cn } from '@/shared/utils';
 import { DynamicIcon, IconName } from 'lucide-react/dynamic';
 import React from 'react';
 
@@ -24,11 +24,14 @@ export const StatItem: React.FC<StatItemProps> = ({
   const isCardVariant = variant === 'card-grid';
 
   return (
-    <div className={cn(
-      isCardVariant && 'rounded-lg p-6 ring-1',
-      isCardVariant && (darkMode ? 'bg-gray-800 ring-gray-700' : 'bg-white ring-gray-200'),
-      className
-    )}>
+    <div
+      className={cn(
+        isCardVariant && 'rounded-lg p-6 ring-1',
+        isCardVariant &&
+          (darkMode ? 'bg-gray-800 ring-gray-700' : 'bg-white ring-gray-200'),
+        className,
+      )}
+    >
       {stat.icon && (
         <div className="mb-4">
           <DynamicIcon
@@ -41,7 +44,9 @@ export const StatItem: React.FC<StatItemProps> = ({
       <div className={cn('text-3xl font-bold', valueColor)}>{stat.value}</div>
       <div className={cn('text-sm font-medium', labelColor)}>{stat.label}</div>
       {stat.description && (
-        <p className={cn('mt-2 text-sm', descriptionColor)}>{stat.description}</p>
+        <p className={cn('mt-2 text-sm', descriptionColor)}>
+          {stat.description}
+        </p>
       )}
     </div>
   );

@@ -1,6 +1,6 @@
 import { Bento } from '@/content/bento/bento';
-import { cn } from '@/content/shared/utils';
-import { useMediaUtils } from '@/content/shared/MediaUtils';
+import { cn } from '@/shared/utils';
+import { useMediaUtils } from '@/shared/MediaUtils';
 import { Action } from '@vyuh/react-core';
 import { DynamicIcon, IconName } from 'lucide-react/dynamic';
 import React from 'react';
@@ -19,10 +19,10 @@ export const BentoItem: React.FC<BentoItemProps> = ({
   className,
 }) => {
   const { getImageUrl } = useMediaUtils();
-  
+
   // Determine span classes based on the item's span property and the current variant
   let spanClasses = '';
-  
+
   if (variant === 'two-row') {
     spanClasses = {
       normal: 'col-span-1',
@@ -50,7 +50,7 @@ export const BentoItem: React.FC<BentoItemProps> = ({
         spanClasses,
         itemBgColor,
         item.action && 'cursor-pointer',
-        className
+        className,
       )}
       onClick={() => item.action && new Action(item.action).execute()}
     >
@@ -62,7 +62,7 @@ export const BentoItem: React.FC<BentoItemProps> = ({
           </span>
         </div>
       )}
-      
+
       {item.image && !item.icon && (
         <div className="mb-4 overflow-hidden rounded-lg">
           <img
@@ -78,10 +78,7 @@ export const BentoItem: React.FC<BentoItemProps> = ({
 
       {/* Description */}
       <p
-        className={cn(
-          'text-sm',
-          darkMode ? 'text-gray-300' : 'text-gray-600'
-        )}
+        className={cn('text-sm', darkMode ? 'text-gray-300' : 'text-gray-600')}
       >
         {item.description}
       </p>

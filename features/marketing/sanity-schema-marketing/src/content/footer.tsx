@@ -56,6 +56,18 @@ export const footerSchema = defineType({
                       validation: (Rule) => Rule.required(),
                     }),
                   ],
+                  preview: {
+                    select: {
+                      title: 'action.title',
+                      url: 'action.url',
+                    },
+                    prepare({ title, url }) {
+                      return {
+                        title: `Link: ${title || 'Untitled'}`,
+                        subtitle: url,
+                      };
+                    },
+                  },
                 },
               ],
               validation: (Rule) => Rule.required().min(1),
@@ -106,6 +118,20 @@ export const footerSchema = defineType({
               hidden: ({ parent }) => parent?.platform !== 'other',
             }),
           ],
+          preview: {
+            select: {
+              platform: 'platform',
+              url: 'url',
+              icon: 'icon',
+            },
+            prepare({ platform, url, icon }) {
+              const displayPlatform = platform === 'other' && icon ? icon : platform;
+              return {
+                title: `Social: ${displayPlatform ? displayPlatform.charAt(0).toUpperCase() + displayPlatform.slice(1) : 'Untitled'}`,
+                subtitle: url ? url.replace(/^https?:\/\//, '') : 'No URL',
+              };
+            },
+          },
         },
       ],
     }),
@@ -124,6 +150,18 @@ export const footerSchema = defineType({
               validation: (Rule) => Rule.required(),
             }),
           ],
+          preview: {
+            select: {
+              title: 'action.title',
+              url: 'action.url',
+            },
+            prepare({ title, url }) {
+              return {
+                title: `Legal: ${title || 'Untitled'}`,
+                subtitle: url,
+              };
+            },
+          },
         },
       ],
       description:

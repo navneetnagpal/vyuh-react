@@ -1,5 +1,5 @@
 import { FAQ } from '@/content/faq/faq';
-import { cn } from '@/content/shared/utils';
+import { cn } from '@/shared/utils';
 import { Action, useVyuh } from '@vyuh/react-core';
 import { Mail, Phone } from 'lucide-react';
 import React, { useState } from 'react';

@@ -1,6 +1,6 @@
 import { Blog } from '@/content/blog/blog';
-import { cn } from '@/content/shared/utils';
-import { useMediaUtils } from '@/content/shared/MediaUtils';
+import { cn } from '@/shared/utils';
+import { useMediaUtils } from '@/shared/MediaUtils';
 import { Action } from '@vyuh/react-core';
 import React from 'react';
 
@@ -32,7 +32,7 @@ export const BlogImageListItem: React.FC<BlogImageListItemProps> = ({
       className={cn(
         'grid cursor-pointer grid-cols-1 gap-6 md:grid-cols-3',
         darkMode ? 'border-gray-700' : 'border-gray-200',
-        className
+        className,
       )}
       onClick={() => new Action(post.action).execute()}
     >
@@ -50,7 +50,7 @@ export const BlogImageListItem: React.FC<BlogImageListItemProps> = ({
         <div
           className={cn(
             'mb-3 flex items-center text-sm',
-            darkMode ? 'text-gray-400' : 'text-gray-600'
+            darkMode ? 'text-gray-400' : 'text-gray-600',
           )}
         >
           <span>{formatDate(post.date)}</span>
@@ -63,10 +63,7 @@ export const BlogImageListItem: React.FC<BlogImageListItemProps> = ({
         </div>
         {post.excerpt && (
           <p
-            className={cn(
-              'mb-3',
-              darkMode ? 'text-gray-300' : 'text-gray-600'
-            )}
+            className={cn('mb-3', darkMode ? 'text-gray-300' : 'text-gray-600')}
           >
             {post.excerpt}
           </p>
@@ -74,7 +71,7 @@ export const BlogImageListItem: React.FC<BlogImageListItemProps> = ({
         <span
           className={cn(
             'inline-flex items-center font-medium',
-            darkMode ? 'text-blue-400' : 'text-blue-600'
+            darkMode ? 'text-blue-400' : 'text-blue-600',
           )}
         >
           Read more

@@ -1,11 +1,11 @@
 import { CTA as CTAContent } from '@/content/cta/cta';
 import { DefaultCTALayout } from '@/content/cta/default-cta-layout';
-import { cn } from '@/content/shared/utils';
+import { cn } from '@/shared/utils';
 import React from 'react';
 import { CTAHeader } from './CTAHeader';
 import { CTAButtonGroup } from './CTAButtonGroup';
 import { CTAImage } from './CTAImage';
-import { useMediaUtils } from '@/content/shared/MediaUtils';
+import { useMediaUtils } from '@/shared/MediaUtils';
 
 interface CTAProps {
   content: CTAContent;
@@ -27,16 +27,25 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
   };
 
   // Helper function for rendering additional info text with appropriate styling
-  const renderAdditionalInfo = (additionalInfo: string | undefined, background: string) => {
+  const renderAdditionalInfo = (
+    additionalInfo: string | undefined,
+    background: string,
+  ) => {
     if (!additionalInfo) return null;
 
     return (
-      <p className={cn(
-        'mt-4 text-sm',
-        background === 'light' ? 'text-gray-600' :
-        background === 'dark' ? 'text-gray-300' :
-        background === 'brand' ? 'text-indigo-200' : 'text-gray-600'
-      )}>
+      <p
+        className={cn(
+          'mt-4 text-sm',
+          background === 'light'
+            ? 'text-gray-600'
+            : background === 'dark'
+              ? 'text-gray-300'
+              : background === 'brand'
+                ? 'text-indigo-200'
+                : 'text-gray-600',
+        )}
+      >
         {additionalInfo}
       </p>
     );
@@ -54,10 +63,7 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
           )}
         >
           <div className="mx-auto max-w-3xl">
-            <CTAHeader
-              content={content}
-              background={background}
-            />
+            <CTAHeader content={content} background={background} />
 
             <div className="mt-8 flex justify-center">
               <CTAButtonGroup
@@ -82,10 +88,7 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
           )}
         >
           <div className="mx-auto max-w-3xl">
-            <CTAHeader
-              content={content}
-              background={background}
-            />
+            <CTAHeader content={content} background={background} />
 
             <div className="mt-8 flex flex-col gap-4">
               <CTAButtonGroup
@@ -179,10 +182,7 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
         >
           <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
             {content.image && (
-              <CTAImage
-                image={content.image}
-                alt={content.title}
-              />
+              <CTAImage image={content.image} alt={content.title} />
             )}
 
             <div>
@@ -235,10 +235,7 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
             </div>
 
             {content.image && (
-              <CTAImage
-                image={content.image}
-                alt={content.title}
-              />
+              <CTAImage image={content.image} alt={content.title} />
             )}
           </div>
         </div>
@@ -255,10 +252,7 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
         >
           <div className="mx-auto max-w-6xl">
             <div className="mb-12 text-center">
-              <CTAHeader
-                content={content}
-                background={background}
-              />
+              <CTAHeader content={content} background={background} />
 
               <div className="mt-8 flex justify-center">
                 <CTAButtonGroup
@@ -296,10 +290,7 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
           )}
         >
           <div className="mx-auto max-w-3xl">
-            <CTAHeader
-              content={content}
-              background={background}
-            />
+            <CTAHeader content={content} background={background} />
 
             <div className="mt-8 flex justify-center">
               <CTAButtonGroup

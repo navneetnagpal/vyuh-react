@@ -1,5 +1,5 @@
 import { Logo } from '@/content/logo/logo';
-import { cn } from '@/content/shared/utils';
+import { cn } from '@/shared/utils';
 import React from 'react';
 
 interface LogoHeaderProps {
@@ -7,10 +7,7 @@ interface LogoHeaderProps {
   className?: string;
 }
 
-export const LogoHeader: React.FC<LogoHeaderProps> = ({
-  title,
-  className,
-}) => {
+export const LogoHeader: React.FC<LogoHeaderProps> = ({ title, className }) => {
   if (!title) {
     return null;
   }

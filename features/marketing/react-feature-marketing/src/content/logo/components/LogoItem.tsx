@@ -1,6 +1,6 @@
 import { Logo } from '@/content/logo/logo';
-import { cn } from '@/content/shared/utils';
-import { useMediaUtils } from '@/content/shared/MediaUtils';
+import { cn } from '@/shared/utils';
+import { useMediaUtils } from '@/shared/MediaUtils';
 import { Action } from '@vyuh/react-core';
 import React from 'react';
 
@@ -24,7 +24,8 @@ export const LogoItem: React.FC<LogoItemProps> = ({
       src={getImageUrl(item.image)}
       alt={item.alt}
       className={cn('h-12 w-auto object-contain', {
-        'grayscale transition-all duration-300 hover:grayscale-0': variant === 'grayscale',
+        'grayscale transition-all duration-300 hover:grayscale-0':
+          variant === 'grayscale',
       })}
     />
   );
@@ -36,9 +37,10 @@ export const LogoItem: React.FC<LogoItemProps> = ({
         onClick={() => new Action(item.action!).execute()}
         className={cn(
           'flex items-center justify-center p-4',
-          variant === 'with-borders' && (darkMode ? 'border border-gray-700' : 'border border-gray-200'),
+          variant === 'with-borders' &&
+            (darkMode ? 'border border-gray-700' : 'border border-gray-200'),
           'rounded-lg transition-all hover:opacity-80',
-          className
+          className,
         )}
       >
         {logoElement}
@@ -51,9 +53,10 @@ export const LogoItem: React.FC<LogoItemProps> = ({
     <div
       className={cn(
         'flex items-center justify-center p-4',
-        variant === 'with-borders' && (darkMode ? 'border border-gray-700' : 'border border-gray-200'),
+        variant === 'with-borders' &&
+          (darkMode ? 'border border-gray-700' : 'border border-gray-200'),
         'rounded-lg',
-        className
+        className,
       )}
     >
       {logoElement}

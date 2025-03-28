@@ -114,6 +114,27 @@ export const pricingSchema = defineType({
               validation: (Rule) => Rule.required(),
             }),
           ],
+          preview: {
+            select: {
+              name: 'name',
+              price: 'priceMonthly',
+              currency: 'currency',
+              featured: 'featured',
+              featureCount: 'features.length',
+            },
+            prepare({ name, price, currency = 'USD', featured, featureCount = 0 }) {
+              const formattedPrice = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: currency,
+                minimumFractionDigits: 0,
+              }).format(price);
+
+              return {
+                title: `Plan: ${name || 'Untitled'}`,
+                subtitle: `${formattedPrice}/mo • ${featureCount} feature${featureCount === 1 ? '' : 's'}${featured ? ' • Featured' : ''}`,
+              };
+            },
+          },
         },
       ],
       validation: (Rule) => Rule.required().min(1),

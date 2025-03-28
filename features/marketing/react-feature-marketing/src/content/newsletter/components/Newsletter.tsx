@@ -1,6 +1,6 @@
 import { Newsletter as NewsletterContent } from '@/content/newsletter/newsletter';
 import { DefaultNewsletterLayout } from '@/content/newsletter/default-newsletter-layout';
-import { cn } from '@/content/shared/utils';
+import { cn } from '@/shared/utils';
 import React from 'react';
 import { NewsletterHeader } from './NewsletterHeader';
 import { NewsletterForm } from './NewsletterForm';
@@ -28,13 +28,7 @@ export const Newsletter: React.FC<NewsletterProps> = ({
   switch (variant) {
     case 'simple-centered':
       return (
-        <div
-          className={cn(
-            'px-6 py-16',
-            backgroundClasses,
-            className
-          )}
-        >
+        <div className={cn('px-6 py-16', backgroundClasses, className)}>
           <div className="mx-auto max-w-2xl text-center">
             <NewsletterHeader content={content} />
             <NewsletterForm
@@ -48,7 +42,7 @@ export const Newsletter: React.FC<NewsletterProps> = ({
 
     case 'simple-card':
       return (
-        <div className={cn('px-6 py-16 bg-gray-50', className)}>
+        <div className={cn('bg-gray-50 px-6 py-16', className)}>
           <div className="mx-auto max-w-2xl rounded-xl bg-white p-8 shadow-md">
             <NewsletterHeader content={content} />
             <NewsletterForm
@@ -70,7 +64,9 @@ export const Newsletter: React.FC<NewsletterProps> = ({
                 alt=""
                 className="h-full w-full object-cover opacity-20"
               />
-              <div className={`absolute inset-0 ${darkMode ? 'bg-gray-900/90' : 'bg-white/80'}`} />
+              <div
+                className={`absolute inset-0 ${darkMode ? 'bg-gray-900/90' : 'bg-white/80'}`}
+              />
             </div>
           )}
           <div className="mx-auto max-w-2xl px-6 py-16 text-center">
@@ -92,10 +88,7 @@ export const Newsletter: React.FC<NewsletterProps> = ({
         <div className={cn('overflow-hidden', backgroundClasses, className)}>
           <div className="mx-auto max-w-7xl px-6 py-16 lg:flex lg:items-center lg:gap-x-10">
             <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
-              <NewsletterHeader
-                content={content}
-                centered={false}
-              />
+              <NewsletterHeader content={content} centered={false} />
               <NewsletterForm
                 content={content}
                 className="mt-6"
@@ -120,10 +113,7 @@ export const Newsletter: React.FC<NewsletterProps> = ({
           <div className="mx-auto max-w-7xl">
             <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-2">
               <div>
-                <NewsletterHeader
-                  content={content}
-                  centered={false}
-                />
+                <NewsletterHeader content={content} centered={false} />
                 {content.features && (
                   <NewsletterFeatures
                     features={content.features}
@@ -132,10 +122,7 @@ export const Newsletter: React.FC<NewsletterProps> = ({
                 )}
               </div>
               <div className="lg:flex lg:flex-col lg:justify-center">
-                <NewsletterForm
-                  content={content}
-                  darkMode={darkMode}
-                />
+                <NewsletterForm content={content} darkMode={darkMode} />
               </div>
             </div>
           </div>

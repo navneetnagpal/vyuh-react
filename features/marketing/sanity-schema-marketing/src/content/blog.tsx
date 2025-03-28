@@ -84,6 +84,20 @@ export const blogSchema = defineType({
                   },
                 }),
               ],
+              preview: {
+                select: {
+                  name: 'name',
+                  role: 'role',
+                  media: 'avatar',
+                },
+                prepare({ name, role, media }) {
+                  return {
+                    title: `Author: ${name || 'Untitled'}`,
+                    subtitle: role,
+                    media,
+                  };
+                },
+              },
             }),
             defineField({
               name: 'categories',
@@ -106,6 +120,28 @@ export const blogSchema = defineType({
               validation: (Rule) => Rule.required(),
             }),
           ],
+          preview: {
+            select: {
+              title: 'title',
+              date: 'date',
+              authorName: 'author.name',
+              featured: 'featured',
+              media: 'image',
+            },
+            prepare({ title, date, authorName, featured, media }) {
+              const formattedDate = date ? new Date(date).toLocaleDateString() : '';
+              const subtitle = [];
+              if (authorName) subtitle.push(authorName);
+              if (formattedDate) subtitle.push(formattedDate);
+              if (featured) subtitle.push('Featured');
+
+              return {
+                title: `Post: ${title || 'Untitled'}`,
+                subtitle: subtitle.length > 0 ? subtitle.join(' • ') : undefined,
+                media,
+              };
+            },
+          },
         },
       ],
       validation: (Rule) => Rule.required().min(1).custom((posts, context) => {

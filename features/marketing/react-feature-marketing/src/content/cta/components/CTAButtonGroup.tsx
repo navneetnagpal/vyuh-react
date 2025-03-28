@@ -1,5 +1,5 @@
 import { CTA } from '@/content/cta/cta';
-import { cn } from '@/content/shared/utils';
+import { cn } from '@/shared/utils';
 import React from 'react';
 import { CTAButton } from './CTAButton';
 
@@ -21,19 +21,24 @@ export const CTAButtonGroup: React.FC<CTAButtonGroupProps> = ({
   }
 
   return (
-    <div className={cn('flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0', className)}>
+    <div
+      className={cn(
+        'flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0',
+        className,
+      )}
+    >
       {primaryAction && (
-        <CTAButton 
-          action={primaryAction} 
-          isPrimary={true} 
-          background={background} 
+        <CTAButton
+          action={primaryAction}
+          isPrimary={true}
+          background={background}
         />
       )}
       {secondaryAction && (
-        <CTAButton 
-          action={secondaryAction} 
-          isPrimary={false} 
-          background={background} 
+        <CTAButton
+          action={secondaryAction}
+          isPrimary={false}
+          background={background}
         />
       )}
     </div>

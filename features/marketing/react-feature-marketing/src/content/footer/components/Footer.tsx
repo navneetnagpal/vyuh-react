@@ -1,6 +1,6 @@
 import { DefaultFooterLayout } from '@/content/footer/default-footer-layout';
 import { Footer as FooterItem } from '@/content/footer/footer';
-import { cn } from '@/content/shared/utils';
+import { cn } from '@/shared/utils';
 import React from 'react';
 import { FooterCopyright } from './FooterCopyright';
 import { FooterDescription } from './FooterDescription';
