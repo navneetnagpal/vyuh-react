@@ -1,9 +1,10 @@
 import { Banner as BannerItem } from '@/content/banner/banner';
 import { DefaultBannerLayout } from '@/content/banner/default-banner-layout';
 import { cn } from '@/content/shared/utils';
-import { XCircleIcon } from 'lucide-react';
-import { DynamicIcon } from 'lucide-react/dynamic';
 import React from 'react';
+import { BannerIcon } from './BannerIcon';
+import { BannerContent } from './BannerContent';
+import { BannerDismiss } from './BannerDismiss';
 
 interface BannerProps {
   content: BannerItem;
@@ -37,22 +38,19 @@ export const Banner: React.FC<BannerProps> = ({
     >
       <div className="flex">
         {content.icon && (
-          <div className="mr-3 flex-shrink-0">
-            <DynamicIcon className="h-6 w-6" name={content.icon} />
-          </div>
+          <BannerIcon
+            icon={content.icon}
+            className="mr-3 flex-shrink-0"
+          />
         )}
-        <div>
-          <p className="text-sm font-medium">{content.text}</p>
-        </div>
+        <BannerContent text={content.text} />
       </div>
 
       {content.dismissible && (
-        <span
-          title={content.dismissText || 'Dismiss'}
-          className={'ml-3 flex-shrink-0'}
-        >
-          <XCircleIcon className="h-5 w-5 cursor-pointer" />
-        </span>
+        <BannerDismiss
+          dismissText={content.dismissText}
+          className="ml-3 flex-shrink-0"
+        />
       )}
     </div>
   );

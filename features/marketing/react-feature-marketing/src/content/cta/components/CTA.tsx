@@ -1,19 +1,22 @@
-import { CTA as CTAItem } from '@/content/cta/cta';
+import { CTA as CTAContent } from '@/content/cta/cta';
 import { DefaultCTALayout } from '@/content/cta/default-cta-layout';
 import { cn } from '@/content/shared/utils';
-import { Action, useVyuh } from '@vyuh/react-core';
 import React from 'react';
+import { CTAHeader } from './CTAHeader';
+import { CTAButtonGroup } from './CTAButtonGroup';
+import { CTAImage } from './CTAImage';
+import { useMediaUtils } from '@/content/shared/MediaUtils';
 
 interface CTAProps {
-  content: CTAItem;
+  content: CTAContent;
   layout: DefaultCTALayout;
   className?: string;
 }
 
 export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
-  const { plugins } = useVyuh();
   const variant = layout.variant || 'simple-centered';
   const background = layout.background || 'light';
+  const { getImageUrl } = useMediaUtils();
 
   // Background color classes based on the background type
   const backgroundClasses = {
@@ -23,101 +26,19 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
     'light-brand': 'bg-indigo-50',
   };
 
-  // Button classes based on the background type
-  const primaryButtonClasses = {
-    light: 'bg-indigo-600 text-white hover:bg-indigo-700',
-    dark: 'bg-white text-gray-900 hover:bg-gray-100',
-    brand: 'bg-white text-indigo-600 hover:bg-gray-100',
-    'light-brand': 'bg-indigo-600 text-white hover:bg-indigo-700',
-  };
-
-  const secondaryButtonClasses = {
-    light: 'text-indigo-600 border border-indigo-600 hover:bg-indigo-50',
-    dark: 'text-white border border-white hover:bg-gray-800',
-    brand: 'text-white border border-white hover:bg-indigo-500',
-    'light-brand':
-      'text-indigo-600 border border-indigo-600 hover:bg-indigo-50',
-  };
-
-  // Render the primary action button
-  const renderPrimaryButton = () => {
-    if (!content.primaryAction) return null;
+  // Helper function for rendering additional info text with appropriate styling
+  const renderAdditionalInfo = (additionalInfo: string | undefined, background: string) => {
+    if (!additionalInfo) return null;
 
     return (
-      <button
-        className={cn(
-          'rounded-md px-5 py-2.5 font-medium cursor-pointer',
-          primaryButtonClasses[background as keyof typeof primaryButtonClasses],
-        )}
-        onClick={() => new Action(content.primaryAction).execute()}
-      >
-        {content.primaryAction.title}
-      </button>
-    );
-  };
-
-  // Render the secondary action button
-  const renderSecondaryButton = () => {
-    if (!content.secondaryAction) return null;
-
-    return (
-      <button
-        className={cn(
-          'rounded-md px-5 py-2.5 font-medium cursor-pointer',
-          secondaryButtonClasses[
-            background as keyof typeof secondaryButtonClasses
-          ],
-        )}
-        onClick={() => new Action(content.secondaryAction!).execute()}
-      >
-        {content.secondaryAction.title}
-      </button>
-    );
-  };
-
-  // Render image if available
-  const renderImage = () => {
-    if (!content.image) return null;
-
-    const imageUrl = plugins.content.provider.image(content.image, {
-      width: 600,
-      height: 400,
-    });
-
-    return (
-      <div className="overflow-hidden rounded-lg">
-        <img
-          src={imageUrl}
-          alt={content.title}
-          className="h-full w-full object-cover"
-        />
-      </div>
-    );
-  };
-
-  // Render image tiles if available
-  const renderImageTiles = () => {
-    if (!content.imageTiles || content.imageTiles.length === 0) return null;
-
-    return (
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-        {content.imageTiles.map((image, index) => {
-          const imageUrl = plugins.content.provider.image(image, {
-            width: 300,
-            height: 200,
-          });
-
-          return (
-            <div key={index} className="overflow-hidden rounded-lg">
-              <img
-                src={imageUrl}
-                alt={`${content.title} - ${index + 1}`}
-                className="h-full w-full object-cover"
-              />
-            </div>
-          );
-        })}
-      </div>
+      <p className={cn(
+        'mt-4 text-sm',
+        background === 'light' ? 'text-gray-600' :
+        background === 'dark' ? 'text-gray-300' :
+        background === 'brand' ? 'text-indigo-200' : 'text-gray-600'
+      )}>
+        {additionalInfo}
+      </p>
     );
   };
 
@@ -133,19 +54,20 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
           )}
         >
           <div className="mx-auto max-w-3xl">
-            <h2 className="mb-4 text-3xl font-bold">{content.title}</h2>
-            {content.subtitle && (
-              <p className="mb-8 text-lg">{content.subtitle}</p>
-            )}
-            <div className="flex flex-col justify-center gap-4 sm:flex-row">
-              {renderPrimaryButton()}
-              {renderSecondaryButton()}
+            <CTAHeader
+              content={content}
+              background={background}
+            />
+
+            <div className="mt-8 flex justify-center">
+              <CTAButtonGroup
+                primaryAction={content.primaryAction}
+                secondaryAction={content.secondaryAction}
+                background={background}
+              />
             </div>
-            {content.additionalInfo && (
-              <p className="mt-4 text-sm opacity-80">
-                {content.additionalInfo}
-              </p>
-            )}
+
+            {renderAdditionalInfo(content.additionalInfo, background)}
           </div>
         </div>
       );
@@ -160,19 +82,20 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
           )}
         >
           <div className="mx-auto max-w-3xl">
-            <h2 className="mb-4 text-3xl font-bold">{content.title}</h2>
-            {content.subtitle && (
-              <p className="mb-8 text-lg">{content.subtitle}</p>
-            )}
-            <div className="flex flex-col gap-4">
-              {renderPrimaryButton()}
-              {renderSecondaryButton()}
+            <CTAHeader
+              content={content}
+              background={background}
+            />
+
+            <div className="mt-8 flex flex-col gap-4">
+              <CTAButtonGroup
+                primaryAction={content.primaryAction}
+                secondaryAction={content.secondaryAction}
+                background={background}
+              />
             </div>
-            {content.additionalInfo && (
-              <p className="mt-4 text-sm opacity-80">
-                {content.additionalInfo}
-              </p>
-            )}
+
+            {renderAdditionalInfo(content.additionalInfo, background)}
           </div>
         </div>
       );
@@ -187,18 +110,22 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
           )}
         >
           <div className="mx-auto max-w-3xl rounded-xl bg-white p-8 text-gray-900 shadow-lg">
-            <h2 className="mb-4 text-center text-3xl font-bold">
-              {content.title}
-            </h2>
-            {content.subtitle && (
-              <p className="mb-8 text-center text-lg">{content.subtitle}</p>
-            )}
-            <div className="flex flex-col justify-center gap-4 sm:flex-row">
-              {renderPrimaryButton()}
-              {renderSecondaryButton()}
+            <CTAHeader
+              content={content}
+              background="light"
+              className="text-center"
+            />
+
+            <div className="mt-8 flex justify-center">
+              <CTAButtonGroup
+                primaryAction={content.primaryAction}
+                secondaryAction={content.secondaryAction}
+                background="light"
+              />
             </div>
+
             {content.additionalInfo && (
-              <p className="mt-4 text-center text-sm opacity-80">
+              <p className="mt-4 text-center text-sm text-gray-600">
                 {content.additionalInfo}
               </p>
             )}
@@ -217,19 +144,25 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
         >
           <div className="mx-auto flex max-w-6xl flex-col gap-6 md:flex-row md:items-center md:justify-between">
             <div className="md:max-w-2xl">
-              <h2 className="mb-2 text-3xl font-bold">{content.title}</h2>
-              {content.subtitle && (
-                <p className="text-lg">{content.subtitle}</p>
-              )}
+              <CTAHeader
+                content={content}
+                background={background}
+                className="text-left"
+              />
             </div>
-            <div className="flex flex-col gap-4 sm:flex-row">
-              {renderPrimaryButton()}
-              {renderSecondaryButton()}
+
+            <div>
+              <CTAButtonGroup
+                primaryAction={content.primaryAction}
+                secondaryAction={content.secondaryAction}
+                background={background}
+              />
             </div>
           </div>
+
           {content.additionalInfo && (
             <div className="mx-auto mt-4 max-w-6xl">
-              <p className="text-sm opacity-80">{content.additionalInfo}</p>
+              {renderAdditionalInfo(content.additionalInfo, background)}
             </div>
           )}
         </div>
@@ -245,21 +178,29 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
           )}
         >
           <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
-            <div>{renderImage()}</div>
+            {content.image && (
+              <CTAImage
+                image={content.image}
+                alt={content.title}
+              />
+            )}
+
             <div>
-              <h2 className="mb-4 text-3xl font-bold">{content.title}</h2>
-              {content.subtitle && (
-                <p className="mb-8 text-lg">{content.subtitle}</p>
-              )}
-              <div className="flex flex-col gap-4 sm:flex-row">
-                {renderPrimaryButton()}
-                {renderSecondaryButton()}
+              <CTAHeader
+                content={content}
+                background={background}
+                className="text-left"
+              />
+
+              <div className="mt-8">
+                <CTAButtonGroup
+                  primaryAction={content.primaryAction}
+                  secondaryAction={content.secondaryAction}
+                  background={background}
+                />
               </div>
-              {content.additionalInfo && (
-                <p className="mt-4 text-sm opacity-80">
-                  {content.additionalInfo}
-                </p>
-              )}
+
+              {renderAdditionalInfo(content.additionalInfo, background)}
             </div>
           </div>
         </div>
@@ -276,21 +217,29 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
         >
           <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
             <div>
-              <h2 className="mb-4 text-3xl font-bold">{content.title}</h2>
-              {content.subtitle && (
-                <p className="mb-8 text-lg">{content.subtitle}</p>
-              )}
-              <div className="flex flex-col gap-4 sm:flex-row">
-                {renderPrimaryButton()}
-                {renderSecondaryButton()}
+              <CTAHeader
+                content={content}
+                background={background}
+                className="text-left"
+              />
+
+              <div className="mt-8">
+                <CTAButtonGroup
+                  primaryAction={content.primaryAction}
+                  secondaryAction={content.secondaryAction}
+                  background={background}
+                />
               </div>
-              {content.additionalInfo && (
-                <p className="mt-4 text-sm opacity-80">
-                  {content.additionalInfo}
-                </p>
-              )}
+
+              {renderAdditionalInfo(content.additionalInfo, background)}
             </div>
-            <div>{renderImage()}</div>
+
+            {content.image && (
+              <CTAImage
+                image={content.image}
+                alt={content.title}
+              />
+            )}
           </div>
         </div>
       );
@@ -306,21 +255,33 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
         >
           <div className="mx-auto max-w-6xl">
             <div className="mb-12 text-center">
-              <h2 className="mb-4 text-3xl font-bold">{content.title}</h2>
-              {content.subtitle && (
-                <p className="mb-8 text-lg">{content.subtitle}</p>
-              )}
-              <div className="flex flex-col justify-center gap-4 sm:flex-row">
-                {renderPrimaryButton()}
-                {renderSecondaryButton()}
+              <CTAHeader
+                content={content}
+                background={background}
+              />
+
+              <div className="mt-8 flex justify-center">
+                <CTAButtonGroup
+                  primaryAction={content.primaryAction}
+                  secondaryAction={content.secondaryAction}
+                  background={background}
+                />
               </div>
-              {content.additionalInfo && (
-                <p className="mt-4 text-sm opacity-80">
-                  {content.additionalInfo}
-                </p>
-              )}
+
+              {renderAdditionalInfo(content.additionalInfo, background)}
             </div>
-            {renderImageTiles()}
+
+            {content.imageTiles && content.imageTiles.length > 0 && (
+              <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+                {content.imageTiles.map((image, index) => (
+                  <CTAImage
+                    key={index}
+                    image={image}
+                    alt={`${content.title} - ${index + 1}`}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       );
@@ -335,19 +296,20 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
           )}
         >
           <div className="mx-auto max-w-3xl">
-            <h2 className="mb-4 text-3xl font-bold">{content.title}</h2>
-            {content.subtitle && (
-              <p className="mb-8 text-lg">{content.subtitle}</p>
-            )}
-            <div className="flex flex-col justify-center gap-4 sm:flex-row">
-              {renderPrimaryButton()}
-              {renderSecondaryButton()}
+            <CTAHeader
+              content={content}
+              background={background}
+            />
+
+            <div className="mt-8 flex justify-center">
+              <CTAButtonGroup
+                primaryAction={content.primaryAction}
+                secondaryAction={content.secondaryAction}
+                background={background}
+              />
             </div>
-            {content.additionalInfo && (
-              <p className="mt-4 text-sm opacity-80">
-                {content.additionalInfo}
-              </p>
-            )}
+
+            {renderAdditionalInfo(content.additionalInfo, background)}
           </div>
         </div>
       );
