@@ -8,8 +8,12 @@ import {
   bannerSchema,
   defaultBannerLayout,
 } from './content/banner';
-import { bentoSchema } from './content/bento';
-import { blogSchema } from './content/blog';
+import {
+  BentoDescriptor,
+  bentoSchema,
+  defaultBentoLayout,
+} from './content/bento';
+import { BlogDescriptor, blogSchema, defaultBlogLayout } from './content/blog';
 import { CTADescriptor, ctaSchema, defaultCTALayout } from './content/cta';
 import { defaultFaqLayout, FAQDescriptor, faqSchema } from './content/faq';
 import {
@@ -17,17 +21,20 @@ import {
   featureSchema,
   FeatureSectionDescriptor,
 } from './content/feature';
-import { footerSchema } from './content/footer';
+import {
+  FooterDescriptor,
+  footerSchema,
+  defaultFooterLayout,
+} from './content/footer';
 import {
   defaultHeaderLayout,
   HeaderDescriptor,
   headerSchema,
+  navigationDropdownItemSchema,
   navigationItemSchema,
-  navigationDropdownItemSchema
 } from './content/header';
 import { defaultHeroLayout, HeroDescriptor, heroSchema } from './content/hero';
-import { logoSchema } from './content/logo';
-import { logoCloudsSchema } from './content/logo-clouds';
+import { LogoDescriptor, logoSchema, defaultLogoLayout } from './content/logo';
 import { newsletterSchema } from './content/newsletter';
 import { pricingSchema } from './content/pricing';
 import { statsSchema } from './content/stats';
@@ -58,13 +65,24 @@ export const marketing = new FeatureDescriptor({
     new HeaderDescriptor({
       layouts: [defaultHeaderLayout],
     }),
+    new FooterDescriptor({
+      layouts: [defaultFooterLayout],
+    }),
+    new LogoDescriptor({
+      layouts: [defaultLogoLayout],
+    }),
+    new BlogDescriptor({
+      layouts: [defaultBlogLayout],
+    }),
+    new BentoDescriptor({
+      layouts: [defaultBentoLayout],
+    }),
     new RouteDescriptor({
       regionItems: [
         { type: bannerSchema.name },
         { type: headerSchema.name },
         { type: heroSchema.name },
         { type: logoSchema.name },
-        { type: logoCloudsSchema.name },
         { type: featureSchema.name },
         { type: bentoSchema.name },
         { type: statsSchema.name },
@@ -82,12 +100,8 @@ export const marketing = new FeatureDescriptor({
   contentSchemaBuilders: [
     new BuiltContentSchemaBuilder(bannerSchema),
     new BuiltContentSchemaBuilder(headerSchema),
-    new BuiltContentSchemaBuilder(defaultHeaderLayout),
-    new BuiltContentSchemaBuilder(navigationItemSchema),
-    new BuiltContentSchemaBuilder(navigationDropdownItemSchema),
     new BuiltContentSchemaBuilder(heroSchema),
     new BuiltContentSchemaBuilder(logoSchema),
-    new BuiltContentSchemaBuilder(logoCloudsSchema),
     new BuiltContentSchemaBuilder(featureSchema),
     new BuiltContentSchemaBuilder(bentoSchema),
     new BuiltContentSchemaBuilder(statsSchema),

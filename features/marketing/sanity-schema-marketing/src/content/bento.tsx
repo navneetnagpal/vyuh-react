@@ -1,5 +1,6 @@
 import { defineField, defineType } from 'sanity';
 import { TbLayoutGrid as Icon } from 'react-icons/tb';
+import { ContentDescriptor } from '@vyuh/sanity-schema-core';
 
 /**
  * Bento grid schema for marketing pages
@@ -23,26 +24,6 @@ export const bentoSchema = defineType({
       title: 'Subtitle',
       type: 'text',
       description: 'A supporting text that appears below the title',
-    }),
-    defineField({
-      name: 'variant',
-      title: 'Variant',
-      type: 'string',
-      description: 'The style variant for the bento grid',
-      options: {
-        list: [
-          { title: 'Three column grid', value: 'three-column' },
-          { title: 'Two row grid', value: 'two-row' },
-        ],
-      },
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'darkMode',
-      title: 'Dark Mode',
-      type: 'boolean',
-      description: 'Whether this section should be displayed in dark mode',
-      initialValue: false,
     }),
     defineField({
       name: 'items',
@@ -125,3 +106,82 @@ export const bentoSchema = defineType({
     },
   },
 });
+
+/**
+ * Default layout schema for bento grid content items
+ */
+export const defaultBentoLayout = defineType({
+  name: `${bentoSchema.name}.layout.default`,
+  title: 'Default',
+  type: 'object',
+  icon: Icon,
+  fields: [
+    defineField({
+      name: 'variant',
+      title: 'Variant',
+      type: 'string',
+      description: 'The style variant for the bento grid',
+      options: {
+        list: [
+          { title: 'Three column grid', value: 'three-column' },
+          { title: 'Two row grid', value: 'two-row' },
+        ],
+      },
+      initialValue: 'three-column',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'darkMode',
+      title: 'Dark Mode',
+      type: 'boolean',
+      description: 'Whether this section should be displayed in dark mode',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'gap',
+      title: 'Grid Gap',
+      type: 'string',
+      description: 'The spacing between grid items',
+      options: {
+        list: [
+          { title: 'Small', value: 'small' },
+          { title: 'Medium', value: 'medium' },
+          { title: 'Large', value: 'large' },
+        ],
+      },
+      initialValue: 'medium',
+    }),
+  ],
+  preview: {
+    select: {
+      variant: 'variant',
+      darkMode: 'darkMode',
+      gap: 'gap',
+    },
+    prepare({ variant, darkMode, gap }) {
+      const variantDisplay =
+        {
+          'three-column': 'Three Column Grid',
+          'two-row': 'Two Row Grid',
+        }[variant as string] || 'Default';
+
+      const features = [];
+      if (darkMode) features.push('Dark Mode');
+      if (gap)
+        features.push(`${gap.charAt(0).toUpperCase() + gap.slice(1)} gap`);
+
+      return {
+        title: `Bento Layout: ${variantDisplay}`,
+        subtitle: features.length > 0 ? features.join(', ') : 'Default',
+      };
+    },
+  },
+});
+
+export class BentoDescriptor extends ContentDescriptor {
+  static readonly schemaName = bentoSchema.name;
+
+  constructor(props: Partial<BentoDescriptor>) {
+    super(BentoDescriptor.schemaName, props);
+  }
+}

@@ -39,10 +39,13 @@ export const navigationDropdownItemSchema = defineType({
     prepare({ title, description, icon }) {
       return {
         title: title || 'Dropdown Item',
-        subtitle: description ? description.substring(0, 50) + (description.length > 50 ? '...' : '') : 'No description',
-        media: icon ?
-          () => <span style={{ fontSize: '1.5rem' }}>{icon}</span> :
-          () => <span style={{ fontSize: '1.5rem' }}>🔹</span>
+        subtitle: description
+          ? description.substring(0, 50) +
+            (description.length > 50 ? '...' : '')
+          : 'No description',
+        media: icon
+          ? () => <span style={{ fontSize: '1.5rem' }}>{icon}</span>
+          : () => <span style={{ fontSize: '1.5rem' }}>🔹</span>,
       };
     },
   },
@@ -74,7 +77,7 @@ export const navigationItemSchema = defineType({
       title: 'Dropdown Items',
       type: 'array',
       description: 'Submenu items for flyout/dropdown menus',
-      of: [{ type: 'marketing.navigationDropdownItem' }],
+      of: [navigationDropdownItemSchema],
     }),
   ],
   preview: {
@@ -91,9 +94,9 @@ export const navigationItemSchema = defineType({
       return {
         title: title || 'Navigation Item',
         subtitle: status.length > 0 ? status.join(' | ') : 'No status',
-        media: isActive ?
-          () => <span style={{ fontSize: '1.5rem' }}>🔵</span> :
-          () => <span style={{ fontSize: '1.5rem' }}>⚪</span>
+        media: isActive
+          ? () => <span style={{ fontSize: '1.5rem' }}>🔵</span>
+          : () => <span style={{ fontSize: '1.5rem' }}>⚪</span>,
       };
     },
   },
@@ -129,7 +132,7 @@ export const headerSchema = defineType({
       name: 'navigationItems',
       title: 'Navigation Items',
       type: 'array',
-      of: [{ type: 'marketing.navigationItem' }],
+      of: [navigationItemSchema],
       validation: (Rule) =>
         Rule.custom((value, context) => {
           // Validation will be handled by the layout
@@ -140,22 +143,24 @@ export const headerSchema = defineType({
       name: 'actions',
       title: 'Actions',
       type: 'array',
-      of: [{
-        type: 'vyuh.action',
-        preview: {
-          select: {
-            title: 'title',
-            url: 'url',
-          },
-          prepare({ title, url }) {
-            return {
-              title: title || 'Action Button',
-              subtitle: url || 'No URL',
-              media: () => <span style={{ fontSize: '1.5rem' }}>🔘</span>
-            };
+      of: [
+        {
+          type: 'vyuh.action',
+          preview: {
+            select: {
+              title: 'title',
+              url: 'url',
+            },
+            prepare({ title, url }) {
+              return {
+                title: title || 'Action Button',
+                subtitle: url || 'No URL',
+                media: () => <span style={{ fontSize: '1.5rem' }}>🔘</span>,
+              };
+            },
           },
         },
-      }],
+      ],
       description: 'Action buttons to display in the header',
       validation: (Rule) =>
         Rule.custom((value, context) => {
@@ -175,16 +180,23 @@ export const headerSchema = defineType({
       const details = [];
 
       if (navItems.length > 0) {
-        details.push(`${navItems.length} navigation item${navItems.length === 1 ? '' : 's'}`);
+        details.push(
+          `${navItems.length} navigation item${navItems.length === 1 ? '' : 's'}`,
+        );
       }
 
       if (actions.length > 0) {
-        details.push(`${actions.length} action${actions.length === 1 ? '' : 's'}`);
+        details.push(
+          `${actions.length} action${actions.length === 1 ? '' : 's'}`,
+        );
       }
 
       return {
         title: title || 'Header Section',
-        subtitle: details.length > 0 ? details.join(' | ') : 'No navigation items or actions',
+        subtitle:
+          details.length > 0
+            ? details.join(' | ')
+            : 'No navigation items or actions',
         media: logo || Icon,
       };
     },

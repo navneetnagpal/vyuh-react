@@ -1,5 +1,6 @@
 import { defineField, defineType } from 'sanity';
 import { TbArticle as Icon } from 'react-icons/tb';
+import { ContentDescriptor } from '@vyuh/sanity-schema-core';
 
 /**
  * Blog section schema for marketing pages
@@ -23,29 +24,6 @@ export const blogSchema = defineType({
       title: 'Subtitle',
       type: 'text',
       description: 'A supporting text that appears below the title',
-    }),
-    defineField({
-      name: 'variant',
-      title: 'Variant',
-      type: 'string',
-      description: 'The style variant for the blog section',
-      options: {
-        list: [
-          { title: 'Simple grid', value: 'simple-grid' },
-          { title: 'With featured post', value: 'with-featured-post' },
-          { title: 'Card grid', value: 'card-grid' },
-          { title: 'List with image', value: 'list-with-image' },
-          { title: 'Compact list', value: 'compact-list' },
-        ],
-      },
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'darkMode',
-      title: 'Dark Mode',
-      type: 'boolean',
-      description: 'Whether this section should be displayed in dark mode',
-      initialValue: false,
     }),
     defineField({
       name: 'posts',
@@ -164,3 +142,89 @@ export const blogSchema = defineType({
     },
   },
 });
+
+/**
+ * Default layout schema for blog content items
+ */
+export const defaultBlogLayout = defineType({
+  name: `${blogSchema.name}.layout.default`,
+  title: 'Default',
+  type: 'object',
+  icon: Icon,
+  fields: [
+    defineField({
+      name: 'variant',
+      title: 'Variant',
+      type: 'string',
+      description: 'The style variant for the blog section',
+      options: {
+        list: [
+          { title: 'Simple grid', value: 'simple-grid' },
+          { title: 'With featured post', value: 'with-featured-post' },
+          { title: 'Card grid', value: 'card-grid' },
+          { title: 'List with image', value: 'list-with-image' },
+          { title: 'Compact list', value: 'compact-list' },
+        ],
+      },
+      initialValue: 'simple-grid',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'darkMode',
+      title: 'Dark Mode',
+      type: 'boolean',
+      description: 'Whether this section should be displayed in dark mode',
+      initialValue: false,
+    }),
+    defineField({
+      name: 'columns',
+      title: 'Columns',
+      type: 'number',
+      description: 'Number of columns to display (for grid variants)',
+      options: {
+        list: [
+          { title: '2 columns', value: 2 },
+          { title: '3 columns', value: 3 },
+          { title: '4 columns', value: 4 },
+        ],
+      },
+      initialValue: 3,
+      hidden: ({ parent }) => !['simple-grid', 'card-grid'].includes(parent?.variant),
+    }),
+  ],
+  preview: {
+    select: {
+      variant: 'variant',
+      darkMode: 'darkMode',
+      columns: 'columns',
+    },
+    prepare({ variant, darkMode, columns }) {
+      const variantDisplay = {
+        'simple-grid': 'Simple Grid',
+        'with-featured-post': 'With Featured Post',
+        'card-grid': 'Card Grid',
+        'list-with-image': 'List with Image',
+        'compact-list': 'Compact List',
+      }[variant] || 'Default';
+
+      const features = [];
+      if (darkMode) features.push('Dark Mode');
+      if (columns && ['simple-grid', 'card-grid'].includes(variant)) {
+        features.push(`${columns} columns`);
+      }
+
+      return {
+        title: `Blog Layout: ${variantDisplay}`,
+        subtitle: features.length > 0 ? features.join(', ') : 'Default',
+      };
+    },
+  },
+});
+
+export class BlogDescriptor extends ContentDescriptor {
+  static readonly schemaName = blogSchema.name;
+
+  constructor(props: Partial<BlogDescriptor>) {
+    super(BlogDescriptor.schemaName, props);
+  }
+}

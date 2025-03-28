@@ -1,0 +1,90 @@
+import { Bento } from '@/content/bento/bento';
+import { cn } from '@/content/shared/utils';
+import { useMediaUtils } from '@/content/shared/MediaUtils';
+import { Action } from '@vyuh/react-core';
+import { DynamicIcon, IconName } from 'lucide-react/dynamic';
+import React from 'react';
+
+interface BentoItemProps {
+  item: Bento['items'][0];
+  darkMode: boolean;
+  variant: 'three-column' | 'two-row';
+  className?: string;
+}
+
+export const BentoItem: React.FC<BentoItemProps> = ({
+  item,
+  darkMode,
+  variant,
+  className,
+}) => {
+  const { getImageUrl } = useMediaUtils();
+  
+  // Determine span classes based on the item's span property and the current variant
+  let spanClasses = '';
+  
+  if (variant === 'two-row') {
+    spanClasses = {
+      normal: 'col-span-1',
+      wide: 'col-span-2',
+      tall: 'col-span-1',
+      large: 'col-span-2',
+    }[item.span || 'normal'];
+  } else {
+    // For three-column layout
+    spanClasses = {
+      normal: 'col-span-1',
+      wide: 'col-span-2',
+      tall: 'col-span-1',
+      large: 'col-span-2',
+    }[item.span || 'normal'];
+  }
+
+  // Background color for the item
+  const itemBgColor = item.color || (darkMode ? 'bg-gray-800' : 'bg-gray-100');
+
+  return (
+    <div
+      className={cn(
+        'flex h-full flex-col rounded-xl p-6 transition-all hover:shadow-md',
+        spanClasses,
+        itemBgColor,
+        item.action && 'cursor-pointer',
+        className
+      )}
+      onClick={() => item.action && new Action(item.action).execute()}
+    >
+      {/* Icon or Image */}
+      {item.icon && (
+        <div className="mb-4 text-2xl">
+          <span className="bg-primary inline-block rounded-full p-2 text-white">
+            <DynamicIcon className="h-6 w-6" name={item.icon as IconName} />
+          </span>
+        </div>
+      )}
+      
+      {item.image && !item.icon && (
+        <div className="mb-4 overflow-hidden rounded-lg">
+          <img
+            src={getImageUrl(item.image)}
+            alt={item.title}
+            className="h-auto w-full object-cover"
+          />
+        </div>
+      )}
+
+      {/* Title */}
+      <h3 className="mb-2 text-lg font-semibold">{item.title}</h3>
+
+      {/* Description */}
+      <p
+        className={cn(
+          'text-sm',
+          darkMode ? 'text-gray-300' : 'text-gray-600'
+        )}
+      >
+        {item.description}
+      </p>
+    </div>
+  );
+};
