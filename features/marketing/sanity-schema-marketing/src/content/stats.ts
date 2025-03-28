@@ -91,12 +91,13 @@ export const statsSchema = defineType({
   preview: {
     select: {
       title: 'title',
-      statCount: 'stats.length',
+      stats: 'stats',
     },
-    prepare({ title, statCount = 0 }) {
+    prepare({ title, stats = [] }) {
       return {
         title: title || 'Stats Section',
-        subtitle: `${statCount} stat${statCount === 1 ? '' : 's'}`,
+        subtitle: `${stats.length} stat${stats.length === 1 ? '' : 's'}`,
+        media: Icon,
       };
     },
   },

@@ -117,12 +117,13 @@ export const teamSchema = defineType({
   preview: {
     select: {
       title: 'title',
-      memberCount: 'members.length',
+      members: 'members',
     },
-    prepare({ title, memberCount = 0 }) {
+    prepare({ title, members = [] }) {
       return {
         title: title || 'Team Section',
-        subtitle: `${memberCount} member${memberCount === 1 ? '' : 's'}`,
+        subtitle: `${members.length} member${members.length === 1 ? '' : 's'}`,
+        media: Icon,
       };
     },
   },

@@ -110,12 +110,13 @@ export const testimonialsSchema = defineType({
   preview: {
     select: {
       title: 'title',
-      testimonialCount: 'testimonials.length',
+      testimonials: 'testimonials',
     },
-    prepare({ title, testimonialCount = 0 }) {
+    prepare({ title, testimonials = [] }) {
       return {
         title: title || 'Testimonials Section',
-        subtitle: `${testimonialCount} testimonial${testimonialCount === 1 ? '' : 's'}`,
+        subtitle: `${testimonials.length} testimonial${testimonials.length === 1 ? '' : 's'}`,
+        media: Icon,
       };
     },
   },

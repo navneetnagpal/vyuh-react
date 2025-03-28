@@ -76,10 +76,13 @@ export const newsletterSchema = defineType({
   preview: {
     select: {
       title: 'title',
+      features: 'features',
     },
-    prepare({ title }) {
+    prepare({ title, features = [] }) {
       return {
         title: title || 'Newsletter Section',
+        subtitle: features.length > 0 ? `${features.length} features` : undefined,
+        media: Icon,
       };
     },
   },

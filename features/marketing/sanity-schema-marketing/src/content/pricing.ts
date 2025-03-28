@@ -128,12 +128,13 @@ export const pricingSchema = defineType({
   preview: {
     select: {
       title: 'title',
-      planCount: 'plans.length',
+      plans: 'plans',
     },
-    prepare({ title, planCount = 0 }) {
+    prepare({ title, plans = [] }) {
       return {
         title: title || 'Pricing Section',
-        subtitle: `${planCount} plan${planCount === 1 ? '' : 's'}`,
+        subtitle: `${plans.length} plan${plans.length === 1 ? '' : 's'}`,
+        media: Icon,
       };
     },
   },
