@@ -25,7 +25,6 @@ export const TestimonialItem: React.FC<TestimonialItemProps> = ({
 
   const isCardVariant = variant === 'card-grid';
   const isLargeAvatarVariant = variant === 'with-large-avatar';
-  const showCompanyLogo = variant === 'with-company-logos';
 
   return (
     <div
@@ -80,16 +79,6 @@ export const TestimonialItem: React.FC<TestimonialItemProps> = ({
             )}
           </div>
         </div>
-
-        {showCompanyLogo && testimonial.companyLogo && (
-          <div className="mt-4">
-            <img
-              src={getImageUrl(testimonial.companyLogo)}
-              alt={testimonial.author.company || 'Company logo'}
-              className="h-8 object-contain"
-            />
-          </div>
-        )}
       </div>
     </div>
   );

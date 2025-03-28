@@ -8,6 +8,7 @@ export default defineConfig({
   sourcemap: false,
   clean: true,
   treeshake: true,
+  injectStyle: true,
   minify: process.env.NODE_ENV === 'production',
   external: ['react', 'react-dom'],
   esbuildOptions(options) {

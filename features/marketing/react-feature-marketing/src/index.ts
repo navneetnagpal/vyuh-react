@@ -29,6 +29,8 @@ import { TestimonialsDescriptor } from '@/content/testimonials/testimonials-desc
 import { FeatureDescriptor } from '@vyuh/react-core';
 import { ContentExtensionDescriptor } from '@vyuh/react-extension-content';
 
+import './styles.css';
+
 /**
  * Marketing feature descriptor
  *

@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "changeset": "changeset",
+    "dev:tw": "pnpm --parallel --recursive dev:tw",
     "publish": "changeset version && pnpm build && changeset publish",
     "build": "pnpm --recursive --filter \"./packages/*\" build"
   },

@@ -24,9 +24,6 @@ export const Header: React.FC<HeaderProps> = ({
   const sticky = layout.sticky || false;
 
   // Background color classes based on dark mode
-  const backgroundClasses = darkMode
-    ? 'bg-gray-900 text-white'
-    : 'bg-white text-gray-900';
 
   // Render the header content based on the variant
   const renderHeaderContent = () => {
@@ -42,7 +39,7 @@ export const Header: React.FC<HeaderProps> = ({
         return (
           <div className="flex items-center justify-between">
             <Logo content={content} />
-            <div className="flex items-center space-x-6">
+            <div className="hidden items-center space-x-6 md:flex">
               <Navigation items={content.navigationItems} darkMode={darkMode} />
               <ActionButtons actions={content.actions} darkMode={darkMode} />
             </div>
@@ -60,12 +57,8 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header
-      className={cn(
-        'px-6 py-4',
-        backgroundClasses,
-        sticky && 'sticky top-0 z-50',
-        className,
-      )}
+      data-theme={darkMode ? 'dark' : 'light'}
+      className={cn('navbar', sticky && 'sticky top-0 z-50', className)}
     >
       <div className="container mx-auto">{renderHeaderContent()}</div>
     </header>

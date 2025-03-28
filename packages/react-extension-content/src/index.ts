@@ -8,3 +8,5 @@ export * from './content-extension-builder';
 export * from './default-content-plugin';
 export * from '@/ui/error-boundary';
 export { AsyncResource } from '@/ui/async-resource';
+
+import './styles.css';

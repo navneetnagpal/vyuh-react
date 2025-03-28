@@ -26,16 +26,6 @@ export const testimonialsSchema = defineType({
     }),
 
     defineField({
-      name: 'backgroundImage',
-      title: 'Background Image',
-      type: 'image',
-      description: 'Background image for variants that use it',
-      options: {
-        hotspot: true,
-      },
-      hidden: ({ parent }) => parent?.variant !== 'with-background-image',
-    }),
-    defineField({
       name: 'testimonials',
       title: 'Testimonials',
       type: 'array',
@@ -107,13 +97,6 @@ export const testimonialsSchema = defineType({
               description: 'Whether this testimonial should be highlighted',
               initialValue: false,
             }),
-            defineField({
-              name: 'companyLogo',
-              title: 'Company Logo',
-              type: 'image',
-              description:
-                'Logo of the company for variants that display logos',
-            }),
           ],
           preview: {
             select: {
@@ -175,9 +158,7 @@ export const defaultTestimonialsLayout = defineType({
           { title: 'Simple centered', value: 'simple-centered' },
           { title: 'Side by side', value: 'side-by-side' },
           { title: 'With large avatar', value: 'with-large-avatar' },
-          { title: 'With company logos', value: 'with-company-logos' },
           { title: 'Card grid', value: 'card-grid' },
-          { title: 'With background image', value: 'with-background-image' },
         ],
       },
       initialValue: 'simple-centered',

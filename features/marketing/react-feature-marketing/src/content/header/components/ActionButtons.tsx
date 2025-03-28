@@ -19,25 +19,12 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
     return null;
   }
 
-  // Primary button classes
-  const primaryButtonClasses = darkMode
-    ? 'bg-white text-gray-900 hover:bg-gray-100'
-    : 'bg-indigo-600 text-white hover:bg-indigo-700';
-
-  // Secondary button classes
-  const secondaryButtonClasses = darkMode
-    ? 'bg-gray-800 text-white hover:bg-gray-700'
-    : 'bg-white text-gray-900 ring-1 ring-gray-300 hover:bg-gray-50';
-
   return (
     <div className={cn('flex items-center space-x-4', className)}>
       {actions.map((actionItem, index) => (
         <button
           key={index}
-          className={cn(
-            'cursor-pointer rounded-md px-4 py-2 text-sm font-medium',
-            index === 0 ? primaryButtonClasses : secondaryButtonClasses,
-          )}
+          className={cn('btn btn-xs')}
           onClick={() => new Action(actionItem.action).execute()}
         >
           <div className="flex items-center">

@@ -33,7 +33,7 @@
     "react-dom": "^19.0.0"
   },
   "dependencies": {
-    "@sanity/client": "^6.28.3",
+    "@sanity/client": "^6.28.4",
     "@tailwindcss/cli": "^4.0.17",
     "@tailwindcss/postcss": "^4.0.17",
     "lucide-react": "^0.482.0",

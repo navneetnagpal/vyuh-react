@@ -19,7 +19,6 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
 }) => {
   const variant = layout.variant || 'simple-centered';
   const darkMode = layout.darkMode || false;
-  const { getImageUrl } = useMediaUtils();
 
   const backgroundClasses = darkMode
     ? 'bg-gray-900 text-white'
@@ -75,11 +74,11 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
 
     case 'side-by-side':
       return (
-        <div className={cn('px-6 py-16', backgroundClasses, className)}>
+        <div className={cn(backgroundClasses, className)}>
           <div className="mx-auto max-w-7xl">
             <TestimonialsHeader content={content} />
 
-            <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+            <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-16 md:max-w-none md:grid-cols-2 lg:mx-0">
               {content.testimonials &&
                 content.testimonials.length > 0 &&
                 content.testimonials.map((testimonial, index) => (
@@ -98,36 +97,14 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
       );
 
     case 'with-large-avatar':
+      // Same layout as side-by-side, but the variant is passed to TestimonialItem
+      // which will render the avatar differently
       return (
-        <div className={cn('px-6 py-16', backgroundClasses, className)}>
+        <div className={cn(backgroundClasses, className)}>
           <div className="mx-auto max-w-7xl">
             <TestimonialsHeader content={content} />
 
-            <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-2">
-              {content.testimonials &&
-                content.testimonials.length > 0 &&
-                content.testimonials.map((testimonial, index) => (
-                  <TestimonialItem
-                    key={index}
-                    testimonial={testimonial}
-                    darkMode={darkMode}
-                    variant={variant}
-                  />
-                ))}
-            </div>
-
-            {renderAction()}
-          </div>
-        </div>
-      );
-
-    case 'with-company-logos':
-      return (
-        <div className={cn('px-6 py-16', backgroundClasses, className)}>
-          <div className="mx-auto max-w-7xl">
-            <TestimonialsHeader content={content} />
-
-            <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+            <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-8 md:grid-cols-2 lg:mx-0 lg:max-w-none">
               {content.testimonials &&
                 content.testimonials.length > 0 &&
                 content.testimonials.map((testimonial, index) => (
@@ -157,7 +134,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
           <div className="mx-auto max-w-7xl">
             <TestimonialsHeader content={content} />
 
-            <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+            <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-8 md:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
               {content.testimonials &&
                 content.testimonials.length > 0 &&
                 content.testimonials.map((testimonial, index) => (
@@ -166,47 +143,6 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
                     testimonial={testimonial}
                     darkMode={darkMode}
                     variant={variant}
-                  />
-                ))}
-            </div>
-
-            {renderAction()}
-          </div>
-        </div>
-      );
-
-    case 'with-background-image':
-      return (
-        <div className={cn('relative isolate overflow-hidden', className)}>
-          {content.backgroundImage && (
-            <div className="absolute inset-0 -z-10">
-              <img
-                src={getImageUrl(content.backgroundImage)}
-                alt=""
-                className="h-full w-full object-cover opacity-20"
-              />
-              <div
-                className={`absolute inset-0 ${darkMode ? 'bg-gray-900/90' : 'bg-white/80'}`}
-              />
-            </div>
-          )}
-
-          <div className="mx-auto max-w-7xl px-6 py-16">
-            <TestimonialsHeader
-              content={content}
-              className={darkMode ? 'text-white' : 'text-gray-900'}
-            />
-
-            <div className="mx-auto mt-10 max-w-2xl">
-              {content.testimonials &&
-                content.testimonials.length > 0 &&
-                content.testimonials.map((testimonial, index) => (
-                  <TestimonialItem
-                    key={index}
-                    testimonial={testimonial}
-                    darkMode={darkMode}
-                    variant={variant}
-                    className={index > 0 ? 'mt-8' : ''}
                   />
                 ))}
             </div>
@@ -217,6 +153,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
       );
 
     default:
+      // Default to simple-centered layout
       return (
         <div className={cn('px-6 py-16', backgroundClasses, className)}>
           <div className="mx-auto max-w-7xl">
@@ -230,7 +167,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
                     key={index}
                     testimonial={testimonial}
                     darkMode={darkMode}
-                    variant={variant}
+                    variant={'simple-centered'}
                     className={index > 0 ? 'mt-8' : ''}
                   />
                 ))}

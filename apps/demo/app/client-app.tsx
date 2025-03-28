@@ -1,5 +1,9 @@
 'use client';
 
+// Styles
+// NOTE: Make sure to import the App styles first and then the feature styles
+import '@/app/globals.css';
+
 import { RouterProvider } from '@/components/router-provider';
 import { marketing } from '@vyuh/react-feature-marketing';
 import { misc } from '@/features/misc-feature';
@@ -11,8 +15,6 @@ import { DefaultContentPlugin } from '@vyuh/react-extension-content';
 import { feature as system } from '@vyuh/react-feature-system';
 import { SanityContentProvider } from '@vyuh/react-plugin-content-provider-sanity';
 import { ReactNode } from 'react';
-
-import '@/app/globals.css';
 
 /**
  * Configure Sanity content provider

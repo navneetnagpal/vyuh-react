@@ -23,11 +23,6 @@ export interface Testimonials extends ContentItem {
   readonly subtitle?: string;
 
   /**
-   * Background image for variants that use a background image
-   */
-  readonly backgroundImage?: ImageReference;
-
-  /**
    * Testimonials to display
    */
   readonly testimonials: Array<{
@@ -65,11 +60,6 @@ export interface Testimonials extends ContentItem {
      * Whether this testimonial should be highlighted
      */
     readonly featured?: boolean;
-
-    /**
-     * Company logo for variants that display logos
-     */
-    readonly companyLogo?: ImageReference;
   }>;
 
   /**

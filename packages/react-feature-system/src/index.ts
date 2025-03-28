@@ -29,3 +29,5 @@ export * from './content/video-player/video-player';
 export * from './content/video-player/video-player-descriptor';
 
 export * from './content/api-content/api-content';
+
+import './styles.css';

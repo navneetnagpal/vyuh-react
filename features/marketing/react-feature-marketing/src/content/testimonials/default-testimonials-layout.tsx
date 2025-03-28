@@ -13,9 +13,7 @@ export type TestimonialsVariant =
   | 'simple-centered'
   | 'side-by-side'
   | 'with-large-avatar'
-  | 'with-company-logos'
-  | 'card-grid'
-  | 'with-background-image';
+  | 'card-grid';
 
 /**
  * Default layout for testimonials content items

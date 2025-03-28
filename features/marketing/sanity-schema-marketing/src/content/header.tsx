@@ -43,9 +43,6 @@ export const navigationDropdownItemSchema = defineType({
           ? description.substring(0, 50) +
             (description.length > 50 ? '...' : '')
           : 'No description',
-        media: icon
-          ? () => <span style={{ fontSize: '1.5rem' }}>{icon}</span>
-          : () => <span style={{ fontSize: '1.5rem' }}>🔹</span>,
       };
     },
   },
@@ -164,16 +161,13 @@ export const headerSchema = defineType({
           preview: {
             select: {
               title: 'action.title',
-              url: 'action.url',
-              icon: 'icon'
+              actionType: 'action.configuration.0._type',
+              icon: 'icon',
             },
-            prepare({ title, url, icon }) {
+            prepare({ title, actionType, icon }) {
               return {
                 title: title || 'Action Button',
-                subtitle: url || 'No URL',
-                media: icon
-                  ? () => <span style={{ fontSize: '1.5rem' }}>{icon}</span>
-                  : () => <span style={{ fontSize: '1.5rem' }}>🔘</span>,
+                subtitle: actionType ?? 'No Action',
               };
             },
           },

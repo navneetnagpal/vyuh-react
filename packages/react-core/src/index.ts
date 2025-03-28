@@ -43,3 +43,5 @@ export * from './core/extension-builder';
 // UI
 export * from './components/loading-overlay';
 export * from './components/powered-by-vyuh';
+
+import './styles.css';
