@@ -208,7 +208,7 @@ export const Footer: React.FC<FooterProps> = ({
               </div>
             </div>
 
-            <div className="mt-12 flex flex-col items-center justify-between border-t pt-8 md:flex-row">
+            <div className="mt-12 flex flex-col items-center justify-between border-t border-neutral-700 pt-8 md:flex-row">
               <div className="mb-4 md:mb-0">
                 {content.copyright && (
                   <FooterCopyright

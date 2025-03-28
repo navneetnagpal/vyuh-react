@@ -16,6 +16,16 @@ import { HeroContentBuilder } from '@/content/hero/hero-builder';
 import { HeroDescriptor } from '@/content/hero/hero-descriptor';
 import { LogoContentBuilder } from '@/content/logo/logo-builder';
 import { LogoDescriptor } from '@/content/logo/logo-descriptor';
+import { NewsletterContentBuilder } from '@/content/newsletter/newsletter-builder';
+import { NewsletterDescriptor } from '@/content/newsletter/newsletter-descriptor';
+import { PricingContentBuilder } from '@/content/pricing/pricing-builder';
+import { PricingDescriptor } from '@/content/pricing/pricing-descriptor';
+import { StatsContentBuilder } from '@/content/stats/stats-builder';
+import { StatsDescriptor } from '@/content/stats/stats-descriptor';
+import { TeamContentBuilder } from '@/content/team/team-builder';
+import { TeamDescriptor } from '@/content/team/team-descriptor';
+import { TestimonialsContentBuilder } from '@/content/testimonials/testimonials-builder';
+import { TestimonialsDescriptor } from '@/content/testimonials/testimonials-descriptor';
 import { FeatureDescriptor } from '@vyuh/react-core';
 import { ContentExtensionDescriptor } from '@vyuh/react-extension-content';
 
@@ -31,6 +41,11 @@ import { ContentExtensionDescriptor } from '@vyuh/react-extension-content';
  * - Blog sections
  * - Footer components
  * - Logo sections
+ * - Newsletter sections
+ * - Pricing sections
+ * - Stats sections
+ * - Team sections
+ * - Testimonials sections
  */
 export const marketing = new FeatureDescriptor({
   name: 'marketing',
@@ -48,6 +63,11 @@ export const marketing = new FeatureDescriptor({
         new BlogDescriptor(),
         new FooterDescriptor(),
         new LogoDescriptor(),
+        new NewsletterDescriptor(),
+        new PricingDescriptor(),
+        new StatsDescriptor(),
+        new TeamDescriptor(),
+        new TestimonialsDescriptor(),
       ],
       contentBuilders: [
         new HeroContentBuilder(),
@@ -60,6 +80,11 @@ export const marketing = new FeatureDescriptor({
         new BlogContentBuilder(),
         new FooterContentBuilder(),
         new LogoContentBuilder(),
+        new NewsletterContentBuilder(),
+        new PricingContentBuilder(),
+        new StatsContentBuilder(),
+        new TeamContentBuilder(),
+        new TestimonialsContentBuilder(),
       ],
     }),
   ],
