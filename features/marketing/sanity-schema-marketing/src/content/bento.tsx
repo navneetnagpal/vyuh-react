@@ -95,13 +95,13 @@ export const bentoSchema = defineType({
   preview: {
     select: {
       title: 'title',
-      subtitle: 'variant',
-      itemCount: 'items.length',
+      items: 'items',
     },
-    prepare({ title, subtitle, itemCount = 0 }) {
+    prepare({ title, items = [] }) {
       return {
-        title: title || 'Bento Grid',
-        subtitle: `Variant: ${subtitle || 'None'} • ${itemCount} item${itemCount === 1 ? '' : 's'}`,
+        title: `Bento: ${title || 'Untitled'}`,
+        subtitle: `${items.length} item${items.length === 1 ? '' : 's'}`,
+        media: Icon,
       };
     },
   },

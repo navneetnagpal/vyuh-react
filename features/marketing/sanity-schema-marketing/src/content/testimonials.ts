@@ -114,7 +114,7 @@ export const testimonialsSchema = defineType({
     },
     prepare({ title, testimonials = [] }) {
       return {
-        title: title || 'Testimonials Section',
+        title: `Testimonials: ${title || 'Untitled'}`,
         subtitle: `${testimonials.length} testimonial${testimonials.length === 1 ? '' : 's'}`,
         media: Icon,
       };

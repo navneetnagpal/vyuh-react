@@ -132,7 +132,7 @@ export const pricingSchema = defineType({
     },
     prepare({ title, plans = [] }) {
       return {
-        title: title || 'Pricing Section',
+        title: `Pricing: ${title || 'Untitled'}`,
         subtitle: `${plans.length} plan${plans.length === 1 ? '' : 's'}`,
         media: Icon,
       };

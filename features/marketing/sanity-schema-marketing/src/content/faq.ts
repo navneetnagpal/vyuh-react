@@ -114,7 +114,7 @@ export const faqSchema = defineType({
       const questionCount = questions.length;
 
       return {
-        title: title || 'FAQ Section',
+        title: `FAQ: ${title || 'Untitled'}`,
         subtitle: `${questionCount} question${questionCount === 1 ? '' : 's'}`,
         media: Icon,
       };

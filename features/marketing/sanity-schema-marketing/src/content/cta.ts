@@ -89,7 +89,7 @@ export const ctaSchema = defineType({
       }
 
       return {
-        title: title || 'CTA Section',
+        title: `CTA: ${title || 'Untitled'}`,
         subtitle:
           subtitleText.length > 0
             ? subtitleText.join(' | ')

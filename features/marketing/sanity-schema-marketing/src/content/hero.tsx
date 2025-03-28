@@ -141,7 +141,7 @@ export const heroSchema = defineType({
       }
 
       return {
-        title: title || 'Hero Section',
+        title: `Hero: ${title || 'Untitled'}`,
         subtitle:
           subtitleText.length > 0
             ? subtitleText.join(' | ')

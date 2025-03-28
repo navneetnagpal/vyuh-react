@@ -131,13 +131,13 @@ export const blogSchema = defineType({
   preview: {
     select: {
       title: 'title',
-      subtitle: 'variant',
-      postCount: 'posts.length',
+      posts: 'posts',
     },
-    prepare({ title, subtitle, postCount = 0 }) {
+    prepare({ title, posts = [] }) {
       return {
-        title: title || 'Blog Section',
-        subtitle: `Variant: ${subtitle || 'None'} • ${postCount} post${postCount === 1 ? '' : 's'}`,
+        title: `Blog: ${title || 'Untitled'}`,
+        subtitle: `${posts.length} post${posts.length === 1 ? '' : 's'}`,
+        media: Icon,
       };
     },
   },

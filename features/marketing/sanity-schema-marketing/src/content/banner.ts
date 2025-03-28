@@ -62,7 +62,7 @@ export const bannerSchema = defineType({
     },
     prepare({ title, dismissible }) {
       return {
-        title: title || 'Banner',
+        title: `Banner: ${title || 'Untitled'}`,
         subtitle: dismissible ? 'Dismissible' : undefined,
         media: Icon,
       };

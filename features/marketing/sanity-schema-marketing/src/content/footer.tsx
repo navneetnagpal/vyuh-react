@@ -151,7 +151,7 @@ export const footerSchema = defineType({
     },
     prepare({ title, subtitle, media }) {
       return {
-        title: title || 'Footer Section',
+        title: `Footer: ${title || 'Untitled'}`,
         subtitle: `Variant: ${subtitle || 'None'}`,
         media,
       };

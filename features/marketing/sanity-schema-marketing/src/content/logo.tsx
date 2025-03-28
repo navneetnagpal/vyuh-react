@@ -51,12 +51,13 @@ export const logoSchema = defineType({
   preview: {
     select: {
       title: 'title',
-      itemCount: 'items.length',
+      items: 'items',
     },
-    prepare({ title, itemCount = 0 }) {
+    prepare({ title, items = [] }) {
       return {
-        title: title || 'Logo Section',
-        subtitle: `${itemCount} logo${itemCount === 1 ? '' : 's'}`,
+        title: `Logo: ${title || 'Untitled'}`,
+        subtitle: `${items.length} logo${items.length === 1 ? '' : 's'}`,
+        media: Icon,
       };
     },
   },

@@ -192,7 +192,7 @@ export const headerSchema = defineType({
       }
 
       return {
-        title: title || 'Header Section',
+        title: `Header: ${title || 'Untitled'}`,
         subtitle:
           details.length > 0
             ? details.join(' | ')

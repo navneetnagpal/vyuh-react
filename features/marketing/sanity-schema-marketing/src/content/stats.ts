@@ -95,7 +95,7 @@ export const statsSchema = defineType({
     },
     prepare({ title, stats = [] }) {
       return {
-        title: title || 'Stats Section',
+        title: `Stats: ${title || 'Untitled'}`,
         subtitle: `${stats.length} stat${stats.length === 1 ? '' : 's'}`,
         media: Icon,
       };

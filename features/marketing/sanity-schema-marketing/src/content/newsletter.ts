@@ -80,7 +80,7 @@ export const newsletterSchema = defineType({
     },
     prepare({ title, features = [] }) {
       return {
-        title: title || 'Newsletter Section',
+        title: `Newsletter: ${title || 'Untitled'}`,
         subtitle: features.length > 0 ? `${features.length} features` : undefined,
         media: Icon,
       };

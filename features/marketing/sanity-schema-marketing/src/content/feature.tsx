@@ -177,25 +177,26 @@ export const featureSchema = defineType({
       title: 'title',
       description: 'description',
       mediaType: 'media.type',
-      featuresCount: 'features.length',
+      features: 'features',
     },
-    prepare({ title, description, mediaType, featuresCount }) {
+    prepare({ title, description, mediaType, features = [] }) {
       const subtitleText = [];
       if (mediaType && mediaType !== 'none') {
         subtitleText.push(`Media: ${mediaType}`);
       }
-      if (featuresCount) {
-        subtitleText.push(`Features: ${featuresCount}`);
+      if (features.length) {
+        subtitleText.push(`${features.length} feature${features.length === 1 ? '' : 's'}`);
       }
 
       return {
-        title: title || 'Feature Section',
+        title: `Feature: ${title || 'Untitled'}`,
         subtitle:
           subtitleText.length > 0
             ? subtitleText.join(' | ')
             : description
               ? description.substring(0, 50)
               : 'No content',
+        media: Icon,
       };
     },
   },

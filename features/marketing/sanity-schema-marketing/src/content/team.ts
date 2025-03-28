@@ -121,7 +121,7 @@ export const teamSchema = defineType({
     },
     prepare({ title, members = [] }) {
       return {
-        title: title || 'Team Section',
+        title: `Team: ${title || 'Untitled'}`,
         subtitle: `${members.length} member${members.length === 1 ? '' : 's'}`,
         media: Icon,
       };
