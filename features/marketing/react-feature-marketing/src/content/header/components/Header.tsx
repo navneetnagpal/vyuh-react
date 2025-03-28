@@ -1,6 +1,8 @@
 import { Header as HeaderItem } from '@/content/header/header';
 import { DefaultHeaderLayout } from '@/content/header/default-header-layout';
 import { cn } from '@/shared/utils';
+import { Section } from '@/shared/components/Section';
+import { Container } from '@/shared/components/Container';
 import { Action, useVyuh } from '@vyuh/react-core';
 import { DynamicIcon, IconName } from 'lucide-react/dynamic';
 import React from 'react';
@@ -22,8 +24,6 @@ export const Header: React.FC<HeaderProps> = ({
   const variant = layout.variant || 'simple';
   const darkMode = layout.darkMode || false;
   const sticky = layout.sticky || false;
-
-  // Background color classes based on dark mode
 
   // Render the header content based on the variant
   const renderHeaderContent = () => {
@@ -56,11 +56,14 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <header
-      data-theme={darkMode ? 'dark' : 'light'}
-      className={cn('navbar', sticky && 'sticky top-0 z-50', className)}
+    <Section
+      as="header"
+      darkMode={darkMode}
+      className={cn('py-4', sticky && 'sticky top-0 z-50', className)}
+      padding="none"
+      constrained={false}
     >
-      <div className="container mx-auto">{renderHeaderContent()}</div>
-    </header>
+      <Container padding="lg">{renderHeaderContent()}</Container>
+    </Section>
   );
 };

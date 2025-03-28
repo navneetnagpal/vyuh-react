@@ -19,7 +19,7 @@ export const FeatureThreeColumn: React.FC<FeatureComponentProps> = ({
   return (
     <div className="bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl lg:text-center">
+        <div className="mx-auto max-w-3xl lg:text-center">
           <FeatureTitle title={title} className="text-center" />
           <FeatureDescription
             description={description}
@@ -28,8 +28,8 @@ export const FeatureThreeColumn: React.FC<FeatureComponentProps> = ({
         </div>
 
         {features && features.length > 0 && (
-          <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-7xl">
-            <dl className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-3">
+          <div className="mx-auto mt-16 max-w-3xl sm:mt-20 lg:mt-24 lg:max-w-7xl">
+            <dl className="grid grid-cols-1 gap-16 lg:grid-cols-3">
               {features.map((feature, index) => (
                 <FeatureItem
                   title={feature.title}

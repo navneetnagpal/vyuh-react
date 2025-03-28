@@ -75,30 +75,28 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
         {/* Date and author */}
         <div
           className={cn(
-            'mb-3 flex items-center text-sm',
+            'mb-3 flex items-center justify-between text-sm',
             darkMode ? 'text-gray-400' : 'text-gray-600',
           )}
         >
           <span>{formatDate(post.date)}</span>
           {post.author && (
-            <>
-              <span className="mx-2">•</span>
-              <div className="flex items-center">
-                {post.author.avatar && (
-                  <img
-                    src={getImageUrl(post.author.avatar)}
-                    alt={post.author.name}
-                    className="mr-2 h-6 w-6 rounded-full"
-                  />
-                )}
+            <div className={'flex items-center'}>
+              {post.author.avatar && (
+                <img
+                  src={getImageUrl(post.author.avatar)}
+                  alt={post.author.name}
+                  className="mr-2 h-6 w-6 rounded-full"
+                />
+              )}
+              <div className={'flex flex-col items-start justify-start'}>
                 <span>{post.author.name}</span>
+
                 {post.author.role && (
-                  <span className="ml-1 text-xs opacity-75">
-                    {post.author.role}
-                  </span>
+                  <span className="text-xs opacity-75">{post.author.role}</span>
                 )}
               </div>
-            </>
+            </div>
           )}
         </div>
 

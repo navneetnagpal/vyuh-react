@@ -1,4 +1,6 @@
 import React from 'react';
+import { Section } from '@/shared/components/Section';
+import { Container } from '@/shared/components/Container';
 import { FeatureComponentProps } from './FeatureTypes';
 import {
   FeatureActions,
@@ -16,11 +18,12 @@ export const FeatureWithScreenshot: React.FC<FeatureComponentProps> = ({
   layout,
 }) => {
   const { title, description, features, media, actions } = content;
+  const darkMode = layout.darkMode || false;
 
   return (
-    <div className="overflow-hidden bg-white py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+    <Section darkMode={darkMode} className="overflow-hidden">
+      <Container padding="lg">
+        <div className="grid grid-cols-1 gap-16 md:grid-cols-2 lg:mx-0 lg:max-w-none">
           <div className="lg:pr-8 lg:pt-4">
             <div className="lg:max-w-lg">
               <FeatureTitle title={title} />
@@ -48,7 +51,7 @@ export const FeatureWithScreenshot: React.FC<FeatureComponentProps> = ({
             className="max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 md:-ml-4 lg:-ml-0"
           />
         </div>
-      </div>
-    </div>
+      </Container>
+    </Section>
   );
 };

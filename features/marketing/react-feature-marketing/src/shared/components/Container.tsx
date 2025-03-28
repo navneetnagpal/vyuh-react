@@ -6,22 +6,27 @@ export interface ContainerProps {
    * The content to render inside the container
    */
   children: React.ReactNode;
-  
+
   /**
    * Additional CSS classes to apply to the container
    */
   className?: string;
-  
+
   /**
    * The maximum width of the container
    */
   maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | 'full' | 'min' | 'max' | 'prose' | 'screen-sm' | 'screen-md' | 'screen-lg' | 'screen-xl' | 'screen-2xl';
-  
+
   /**
    * Whether to center the container horizontally
    */
   centered?: boolean;
-  
+
+  /**
+   * The amount of horizontal padding to apply to the container
+   */
+  padding?: 'none' | 'sm' | 'md' | 'lg';
+
   /**
    * The HTML element to use for the container
    */
@@ -36,6 +41,7 @@ export const Container: React.FC<ContainerProps> = ({
   className,
   maxWidth = '7xl',
   centered = true,
+  padding = 'none',
   as: Component = 'div',
 }) => {
   const maxWidthClasses = {
@@ -59,12 +65,20 @@ export const Container: React.FC<ContainerProps> = ({
     'screen-xl': 'max-w-screen-xl',
     'screen-2xl': 'max-w-screen-2xl',
   };
-  
+
+  const paddingClasses = {
+    none: '',
+    sm: 'px-4',
+    md: 'px-6 md:px-8',
+    lg: 'px-8 md:px-12',
+  };
+
   return (
     <Component
       className={cn(
         centered && 'mx-auto',
         maxWidthClasses[maxWidth],
+        paddingClasses[padding],
         className
       )}
     >

@@ -21,12 +21,7 @@ export const CTAButtonGroup: React.FC<CTAButtonGroupProps> = ({
   }
 
   return (
-    <div
-      className={cn(
-        'flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0',
-        className,
-      )}
-    >
+    <div className={cn('flex flex-col gap-4 sm:flex-row', className)}>
       {primaryAction && (
         <CTAButton
           action={primaryAction}

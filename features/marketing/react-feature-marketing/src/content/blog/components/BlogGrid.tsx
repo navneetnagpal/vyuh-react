@@ -31,7 +31,7 @@ export const BlogGrid: React.FC<BlogGridProps> = ({
           <BlogFeaturedPost post={featuredPost} darkMode={darkMode} />
         )}
         <div
-          className={cn('grid gap-6', {
+          className={cn('grid gap-16', {
             'grid-cols-1': columns === 1,
             'grid-cols-1 md:grid-cols-2': columns === 2,
             'grid-cols-1 md:grid-cols-2 lg:grid-cols-3': columns === 3,
@@ -50,7 +50,7 @@ export const BlogGrid: React.FC<BlogGridProps> = ({
     return (
       <div
         className={cn(
-          'grid gap-6',
+          'grid gap-16',
           {
             'grid-cols-1': columns === 1,
             'grid-cols-1 md:grid-cols-2': columns === 2,
@@ -97,7 +97,7 @@ export const BlogGrid: React.FC<BlogGridProps> = ({
   return (
     <div
       className={cn(
-        'grid gap-6',
+        'grid gap-16',
         {
           'grid-cols-1': columns === 1,
           'grid-cols-1 md:grid-cols-2': columns === 2,

@@ -215,7 +215,7 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
             className,
           )}
         >
-          <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
+          <div className="mx-auto grid max-w-6xl items-center gap-16 md:grid-cols-2">
             <div>
               <CTAHeader
                 content={content}
@@ -266,7 +266,7 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
             </div>
 
             {content.imageTiles && content.imageTiles.length > 0 && (
-              <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+              <div className="grid grid-cols-2 gap-16 md:grid-cols-3">
                 {content.imageTiles.map((image, index) => (
                   <CTAImage
                     key={index}

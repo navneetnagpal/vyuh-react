@@ -5,6 +5,8 @@ import React from 'react';
 import { TestimonialsHeader } from './TestimonialsHeader';
 import { TestimonialItem } from './TestimonialItem';
 import { useMediaUtils } from '@/shared/MediaUtils';
+import { Section } from '@/shared/components/Section';
+import { Container } from '@/shared/components/Container';
 
 interface TestimonialsProps {
   content: TestimonialsContent;
@@ -19,10 +21,6 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
 }) => {
   const variant = layout.variant || 'simple-centered';
   const darkMode = layout.darkMode || false;
-
-  const backgroundClasses = darkMode
-    ? 'bg-gray-900 text-white'
-    : 'bg-white text-gray-900';
 
   const renderAction = () => {
     if (!content.action) return null;
@@ -46,136 +44,99 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
     );
   };
 
-  switch (variant) {
-    case 'simple-centered':
-      return (
-        <div className={cn('px-6 py-16', backgroundClasses, className)}>
-          <div className="mx-auto max-w-7xl">
-            <TestimonialsHeader content={content} />
-
-            <div className="mx-auto mt-10 max-w-2xl">
-              {content.testimonials &&
-                content.testimonials.length > 0 &&
-                content.testimonials.map((testimonial, index) => (
-                  <TestimonialItem
-                    key={index}
-                    testimonial={testimonial}
-                    darkMode={darkMode}
-                    variant={variant}
-                    className={index > 0 ? 'mt-8' : ''}
-                  />
-                ))}
-            </div>
-
-            {renderAction()}
+  const renderTestimonials = () => {
+    switch (variant) {
+      case 'simple-centered':
+        return (
+          <div className="mx-auto mt-10 max-w-2xl">
+            {content.testimonials?.map((testimonial, index) => (
+              <TestimonialItem
+                key={index}
+                testimonial={testimonial}
+                darkMode={darkMode}
+                variant={variant}
+                className={index > 0 ? 'mt-8' : ''}
+              />
+            ))}
           </div>
-        </div>
-      );
+        );
 
-    case 'side-by-side':
-      return (
-        <div className={cn(backgroundClasses, className)}>
-          <div className="mx-auto max-w-7xl">
-            <TestimonialsHeader content={content} />
-
-            <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-16 md:max-w-none md:grid-cols-2 lg:mx-0">
-              {content.testimonials &&
-                content.testimonials.length > 0 &&
-                content.testimonials.map((testimonial, index) => (
-                  <TestimonialItem
-                    key={index}
-                    testimonial={testimonial}
-                    darkMode={darkMode}
-                    variant={variant}
-                  />
-                ))}
-            </div>
-
-            {renderAction()}
+      case 'side-by-side':
+        return (
+          <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-16 md:max-w-none md:grid-cols-2 lg:mx-0">
+            {content.testimonials?.map((testimonial, index) => (
+              <TestimonialItem
+                key={index}
+                testimonial={testimonial}
+                darkMode={darkMode}
+                variant={variant}
+              />
+            ))}
           </div>
-        </div>
-      );
+        );
 
-    case 'with-large-avatar':
-      // Same layout as side-by-side, but the variant is passed to TestimonialItem
-      // which will render the avatar differently
-      return (
-        <div className={cn(backgroundClasses, className)}>
-          <div className="mx-auto max-w-7xl">
-            <TestimonialsHeader content={content} />
-
-            <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-8 md:grid-cols-2 lg:mx-0 lg:max-w-none">
-              {content.testimonials &&
-                content.testimonials.length > 0 &&
-                content.testimonials.map((testimonial, index) => (
-                  <TestimonialItem
-                    key={index}
-                    testimonial={testimonial}
-                    darkMode={darkMode}
-                    variant={variant}
-                  />
-                ))}
-            </div>
-
-            {renderAction()}
+      case 'with-large-avatar':
+        return (
+          <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-16 md:grid-cols-2 lg:mx-0 lg:max-w-none">
+            {content.testimonials?.map((testimonial, index) => (
+              <TestimonialItem
+                key={index}
+                testimonial={testimonial}
+                darkMode={darkMode}
+                variant={variant}
+              />
+            ))}
           </div>
-        </div>
-      );
+        );
 
-    case 'card-grid':
-      return (
-        <div
-          className={cn(
-            'px-6 py-16',
-            darkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900',
-            className,
-          )}
-        >
-          <div className="mx-auto max-w-7xl">
-            <TestimonialsHeader content={content} />
-
-            <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-8 md:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-              {content.testimonials &&
-                content.testimonials.length > 0 &&
-                content.testimonials.map((testimonial, index) => (
-                  <TestimonialItem
-                    key={index}
-                    testimonial={testimonial}
-                    darkMode={darkMode}
-                    variant={variant}
-                  />
-                ))}
-            </div>
-
-            {renderAction()}
+      case 'card-grid':
+        return (
+          <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-16 md:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+            {content.testimonials?.map((testimonial, index) => (
+              <TestimonialItem
+                key={index}
+                testimonial={testimonial}
+                darkMode={darkMode}
+                variant={variant}
+              />
+            ))}
           </div>
-        </div>
-      );
+        );
 
-    default:
-      // Default to simple-centered layout
-      return (
-        <div className={cn('px-6 py-16', backgroundClasses, className)}>
-          <div className="mx-auto max-w-7xl">
-            <TestimonialsHeader content={content} />
-
-            <div className="mx-auto mt-10 max-w-2xl">
-              {content.testimonials &&
-                content.testimonials.length > 0 &&
-                content.testimonials.map((testimonial, index) => (
-                  <TestimonialItem
-                    key={index}
-                    testimonial={testimonial}
-                    darkMode={darkMode}
-                    variant={'simple-centered'}
-                    className={index > 0 ? 'mt-8' : ''}
-                  />
-                ))}
-            </div>
-
-            {renderAction()}
+      default:
+        return (
+          <div className="mx-auto mt-10 max-w-2xl">
+            {content.testimonials?.map((testimonial, index) => (
+              <TestimonialItem
+                key={index}
+                testimonial={testimonial}
+                darkMode={darkMode}
+                variant={'simple-centered'}
+                className={index > 0 ? 'mt-8' : ''}
+              />
+            ))}
           </div>
-        </div>
-      );
-  }
+        );
+    }
+  };
+
+  return (
+    <Section
+      className={cn(className)}
+      darkMode={darkMode}
+      padding={
+        variant === 'side-by-side' || variant === 'with-large-avatar'
+          ? 'md'
+          : 'lg'
+      }
+    >
+      <Container>
+        <TestimonialsHeader content={content} />
+        {content.testimonials &&
+          content.testimonials.length > 0 &&
+          renderTestimonials()}
+        {renderAction()}
+      </Container>
+    </Section>
+  );
 };

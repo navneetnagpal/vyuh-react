@@ -24,8 +24,8 @@ export const Bento: React.FC<BentoProps> = ({ content, layout, className }) => {
   // Gap classes based on the gap size
   const gapClasses = {
     small: 'gap-4',
-    medium: 'gap-6',
-    large: 'gap-8',
+    medium: 'gap-16',
+    large: 'gap-16',
   }[gap];
 
   return (

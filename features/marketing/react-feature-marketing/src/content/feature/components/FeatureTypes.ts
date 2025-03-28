@@ -6,8 +6,5 @@ import { Feature } from '@/content/feature/feature';
  */
 export interface FeatureComponentProps {
   content: Feature;
-  layout: {
-    variant: string;
-    background?: DefaultFeatureLayout['background'];
-  };
+  layout: DefaultFeatureLayout;
 }

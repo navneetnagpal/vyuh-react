@@ -62,15 +62,7 @@ export class DefaultFeatureLayout extends LayoutConfiguration<Feature> {
    * Render the feature content based on the selected variant
    */
   render(content: Feature): React.ReactNode {
-    return (
-      <FeatureView
-        content={content}
-        layout={{
-          variant: this.variant,
-          background: this.background,
-        }}
-      />
-    );
+    return <FeatureView content={content} layout={this} />;
   }
 }
 
@@ -79,10 +71,7 @@ export class DefaultFeatureLayout extends LayoutConfiguration<Feature> {
  */
 interface FeatureViewProps {
   content: Feature;
-  layout: {
-    variant: FeatureVariant;
-    background?: DefaultFeatureLayout['background'];
-  };
+  layout: DefaultFeatureLayout;
 }
 
 const FeatureView: React.FC<FeatureViewProps> = ({ content, layout }) => {

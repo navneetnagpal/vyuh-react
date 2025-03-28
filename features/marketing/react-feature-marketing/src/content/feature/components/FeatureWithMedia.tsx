@@ -1,4 +1,6 @@
 import React from 'react';
+import { Section } from '@/shared/components/Section';
+import { Container } from '@/shared/components/Container';
 import { FeatureComponentProps } from './FeatureTypes';
 import {
   FeatureActions,
@@ -24,6 +26,7 @@ export const FeatureWithMedia: React.FC<FeatureWithMediaProps> = ({
   mediaPosition = 'right',
 }) => {
   const { title, description, features, media, actions } = content;
+  const darkMode = layout.darkMode || false;
   const bgStyles = useBackgroundStyles(layout.background);
 
   // Determine order classes based on media position
@@ -31,9 +34,13 @@ export const FeatureWithMedia: React.FC<FeatureWithMediaProps> = ({
   const mediaOrderClass = mediaPosition === 'left' ? 'order-1' : 'order-2';
 
   return (
-    <div className="overflow-hidden bg-white py-24 sm:py-32" style={bgStyles}>
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+    <Section
+      darkMode={darkMode}
+      className="overflow-hidden"
+      style={bgStyles}
+    >
+      <Container padding="lg">
+        <div className="grid grid-cols-1 gap-16 md:grid-cols-2 lg:mx-0 lg:max-w-none">
           <div
             className={`lg:pt-4 ${contentOrderClass} ${mediaPosition === 'left' ? 'lg:pl-8' : 'lg:pr-8'}`}
           >
@@ -82,7 +89,7 @@ export const FeatureWithMedia: React.FC<FeatureWithMediaProps> = ({
             )}
           </div>
         </div>
-      </div>
-    </div>
+      </Container>
+    </Section>
   );
 };

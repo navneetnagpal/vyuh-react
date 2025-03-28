@@ -1,6 +1,8 @@
 import { Stats as StatsContent } from '@/content/stats/stats';
 import { DefaultStatsLayout } from '@/content/stats/default-stats-layout';
 import { cn } from '@/shared/utils';
+import { Section } from '@/shared/components/Section';
+import { Container } from '@/shared/components/Container';
 import React from 'react';
 import { StatsHeader } from './StatsHeader';
 import { StatItem } from './StatItem';
@@ -9,16 +11,11 @@ import { StatsImage } from './StatsImage';
 interface StatsProps {
   content: StatsContent;
   layout: DefaultStatsLayout;
-  className?: string;
 }
 
-export const Stats: React.FC<StatsProps> = ({ content, layout, className }) => {
+export const Stats: React.FC<StatsProps> = ({ content, layout }) => {
   const variant = layout.variant || 'simple';
   const darkMode = layout.darkMode || false;
-
-  const backgroundClasses = darkMode
-    ? 'bg-gray-900 text-white'
-    : 'bg-white text-gray-900';
 
   const renderAction = () => {
     if (!content.action) return null;
@@ -45,69 +42,31 @@ export const Stats: React.FC<StatsProps> = ({ content, layout, className }) => {
   switch (variant) {
     case 'simple':
       return (
-        <div className={cn('px-6 py-16', backgroundClasses, className)}>
-          <div className="mx-auto max-w-7xl">
-            <StatsHeader content={content} />
+        <StatsContainer>
+          <StatsHeader content={content} />
 
-            <dl className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-              {content.stats &&
-                content.stats.length > 0 &&
-                content.stats.map((stat, index) => (
-                  <StatItem
-                    key={index}
-                    stat={stat}
-                    darkMode={darkMode}
-                    variant={variant}
-                  />
-                ))}
-            </dl>
+          <dl className="mt-10 grid grid-cols-1 gap-16 sm:grid-cols-2 lg:grid-cols-4">
+            {content.stats &&
+              content.stats.length > 0 &&
+              content.stats.map((stat, index) => (
+                <StatItem
+                  key={index}
+                  stat={stat}
+                  darkMode={darkMode}
+                  variant={variant}
+                />
+              ))}
+          </dl>
 
-            {renderAction()}
-          </div>
-        </div>
+          {renderAction()}
+        </StatsContainer>
       );
 
     case 'with-description':
       return (
-        <div className={cn('px-6 py-16', backgroundClasses, className)}>
-          <div className="mx-auto max-w-7xl">
-            <div className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-2">
-              <div className="max-w-2xl">
-                <StatsHeader content={content} centered={false} />
-                {content.description && (
-                  <p
-                    className={cn(
-                      'mt-6 text-base leading-7',
-                      darkMode ? 'text-gray-300' : 'text-gray-600',
-                    )}
-                  >
-                    {content.description}
-                  </p>
-                )}
-                {renderAction()}
-              </div>
-              <dl className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2">
-                {content.stats &&
-                  content.stats.length > 0 &&
-                  content.stats.map((stat, index) => (
-                    <StatItem
-                      key={index}
-                      stat={stat}
-                      darkMode={darkMode}
-                      variant={variant}
-                    />
-                  ))}
-              </dl>
-            </div>
-          </div>
-        </div>
-      );
-
-    case 'grid-with-heading':
-      return (
-        <div className={cn('px-6 py-16', backgroundClasses, className)}>
-          <div className="mx-auto max-w-7xl">
-            <div className="mx-auto max-w-2xl lg:mx-0">
+        <StatsContainer darkMode={darkMode}>
+          <div className="grid grid-cols-1 gap-16 md:grid-cols-2">
+            <div className="max-w-2xl">
               <StatsHeader content={content} centered={false} />
               {content.description && (
                 <p
@@ -119,8 +78,9 @@ export const Stats: React.FC<StatsProps> = ({ content, layout, className }) => {
                   {content.description}
                 </p>
               )}
+              {renderAction()}
             </div>
-            <dl className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-8 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-4">
+            <dl className="grid grid-cols-1 gap-16 sm:grid-cols-2">
               {content.stats &&
                 content.stats.length > 0 &&
                 content.stats.map((stat, index) => (
@@ -132,95 +92,126 @@ export const Stats: React.FC<StatsProps> = ({ content, layout, className }) => {
                   />
                 ))}
             </dl>
-            {renderAction()}
           </div>
-        </div>
+        </StatsContainer>
+      );
+
+    case 'grid-with-heading':
+      return (
+        <StatsContainer darkMode={darkMode}>
+          <div className="flex max-w-4xl flex-col items-center">
+            <StatsHeader content={content} centered={true} />
+            {content.description && (
+              <p className={cn('mt-6 text-base leading-7')}>
+                {content.description}
+              </p>
+            )}
+          </div>
+          <dl className="mx-auto mt-10 grid max-w-4xl grid-cols-1 gap-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-4">
+            {content.stats &&
+              content.stats.length > 0 &&
+              content.stats.map((stat, index) => (
+                <StatItem
+                  key={index}
+                  stat={stat}
+                  darkMode={darkMode}
+                  variant={variant}
+                />
+              ))}
+          </dl>
+          {renderAction()}
+        </StatsContainer>
       );
 
     case 'with-image':
       return (
-        <div className={cn('px-6 py-16', backgroundClasses, className)}>
-          <div className="mx-auto max-w-7xl">
-            <div className="grid grid-cols-1 gap-x-8 gap-y-16 lg:grid-cols-2">
-              {content.image && (
-                <StatsImage
-                  image={content.image}
-                  className="mx-auto w-full max-w-md lg:mx-0"
-                />
-              )}
-              <div>
-                <StatsHeader content={content} centered={false} />
-                <dl className="mt-10 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2">
-                  {content.stats &&
-                    content.stats.length > 0 &&
-                    content.stats.map((stat, index) => (
-                      <StatItem
-                        key={index}
-                        stat={stat}
-                        darkMode={darkMode}
-                        variant={variant}
-                      />
-                    ))}
-                </dl>
-                {renderAction()}
-              </div>
+        <StatsContainer darkMode={darkMode}>
+          <div className="grid grid-cols-1 gap-16 lg:grid-cols-2">
+            {content.image && (
+              <StatsImage
+                image={content.image}
+                className="mx-auto w-full max-w-md lg:mx-0"
+              />
+            )}
+            <div>
+              <StatsHeader content={content} centered={false} />
+              <dl className="mt-10 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2">
+                {content.stats &&
+                  content.stats.length > 0 &&
+                  content.stats.map((stat, index) => (
+                    <StatItem
+                      key={index}
+                      stat={stat}
+                      darkMode={darkMode}
+                      variant={variant}
+                    />
+                  ))}
+              </dl>
+              {renderAction()}
             </div>
           </div>
-        </div>
+        </StatsContainer>
       );
 
     case 'card-grid':
       return (
-        <div
-          className={cn(
-            'px-6 py-16',
-            darkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900',
-            className,
-          )}
-        >
-          <div className="mx-auto max-w-7xl">
-            <StatsHeader content={content} />
+        <StatsContainer darkMode={darkMode}>
+          <StatsHeader content={content} />
+          <StatsHeader content={content} />
 
-            <dl className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
-              {content.stats &&
-                content.stats.length > 0 &&
-                content.stats.map((stat, index) => (
-                  <StatItem
-                    key={index}
-                    stat={stat}
-                    darkMode={darkMode}
-                    variant={variant}
-                  />
-                ))}
-            </dl>
+          <dl className="mt-10 grid grid-cols-1 gap-16 sm:grid-cols-2 lg:grid-cols-4">
+            {content.stats &&
+              content.stats.length > 0 &&
+              content.stats.map((stat, index) => (
+                <StatItem
+                  key={index}
+                  stat={stat}
+                  darkMode={darkMode}
+                  variant={variant}
+                />
+              ))}
+          </dl>
 
-            {renderAction()}
-          </div>
-        </div>
+          {renderAction()}
+        </StatsContainer>
       );
 
     default:
       return (
-        <div className={cn('px-6 py-16', backgroundClasses, className)}>
-          <div className="mx-auto max-w-7xl">
-            <StatsHeader content={content} />
+        <StatsContainer darkMode={darkMode}>
+          <StatsHeader content={content} />
 
-            <dl className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-              {content.stats &&
-                content.stats.length > 0 &&
-                content.stats.map((stat, index) => (
-                  <StatItem
-                    key={index}
-                    stat={stat}
-                    darkMode={darkMode}
-                    variant={variant}
-                  />
-                ))}
-            </dl>
+          <dl className="mt-10 grid grid-cols-1 gap-16 sm:grid-cols-2 lg:grid-cols-4">
+            {content.stats &&
+              content.stats.length > 0 &&
+              content.stats.map((stat, index) => (
+                <StatItem
+                  key={index}
+                  stat={stat}
+                  darkMode={darkMode}
+                  variant={variant}
+                />
+              ))}
+          </dl>
 
-            {renderAction()}
-          </div>
-        </div>
+          {renderAction()}
+        </StatsContainer>
       );
   }
 };
+
+function StatsContainer({
+  darkMode,
+  children,
+}: {
+  darkMode?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <Section darkMode={darkMode} maxWidth="5xl">
+      <Container padding="lg">
+        {children}
+      </Container>
+    </Section>
+  );
+}

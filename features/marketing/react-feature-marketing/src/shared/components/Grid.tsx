@@ -6,12 +6,12 @@ export interface GridProps {
    * The content to render inside the grid
    */
   children: React.ReactNode;
-  
+
   /**
    * Additional CSS classes to apply to the grid
    */
   className?: string;
-  
+
   /**
    * The number of columns at different breakpoints
    */
@@ -23,7 +23,7 @@ export interface GridProps {
     xl?: number;
     '2xl'?: number;
   };
-  
+
   /**
    * The gap between grid items
    */
@@ -40,7 +40,7 @@ export const Grid: React.FC<GridProps> = ({
   gap = 'md',
 }) => {
   const { default: defaultCols, sm, md, lg, xl, '2xl': xxl } = columns;
-  
+
   const colClasses = [
     `grid-cols-${defaultCols}`,
     sm && `sm:grid-cols-${sm}`,
@@ -49,15 +49,15 @@ export const Grid: React.FC<GridProps> = ({
     xl && `xl:grid-cols-${xl}`,
     xxl && `2xl:grid-cols-${xxl}`,
   ].filter(Boolean);
-  
+
   const gapClasses = {
     none: 'gap-0',
     sm: 'gap-4',
-    md: 'gap-6',
+    md: 'gap-16',
     lg: 'gap-8',
     xl: 'gap-10',
   };
-  
+
   return (
     <div
       className={cn(
