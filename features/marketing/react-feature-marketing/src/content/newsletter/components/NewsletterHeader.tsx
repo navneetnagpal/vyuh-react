@@ -1,5 +1,5 @@
 import { Newsletter } from '@/content/newsletter/newsletter';
-import { cn } from '@/shared/utils';
+import { ContentHeader } from '@/shared/components';
 import React from 'react';
 
 interface NewsletterHeaderProps {
@@ -14,15 +14,11 @@ export const NewsletterHeader: React.FC<NewsletterHeaderProps> = ({
   centered = true,
 }) => {
   return (
-    <div className={cn(centered && 'text-center', className)}>
-      <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-        {content.title}
-      </h2>
-      {content.subtitle && (
-        <p className="mt-4 text-lg text-gray-600 dark:text-gray-300">
-          {content.subtitle}
-        </p>
-      )}
-    </div>
+    <ContentHeader
+      title={content.title}
+      subtitle={content.subtitle}
+      className={className}
+      centered={centered}
+    />
   );
 };

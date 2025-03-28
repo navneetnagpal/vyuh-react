@@ -1,7 +1,6 @@
 import { ImageReference } from '@vyuh/react-core';
-import { cn } from '@/shared/utils';
+import { MediaImage } from '@/shared/components';
 import React from 'react';
-import { useMediaUtils } from '@/shared/MediaUtils';
 
 interface NewsletterImageProps {
   image: ImageReference;
@@ -14,19 +13,17 @@ export const NewsletterImage: React.FC<NewsletterImageProps> = ({
   alt = 'Newsletter image',
   className,
 }) => {
-  const { getImageUrl } = useMediaUtils();
-
   if (!image) {
     return null;
   }
 
   return (
-    <div className={className}>
-      <img
-        src={getImageUrl(image)}
-        alt={alt}
-        className="h-full w-full rounded-lg object-cover"
-      />
-    </div>
+    <MediaImage
+      image={image}
+      alt={alt}
+      className={className}
+      fill
+      rounded="lg"
+    />
   );
 };

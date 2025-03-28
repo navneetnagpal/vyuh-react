@@ -1,5 +1,6 @@
 import { DefaultFeatureLayout } from '@/content/feature/default-feature-layout';
-import { MediaImage, MediaVideo, useMediaUtils } from '@/shared/MediaUtils';
+import { MediaImage } from '@/shared/components';
+import { MediaVideo, useMediaUtils } from '@/shared/MediaUtils';
 import { cn } from '@/shared/utils';
 import { DynamicIcon, IconName } from 'lucide-react/dynamic';
 import React from 'react';
@@ -133,9 +134,10 @@ export const FeatureMedia: React.FC<{
         <div className={`h-full overflow-hidden rounded-lg ${className}`}>
           <MediaImage
             image={media.image}
-            fallback="https://via.placeholder.com/1200x800?text=Feature+Image"
             alt="Feature illustration"
-            className="h-full w-full object-cover"
+            className={'h-full w-full'}
+            fill={true}
+            objectFit="cover"
           />
         </div>
       );

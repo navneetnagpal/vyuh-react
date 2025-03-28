@@ -145,17 +145,35 @@ export const headerSchema = defineType({
       type: 'array',
       of: [
         {
-          type: 'vyuh.action',
+          type: 'object',
+          name: 'marketing.header.action',
+          fields: [
+            {
+              name: 'action',
+              title: 'Action',
+              type: 'vyuh.action',
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: 'icon',
+              title: 'Icon',
+              type: 'string',
+              description: 'Optional icon name from your icon library',
+            },
+          ],
           preview: {
             select: {
-              title: 'title',
-              url: 'url',
+              title: 'action.title',
+              url: 'action.url',
+              icon: 'icon'
             },
-            prepare({ title, url }) {
+            prepare({ title, url, icon }) {
               return {
                 title: title || 'Action Button',
                 subtitle: url || 'No URL',
-                media: () => <span style={{ fontSize: '1.5rem' }}>🔘</span>,
+                media: icon
+                  ? () => <span style={{ fontSize: '1.5rem' }}>{icon}</span>
+                  : () => <span style={{ fontSize: '1.5rem' }}>🔘</span>,
               };
             },
           },
@@ -221,11 +239,6 @@ export const defaultHeaderLayout = defineType({
         list: [
           { title: 'Simple', value: 'simple' },
           { title: 'With navigation', value: 'with-navigation' },
-          {
-            title: 'With navigation and buttons',
-            value: 'with-navigation-buttons',
-          },
-          { title: 'With search', value: 'with-search' },
         ],
       },
       initialValue: 'simple',
@@ -275,12 +288,6 @@ export const defaultHeaderLayout = defineType({
           break;
         case 'with-navigation':
           variantIcon = () => <span style={{ fontSize: '1.5rem' }}>🧭</span>;
-          break;
-        case 'with-navigation-buttons':
-          variantIcon = () => <span style={{ fontSize: '1.5rem' }}>🔘</span>;
-          break;
-        case 'with-search':
-          variantIcon = () => <span style={{ fontSize: '1.5rem' }}>🔍</span>;
           break;
         default:
           variantIcon = Icon;

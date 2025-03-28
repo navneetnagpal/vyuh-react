@@ -186,7 +186,7 @@ export const Footer: React.FC<FooterProps> = ({
       case 'with-social-links':
         return (
           <div>
-            <div className="flex flex-col justify-between md:flex-row">
+            <div className="flex flex-col justify-between gap-8 md:flex-row">
               <div className="mb-8 md:mb-0">
                 <FooterLogo content={content} headingClasses={headingClasses} />
 
@@ -208,7 +208,13 @@ export const Footer: React.FC<FooterProps> = ({
               </div>
             </div>
 
-            <div className="mt-12 flex flex-col items-center justify-between border-t border-neutral-700 pt-8 md:flex-row">
+            <div
+              className={cn(
+                `mt-12 flex flex-col items-center justify-between border-t pt-8 md:flex-row`,
+                { 'border-neutral-200': !darkMode },
+                { 'border-neutral-700': darkMode },
+              )}
+            >
               <div className="mb-4 md:mb-0">
                 {content.copyright && (
                   <FooterCopyright

@@ -1,7 +1,8 @@
 import { Hero } from '@/content/hero';
 import { HeroComponentProps } from '@/content/hero/components/HeroTypes';
 import { DefaultHeroLayout } from '@/content/hero/default-hero-layout';
-import { MediaImage, MediaVideo, useMediaUtils } from '@/shared/MediaUtils';
+import { MediaImage } from '@/shared/components';
+import { MediaVideo, useMediaUtils } from '@/shared/MediaUtils';
 import { Action } from '@vyuh/react-core';
 import React from 'react';
 
@@ -237,9 +238,11 @@ export function HeroMedia({
         <Container>
           <MediaImage
             image={media.image}
-            fallback="https://via.placeholder.com/1200x800?text=Hero+Image"
             alt="Hero Image"
-            className={`rounded-md shadow-2xl ring-1 ring-gray-900/10 ${className}`}
+            fill={true}
+            rounded={'md'}
+            shadow={'2xl'}
+            className={`ring-1 ring-gray-900/10 ${className}`}
           />
         </Container>
       );
@@ -289,9 +292,9 @@ export function HeroMedia({
                 >
                   <MediaImage
                     image={image}
-                    fallback={`https://via.placeholder.com/400x300?text=Tile+${index + 1}`}
                     alt={`Image Tile ${index + 1}`}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full"
+                    fill={true}
                   />
                 </div>
               );

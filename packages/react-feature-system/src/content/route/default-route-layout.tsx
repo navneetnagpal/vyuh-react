@@ -10,32 +10,51 @@ export class DefaultRouteLayout extends LayoutConfiguration<Route> {
   static readonly schemaName: string = `${ROUTE_SCHEMA_TYPE}.layout.default`;
   static typeDescriptor = new TypeDescriptor(this.schemaName, this);
 
-  constructor() {
+  readonly gap: 'none' | 'small' | 'medium' | 'large';
+
+  constructor(props?: Partial<DefaultRouteLayout>) {
     super({
       schemaType: DefaultRouteLayout.schemaName,
       title: 'Default Route Layout',
     });
+
+    this.gap = props?.gap ?? 'small';
   }
 
   /**
    * Renders the route with the default layout
    */
   render(content: Route): React.ReactNode {
-    return <DefaultRouteComponent route={content} />;
+    return <DefaultRouteComponent route={content} layout={this} />;
   }
 }
+
+const gapClasses = {
+  none: 'gap-0',
+  small: 'gap-4',
+  medium: 'gap-8',
+  large: 'gap-16',
+};
 
 /**
  * Default route component used by the DefaultRouteLayout
  */
-function DefaultRouteComponent({ route }: { route: Route }) {
+function DefaultRouteComponent({
+  route,
+  layout,
+}: {
+  route: Route;
+  layout: DefaultRouteLayout;
+}) {
   const { plugins } = useVyuh();
+
+  const gapClass: string = gapClasses[layout.gap || 'medium'];
 
   return (
     <DefaultRouteContainer title={route.title}>
       {route.regions.map((region) => (
         <div key={region.identifier} className="mb-8">
-          <div className="flex flex-col gap-6">
+          <div className={`flex flex-col ${gapClass}`}>
             {region.items.map((item, itemIndex) => (
               <div key={itemIndex}>{plugins.content.render(item)}</div>
             ))}

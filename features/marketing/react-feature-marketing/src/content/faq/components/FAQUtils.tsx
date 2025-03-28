@@ -67,12 +67,12 @@ export function FAQQuestion({
   const { plugins } = useVyuh();
 
   return (
-    <div className={cn('pt-6', className)}>
+    <div className={cn('px-6 py-3 hover:shadow-md', className)}>
       <dt>
         <button
           type="button"
           className={cn(
-            'flex w-full items-start justify-between text-left',
+            'flex w-full cursor-pointer items-start justify-between text-left',
             textColorClass,
           )}
           onClick={onToggle}
@@ -140,7 +140,7 @@ export function FAQContact({
   if (!contactInfo) return null;
 
   const { title, description, email, phone, action } = contactInfo;
-  const textColorClass = darkMode ? 'text-white' : 'text-gray-900';
+  const textColorClass = darkMode ? 'text-indigo-400' : 'text-indigo-600';
   const descColorClass = darkMode ? 'text-gray-300' : 'text-gray-600';
 
   const handleActionClick = () => {

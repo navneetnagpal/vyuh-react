@@ -1,11 +1,12 @@
 import { Newsletter as NewsletterContent } from '@/content/newsletter/newsletter';
 import { DefaultNewsletterLayout } from '@/content/newsletter/default-newsletter-layout';
-import { cn } from '@/shared/utils';
+import { Section, Container, Card, MediaImage } from '@/shared/components';
 import React from 'react';
 import { NewsletterHeader } from './NewsletterHeader';
 import { NewsletterForm } from './NewsletterForm';
 import { NewsletterFeatures } from './NewsletterFeatures';
 import { NewsletterImage } from './NewsletterImage';
+import { cn } from '@/shared/utils';
 
 interface NewsletterProps {
   content: NewsletterContent;
@@ -28,30 +29,35 @@ export const Newsletter: React.FC<NewsletterProps> = ({
   switch (variant) {
     case 'simple-centered':
       return (
-        <div className={cn('px-6 py-16', backgroundClasses, className)}>
-          <div className="mx-auto max-w-2xl text-center">
-            <NewsletterHeader content={content} />
-            <NewsletterForm
-              content={content}
-              className="mt-6"
-              darkMode={darkMode}
-            />
-          </div>
-        </div>
+        <Section
+          darkMode={darkMode}
+          className={className}
+          maxWidth="2xl"
+          centered
+        >
+          <NewsletterHeader content={content} />
+          <NewsletterForm
+            content={content}
+            className="mt-6"
+            darkMode={darkMode}
+          />
+        </Section>
       );
 
     case 'simple-card':
       return (
-        <div className={cn('bg-gray-50 px-6 py-16', className)}>
-          <div className="mx-auto max-w-2xl rounded-xl bg-white p-8 shadow-md">
-            <NewsletterHeader content={content} />
-            <NewsletterForm
-              content={content}
-              className="mt-6"
-              darkMode={false}
-            />
-          </div>
-        </div>
+        <Section className={cn('bg-gray-50', className)} darkMode={false}>
+          <Container maxWidth="2xl">
+            <Card padding="lg" className="shadow-md">
+              <NewsletterHeader content={content} />
+              <NewsletterForm
+                content={content}
+                className="mt-6"
+                darkMode={false}
+              />
+            </Card>
+          </Container>
+        </Section>
       );
 
     case 'with-background-image':
@@ -59,17 +65,19 @@ export const Newsletter: React.FC<NewsletterProps> = ({
         <div className={cn('relative isolate overflow-hidden', className)}>
           {content.image && (
             <div className="absolute inset-0 -z-10">
-              <img
-                src={content.image.url}
+              <MediaImage
+                image={content.image}
                 alt=""
-                className="h-full w-full object-cover opacity-20"
+                fill
+                objectFit="cover"
+                imgClassName="opacity-20"
               />
               <div
                 className={`absolute inset-0 ${darkMode ? 'bg-gray-900/90' : 'bg-white/80'}`}
               />
             </div>
           )}
-          <div className="mx-auto max-w-2xl px-6 py-16 text-center">
+          <Container maxWidth="2xl" centered className="px-6 py-16">
             <NewsletterHeader
               content={content}
               className={darkMode ? 'text-white' : 'text-gray-900'}
@@ -79,14 +87,21 @@ export const Newsletter: React.FC<NewsletterProps> = ({
               className="mt-6"
               darkMode={darkMode}
             />
-          </div>
+          </Container>
         </div>
       );
 
     case 'split-with-image':
       return (
-        <div className={cn('overflow-hidden', backgroundClasses, className)}>
-          <div className="mx-auto max-w-7xl px-6 py-16 lg:flex lg:items-center lg:gap-x-10">
+        <Section
+          darkMode={darkMode}
+          className={cn('overflow-hidden', className)}
+          constrained={false}
+        >
+          <Container
+            maxWidth="7xl"
+            className="lg:flex lg:items-center lg:gap-x-10"
+          >
             <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
               <NewsletterHeader content={content} centered={false} />
               <NewsletterForm
@@ -103,18 +118,18 @@ export const Newsletter: React.FC<NewsletterProps> = ({
                 />
               </div>
             )}
-          </div>
-        </div>
+          </Container>
+        </Section>
       );
 
     case 'with-description':
       return (
-        <div className={cn('px-6 py-16', backgroundClasses, className)}>
-          <div className="mx-auto max-w-7xl">
+        <Section darkMode={darkMode} className={className}>
+          <Container maxWidth="7xl">
             <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-2">
               <div>
                 <NewsletterHeader content={content} centered={false} />
-                {content.features && (
+                {content.features && content.features.length > 0 && (
                   <NewsletterFeatures
                     features={content.features}
                     darkMode={darkMode}
@@ -125,22 +140,25 @@ export const Newsletter: React.FC<NewsletterProps> = ({
                 <NewsletterForm content={content} darkMode={darkMode} />
               </div>
             </div>
-          </div>
-        </div>
+          </Container>
+        </Section>
       );
 
     default:
       return (
-        <div className={cn('px-6 py-16', backgroundClasses, className)}>
-          <div className="mx-auto max-w-2xl text-center">
-            <NewsletterHeader content={content} />
-            <NewsletterForm
-              content={content}
-              className="mt-6"
-              darkMode={darkMode}
-            />
-          </div>
-        </div>
+        <Section
+          darkMode={darkMode}
+          className={className}
+          maxWidth="2xl"
+          centered
+        >
+          <NewsletterHeader content={content} />
+          <NewsletterForm
+            content={content}
+            className="mt-6"
+            darkMode={darkMode}
+          />
+        </Section>
       );
   }
 };

@@ -90,25 +90,6 @@ export function useMediaUtils() {
 }
 
 /**
- * Image component that handles ImageReference objects
- */
-export const MediaImage: React.FC<{
-  image?: ImageReference;
-  fallback?: string;
-  alt?: string;
-  className?: string;
-}> = ({ image, fallback, alt = '', className = '' }) => {
-  const { getImageUrl } = useMediaUtils();
-  const imageUrl = getImageUrl(image, fallback);
-
-  if (!imageUrl) {
-    return null;
-  }
-
-  return <img src={imageUrl} alt={alt} className={className} />;
-};
-
-/**
  * Video component that handles ObjectReference objects
  */
 export const MediaVideo: React.FC<{

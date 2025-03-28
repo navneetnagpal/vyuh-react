@@ -1,4 +1,5 @@
 import { Bento } from '@/content/bento/bento';
+import { MediaImage } from '@/shared/components';
 import { cn } from '@/shared/utils';
 import { useMediaUtils } from '@/shared/MediaUtils';
 import { Action } from '@vyuh/react-core';
@@ -25,18 +26,18 @@ export const BentoItem: React.FC<BentoItemProps> = ({
 
   if (variant === 'two-row') {
     spanClasses = {
-      normal: 'col-span-1',
-      wide: 'col-span-2',
-      tall: 'col-span-1',
-      large: 'col-span-2',
+      normal: 'col-span-1 row-span-1',
+      wide: 'col-span-2 row-span-1',
+      tall: 'col-span-1 row-span-2',
+      large: 'col-span-2 row-span-2',
     }[item.span || 'normal'];
   } else {
     // For three-column layout
     spanClasses = {
       normal: 'col-span-1',
       wide: 'col-span-2',
-      tall: 'col-span-1',
-      large: 'col-span-2',
+      tall: 'col-span-1 row-span-2',
+      large: 'col-span-2 row-span-2',
     }[item.span || 'normal'];
   }
 
@@ -63,12 +64,14 @@ export const BentoItem: React.FC<BentoItemProps> = ({
         </div>
       )}
 
-      {item.image && !item.icon && (
+      {item.image && (
         <div className="mb-4 overflow-hidden rounded-lg">
-          <img
-            src={getImageUrl(item.image)}
+          <MediaImage
+            image={item.image}
             alt={item.title}
-            className="h-auto w-full object-cover"
+            fill={true}
+            rounded="lg"
+            className="w-full"
           />
         </div>
       )}

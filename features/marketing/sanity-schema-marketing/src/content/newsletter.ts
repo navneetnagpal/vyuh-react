@@ -34,7 +34,6 @@ export const newsletterSchema = defineType({
       options: {
         hotspot: true,
       },
-
     }),
     defineField({
       name: 'formAction',
@@ -70,7 +69,6 @@ export const newsletterSchema = defineType({
       type: 'array',
       of: [{ type: 'string' }],
       description: 'Optional list of features or benefits to display',
-
     }),
   ],
   preview: {
@@ -81,7 +79,8 @@ export const newsletterSchema = defineType({
     prepare({ title, features = [] }) {
       return {
         title: `Newsletter: ${title || 'Untitled'}`,
-        subtitle: features.length > 0 ? `${features.length} features` : undefined,
+        subtitle:
+          features.length > 0 ? `${features.length} features` : undefined,
         media: Icon,
       };
     },
@@ -131,7 +130,7 @@ export const defaultNewsletterLayout = defineType({
       const variantDisplay = variant
         ? variant
             .split('-')
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
             .join(' ')
         : 'Simple Centered';
 

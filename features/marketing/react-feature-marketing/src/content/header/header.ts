@@ -59,5 +59,15 @@ export interface Header extends ContentItem {
   /**
    * Action buttons to display in the header
    */
-  readonly actions?: Action[];
+  readonly actions?: {
+    /**
+     * The action to execute when the button is clicked
+     */
+    readonly action?: Action;
+
+    /**
+     * Optional icon name from your icon library
+     */
+    readonly icon?: string;
+  }[];
 }

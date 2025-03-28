@@ -8,9 +8,7 @@ import React from 'react';
  */
 export type HeaderVariant =
   | 'simple'
-  | 'with-navigation'
-  | 'with-navigation-buttons'
-  | 'with-search';
+  | 'with-navigation';
 
 /**
  * Default layout for Header content items
