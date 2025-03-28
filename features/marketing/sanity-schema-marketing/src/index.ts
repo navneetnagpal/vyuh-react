@@ -10,7 +10,7 @@ import {
 } from './content/banner';
 import { bentoSchema } from './content/bento';
 import { blogSchema } from './content/blog';
-import { ctaSchema } from './content/cta';
+import { CTADescriptor, ctaSchema, defaultCTALayout } from './content/cta';
 import { defaultFaqLayout, FAQDescriptor, faqSchema } from './content/faq';
 import {
   defaultFeatureLayout,
@@ -42,6 +42,9 @@ export const marketing = new FeatureDescriptor({
     }),
     new BannerDescriptor({
       layouts: [defaultBannerLayout],
+    }),
+    new CTADescriptor({
+      layouts: [defaultCTALayout],
     }),
     new FAQDescriptor({
       layouts: [defaultFaqLayout],

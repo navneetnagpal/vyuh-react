@@ -1,4 +1,4 @@
-import { Banner } from '@/content/banner/banner';
+import { Banner as BannerItem } from '@/content/banner/banner';
 import { DefaultBannerLayout } from '@/content/banner/default-banner-layout';
 import { cn } from '@/content/shared/utils';
 import { XCircleIcon } from 'lucide-react';
@@ -6,7 +6,7 @@ import { DynamicIcon } from 'lucide-react/dynamic';
 import React from 'react';
 
 interface BannerProps {
-  content: Banner;
+  content: BannerItem;
   layout: DefaultBannerLayout;
   className?: string;
 }

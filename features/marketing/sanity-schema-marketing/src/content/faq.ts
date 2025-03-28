@@ -108,9 +108,11 @@ export const faqSchema = defineType({
   preview: {
     select: {
       title: 'title',
-      questionCount: 'questions.length',
+      questions: 'questions',
     },
-    prepare({ title, questionCount = 0 }) {
+    prepare({ title, questions = [] }) {
+      const questionCount = questions.length;
+
       return {
         title: title || 'FAQ Section',
         subtitle: `${questionCount} question${questionCount === 1 ? '' : 's'}`,

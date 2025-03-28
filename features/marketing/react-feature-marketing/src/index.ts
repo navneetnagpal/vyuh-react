@@ -1,4 +1,7 @@
 import { BannerContentBuilder } from '@/content/banner/banner-builder';
+import { BannerDescriptor } from '@/content/banner/banner-descriptor';
+import { CTAContentBuilder } from '@/content/cta/cta-builder';
+import { CTADescriptor } from '@/content/cta/cta-descriptor';
 import { FAQContentBuilder } from '@/content/faq/faq-builder';
 import { FeatureContentBuilder } from '@/content/feature/feature-builder';
 import { HeroContentBuilder } from '@/content/hero/hero-builder';
@@ -20,12 +23,13 @@ export const marketing = new FeatureDescriptor({
   icon: 'layout-grid',
   extensions: [
     new ContentExtensionDescriptor({
-      contents: [new HeroDescriptor()],
+      contents: [new HeroDescriptor(), new BannerDescriptor(), new CTADescriptor()],
       contentBuilders: [
         new HeroContentBuilder(),
         new FeatureContentBuilder(),
         new BannerContentBuilder(),
         new FAQContentBuilder(),
+        new CTAContentBuilder(),
       ],
     }),
   ],
