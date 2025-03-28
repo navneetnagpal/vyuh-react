@@ -134,7 +134,7 @@ export const Footer: React.FC<FooterProps> = ({
       case 'four-columns-mission':
         return (
           <div>
-            <div className="grid grid-cols-1 gap-8 lg:grid-cols-5">
+            <div className="grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-5">
               <div className="lg:col-span-2">
                 <FooterLogo content={content} headingClasses={headingClasses} />
 
@@ -153,7 +153,7 @@ export const Footer: React.FC<FooterProps> = ({
                 )}
               </div>
 
-              <div className="lg:col-span-3">
+              <div className="md:col-span-1 lg:col-span-3">
                 {content.navigationGroups && (
                   <FooterNavigation
                     navigationGroups={content.navigationGroups}
@@ -186,7 +186,7 @@ export const Footer: React.FC<FooterProps> = ({
       case 'with-social-links':
         return (
           <div>
-            <div className="flex flex-col justify-between gap-8 md:flex-row">
+            <div className="flex flex-wrap justify-between gap-8 max-sm:flex-col md:flex-row">
               <div className="mb-8 md:mb-0">
                 <FooterLogo content={content} headingClasses={headingClasses} />
 
@@ -210,7 +210,7 @@ export const Footer: React.FC<FooterProps> = ({
 
             <div
               className={cn(
-                `mt-12 flex flex-col items-center justify-between border-t pt-8 md:flex-row`,
+                `mt-12 flex items-center justify-between border-t pt-8 max-sm:flex-col md:flex-row`,
                 { 'border-neutral-200': !darkMode },
                 { 'border-neutral-700': darkMode },
               )}
