@@ -26,28 +26,30 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
     'light-brand': 'bg-primary-content',
   };
 
-  // Helper function for rendering additional info text with appropriate styling
-  const renderAdditionalInfo = (
-    additionalInfo: string | undefined,
-    background: string,
-  ) => {
-    if (!additionalInfo) return null;
+/**
+ * CTAAdditionalInfo component for rendering additional information text
+ */
+const CTAAdditionalInfo: React.FC<{
+  additionalInfo?: string;
+  background: string;
+}> = ({ additionalInfo, background }) => {
+  if (!additionalInfo) return null;
 
-    return (
-      <p
-        className={cn(
-          'mt-4 text-sm',
-          background === 'light'
-            ? 'opacity-70'
-            : background === 'brand'
-              ? 'opacity-80'
-              : 'opacity-70',
-        )}
-      >
-        {additionalInfo}
-      </p>
-    );
-  };
+  return (
+    <p
+      className={cn(
+        'mt-4 text-sm',
+        background === 'light'
+          ? 'opacity-70'
+          : background === 'brand'
+            ? 'opacity-80'
+            : 'opacity-70',
+      )}
+    >
+      {additionalInfo}
+    </p>
+  );
+};
 
   // Get the background class for the section
   const bgClass =
@@ -67,7 +69,7 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
             />
           </div>
 
-          {renderAdditionalInfo(content.additionalInfo, background)}
+          <CTAAdditionalInfo additionalInfo={content.additionalInfo} background={background} />
         </div>
       )}
 
@@ -88,7 +90,7 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
               />
             </div>
 
-            {renderAdditionalInfo(content.additionalInfo, background)}
+            <CTAAdditionalInfo additionalInfo={content.additionalInfo} background={background} />
           </div>
 
           {content.image && (
@@ -109,7 +111,7 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
             />
           </div>
 
-          {renderAdditionalInfo(content.additionalInfo, background)}
+          <CTAAdditionalInfo additionalInfo={content.additionalInfo} background={background} />
         </div>
       )}
     </Section>

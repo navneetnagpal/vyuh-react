@@ -39,8 +39,16 @@ export const Pricing: React.FC<PricingProps> = ({
     (plan) => plan.priceAnnually !== undefined,
   );
 
-  // Common header and toggle components
-  const headerAndToggle = (
+/**
+ * PricingHeaderAndToggle component for rendering the header and billing toggle
+ */
+const PricingHeaderAndToggle: React.FC<{
+  content: PricingContent;
+  showAnnual: boolean;
+  setShowAnnual: (value: boolean) => void;
+  hasAnnualPricing: boolean;
+}> = ({ content, showAnnual, setShowAnnual, hasAnnualPricing }) => {
+  return (
     <>
       <PricingHeader content={content} />
       {hasAnnualPricing && (
@@ -52,35 +60,51 @@ export const Pricing: React.FC<PricingProps> = ({
       )}
     </>
   );
+};
 
-  // Render the appropriate grid layout based on the variant
-  const renderPricingGrid = () => {
-    switch (variant) {
-      case 'two-tiers-highlighted':
-        return (
-          <div className="mx-auto mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 md:grid-rows-[auto_auto_auto_auto_1fr] lg:max-w-4xl">
-            {content.plans.map((plan, index) => (
-              <PricingPlan key={index} plan={plan} showAnnual={showAnnual} />
-            ))}
-          </div>
-        );
+/**
+ * PricingGrid component for rendering the pricing plans grid
+ */
+const PricingGrid: React.FC<{
+  variant: string;
+  plans: PricingContent['plans'];
+  showAnnual: boolean;
+}> = ({ variant, plans, showAnnual }) => {
+  switch (variant) {
+    case 'two-tiers-highlighted':
+      return (
+        <div className="mx-auto mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 md:grid-rows-[auto_auto_auto_auto_1fr] lg:max-w-4xl">
+          {plans.map((plan, index) => (
+            <PricingPlan key={index} plan={plan} showAnnual={showAnnual} />
+          ))}
+        </div>
+      );
 
-      // Default to simple-three-tiers
-      default:
-        return (
-          <div className="mx-auto mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 lg:max-w-4xl lg:grid-cols-3 lg:grid-rows-[auto_auto_auto_auto_1fr]">
-            {content.plans.map((plan, index) => (
-              <PricingPlan key={index} plan={plan} showAnnual={showAnnual} />
-            ))}
-          </div>
-        );
-    }
-  };
+    // Default to simple-three-tiers
+    default:
+      return (
+        <div className="mx-auto mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 lg:max-w-4xl lg:grid-cols-3 lg:grid-rows-[auto_auto_auto_auto_1fr]">
+          {plans.map((plan, index) => (
+            <PricingPlan key={index} plan={plan} showAnnual={showAnnual} />
+          ))}
+        </div>
+      );
+  }
+};
 
   return (
     <Section className={className}>
-      {headerAndToggle}
-      {renderPricingGrid()}
+      <PricingHeaderAndToggle
+        content={content}
+        showAnnual={showAnnual}
+        setShowAnnual={setShowAnnual}
+        hasAnnualPricing={hasAnnualPricing}
+      />
+      <PricingGrid
+        variant={variant}
+        plans={content.plans}
+        showAnnual={showAnnual}
+      />
       <PricingDisclaimer disclaimer={content.disclaimer} />
     </Section>
   );

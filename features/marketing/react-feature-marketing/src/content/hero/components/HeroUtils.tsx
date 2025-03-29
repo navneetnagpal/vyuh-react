@@ -55,71 +55,80 @@ export function HeroActions({
     }
   };
 
-  const renderActionButton = (
-    actionItem: { variant: ActionVariant; action: Action },
-    index: number,
-  ) => {
-    const { variant, action } = actionItem;
+/**
+ * HeroActionButton component for rendering a single action button
+ */
+const HeroActionButton: React.FC<{
+  actionItem: { variant: ActionVariant; action: Action };
+  index: number;
+  handleActionClick: (e: React.MouseEvent, action: Action) => void;
+}> = ({ actionItem, index, handleActionClick }) => {
+  const { variant, action } = actionItem;
 
-    // Get the title from the first configuration if available
-    const actionTitle =
-      action.title || action?.configurations?.[0]?.title || 'Learn more';
+  // Get the title from the first configuration if available
+  const actionTitle =
+    action.title || action?.configurations?.[0]?.title || 'Learn more';
 
-    if (variant === 'primary') {
-      return (
-        <button
-          key={index}
-          onClick={(e) => handleActionClick(e, action)}
-          className="btn btn-primary"
-        >
-          {actionTitle}
-        </button>
-      );
-    }
-
-    if (variant === 'secondary') {
-      return (
-        <button
-          key={index}
-          onClick={(e) => handleActionClick(e, action)}
-          className="btn btn-secondary"
-        >
-          {actionTitle}
-        </button>
-      );
-    }
-
-    if (variant === 'link') {
-      return (
-        <button
-          key={index}
-          onClick={(e) => handleActionClick(e, action)}
-          className="btn btn-link text-primary"
-        >
-          {actionTitle} <span aria-hidden="true">→</span>
-        </button>
-      );
-    }
-
-    // Default button style (tertiary)
+  if (variant === 'primary') {
     return (
       <button
         key={index}
         onClick={(e) => handleActionClick(e, action)}
-        className="btn btn-outline btn-primary"
+        className="btn btn-primary"
+      >
+        {actionTitle}
+      </button>
+    );
+  }
+
+  if (variant === 'secondary') {
+    return (
+      <button
+        key={index}
+        onClick={(e) => handleActionClick(e, action)}
+        className="btn btn-secondary"
+      >
+        {actionTitle}
+      </button>
+    );
+  }
+
+  if (variant === 'link') {
+    return (
+      <button
+        key={index}
+        onClick={(e) => handleActionClick(e, action)}
+        className="btn btn-link text-primary"
       >
         {actionTitle} <span aria-hidden="true">→</span>
       </button>
     );
-  };
+  }
+
+  // Default button style (tertiary)
+  return (
+    <button
+      key={index}
+      onClick={(e) => handleActionClick(e, action)}
+      className="btn btn-outline btn-primary"
+    >
+      {actionTitle} <span aria-hidden="true">→</span>
+    </button>
+  );
+};
 
   return (
     <div
       className={`mt-10 flex items-center ${centered ? 'justify-center' : 'justify-start'} gap-x-6 ${className}`}
     >
-      {actions.map((actionItem, index) =>
-        renderActionButton(actionItem, index),
-      )}
+      {actions.map((actionItem, index) => (
+        <HeroActionButton
+          key={index}
+          actionItem={actionItem}
+          index={index}
+          handleActionClick={handleActionClick}
+        />
+      ))}
     </div>
   );
 }
