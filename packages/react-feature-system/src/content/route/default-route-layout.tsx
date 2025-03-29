@@ -30,10 +30,10 @@ export class DefaultRouteLayout extends LayoutConfiguration<Route> {
 }
 
 const gapClasses = {
-  none: 'gap-0',
-  small: 'gap-4',
-  medium: 'gap-8',
-  large: 'gap-16',
+  none: 'vfs:gap-0',
+  small: 'vfs:gap-4',
+  medium: 'vfs:gap-8',
+  large: 'vfs:gap-16',
 };
 
 /**
@@ -53,8 +53,8 @@ function DefaultRouteComponent({
   return (
     <DefaultRouteContainer title={route.title}>
       {route.regions.map((region) => (
-        <div key={region.identifier} className="mb-8">
-          <div className={`flex flex-col ${gapClass}`}>
+        <div key={region.identifier} className="vfs:mb-8">
+          <div className={`vfs:flex vfs:flex-col ${gapClass}`}>
             {region.items.map((item, itemIndex) => (
               <div key={itemIndex}>{plugins.content.render(item)}</div>
             ))}

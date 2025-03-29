@@ -52,15 +52,17 @@ const AccordionView: React.FC<{ content: ContentAccordion }> = ({
   const defaultValue = content.items.length > 0 ? `item-0` : undefined;
 
   return (
-    <div className="w-full space-y-4">
+    <div className="vfs:w-full vfs:space-y-4">
       {/* Header */}
       {(content.title || content.description) && (
-        <div className="mb-6">
+        <div className="vfs:mb-6">
           {content.title && (
-            <h3 className="text-2xl font-bold text-black">{content.title}</h3>
+            <h3 className="vfs:text-2xl vfs:font-bold vfs:text-black">
+              {content.title}
+            </h3>
           )}
           {content.description && (
-            <p className="text-muted-foreground mt-2 max-w-2xl text-sm">
+            <p className="vfs:text-muted-foreground vfs:mt-2 vfs:max-w-2xl vfs:text-sm">
               {content.description}
             </p>
           )}
@@ -68,24 +70,26 @@ const AccordionView: React.FC<{ content: ContentAccordion }> = ({
       )}
 
       {/* Accordion */}
-      <div className="overflow-hidden rounded-xl border border-neutral-200 bg-gradient-to-br from-white to-neutral-50 p-2 dark:border-neutral-700 dark:from-neutral-900 dark:to-neutral-950">
+      <div className="vfs:overflow-hidden vfs:rounded-xl vfs:border vfs:border-neutral-200 vfs:bg-gradient-to-br vfs:from-white vfs:to-neutral-50 vfs:p-2 dark:vfs:border-neutral-700 dark:vfs:from-neutral-900 dark:vfs:to-neutral-950">
         <Accordion
           type="single"
           collapsible
           defaultValue={defaultValue}
-          className="w-full"
+          className="vfs:w-full"
         >
           {content.items.map((item: ContentAccordionItem, index: number) => (
             <AccordionItem
               key={index}
               value={`item-${index}`}
-              className="mb-2 overflow-hidden rounded-lg border-0 bg-white shadow-sm transition-all duration-200 last:mb-0 hover:shadow-md dark:bg-neutral-800"
+              className="vfs:mb-2 vfs:overflow-hidden vfs:rounded-lg vfs:border-0 vfs:bg-white vfs:shadow-sm vfs:transition-all vfs:duration-200 vfs:last:mb-0 vfs:hover:shadow-md vfs:dark:bg-neutral-800"
             >
-              <AccordionTrigger className="dark:to-neutral-750 rounded-t-lg bg-gradient-to-r from-neutral-50 to-white px-6 py-4 text-base font-medium transition-all duration-300 hover:from-blue-50 hover:to-indigo-50 hover:no-underline data-[state=open]:rounded-bl-none data-[state=open]:rounded-br-none dark:from-neutral-800 dark:hover:from-blue-950 dark:hover:to-indigo-950">
-                <span className="flex items-center gap-2">{item.title}</span>
+              <AccordionTrigger className="vfs:dark:to-neutral-750 vfs:rounded-t-lg vfs:bg-gradient-to-r vfs:from-neutral-50 vfs:to-white vfs:px-6 vfs:py-4 vfs:text-base vfs:font-medium vfs:transition-all vfs:duration-300 vfs:hover:from-blue-50 vfs:hover:to-indigo-50 vfs:hover:no-underline vfs:data-[state=open]:rounded-bl-none vfs:data-[state=open]:rounded-br-none vfs:dark:from-neutral-800 vfs:dark:hover:from-blue-950 vfs:dark:hover:to-indigo-950">
+                <span className="vfs:flex vfs:items-center vfs:gap-2">
+                  {item.title}
+                </span>
               </AccordionTrigger>
-              <AccordionContent className="border-t border-neutral-100 bg-white px-6 py-4 dark:border-neutral-700 dark:bg-neutral-800">
-                <div className="prose dark:prose-invert max-w-none">
+              <AccordionContent className="vfs:border-t vfs:border-neutral-100 vfs:bg-white vfs:px-6 vfs:py-4 vfs:dark:border-neutral-700 vfs:dark:bg-neutral-800">
+                <div className="vfs:prose vfs:dark:prose-invert vfs:max-w-none">
                   <AccordionItemView item={item} />
                 </div>
               </AccordionContent>

@@ -60,7 +60,7 @@ function APIContentLayoutView({
   };
 
   return (
-    <div className="api-content">
+    <div className="vfs:api-content">
       <AsyncContentContainer
         fetchContent={fetchContent}
         renderContent={renderContent}

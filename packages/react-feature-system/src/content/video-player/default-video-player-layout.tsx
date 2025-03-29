@@ -73,11 +73,11 @@ const VideoPlayerComponent: React.FC<VideoPlayerComponentProps> = ({
   // Function to render the video with the loaded URL
   const renderVideo = (url: string) => {
     return (
-      <div className="w-full">
+      <div className="vfs:w-full">
         {content.title && (
-          <div className="mb-2 text-lg font-medium">{content.title}</div>
+          <div className="vfs:mb-2 vfs:text-lg vfs:font-medium">{content.title}</div>
         )}
-        <div className="relative overflow-hidden rounded-lg">
+        <div className="vfs:relative vfs:overflow-hidden vfs:rounded-lg">
           <VideoElement
             url={url}
             loop={content.loop}
@@ -135,7 +135,7 @@ const VideoElement: React.FC<VideoElementProps> = ({
   return (
     <video
       ref={videoRef}
-      className="aspect-video w-full object-cover"
+      className="vfs:aspect-video vfs:w-full vfs:object-cover"
       src={url}
       controls
       loop={loop}

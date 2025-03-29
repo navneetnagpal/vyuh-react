@@ -94,7 +94,7 @@ export function RouteLoader({
       {allowRefresh && (
         <button
           onClick={handleRefresh}
-          className={`z-1000 fixed bottom-2 right-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-gray-600 text-white transition-colors ease-in-out hover:bg-gray-300 hover:text-gray-700 hover:shadow-md`}
+          className={`vxc:z-1000 vxc:fixed vxc:bottom-2 vxc:right-2 vxc:flex vxc:h-8 vxc:w-8 vxc:cursor-pointer vxc:items-center vxc:justify-center vxc:rounded-full vxc:bg-gray-600 vxc:text-white vxc:transition-colors vxc:ease-in-out vxc:hover:bg-gray-300 vxc:hover:text-gray-700 vxc:hover:shadow-md`}
           title={'Refresh Route'}
         >
           <RefreshCcw size={16} />

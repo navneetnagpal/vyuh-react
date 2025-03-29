@@ -120,7 +120,7 @@ function Carousel({
     >
       <div
         onKeyDownCapture={handleKeyDown}
-        className={cn('relative', className)}
+        className={cn('vfs:relative', className)}
         role="region"
         aria-roledescription="carousel"
         data-slot="carousel"
@@ -138,13 +138,13 @@ function CarouselContent({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       ref={carouselRef}
-      className="overflow-hidden"
+      className="vfs:overflow-hidden"
       data-slot="carousel-content"
     >
       <div
         className={cn(
-          'flex',
-          orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col',
+          'vfs:flex',
+          orientation === 'horizontal' ? 'vfs:-ml-4' : 'vfs:-mt-4 vfs:flex-col',
           className,
         )}
         {...props}
@@ -162,8 +162,8 @@ function CarouselItem({ className, ...props }: React.ComponentProps<'div'>) {
       aria-roledescription="slide"
       data-slot="carousel-item"
       className={cn(
-        'min-w-0 shrink-0 grow-0 basis-full',
-        orientation === 'horizontal' ? 'pl-4' : 'pt-4',
+        'vfs:min-w-0 vfs:shrink-0 vfs:grow-0 vfs:basis-full',
+        orientation === 'horizontal' ? 'vfs:pl-4' : 'vfs:pt-4',
         className,
       )}
       {...props}
@@ -185,10 +185,10 @@ function CarouselPrevious({
       variant={variant}
       size={size}
       className={cn(
-        'absolute size-8 rounded-full',
+        'vfs:absolute vfs:size-8 vfs:rounded-full',
         orientation === 'horizontal'
-          ? '-left-12 top-1/2 -translate-y-1/2'
-          : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
+          ? 'vfs:-left-12 vfs:top-1/2 vfs:-translate-y-1/2'
+          : 'vfs:-top-12 vfs:left-1/2 vfs:-translate-x-1/2 vfs:rotate-90',
         className,
       )}
       disabled={!canScrollPrev}
@@ -196,7 +196,7 @@ function CarouselPrevious({
       {...props}
     >
       <ArrowLeft />
-      <span className="sr-only">Previous slide</span>
+      <span className="vfs:sr-only">Previous slide</span>
     </Button>
   );
 }
@@ -215,10 +215,10 @@ function CarouselNext({
       variant={variant}
       size={size}
       className={cn(
-        'absolute size-8 rounded-full',
+        'vfs:absolute vfs:size-8 vfs:rounded-full',
         orientation === 'horizontal'
-          ? '-right-12 top-1/2 -translate-y-1/2'
-          : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
+          ? 'vfs:-right-12 vfs:top-1/2 vfs:-translate-y-1/2'
+          : 'vfs:-bottom-12 vfs:left-1/2 vfs:-translate-x-1/2 vfs:rotate-90',
         className,
       )}
       disabled={!canScrollNext}
@@ -226,7 +226,7 @@ function CarouselNext({
       {...props}
     >
       <ArrowRight />
-      <span className="sr-only">Next slide</span>
+      <span className="vfs:sr-only">Next slide</span>
     </Button>
   );
 }

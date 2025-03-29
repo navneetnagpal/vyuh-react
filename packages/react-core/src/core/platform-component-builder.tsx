@@ -84,8 +84,8 @@ export class PlatformComponentBuilder {
 
 function DefaultAppLoader() {
   return (
-    <div className={'flex h-screen flex-col items-center justify-center p-2'}>
-      <Loader className={'animate-spin'} />
+    <div className={'vc:flex vc:h-screen vc:flex-col vc:items-center vc:justify-center vc:p-2'}>
+      <Loader className={'vc:animate-spin'} />
       <div>Loading application...</div>
       <PoweredByVyuh />
     </div>
@@ -94,8 +94,8 @@ function DefaultAppLoader() {
 
 function DefaultContentLoader() {
   return (
-    <div className={'flex flex-col items-center justify-center p-2'}>
-      <Loader className={'animate-spin'} />
+    <div className={'vc:flex vc:flex-col vc:items-center vc:justify-center vc:p-2'}>
+      <Loader className={'vc:animate-spin'} />
       <div>Loading content...</div>
       <PoweredByVyuh />
     </div>
@@ -105,9 +105,9 @@ function DefaultContentLoader() {
 function DefaultRouteLoader() {
   return (
     <div
-      className={'flex flex-col items-center justify-center bg-white px-8 py-4'}
+      className={'vc:flex vc:flex-col vc:items-center vc:justify-center vc:bg-white vc:px-8 vc:py-4'}
     >
-      <Loader className={'animate-spin'} />
+      <Loader className={'vc:animate-spin'} />
       <div>Loading route...</div>
       <PoweredByVyuh />
     </div>
@@ -124,24 +124,24 @@ function DefaultErrorView({
   onRetry?: () => void;
 }) {
   return (
-    <div className="m-2 mx-auto max-w-lg rounded border border-red-200 bg-red-50 p-4 text-sm shadow-sm">
-      <h2 className="mb-4 font-mono font-semibold text-red-700">{title}</h2>
+    <div className="vc:m-2 vc:mx-auto vc:max-w-lg vc:rounded vc:border vc:border-red-200 vc:bg-red-50 vc:p-4 vc:text-sm vc:shadow-sm">
+      <h2 className="vc:mb-4 vc:font-mono vc:font-semibold vc:text-red-700">{title}</h2>
       {error && (
-        <pre className="mb-4 max-h-48 overflow-auto rounded bg-white p-4 font-mono text-red-600">
+        <pre className="vc:mb-4 vc:max-h-48 vc:overflow-auto vc:rounded vc:bg-white vc:p-4 vc:font-mono vc:text-red-600">
           {error.message}
         </pre>
       )}
       {onRetry && (
         <button
           onClick={onRetry}
-          className="mt-2 cursor-pointer rounded bg-red-500 px-2 py-1 font-medium text-white transition-colors hover:bg-red-800"
+          className="vc:mt-2 vc:cursor-pointer vc:rounded vc:bg-red-500 vc:px-2 vc:py-1 vc:font-medium vc:text-white vc:transition-colors hover:vc:bg-red-800"
         >
           Retry
         </button>
       )}
 
-      <div className="flex justify-center">
-        <PoweredByVyuh className={'inline-block'} />
+      <div className="vc:flex vc:justify-center">
+        <PoweredByVyuh className={'vc:inline-block'} />
       </div>
     </div>
   );

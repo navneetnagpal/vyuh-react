@@ -77,15 +77,15 @@ const CardView: React.FC<CardRendererProps> = ({ content }) => {
   if (hasOnlyImage) {
     return (
       <ShadcnCard
-        className={cn('overflow-hidden border-neutral-300 p-0', {
-          'cursor-pointer': content.action,
+        className={cn('vfs:overflow-hidden vfs:border-neutral-300 vfs:p-0', {
+          'vfs:cursor-pointer': content.action,
         })}
         onClick={() => content.action && new Action(content.action).execute()}
       >
         <img
           src={imageUrl}
           alt="Card image"
-          className="max-h-[400px] w-full object-cover"
+          className="vfs:max-h-[400px] vfs:w-full vfs:object-cover"
         />
       </ShadcnCard>
     );
@@ -94,18 +94,18 @@ const CardView: React.FC<CardRendererProps> = ({ content }) => {
   // Otherwise render the standard card layout
   return (
     <ShadcnCard
-      className={cn('h-full border-[6px] border-neutral-100', {
-        'cursor-pointer': content.action,
+      className={cn('vfs:h-full vfs:border-[6px] vfs:border-neutral-100', {
+        'vfs:cursor-pointer': content.action,
       })}
       onClick={() => content.action && new Action(content.action).execute()}
     >
       <CardHeader>
         {hasImage && (
-          <div className="h-48 w-full overflow-hidden">
+          <div className="vfs:h-48 vfs:w-full vfs:overflow-hidden">
             <img
               src={imageUrl}
               alt={content.title || 'Card image'}
-              className="h-full w-full object-cover"
+              className="vfs:h-full vfs:w-full vfs:object-cover"
             />
           </div>
         )}
@@ -121,7 +121,7 @@ const CardView: React.FC<CardRendererProps> = ({ content }) => {
       )}
 
       {(content.secondaryAction || content.tertiaryAction) && (
-        <CardFooter className="flex flex-wrap gap-2">
+        <CardFooter className="vfs:flex vfs:flex-wrap vfs:gap-2">
           {content.secondaryAction && (
             <Button
               onClick={() => new Action(content.secondaryAction).execute()}

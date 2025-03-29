@@ -28,15 +28,15 @@ class DefaultUnknownLayout extends LayoutConfiguration<Unknown> {
    */
   render(content: Unknown): React.ReactNode {
     return (
-      <div className="bg-red-100 p-3 rounded border border-red-300 text-red-800 my-2">
-        <div className="flex items-center mb-2">
-          <TriangleAlert className="mr-2" />
-          <h3 className="m-0 text-base font-semibold">Missing Content Type</h3>
+      <div className="vfs:bg-red-100 vfs:p-3 vfs:rounded vfs:border vfs:border-red-300 vfs:text-red-800 vfs:my-2">
+        <div className="vfs:flex vfs:items-center vfs:mb-2">
+          <TriangleAlert className="vfs:mr-2" />
+          <h3 className="vfs:m-0 vfs:text-base vfs:font-semibold">Missing Content Type</h3>
         </div>
-        <div className="font-bold font-mono mb-1">
+        <div className="vfs:font-bold vfs:font-mono vfs:mb-1">
           {content.missingSchemaType}
         </div>
-        <div className="text-sm">{content.description}</div>
+        <div className="vfs:text-sm">{content.description}</div>
       </div>
     );
   }

@@ -55,7 +55,7 @@ const DividerView: React.FC<{ content: Divider }> = ({ content }) => {
 
   return (
     <div
-      className="bg-neutral-300"
+      className="vfs:bg-neutral-300"
       style={style}
       role="separator"
       aria-orientation="horizontal"

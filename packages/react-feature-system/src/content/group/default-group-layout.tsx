@@ -37,15 +37,15 @@ const GroupView: React.FC<{ content: Group }> = ({ content }) => {
   const { plugins } = useVyuh();
 
   return (
-    <div className="w-full space-y-4">
+    <div className="vfs:w-full vfs:space-y-4">
       {/* Header */}
       {(content.title || content.description) && (
-        <div className="mb-4">
+        <div className="vfs:mb-4">
           {content.title && (
-            <h3 className="text-xl font-semibold">{content.title}</h3>
+            <h3 className="vfs:text-xl vfs:font-semibold">{content.title}</h3>
           )}
           {content.description && (
-            <p className="text-muted-foreground text-sm">
+            <p className="vfs:text-muted-foreground vfs:text-sm">
               {content.description}
             </p>
           )}
@@ -53,9 +53,9 @@ const GroupView: React.FC<{ content: Group }> = ({ content }) => {
       )}
 
       {/* Items */}
-      <div className="grid snap-x grid-flow-col grid-cols-none gap-4 overflow-x-auto pb-4">
+      <div className="vfs:grid vfs:snap-x vfs:grid-flow-col vfs:grid-cols-none vfs:gap-4 vfs:overflow-x-auto vfs:pb-4">
         {content.items.map((item, index) => (
-          <div key={index} className="w-80 snap-start">
+          <div key={index} className="vfs:w-80 vfs:snap-start">
             {plugins.content.render(item)}
           </div>
         ))}

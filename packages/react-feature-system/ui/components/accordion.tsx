@@ -17,7 +17,7 @@ function AccordionItem({
   return (
     <AccordionPrimitive.Item
       data-slot="accordion-item"
-      className={cn("border-b last:border-b-0", className)}
+      className={cn("vfs:border-b vfs:last:border-b-0", className)}
       {...props}
     />
   )
@@ -29,17 +29,17 @@ function AccordionTrigger({
   ...props
 }: React.ComponentProps<typeof AccordionPrimitive.Trigger>) {
   return (
-    <AccordionPrimitive.Header className="flex">
+    <AccordionPrimitive.Header className="vfs:flex">
       <AccordionPrimitive.Trigger
         data-slot="accordion-trigger"
         className={cn(
-          "focus-visible:border-neutral-950 focus-visible:ring-neutral-950/50 flex flex-1 items-start justify-between gap-4 rounded-md py-4 text-left text-sm font-medium transition-all outline-none focus-visible:ring-[3px] disabled:pointer-events-none disabled:opacity-50 [&[data-state=open]>svg]:rotate-180 dark:focus-visible:border-neutral-300 dark:focus-visible:ring-neutral-300/50",
+          "vfs:focus-visible:border-neutral-950 vfs:focus-visible:ring-neutral-950/50 vfs:flex vfs:flex-1 vfs:items-start vfs:justify-between vfs:gap-4 vfs:rounded-md vfs:py-4 vfs:text-left vfs:text-sm vfs:font-medium vfs:transition-all vfs:outline-none vfs:focus-visible:ring-[3px] vfs:disabled:pointer-events-none vfs:disabled:opacity-50 vfs:[&[data-state=open]>svg]:rotate-180 vfs:dark:focus-visible:border-neutral-300 vfs:dark:focus-visible:ring-neutral-300/50",
           className
         )}
         {...props}
       >
         {children}
-        <ChevronDownIcon className="text-neutral-500 pointer-events-none size-4 shrink-0 translate-y-0.5 transition-transform duration-200 dark:text-neutral-400" />
+        <ChevronDownIcon className="vfs:text-neutral-500 vfs:pointer-events-none vfs:size-4 vfs:shrink-0 vfs:translate-y-0.5 vfs:transition-transform vfs:duration-200 vfs:dark:text-neutral-400" />
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
   )
@@ -53,10 +53,10 @@ function AccordionContent({
   return (
     <AccordionPrimitive.Content
       data-slot="accordion-content"
-      className="data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down overflow-hidden text-sm"
+      className="vfs:data-[state=closed]:animate-accordion-up vfs:data-[state=open]:animate-accordion-down vfs:overflow-hidden vfs:text-sm"
       {...props}
     >
-      <div className={cn("pt-0 pb-4", className)}>{children}</div>
+      <div className={cn("vfs:pt-0 vfs:pb-4", className)}>{children}</div>
     </AccordionPrimitive.Content>
   )
 }

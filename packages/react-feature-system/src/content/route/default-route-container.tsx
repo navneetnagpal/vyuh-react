@@ -29,17 +29,17 @@ export const DefaultRouteContainer = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div className="container mx-auto p-4">
+    <div className="vfs:container vfs:mx-auto vfs:p-4">
       {(title || actions?.length) && (
-        <h1 className="mb-16 flex items-center justify-between border-b border-neutral-200 py-2">
+        <h1 className="vfs:mb-16 vfs:flex vfs:items-center vfs:justify-between vfs:border-b vfs:border-neutral-200 vfs:py-2">
           {title && (
-            <span className="inline-block bg-gradient-to-r from-purple-600 to-indigo-500 bg-clip-text text-xl font-bold text-transparent md:text-3xl">
+            <span className="vfs:inline-block vfs:bg-gradient-to-r vfs:from-purple-600 vfs:to-indigo-500 vfs:bg-clip-text vfs:text-xl vfs:font-bold vfs:text-transparent md:vfs:text-3xl">
               {title}
             </span>
           )}
 
           {actions?.length && (
-            <div className="flex space-x-2">
+            <div className="vfs:flex vfs:space-x-2">
               {actions.map((action, index) => (
                 <Button
                   key={index}
@@ -49,7 +49,7 @@ export const DefaultRouteContainer = ({
                   onClick={() => {
                     new Action(action.action).execute();
                   }}
-                  className={'cursor-pointer'}
+                  className={'vfs:cursor-pointer'}
                 >
                   {iconMap[action.icon] || iconMap.fallback}
                 </Button>
@@ -61,8 +61,8 @@ export const DefaultRouteContainer = ({
 
       <main>{children}</main>
 
-      <div className={'flex justify-center'}>
-        <PoweredByVyuh className={'bg-neutral-200'} />
+      <div className={'vfs:flex vfs:justify-center'}>
+        <PoweredByVyuh className={'vfs:bg-neutral-200'} />
       </div>
     </div>
   );

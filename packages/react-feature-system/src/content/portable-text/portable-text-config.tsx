@@ -24,7 +24,7 @@ export class PortableTextConfig {
         <img
           src={imageUrl}
           alt={value.alt || ''}
-          className="my-4 max-w-full rounded-md"
+          className="vfs:my-4 vfs:max-w-full vfs:rounded-md"
         />
       );
     },
@@ -44,14 +44,14 @@ export class PortableTextConfig {
         <a
           href={value.href}
           rel={rel}
-          className="text-blue-500 hover:underline"
+          className="vfs:text-blue-500 vfs:hover:underline"
         >
           {children}
         </a>
       );
     },
     code: ({ children }) => (
-      <code className="rounded bg-gray-100 p-1 font-mono text-sm">
+      <code className="vfs:rounded vfs:bg-gray-100 vfs:p-1 vfs:font-mono vfs:text-sm">
         {children}
       </code>
     ),
@@ -62,20 +62,20 @@ export class PortableTextConfig {
     PortableTextBlockComponent
   > = {
     h1: ({ children }) => (
-      <h1 className="mb-4 mt-6 text-3xl font-bold">{children}</h1>
+      <h1 className="vfs:mb-4 vfs:mt-6 vfs:text-3xl vfs:font-bold">{children}</h1>
     ),
     h2: ({ children }) => (
-      <h2 className="mb-3 mt-5 text-2xl font-bold">{children}</h2>
+      <h2 className="vfs:mb-3 vfs:mt-5 vfs:text-2xl vfs:font-bold">{children}</h2>
     ),
     h3: ({ children }) => (
-      <h3 className="mb-2 mt-4 text-xl font-bold">{children}</h3>
+      <h3 className="vfs:mb-2 vfs:mt-4 vfs:text-xl vfs:font-bold">{children}</h3>
     ),
     h4: ({ children }) => (
-      <h4 className="mb-1 mt-3 text-lg font-bold">{children}</h4>
+      <h4 className="vfs:mb-1 vfs:mt-3 vfs:text-lg vfs:font-bold">{children}</h4>
     ),
-    normal: ({ children }) => <div className="mb-4">{children}</div>,
+    normal: ({ children }) => <div className="vfs:mb-4">{children}</div>,
     blockquote: ({ children }) => (
-      <blockquote className="my-4 border-l-4 border-gray-300 pl-4 italic">
+      <blockquote className="vfs:my-4 vfs:border-l-4 vfs:border-gray-300 vfs:pl-4 vfs:italic">
         {children}
       </blockquote>
     ),
@@ -83,10 +83,10 @@ export class PortableTextConfig {
 
   private readonly _defaultLists: Record<string, PortableTextListComponent> = {
     bullet: ({ children }) => (
-      <ul className="mb-4 list-disc pl-5">{children}</ul>
+      <ul className="vfs:mb-4 vfs:list-disc vfs:pl-5">{children}</ul>
     ),
     number: ({ children }) => (
-      <ol className="mb-4 list-decimal pl-5">{children}</ol>
+      <ol className="vfs:mb-4 vfs:list-decimal vfs:pl-5">{children}</ol>
     ),
   };
 
@@ -94,8 +94,8 @@ export class PortableTextConfig {
     string,
     PortableTextListItemComponent
   > = {
-    bullet: ({ children }) => <li className="mb-1">{children}</li>,
-    number: ({ children }) => <li className="mb-1">{children}</li>,
+    bullet: ({ children }) => <li className="vfs:mb-1">{children}</li>,
+    number: ({ children }) => <li className="vfs:mb-1">{children}</li>,
   };
 
   // Custom component registries
