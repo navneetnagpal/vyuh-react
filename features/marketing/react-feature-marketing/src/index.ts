@@ -54,21 +54,6 @@ export const marketing = new FeatureDescriptor({
   icon: 'layout-grid',
   extensions: [
     new ContentExtensionDescriptor({
-      contents: [
-        new HeroDescriptor(),
-        new BannerDescriptor(),
-        new CTADescriptor(),
-        new HeaderDescriptor(),
-        new BentoDescriptor(),
-        new BlogDescriptor(),
-        new FooterDescriptor(),
-        new LogoDescriptor(),
-        new NewsletterDescriptor(),
-        new PricingDescriptor(),
-        new StatsDescriptor(),
-        new TeamDescriptor(),
-        new TestimonialsDescriptor(),
-      ],
       contentBuilders: [
         new HeroContentBuilder(),
         new FeatureContentBuilder(),

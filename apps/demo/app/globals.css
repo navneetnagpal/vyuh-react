@@ -1,4 +1,5 @@
 @import 'tailwindcss' source(none);
+@import '@vyuh/react-feature-marketing/styles.css';
 
 @source './';
 @source '../features/';

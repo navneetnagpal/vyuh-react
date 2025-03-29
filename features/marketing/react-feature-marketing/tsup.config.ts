@@ -8,11 +8,11 @@ export default defineConfig({
   sourcemap: false,
   clean: true,
   treeshake: true,
-  minify: process.env.NODE_ENV === 'production',
+  minify: false,
   external: ['react', 'react-dom'],
   esbuildOptions(options) {
     options.banner = {
-      js: '// @vyuh/react-core - The core package for the Vyuh Platform',
+      js: '// @vyuh/react-feature-marketing - Marketing feature package for Vyuh React framework',
     };
   },
 });

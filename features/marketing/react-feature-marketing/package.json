@@ -59,7 +59,7 @@
     ".": {
       "import": "./src/index.ts"
     },
-    "./styles.css": "./dist/styles.css"
+    "./styles.css": "./src/styles.css"
   },
   "files": [
     "*.md",
