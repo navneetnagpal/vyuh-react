@@ -1,8 +1,6 @@
 import { DefaultPricingLayout } from '@/content/pricing/default-pricing-layout';
 import { Pricing as PricingContent } from '@/content/pricing/pricing';
-import { cn } from '@/shared/utils';
 import { Section } from '@/shared/components/Section';
-import { Action } from '@vyuh/react-core';
 import React, { useState } from 'react';
 import { PricingHeader } from './PricingHeader';
 import { PricingPlan } from './PricingPlan';

@@ -17,20 +17,14 @@ export const PricingToggle: React.FC<PricingToggleProps> = ({
       <div className="join">
         <button
           type="button"
-          className={cn(
-            'join-item btn',
-            !showAnnual ? 'btn-active' : '',
-          )}
+          className={cn('join-item btn', !showAnnual ? 'btn-active' : '')}
           onClick={() => onChange(false)}
         >
           Monthly
         </button>
         <button
           type="button"
-          className={cn(
-            'join-item btn',
-            showAnnual ? 'btn-active' : '',
-          )}
+          className={cn('join-item btn', showAnnual ? 'btn-active' : '')}
           onClick={() => onChange(true)}
         >
           Annually

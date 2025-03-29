@@ -9,9 +9,7 @@ import React from 'react';
 /**
  * Pricing layout variant type
  */
-export type PricingVariant =
-  | 'simple-three-tiers'
-  | 'two-tiers-highlighted';
+export type PricingVariant = 'simple-three-tiers' | 'two-tiers-highlighted';
 
 /**
  * Default layout for pricing content items

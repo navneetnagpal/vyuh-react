@@ -46,12 +46,6 @@ export const Card: React.FC<CardProps> = ({
   hoverable = false,
   onClick,
 }) => {
-  const baseClasses = 'rounded-lg ring-1';
-
-  const colorClasses = highlighted
-    ? 'bg-white ring-indigo-500 ring-2'
-    : 'bg-white ring-gray-200';
-
   const paddingClasses = {
     none: '',
     sm: 'p-4',
@@ -59,17 +53,13 @@ export const Card: React.FC<CardProps> = ({
     lg: 'p-8',
   };
 
-  const hoverClasses = hoverable
-    ? 'transition-shadow hover:shadow-md cursor-pointer'
-    : '';
-
   return (
     <div
       className={cn(
-        baseClasses,
-        colorClasses,
+        'card bg-base-100',
+        highlighted ? 'border-2 border-primary' : 'border border-base-300',
         paddingClasses[padding],
-        hoverClasses,
+        hoverable ? 'hover:shadow-lg cursor-pointer' : '',
         className,
       )}
       onClick={onClick}

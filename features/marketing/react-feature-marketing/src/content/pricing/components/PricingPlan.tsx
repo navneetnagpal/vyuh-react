@@ -34,34 +34,28 @@ export const PricingPlan: React.FC<PricingPlanProps> = ({
   return (
     <div
       className={cn(
-        'card rounded-3xl shadow-sm border row-span-5 grid grid-rows-subgrid gap-y-4 p-8 xl:p-10',
-        plan.featured ? 'bg-primary text-primary-content border-primary border-2' : 'bg-base-100 border-base-300',
+        'card row-span-5 grid grid-rows-subgrid gap-y-4 rounded-3xl border p-8 shadow-sm xl:p-10',
+        plan.featured
+          ? 'bg-primary text-primary-content border-primary border-2'
+          : 'bg-base-100 border-base-300',
         className,
       )}
       data-theme={cardTheme}
     >
       {/* Title - Row 1 */}
-      <h3 className="text-lg font-semibold">
-        {plan.name}
-      </h3>
+      <h3 className="text-lg font-semibold">{plan.name}</h3>
 
       {/* Description - Row 2 */}
       <div>
         {plan.description && (
-          <p className="text-sm opacity-80">
-            {plan.description}
-          </p>
+          <p className="text-sm opacity-80">{plan.description}</p>
         )}
       </div>
 
       {/* Price - Row 3 */}
       <div className="flex items-baseline gap-x-1">
-        <span className="text-4xl font-bold">
-          {formatPrice(price)}
-        </span>
-        <span className="text-sm font-semibold opacity-80">
-          {period}
-        </span>
+        <span className="text-4xl font-bold">{formatPrice(price)}</span>
+        <span className="text-sm font-semibold opacity-80">{period}</span>
       </div>
 
       {/* Button - Row 4 */}
@@ -70,7 +64,9 @@ export const PricingPlan: React.FC<PricingPlanProps> = ({
           onClick={() => new Action(plan.action).execute()}
           className={cn(
             'btn w-full',
-            plan.featured ? 'bg-white text-primary hover:bg-gray-100' : 'btn-primary',
+            plan.featured
+              ? 'text-primary bg-white hover:bg-gray-100'
+              : 'btn-primary',
           )}
         >
           {plan.action.title || 'Get started'}
@@ -85,7 +81,10 @@ export const PricingPlan: React.FC<PricingPlanProps> = ({
             plan.features.map((feature, index) => (
               <li key={index} className="flex gap-x-3">
                 <CheckIcon
-                  className={cn('h-6 w-5 flex-none', plan.featured ? 'text-primary-content' : 'text-primary')}
+                  className={cn(
+                    'h-6 w-5 flex-none',
+                    plan.featured ? 'text-primary-content' : 'text-primary',
+                  )}
                   aria-hidden="true"
                 />
                 <span className="opacity-80">{feature}</span>

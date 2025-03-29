@@ -30,7 +30,7 @@ export function HeroSubtitle({
   className?: string;
 }) {
   if (!subtitle) return null;
-  return <p className={`mt-6 text-lg leading-8 ${className}`}>{subtitle}</p>;
+  return <p className={`mt-6 text-lg leading-8 opacity-70 ${className}`}>{subtitle}</p>;
 }
 
 type ActionVariant = 'primary' | 'secondary' | 'tertiary' | 'link';
@@ -70,7 +70,7 @@ export function HeroActions({
         <button
           key={index}
           onClick={(e) => handleActionClick(e, action)}
-          className="cursor-pointer rounded-md bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-indigo-700 hover:shadow-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          className="btn btn-primary"
         >
           {actionTitle}
         </button>
@@ -82,7 +82,7 @@ export function HeroActions({
         <button
           key={index}
           onClick={(e) => handleActionClick(e, action)}
-          className="cursor-pointer rounded-lg bg-gradient-to-r from-indigo-100 to-purple-100 px-4 py-2.5 text-sm font-semibold text-indigo-800 shadow-sm transition-all duration-200 hover:from-indigo-200 hover:to-purple-200 hover:shadow-md"
+          className="btn btn-secondary"
         >
           {actionTitle}
         </button>
@@ -94,7 +94,7 @@ export function HeroActions({
         <button
           key={index}
           onClick={(e) => handleActionClick(e, action)}
-          className="inline-flex cursor-pointer items-center gap-1 text-sm font-semibold text-indigo-600 underline-offset-2 hover:text-indigo-800 hover:underline"
+          className="btn btn-link text-primary"
         >
           {actionTitle} <span aria-hidden="true">→</span>
         </button>
@@ -106,7 +106,7 @@ export function HeroActions({
       <button
         key={index}
         onClick={(e) => handleActionClick(e, action)}
-        className="cursor-pointer rounded-md border-2 border-indigo-200 bg-white px-4 py-2.5 text-sm font-semibold text-indigo-700 shadow-sm transition-all duration-200 hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-800 hover:shadow-md"
+        className="btn btn-outline btn-primary"
       >
         {actionTitle} <span aria-hidden="true">→</span>
       </button>
@@ -181,8 +181,8 @@ export function HeroBackgroundImage({ content, layout }: HeroComponentProps) {
       </div>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:mx-0">
-          <HeroTitle title={title} className="text-white" />
-          <HeroSubtitle subtitle={subtitle} className="text-gray-300" />
+          <HeroTitle title={title} className="text-primary-content" />
+          <HeroSubtitle subtitle={subtitle} className="text-primary-content" />
           <HeroActions actions={actions} />
         </div>
       </div>
@@ -223,7 +223,7 @@ export function HeroMedia({
             fill={true}
             rounded={'md'}
             shadow={'2xl'}
-            className={`ring-1 ring-gray-900/10 ${className}`}
+            className={`border border-base-300 ${className}`}
           />
         </Wrapper>
       );
@@ -234,7 +234,7 @@ export function HeroMedia({
       return (
         <Wrapper>
           <div
-            className={`relative overflow-hidden rounded-md shadow-2xl ring-1 ring-gray-900/10 ${className}`}
+            className={`relative overflow-hidden rounded-md shadow-lg border border-base-300 ${className}`}
           >
             <MediaVideo
               video={media.video}
