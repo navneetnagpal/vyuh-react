@@ -1,7 +1,5 @@
-import { FAQCenteredAccordion } from '@/content/faq/components/FAQCenteredAccordion';
 import { FAQSimpleWide } from '@/content/faq/components/FAQSimpleWide';
 import { FAQTwoColumns } from '@/content/faq/components/FAQTwoColumns';
-import { FAQWithContact } from '@/content/faq/components/FAQWithContact';
 import { FAQ, FAQ_SCHEMA_TYPE } from '@/content/faq/faq';
 import { LayoutConfiguration, TypeDescriptor } from '@vyuh/react-core';
 import React from 'react';
@@ -11,9 +9,7 @@ import React from 'react';
  */
 export type FAQVariant =
   | 'simple-wide'
-  | 'two-columns'
-  | 'with-contact'
-  | 'centered-accordion';
+  | 'two-columns';
 
 /**
  * Default layout for FAQ content items
@@ -63,10 +59,6 @@ const FAQView: React.FC<FAQViewProps> = ({ content, layout }) => {
       return <FAQSimpleWide content={content} layout={layout} />;
     case 'two-columns':
       return <FAQTwoColumns content={content} layout={layout} />;
-    case 'with-contact':
-      return <FAQWithContact content={content} layout={layout} />;
-    case 'centered-accordion':
-      return <FAQCenteredAccordion content={content} layout={layout} />;
     default:
       return <FAQSimpleWide content={content} layout={layout} />;
   }

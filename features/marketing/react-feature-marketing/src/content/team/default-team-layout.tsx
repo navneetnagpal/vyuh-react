@@ -8,10 +8,7 @@ import React from 'react';
  */
 export type TeamVariant =
   | 'simple-grid'
-  | 'with-large-images'
-  | 'with-roles-social'
-  | 'card-grid'
-  | 'with-background';
+  | 'with-large-images';
 
 /**
  * Default layout for team content items

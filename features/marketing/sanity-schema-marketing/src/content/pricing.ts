@@ -187,9 +187,6 @@ export const defaultPricingLayout = defineType({
         list: [
           { title: 'Simple three tiers', value: 'simple-three-tiers' },
           { title: 'Two tiers highlighted', value: 'two-tiers-highlighted' },
-          { title: 'Three tiers emphasized', value: 'three-tiers-emphasized' },
-          { title: 'Single tier features', value: 'single-tier-features' },
-          { title: 'Two tiers comparison', value: 'two-tiers-comparison' },
         ],
       },
       initialValue: 'simple-three-tiers',

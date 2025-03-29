@@ -158,8 +158,6 @@ export const defaultTestimonialsLayout = defineType({
         list: [
           { title: 'Simple centered', value: 'simple-centered' },
           { title: 'Side by side', value: 'side-by-side' },
-          { title: 'With large avatar', value: 'with-large-avatar' },
-          { title: 'Card grid', value: 'card-grid' },
         ],
       },
       initialValue: 'simple-centered',

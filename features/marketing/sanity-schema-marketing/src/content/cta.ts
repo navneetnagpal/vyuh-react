@@ -119,10 +119,6 @@ export const defaultCTALayout = defineType({
       options: {
         list: [
           { title: 'Simple centered', value: 'simple-centered' },
-          { title: 'Simple stacked', value: 'simple-stacked' },
-          { title: 'Centered on panel', value: 'centered-panel' },
-          { title: 'Simple justified', value: 'simple-justified' },
-          { title: 'Split with image on left', value: 'split-image-left' },
           { title: 'Split with image on right', value: 'split-image-right' },
         ],
       },

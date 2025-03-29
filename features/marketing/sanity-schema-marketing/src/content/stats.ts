@@ -134,9 +134,6 @@ export const defaultStatsLayout = defineType({
         list: [
           { title: 'Simple', value: 'simple' },
           { title: 'With description', value: 'with-description' },
-          { title: 'Grid with heading', value: 'grid-with-heading' },
-          { title: 'With image', value: 'with-image' },
-          { title: 'Card grid', value: 'card-grid' },
         ],
       },
       initialValue: 'simple',

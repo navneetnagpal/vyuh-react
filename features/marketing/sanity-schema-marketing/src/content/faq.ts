@@ -150,8 +150,6 @@ export const defaultFaqLayout = defineType({
         list: [
           { title: 'Simple with wide questions', value: 'simple-wide' },
           { title: 'Two columns', value: 'two-columns' },
-          { title: 'With contact details', value: 'with-contact' },
-          { title: 'Centered accordion', value: 'centered-accordion' },
         ],
       },
       validation: (Rule) => Rule.required(),

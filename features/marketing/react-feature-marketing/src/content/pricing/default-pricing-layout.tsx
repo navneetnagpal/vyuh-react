@@ -11,10 +11,7 @@ import React from 'react';
  */
 export type PricingVariant =
   | 'simple-three-tiers'
-  | 'two-tiers-highlighted'
-  | 'three-tiers-emphasized'
-  | 'single-tier-features'
-  | 'two-tiers-comparison';
+  | 'two-tiers-highlighted';
 
 /**
  * Default layout for pricing content items

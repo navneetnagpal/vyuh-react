@@ -8,8 +8,6 @@ import React from 'react';
  */
 export type FooterVariant =
   | 'simple-centered'
-  | 'simple-mission'
-  | 'four-columns-mission'
   | 'with-social-links';
 
 /**

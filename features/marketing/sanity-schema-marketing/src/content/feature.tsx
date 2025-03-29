@@ -234,12 +234,7 @@ export const defaultFeatureLayout = defineType({
       options: {
         list: [
           { title: 'Simple', value: 'simple' },
-          { title: 'Centered Grid', value: 'centered-grid' },
-          { title: 'Three Column', value: 'three-column' },
           { title: 'With Screenshot', value: 'with-screenshot' },
-          { title: 'With Alternate Screenshot', value: 'with-screenshot-alternate' },
-          { title: 'With Media Left', value: 'with-media-left' },
-          { title: 'With Media Right', value: 'with-media-right' },
         ],
       },
     }),

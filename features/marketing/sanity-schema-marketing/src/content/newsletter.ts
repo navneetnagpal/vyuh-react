@@ -104,10 +104,7 @@ export const defaultNewsletterLayout = defineType({
       options: {
         list: [
           { title: 'Simple centered', value: 'simple-centered' },
-          { title: 'Simple card', value: 'simple-card' },
-          { title: 'With background image', value: 'with-background-image' },
           { title: 'Split with image', value: 'split-with-image' },
-          { title: 'With description', value: 'with-description' },
         ],
       },
       initialValue: 'simple-centered',

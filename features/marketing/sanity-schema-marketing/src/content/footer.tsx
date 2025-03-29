@@ -215,11 +215,6 @@ export const defaultFooterLayout = defineType({
       options: {
         list: [
           { title: 'Simple centered', value: 'simple-centered' },
-          { title: 'Simple with company mission', value: 'simple-mission' },
-          {
-            title: 'Four columns with company mission',
-            value: 'four-columns-mission',
-          },
           { title: 'With social links', value: 'with-social-links' },
         ],
       },

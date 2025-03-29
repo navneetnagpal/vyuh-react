@@ -16,27 +16,6 @@ export const LogoGrid: React.FC<LogoGridProps> = ({
   columns,
   className,
 }) => {
-  if (variant === 'carousel') {
-    // For carousel, we'll create a simple auto-scrolling container
-    return (
-      <div className={cn('relative overflow-hidden', className)}>
-        <div className="animate-marquee flex space-x-8 py-4">
-          {items.map((item, index) => (
-            <div key={index} className="flex-shrink-0">
-              <LogoItem item={item} variant={variant} />
-            </div>
-          ))}
-          {/* Duplicate items for continuous scrolling effect */}
-          {items.map((item, index) => (
-            <div key={`dup-${index}`} className="flex-shrink-0">
-              <LogoItem item={item} variant={variant} />
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
   // For grid layouts
   return (
     <div

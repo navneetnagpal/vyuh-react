@@ -81,8 +81,6 @@ export const defaultLogoLayout = defineType({
         list: [
           { title: 'Simple grid', value: 'simple-grid' },
           { title: 'With borders', value: 'with-borders' },
-          { title: 'Grayscale', value: 'grayscale' },
-          { title: 'Carousel', value: 'carousel' },
         ],
       },
       initialValue: 'simple-grid',
@@ -116,13 +114,10 @@ export const defaultLogoLayout = defineType({
         {
           'simple-grid': 'Simple Grid',
           'with-borders': 'With Borders',
-          grayscale: 'Grayscale',
-          carousel: 'Carousel',
         }[variant as string] || 'Default';
 
       const features = [];
-      if (columns && variant !== 'carousel')
-        features.push(`${columns} columns`);
+      if (columns) features.push(`${columns} columns`);
 
       return {
         title: `Logo Layout: ${variantDisplay}`,

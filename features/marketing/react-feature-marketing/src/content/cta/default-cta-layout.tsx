@@ -8,10 +8,6 @@ import React from 'react';
  */
 export type CTAVariant =
   | 'simple-centered'
-  | 'simple-stacked'
-  | 'centered-panel'
-  | 'simple-justified'
-  | 'split-image-left'
   | 'split-image-right';
 
 /**

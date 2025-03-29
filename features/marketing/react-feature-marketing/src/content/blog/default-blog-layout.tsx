@@ -8,10 +8,7 @@ import React from 'react';
  */
 export type BlogVariant =
   | 'simple-grid'
-  | 'with-featured-post'
-  | 'card-grid'
-  | 'list-with-image'
-  | 'compact-list';
+  | 'with-featured-post';
 
 /**
  * Default layout for Blog section content items

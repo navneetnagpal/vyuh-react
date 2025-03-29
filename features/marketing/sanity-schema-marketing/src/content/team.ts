@@ -175,9 +175,6 @@ export const defaultTeamLayout = defineType({
         list: [
           { title: 'Simple grid', value: 'simple-grid' },
           { title: 'With large images', value: 'with-large-images' },
-          { title: 'With roles social', value: 'with-roles-social' },
-          { title: 'Card grid', value: 'card-grid' },
-          { title: 'With background', value: 'with-background' },
         ],
       },
       initialValue: 'simple-grid',

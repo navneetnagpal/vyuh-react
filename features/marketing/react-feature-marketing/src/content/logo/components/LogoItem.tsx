@@ -21,10 +21,7 @@ export const LogoItem: React.FC<LogoItemProps> = ({
     <img
       src={getImageUrl(item.image)}
       alt={item.alt}
-      className={cn('h-12 w-auto object-contain', {
-        'grayscale transition-all duration-300 hover:grayscale-0':
-          variant === 'grayscale',
-      })}
+      className="h-12 w-auto object-contain"
     />
   );
 

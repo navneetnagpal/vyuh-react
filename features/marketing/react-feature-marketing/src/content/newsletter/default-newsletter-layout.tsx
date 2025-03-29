@@ -11,10 +11,7 @@ import React from 'react';
  */
 export type NewsletterVariant =
   | 'simple-centered'
-  | 'simple-card'
-  | 'with-background-image'
-  | 'split-with-image'
-  | 'with-description';
+  | 'split-with-image';
 
 /**
  * Default layout for newsletter content items

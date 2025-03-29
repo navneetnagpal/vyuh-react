@@ -5,7 +5,6 @@ import { cn } from '@/shared/utils';
 import React from 'react';
 import { StatItem } from './StatItem';
 import { StatsHeader } from './StatsHeader';
-import { StatsImage } from './StatsImage';
 
 interface StatsProps {
   content: StatsContent;
@@ -84,58 +83,7 @@ export const Stats: React.FC<StatsProps> = ({ content, layout }) => {
         </div>
       )}
 
-      {variant === 'grid-with-heading' && (
-        <>
-          <div className="flex max-w-4xl flex-col items-center">
-            <StatsHeader content={content} centered={true} />
-            {content.description && (
-              <p className={cn('mt-6 text-base leading-7')}>
-                {content.description}
-              </p>
-            )}
-          </div>
-          <dl className="mx-auto mt-10 grid max-w-4xl grid-cols-1 gap-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-4">
-            {content.stats &&
-              content.stats.length > 0 &&
-              content.stats.map((stat, index) => (
-                <StatItem
-                  key={index}
-                  stat={stat}
-                  variant={variant}
-                />
-              ))}
-          </dl>
-          {renderAction()}
-        </>
-      )}
-
-      {variant === 'with-image' && (
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2">
-          {content.image && (
-            <StatsImage
-              image={content.image}
-              className="mx-auto w-full max-w-md lg:mx-0"
-            />
-          )}
-          <div>
-            <StatsHeader content={content} centered={false} />
-            <dl className="mt-10 grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2">
-              {content.stats &&
-                content.stats.length > 0 &&
-                content.stats.map((stat, index) => (
-                  <StatItem
-                    key={index}
-                    stat={stat}
-                    variant={variant}
-                  />
-                ))}
-            </dl>
-            {renderAction()}
-          </div>
-        </div>
-      )}
-
-      {variant === 'card-grid' && (
+      {!['simple', 'with-description'].includes(variant) && (
         <>
           <StatsHeader content={content} />
 
@@ -146,27 +94,7 @@ export const Stats: React.FC<StatsProps> = ({ content, layout }) => {
                 <StatItem
                   key={index}
                   stat={stat}
-                  variant={variant}
-                />
-              ))}
-          </dl>
-
-          {renderAction()}
-        </>
-      )}
-
-      {!['simple', 'with-description', 'grid-with-heading', 'with-image', 'card-grid'].includes(variant) && (
-        <>
-          <StatsHeader content={content} />
-
-          <dl className="mt-10 grid grid-cols-1 gap-16 sm:grid-cols-2 lg:grid-cols-4">
-            {content.stats &&
-              content.stats.length > 0 &&
-              content.stats.map((stat, index) => (
-                <StatItem
-                  key={index}
-                  stat={stat}
-                  variant={variant}
+                  variant="simple"
                 />
               ))}
           </dl>
@@ -177,5 +105,3 @@ export const Stats: React.FC<StatsProps> = ({ content, layout }) => {
     </Section>
   );
 };
-
-

@@ -71,100 +71,6 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
         </div>
       )}
 
-      {variant === 'simple-stacked' && (
-        <div className="mx-auto max-w-3xl">
-          <CTAHeader content={content} background={background} />
-
-          <div className="mt-8 flex flex-col gap-4">
-            <CTAButtonGroup
-              primaryAction={content.primaryAction}
-              secondaryAction={content.secondaryAction}
-              background={background}
-            />
-          </div>
-
-          {renderAdditionalInfo(content.additionalInfo, background)}
-        </div>
-      )}
-
-      {variant === 'centered-panel' && (
-        <div className="mx-auto max-w-3xl rounded-xl bg-white p-8 text-gray-900 shadow-lg">
-          <CTAHeader
-            content={content}
-            background="light"
-            className="text-center"
-          />
-
-          <div className="mt-8 flex justify-center">
-            <CTAButtonGroup
-              primaryAction={content.primaryAction}
-              secondaryAction={content.secondaryAction}
-              background="light"
-            />
-          </div>
-
-          {content.additionalInfo && (
-            <p className="mt-4 text-center text-sm text-gray-600">
-              {content.additionalInfo}
-            </p>
-          )}
-        </div>
-      )}
-
-      {variant === 'simple-justified' && (
-        <>
-          <div className="mx-auto flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-            <div className="md:max-w-2xl">
-              <CTAHeader
-                content={content}
-                background={background}
-                className="text-left"
-              />
-            </div>
-
-            <div>
-              <CTAButtonGroup
-                primaryAction={content.primaryAction}
-                secondaryAction={content.secondaryAction}
-                background={background}
-              />
-            </div>
-          </div>
-
-          {content.additionalInfo && (
-            <div className="mx-auto mt-4">
-              {renderAdditionalInfo(content.additionalInfo, background)}
-            </div>
-          )}
-        </>
-      )}
-
-      {variant === 'split-image-left' && (
-        <div className="mx-auto grid items-center gap-12 md:grid-cols-2">
-          {content.image && (
-            <CTAImage image={content.image} alt={content.title} />
-          )}
-
-          <div>
-            <CTAHeader
-              content={content}
-              background={background}
-              className="text-left"
-            />
-
-            <div className="mt-8">
-              <CTAButtonGroup
-                primaryAction={content.primaryAction}
-                secondaryAction={content.secondaryAction}
-                background={background}
-              />
-            </div>
-
-            {renderAdditionalInfo(content.additionalInfo, background)}
-          </div>
-        </div>
-      )}
-
       {variant === 'split-image-right' && (
         <div className="mx-auto grid items-center gap-16 md:grid-cols-2">
           <div>
@@ -191,14 +97,7 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
         </div>
       )}
 
-      {![
-        'simple-centered',
-        'simple-stacked',
-        'centered-panel',
-        'simple-justified',
-        'split-image-left',
-        'split-image-right',
-      ].includes(variant) && (
+      {!['simple-centered', 'split-image-right'].includes(variant) && (
         <div className="mx-auto max-w-3xl text-center">
           <CTAHeader content={content} background={background} />
 

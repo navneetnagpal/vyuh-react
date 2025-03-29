@@ -1,4 +1,4 @@
-import { HeroCentered, HeroImageBelow, HeroSplitLeft, HeroSplitRight } from '@/content/hero/components';
+import { HeroCentered, HeroSplitRight } from '@/content/hero/components';
 import { Hero, HERO_SCHEMA_TYPE } from '@/content/hero/hero';
 import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
 import React from 'react';
@@ -8,10 +8,7 @@ import React from 'react';
  */
 export type HeroVariant =
   | 'centered'
-  | 'split-right'
-  | 'split-left'
-  | 'image-below'
-  | 'offset-image';
+  | 'split-right';
 
 /**
  * Default layout for hero content items
@@ -79,10 +76,6 @@ const HeroView: React.FC<HeroViewProps> = ({ content, layout }) => {
       return <HeroCentered content={content} layout={layout} />;
     case 'split-right':
       return <HeroSplitRight content={content} layout={layout} />;
-    case 'split-left':
-      return <HeroSplitLeft content={content} layout={layout} />;
-    case 'image-below':
-      return <HeroImageBelow content={content} layout={layout} />;
     default:
       return <HeroCentered content={content} layout={layout} />;
   }

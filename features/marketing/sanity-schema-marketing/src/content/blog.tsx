@@ -203,9 +203,6 @@ export const defaultBlogLayout = defineType({
         list: [
           { title: 'Simple grid', value: 'simple-grid' },
           { title: 'With featured post', value: 'with-featured-post' },
-          { title: 'Card grid', value: 'card-grid' },
-          { title: 'List with image', value: 'list-with-image' },
-          { title: 'Compact list', value: 'compact-list' },
         ],
       },
       initialValue: 'simple-grid',

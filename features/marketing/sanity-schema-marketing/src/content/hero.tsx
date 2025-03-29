@@ -174,9 +174,7 @@ export const defaultHeroLayout = defineType({
       options: {
         list: [
           { title: 'Centered', value: 'centered' },
-          { title: 'With Image below', value: 'image-below' },
           { title: 'Split with Image on right', value: 'split-right' },
-          { title: 'Split with Image on left', value: 'split-left' },
         ],
       },
     }),

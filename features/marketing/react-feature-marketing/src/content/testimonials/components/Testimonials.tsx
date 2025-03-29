@@ -48,7 +48,6 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
               <TestimonialItem
                 key={index}
                 testimonial={testimonial}
-
                 variant={variant}
                 className={index > 0 ? 'mt-8' : ''}
               />
@@ -63,35 +62,6 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
               <TestimonialItem
                 key={index}
                 testimonial={testimonial}
-
-                variant={variant}
-              />
-            ))}
-          </div>
-        );
-
-      case 'with-large-avatar':
-        return (
-          <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-16 md:grid-cols-2 lg:mx-0 lg:max-w-none">
-            {content.testimonials?.map((testimonial, index) => (
-              <TestimonialItem
-                key={index}
-                testimonial={testimonial}
-
-                variant={variant}
-              />
-            ))}
-          </div>
-        );
-
-      case 'card-grid':
-        return (
-          <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-16 md:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-            {content.testimonials?.map((testimonial, index) => (
-              <TestimonialItem
-                key={index}
-                testimonial={testimonial}
-
                 variant={variant}
               />
             ))}
@@ -105,8 +75,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
               <TestimonialItem
                 key={index}
                 testimonial={testimonial}
-
-                variant={'simple-centered'}
+                variant="simple-centered"
                 className={index > 0 ? 'mt-8' : ''}
               />
             ))}
@@ -116,18 +85,9 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
   };
 
   return (
-    <Section
-      className={cn(className)}
-      padding={
-        variant === 'side-by-side' || variant === 'with-large-avatar'
-          ? 'md'
-          : 'lg'
-      }
-    >
+    <Section className={className}>
       <TestimonialsHeader content={content} />
-      {content.testimonials &&
-        content.testimonials.length > 0 &&
-        renderTestimonials()}
+      {renderTestimonials()}
       {renderAction()}
     </Section>
   );

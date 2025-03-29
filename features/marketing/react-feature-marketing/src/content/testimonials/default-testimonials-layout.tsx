@@ -11,9 +11,7 @@ import React from 'react';
  */
 export type TestimonialsVariant =
   | 'simple-centered'
-  | 'side-by-side'
-  | 'with-large-avatar'
-  | 'card-grid';
+  | 'side-by-side';
 
 /**
  * Default layout for testimonials content items

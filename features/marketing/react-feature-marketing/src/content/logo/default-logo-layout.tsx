@@ -8,9 +8,7 @@ import React from 'react';
  */
 export type LogoVariant =
   | 'simple-grid'
-  | 'with-borders'
-  | 'grayscale'
-  | 'carousel';
+  | 'with-borders';
 
 /**
  * Default layout for Logo section content items

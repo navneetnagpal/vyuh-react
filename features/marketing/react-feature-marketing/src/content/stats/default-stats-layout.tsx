@@ -8,10 +8,7 @@ import React from 'react';
  */
 export type StatsVariant =
   | 'simple'
-  | 'with-description'
-  | 'grid-with-heading'
-  | 'with-image'
-  | 'card-grid';
+  | 'with-description';
 
 /**
  * Default layout for stats content items
