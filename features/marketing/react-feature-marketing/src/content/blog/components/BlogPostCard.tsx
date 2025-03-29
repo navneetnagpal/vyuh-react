@@ -6,13 +6,11 @@ import React from 'react';
 
 interface BlogPostCardProps {
   post: Blog['posts'][0];
-  darkMode: boolean;
   className?: string;
 }
 
 export const BlogPostCard: React.FC<BlogPostCardProps> = ({
   post,
-  darkMode,
   className,
 }) => {
   const { getImageUrl } = useMediaUtils();
@@ -31,7 +29,7 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
     <div
       className={cn(
         'flex flex-col overflow-hidden rounded-lg transition-all hover:shadow-md',
-        darkMode ? 'bg-gray-800' : 'bg-gray-50',
+        'bg-gray-50',
         'cursor-pointer',
         className,
       )}
@@ -58,9 +56,7 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
                 key={idx}
                 className={cn(
                   'inline-block rounded-full px-3 py-1 text-xs font-medium',
-                  darkMode
-                    ? 'bg-gray-700 text-gray-200'
-                    : 'bg-gray-200 text-gray-700',
+                  'bg-gray-200 text-gray-700',
                 )}
               >
                 {category}
@@ -73,11 +69,7 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
         <h3 className="mb-2 text-xl font-semibold">{post.title}</h3>
 
         {/* Date and author */}
-        <div
-          className={cn(
-            'mb-3 flex items-center justify-between text-sm',
-            darkMode ? 'text-gray-400' : 'text-gray-600',
-          )}
+        <div className="mb-3 flex items-center justify-between text-sm text-gray-600"
         >
           <span>{formatDate(post.date)}</span>
           {post.author && (
@@ -105,7 +97,7 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
           <p
             className={cn(
               'mb-4 flex-1 text-sm',
-              darkMode ? 'text-gray-300' : 'text-gray-600',
+              'text-gray-600',
             )}
           >
             {post.excerpt}
@@ -117,7 +109,7 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
           <span
             className={cn(
               'inline-flex items-center text-sm font-medium',
-              darkMode ? 'text-blue-400' : 'text-blue-600',
+              'text-blue-600',
             )}
           >
             Read more

@@ -87,13 +87,11 @@ const NavigationItem: React.FC<NavigationItemProps> = ({ item }) => {
 // Main Navigation Component
 interface NavigationProps {
   items?: Header['navigationItems'];
-  darkMode?: boolean;
   className?: string;
 }
 
 export const Navigation: React.FC<NavigationProps> = ({
   items,
-  darkMode = false,
   className,
 }) => {
   if (!items || items.length === 0) {

@@ -21,7 +21,6 @@ export class DefaultBlogLayout extends LayoutConfiguration<Blog> {
   static readonly typeDescriptor = new TypeDescriptor(this.schemaName, this);
 
   readonly variant?: BlogVariant;
-  readonly darkMode?: boolean;
   readonly columns?: number;
 
   constructor(props?: Partial<DefaultBlogLayout>) {
@@ -31,7 +30,6 @@ export class DefaultBlogLayout extends LayoutConfiguration<Blog> {
     });
 
     this.variant = props?.variant || 'simple-grid';
-    this.darkMode = props?.darkMode || false;
     this.columns = props?.columns || 3;
   }
 

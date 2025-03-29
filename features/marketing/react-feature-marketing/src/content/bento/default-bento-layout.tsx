@@ -16,7 +16,6 @@ export class DefaultBentoLayout extends LayoutConfiguration<Bento> {
   static readonly typeDescriptor = new TypeDescriptor(this.schemaName, this);
 
   readonly variant?: BentoVariant;
-  readonly darkMode?: boolean;
   readonly gap?: 'small' | 'medium' | 'large';
 
   constructor(props?: Partial<DefaultBentoLayout>) {
@@ -26,7 +25,6 @@ export class DefaultBentoLayout extends LayoutConfiguration<Bento> {
     });
 
     this.variant = props?.variant || 'three-column';
-    this.darkMode = props?.darkMode || false;
     this.gap = props?.gap || 'small';
   }
 

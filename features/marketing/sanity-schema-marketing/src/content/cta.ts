@@ -136,7 +136,6 @@ export const defaultCTALayout = defineType({
       options: {
         list: [
           { title: 'Light', value: 'light' },
-          { title: 'Dark', value: 'dark' },
           { title: 'Brand', value: 'brand' },
           { title: 'Light Brand', value: 'light-brand' },
         ],

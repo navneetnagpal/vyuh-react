@@ -24,7 +24,6 @@ export class DefaultPricingLayout extends LayoutConfiguration<PricingContent> {
   static readonly typeDescriptor = new TypeDescriptor(this.schemaName, this);
 
   readonly variant?: PricingVariant;
-  readonly darkMode?: boolean;
 
   constructor(props?: Partial<DefaultPricingLayout>) {
     super({
@@ -33,7 +32,6 @@ export class DefaultPricingLayout extends LayoutConfiguration<PricingContent> {
     });
 
     this.variant = props?.variant || 'simple-three-tiers';
-    this.darkMode = props?.darkMode || false;
   }
 
   render(content: PricingContent): React.ReactNode {

@@ -183,20 +183,13 @@ export const defaultTeamLayout = defineType({
       initialValue: 'simple-grid',
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: 'darkMode',
-      title: 'Dark Mode',
-      type: 'boolean',
-      description: 'Whether this section should be displayed in dark mode',
-      initialValue: false,
-    }),
+
   ],
   preview: {
     select: {
       variant: 'variant',
-      darkMode: 'darkMode',
     },
-    prepare({ variant, darkMode }) {
+    prepare({ variant }) {
       const variantDisplay = variant
         ? variant
             .split('-')
@@ -204,12 +197,9 @@ export const defaultTeamLayout = defineType({
             .join(' ')
         : 'Simple Grid';
 
-      const features = [];
-      if (darkMode) features.push('Dark Mode');
-
       return {
         title: `Team Layout: ${variantDisplay}`,
-        subtitle: features.length > 0 ? features.join(', ') : 'Default',
+        subtitle: 'Default',
         media: Icon,
       };
     },

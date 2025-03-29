@@ -13,13 +13,10 @@ interface BentoProps {
 
 export const Bento: React.FC<BentoProps> = ({ content, layout, className }) => {
   const variant = layout.variant || 'three-column';
-  const darkMode = layout.darkMode || false;
   const gap = layout.gap || 'small';
 
-  // Background color classes based on dark mode
-  const backgroundClasses = darkMode
-    ? 'bg-gray-900 text-white'
-    : 'bg-white text-gray-900';
+  // Background color classes
+  const backgroundClasses = 'bg-white text-gray-900';
 
   // Gap classes based on the gap size
   const gapClasses = {
@@ -32,13 +29,13 @@ export const Bento: React.FC<BentoProps> = ({ content, layout, className }) => {
     <section className={cn('px-6 py-12', backgroundClasses, className)}>
       <div className="container mx-auto">
         {/* Section header */}
-        <BentoHeader content={content} darkMode={darkMode} className="mb-10" />
+        <BentoHeader content={content} className="mb-10" />
 
         {/* Bento grid */}
         <BentoGrid
           items={content.items}
           variant={variant}
-          darkMode={darkMode}
+
           gapClasses={gapClasses}
         />
       </div>

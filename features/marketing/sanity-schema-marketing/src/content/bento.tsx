@@ -151,13 +151,7 @@ export const defaultBentoLayout = defineType({
       initialValue: 'three-column',
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: 'darkMode',
-      title: 'Dark Mode',
-      type: 'boolean',
-      description: 'Whether this section should be displayed in dark mode',
-      initialValue: false,
-    }),
+
     defineField({
       name: 'gap',
       title: 'Grid Gap',
@@ -176,10 +170,9 @@ export const defaultBentoLayout = defineType({
   preview: {
     select: {
       variant: 'variant',
-      darkMode: 'darkMode',
       gap: 'gap',
     },
-    prepare({ variant, darkMode, gap }) {
+    prepare({ variant, gap }) {
       const variantDisplay =
         {
           'three-column': 'Three Column Grid',
@@ -187,7 +180,6 @@ export const defaultBentoLayout = defineType({
         }[variant as string] || 'Default';
 
       const features = [];
-      if (darkMode) features.push('Dark Mode');
       if (gap)
         features.push(`${gap.charAt(0).toUpperCase() + gap.slice(1)} gap`);
 

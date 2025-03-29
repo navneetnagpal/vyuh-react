@@ -1,6 +1,5 @@
 import { DefaultTestimonialsLayout } from '@/content/testimonials/default-testimonials-layout';
 import { Testimonials as TestimonialsContent } from '@/content/testimonials/testimonials';
-import { Container } from '@/shared/components/Container';
 import { Section } from '@/shared/components/Section';
 import { cn } from '@/shared/utils';
 import React from 'react';
@@ -19,14 +18,11 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
   className,
 }) => {
   const variant = layout.variant || 'simple-centered';
-  const darkMode = layout.darkMode || false;
 
   const renderAction = () => {
     if (!content.action) return null;
 
-    const buttonClasses = darkMode
-      ? 'bg-indigo-500 text-white hover:bg-indigo-400'
-      : 'bg-indigo-600 text-white hover:bg-indigo-500';
+    const buttonClasses = 'bg-indigo-600 text-white hover:bg-indigo-500';
 
     return (
       <div className="mt-10 flex justify-center">
@@ -52,7 +48,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
               <TestimonialItem
                 key={index}
                 testimonial={testimonial}
-                darkMode={darkMode}
+
                 variant={variant}
                 className={index > 0 ? 'mt-8' : ''}
               />
@@ -67,7 +63,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
               <TestimonialItem
                 key={index}
                 testimonial={testimonial}
-                darkMode={darkMode}
+
                 variant={variant}
               />
             ))}
@@ -81,7 +77,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
               <TestimonialItem
                 key={index}
                 testimonial={testimonial}
-                darkMode={darkMode}
+
                 variant={variant}
               />
             ))}
@@ -95,7 +91,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
               <TestimonialItem
                 key={index}
                 testimonial={testimonial}
-                darkMode={darkMode}
+
                 variant={variant}
               />
             ))}
@@ -109,7 +105,7 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
               <TestimonialItem
                 key={index}
                 testimonial={testimonial}
-                darkMode={darkMode}
+
                 variant={'simple-centered'}
                 className={index > 0 ? 'mt-8' : ''}
               />
@@ -122,20 +118,17 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
   return (
     <Section
       className={cn(className)}
-      darkMode={darkMode}
       padding={
         variant === 'side-by-side' || variant === 'with-large-avatar'
           ? 'md'
           : 'lg'
       }
     >
-      <Container>
-        <TestimonialsHeader content={content} />
-        {content.testimonials &&
-          content.testimonials.length > 0 &&
-          renderTestimonials()}
-        {renderAction()}
-      </Container>
+      <TestimonialsHeader content={content} />
+      {content.testimonials &&
+        content.testimonials.length > 0 &&
+        renderTestimonials()}
+      {renderAction()}
     </Section>
   );
 };

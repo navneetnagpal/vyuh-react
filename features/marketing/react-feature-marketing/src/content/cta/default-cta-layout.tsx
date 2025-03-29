@@ -17,7 +17,7 @@ export type CTAVariant =
 /**
  * The background style for the CTA
  */
-export type CTABackground = 'light' | 'dark' | 'brand' | 'light-brand';
+export type CTABackground = 'light' | 'brand' | 'light-brand';
 
 /**
  * Default layout for CTA content items

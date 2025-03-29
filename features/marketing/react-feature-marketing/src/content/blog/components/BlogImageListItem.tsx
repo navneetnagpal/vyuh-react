@@ -6,13 +6,11 @@ import React from 'react';
 
 interface BlogImageListItemProps {
   post: Blog['posts'][0];
-  darkMode: boolean;
   className?: string;
 }
 
 export const BlogImageListItem: React.FC<BlogImageListItemProps> = ({
   post,
-  darkMode,
   className,
 }) => {
   const { getImageUrl } = useMediaUtils();
@@ -31,7 +29,7 @@ export const BlogImageListItem: React.FC<BlogImageListItemProps> = ({
     <div
       className={cn(
         'grid cursor-pointer grid-cols-1 gap-6 md:grid-cols-3',
-        darkMode ? 'border-gray-700' : 'border-gray-200',
+        'border-gray-200',
         className,
       )}
       onClick={() => new Action(post.action).execute()}
@@ -47,11 +45,7 @@ export const BlogImageListItem: React.FC<BlogImageListItemProps> = ({
       )}
       <div className={cn('md:col-span-2', !post.image && 'md:col-span-3')}>
         <h3 className="mb-2 text-xl font-semibold">{post.title}</h3>
-        <div
-          className={cn(
-            'mb-3 flex items-center text-sm',
-            darkMode ? 'text-gray-400' : 'text-gray-600',
-          )}
+        <div className="mb-3 flex items-center text-sm text-gray-600"
         >
           <span>{formatDate(post.date)}</span>
           {post.author && (
@@ -62,16 +56,14 @@ export const BlogImageListItem: React.FC<BlogImageListItemProps> = ({
           )}
         </div>
         {post.excerpt && (
-          <p
-            className={cn('mb-3', darkMode ? 'text-gray-300' : 'text-gray-600')}
-          >
+          <p className="mb-3 text-gray-600">
             {post.excerpt}
           </p>
         )}
         <span
           className={cn(
             'inline-flex items-center font-medium',
-            darkMode ? 'text-blue-400' : 'text-blue-600',
+            'text-blue-600',
           )}
         >
           Read more

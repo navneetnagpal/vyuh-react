@@ -18,7 +18,7 @@ export const FeatureCenteredGrid: React.FC<FeatureComponentProps> = ({
 
   return (
     <div className="bg-white py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
           <FeatureTitle title={title} className="text-center" />
           <FeatureDescription

@@ -7,21 +7,19 @@ import React from 'react';
 interface TestimonialItemProps {
   testimonial: Testimonials['testimonials'][0];
   className?: string;
-  darkMode?: boolean;
   variant?: string;
 }
 
 export const TestimonialItem: React.FC<TestimonialItemProps> = ({
   testimonial,
   className,
-  darkMode = false,
   variant = 'simple-centered',
 }) => {
   const { getImageUrl } = useMediaUtils();
 
-  const quoteColor = darkMode ? 'text-white' : 'text-gray-900';
-  const nameColor = darkMode ? 'text-white' : 'text-gray-900';
-  const roleColor = darkMode ? 'text-gray-300' : 'text-gray-600';
+  const quoteColor = 'text-gray-900';
+  const nameColor = 'text-gray-900';
+  const roleColor = 'text-gray-600';
 
   const isCardVariant = variant === 'card-grid';
   const isLargeAvatarVariant = variant === 'with-large-avatar';
@@ -30,8 +28,7 @@ export const TestimonialItem: React.FC<TestimonialItemProps> = ({
     <div
       className={cn(
         isCardVariant && 'rounded-lg p-6 ring-1',
-        isCardVariant &&
-          (darkMode ? 'bg-gray-800 ring-gray-700' : 'bg-white ring-gray-200'),
+        isCardVariant && 'bg-white ring-gray-200',
         testimonial.featured && 'ring-2 ring-indigo-500',
         className,
       )}
@@ -40,7 +37,7 @@ export const TestimonialItem: React.FC<TestimonialItemProps> = ({
         <QuoteIcon
           className={cn(
             'mb-4 h-8 w-8',
-            darkMode ? 'text-indigo-400' : 'text-indigo-600',
+            'text-indigo-600',
           )}
         />
 

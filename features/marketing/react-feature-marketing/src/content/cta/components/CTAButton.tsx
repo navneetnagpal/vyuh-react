@@ -18,14 +18,12 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
   // Button classes based on the background type and whether it's primary or secondary
   const primaryButtonClasses = {
     light: 'bg-indigo-600 text-white hover:bg-indigo-700',
-    dark: 'bg-white text-gray-900 hover:bg-gray-100',
     brand: 'bg-white text-indigo-600 hover:bg-gray-100',
     'light-brand': 'bg-indigo-600 text-white hover:bg-indigo-700',
   };
 
   const secondaryButtonClasses = {
     light: 'border border-indigo-600 text-indigo-600 hover:bg-indigo-50',
-    dark: 'border border-white text-white hover:bg-gray-800',
     brand: 'border border-white text-white hover:bg-indigo-700',
     'light-brand':
       'border border-indigo-600 text-indigo-600 hover:bg-indigo-50',

@@ -19,7 +19,6 @@ export class DefaultHeaderLayout extends LayoutConfiguration<HeaderContent> {
   static readonly typeDescriptor = new TypeDescriptor(this.schemaName, this);
 
   readonly variant?: HeaderVariant;
-  readonly darkMode?: boolean;
   readonly sticky?: boolean;
 
   constructor(props?: Partial<DefaultHeaderLayout>) {
@@ -29,7 +28,6 @@ export class DefaultHeaderLayout extends LayoutConfiguration<HeaderContent> {
     });
 
     this.variant = props?.variant || 'simple';
-    this.darkMode = props?.darkMode || false;
     this.sticky = props?.sticky || false;
   }
 

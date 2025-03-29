@@ -3,7 +3,6 @@ import {
   FeatureSimple,
   FeatureThreeColumn,
   FeatureWithScreenshot,
-  FeatureWithScreenshotDark,
 } from '@/content/feature/components';
 import { FeatureWithMedia } from '@/content/feature/components/FeatureWithMedia';
 import { Feature, FEATURE_SCHEMA_TYPE } from '@/content/feature/feature';
@@ -18,7 +17,6 @@ export type FeatureVariant =
   | 'centered-grid'
   | 'three-column'
   | 'with-screenshot'
-  | 'with-screenshot-dark'
   | 'with-media-left'
   | 'with-media-right';
 
@@ -84,8 +82,7 @@ const FeatureView: React.FC<FeatureViewProps> = ({ content, layout }) => {
     case 'with-screenshot':
       return <FeatureWithScreenshot content={content} layout={layout} />;
 
-    case 'with-screenshot-dark':
-      return <FeatureWithScreenshotDark content={content} layout={layout} />;
+
 
     case 'with-media-left':
       return (

@@ -1,6 +1,5 @@
 import { DefaultHeaderLayout } from '@/content/header/default-header-layout';
 import { Header as HeaderItem } from '@/content/header/header';
-import { Container } from '@/shared/components/Container';
 import { Section } from '@/shared/components/Section';
 import { cn } from '@/shared/utils';
 import React from 'react';
@@ -20,7 +19,6 @@ export const Header: React.FC<HeaderProps> = ({
   className,
 }) => {
   const variant = layout.variant || 'simple';
-  const darkMode = layout.darkMode || false;
   const sticky = layout.sticky || false;
 
   // Render the header content based on the variant
@@ -38,8 +36,8 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="flex items-center justify-between">
             <Logo content={content} />
             <div className="hidden items-center space-x-6 md:flex">
-              <Navigation items={content.navigationItems} darkMode={darkMode} />
-              <ActionButtons actions={content.actions} darkMode={darkMode} />
+              <Navigation items={content.navigationItems} />
+              <ActionButtons actions={content.actions} />
             </div>
           </div>
         );
@@ -56,12 +54,11 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <Section
       as="header"
-      darkMode={darkMode}
-      className={cn('py-4', sticky && 'sticky top-0 z-50', className)}
+      className={cn('py-4 px-8', sticky && 'sticky top-0 z-50', className)}
       padding="none"
       constrained={false}
     >
-      <Container padding="lg">{renderHeaderContent()}</Container>
+      {renderHeaderContent()}
     </Section>
   );
 };

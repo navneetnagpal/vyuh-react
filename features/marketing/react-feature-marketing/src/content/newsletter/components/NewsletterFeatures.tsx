@@ -5,13 +5,11 @@ import React from 'react';
 interface NewsletterFeaturesProps {
   features: string[];
   className?: string;
-  darkMode?: boolean;
 }
 
 export const NewsletterFeatures: React.FC<NewsletterFeaturesProps> = ({
   features,
   className,
-  darkMode = false,
 }) => {
   if (!features || features.length === 0) {
     return null;
@@ -25,11 +23,11 @@ export const NewsletterFeatures: React.FC<NewsletterFeaturesProps> = ({
             <CheckIcon
               className={cn(
                 'h-6 w-5 flex-none',
-                darkMode ? 'text-indigo-400' : 'text-indigo-600',
+                'text-indigo-600',
               )}
               aria-hidden="true"
             />
-            <span className={darkMode ? 'text-gray-300' : 'text-gray-600'}>
+            <span className='text-gray-600'>
               {feature}
             </span>
           </li>

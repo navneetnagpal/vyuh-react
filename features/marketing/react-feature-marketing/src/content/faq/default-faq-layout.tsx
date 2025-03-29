@@ -28,7 +28,6 @@ export class DefaultFAQLayout extends LayoutConfiguration<FAQ> {
   static readonly typeDescriptor = new TypeDescriptor(this.schemaName, this);
 
   readonly variant: FAQVariant;
-  readonly darkMode?: boolean;
 
   constructor(props?: Partial<DefaultFAQLayout>) {
     super({
@@ -37,7 +36,6 @@ export class DefaultFAQLayout extends LayoutConfiguration<FAQ> {
     });
 
     this.variant = props?.variant ?? 'simple-wide';
-    this.darkMode = props?.darkMode ?? false;
   }
 
   /**
@@ -57,7 +55,7 @@ interface FAQViewProps {
 }
 
 const FAQView: React.FC<FAQViewProps> = ({ content, layout }) => {
-  const { variant, darkMode } = layout;
+  const { variant } = layout;
 
   // Render the appropriate variant
   switch (variant) {

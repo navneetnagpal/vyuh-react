@@ -7,14 +7,12 @@ import React from 'react';
 interface LogoItemProps {
   item: Logo['items'][0];
   variant: string;
-  darkMode: boolean;
   className?: string;
 }
 
 export const LogoItem: React.FC<LogoItemProps> = ({
   item,
   variant,
-  darkMode,
   className,
 }) => {
   const { getImageUrl } = useMediaUtils();
@@ -37,8 +35,7 @@ export const LogoItem: React.FC<LogoItemProps> = ({
         onClick={() => new Action(item.action!).execute()}
         className={cn(
           'flex items-center justify-center p-4',
-          variant === 'with-borders' &&
-            (darkMode ? 'border border-gray-700' : 'border border-gray-200'),
+          variant === 'with-borders' && 'border border-gray-200',
           'rounded-lg transition-all hover:opacity-80',
           className,
         )}
@@ -53,8 +50,7 @@ export const LogoItem: React.FC<LogoItemProps> = ({
     <div
       className={cn(
         'flex items-center justify-center p-4',
-        variant === 'with-borders' &&
-          (darkMode ? 'border border-gray-700' : 'border border-gray-200'),
+        variant === 'with-borders' && 'border border-gray-200',
         'rounded-lg',
         className,
       )}

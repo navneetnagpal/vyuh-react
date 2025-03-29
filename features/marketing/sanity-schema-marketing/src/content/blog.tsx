@@ -211,13 +211,7 @@ export const defaultBlogLayout = defineType({
       initialValue: 'simple-grid',
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: 'darkMode',
-      title: 'Dark Mode',
-      type: 'boolean',
-      description: 'Whether this section should be displayed in dark mode',
-      initialValue: false,
-    }),
+
     defineField({
       name: 'columns',
       title: 'Columns',
@@ -238,10 +232,9 @@ export const defaultBlogLayout = defineType({
   preview: {
     select: {
       variant: 'variant',
-      darkMode: 'darkMode',
       columns: 'columns',
     },
-    prepare({ variant, darkMode, columns }) {
+    prepare({ variant, columns }) {
       const variantDisplay =
         {
           'simple-grid': 'Simple Grid',
@@ -252,7 +245,6 @@ export const defaultBlogLayout = defineType({
         }[variant] || 'Default';
 
       const features = [];
-      if (darkMode) features.push('Dark Mode');
       if (columns && ['simple-grid', 'card-grid'].includes(variant)) {
         features.push(`${columns} columns`);
       }

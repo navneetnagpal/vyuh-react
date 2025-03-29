@@ -113,20 +113,13 @@ export const defaultNewsletterLayout = defineType({
       initialValue: 'simple-centered',
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: 'darkMode',
-      title: 'Dark Mode',
-      type: 'boolean',
-      description: 'Whether this section should be displayed in dark mode',
-      initialValue: false,
-    }),
+
   ],
   preview: {
     select: {
       variant: 'variant',
-      darkMode: 'darkMode',
     },
-    prepare({ variant, darkMode }) {
+    prepare({ variant }) {
       const variantDisplay = variant
         ? variant
             .split('-')
@@ -134,12 +127,9 @@ export const defaultNewsletterLayout = defineType({
             .join(' ')
         : 'Simple Centered';
 
-      const features = [];
-      if (darkMode) features.push('Dark Mode');
-
       return {
         title: `Newsletter Layout: ${variantDisplay}`,
-        subtitle: features.length > 0 ? features.join(', ') : 'Default',
+        subtitle: 'Default',
         media: Icon,
       };
     },

@@ -1,6 +1,6 @@
 import { DefaultNewsletterLayout } from '@/content/newsletter/default-newsletter-layout';
 import { Newsletter as NewsletterContent } from '@/content/newsletter/newsletter';
-import { Card, Container, MediaImage, Section } from '@/shared/components';
+import { Card, MediaImage, Section } from '@/shared/components';
 import { cn } from '@/shared/utils';
 import React from 'react';
 import { NewsletterFeatures } from './NewsletterFeatures';
@@ -20,17 +20,13 @@ export const Newsletter: React.FC<NewsletterProps> = ({
   className,
 }) => {
   const variant = layout.variant || 'simple-centered';
-  const darkMode = layout.darkMode || false;
 
-  const backgroundClasses = darkMode
-    ? 'bg-gray-900 text-white'
-    : 'bg-white text-gray-900';
+  const backgroundClasses = 'bg-white text-gray-900';
 
   switch (variant) {
     case 'simple-centered':
       return (
         <Section
-          darkMode={darkMode}
           className={className}
           maxWidth="2xl"
           centered
@@ -39,24 +35,20 @@ export const Newsletter: React.FC<NewsletterProps> = ({
           <NewsletterForm
             content={content}
             className="mt-6"
-            darkMode={darkMode}
           />
         </Section>
       );
 
     case 'simple-card':
       return (
-        <Section className={cn('bg-gray-50', className)} darkMode={false}>
-          <Container maxWidth="2xl">
-            <Card padding="lg" className="shadow-md">
-              <NewsletterHeader content={content} />
-              <NewsletterForm
-                content={content}
-                className="mt-6"
-                darkMode={false}
-              />
-            </Card>
-          </Container>
+        <Section className={cn('bg-gray-50', className)} maxWidth="2xl">
+          <Card padding="lg" className="shadow-md">
+            <NewsletterHeader content={content} />
+            <NewsletterForm
+              content={content}
+              className="mt-6"
+            />
+          </Card>
         </Section>
       );
 
@@ -73,41 +65,35 @@ export const Newsletter: React.FC<NewsletterProps> = ({
                 imgClassName="opacity-20"
               />
               <div
-                className={`absolute inset-0 ${darkMode ? 'bg-gray-900/90' : 'bg-white/80'}`}
+                className="absolute inset-0 bg-white/80"
               />
             </div>
           )}
-          <Container maxWidth="2xl" centered className="px-6 py-16">
+          <div className="mx-auto max-w-2xl px-6 py-16">
             <NewsletterHeader
               content={content}
-              className={darkMode ? 'text-white' : 'text-gray-900'}
+              className="text-gray-900"
             />
             <NewsletterForm
               content={content}
               className="mt-6"
-              darkMode={darkMode}
             />
-          </Container>
+          </div>
         </div>
       );
 
     case 'split-with-image':
       return (
         <Section
-          darkMode={darkMode}
           className={cn('overflow-hidden', className)}
           constrained={false}
         >
-          <Container
-            maxWidth="7xl"
-            className="lg:flex lg:items-center lg:gap-x-10"
-          >
+          <div className="mx-auto max-w-7xl lg:flex lg:items-center lg:gap-x-10">
             <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
               <NewsletterHeader content={content} centered={false} />
               <NewsletterForm
                 content={content}
                 className="mt-6"
-                darkMode={darkMode}
               />
             </div>
             {content.image && (
@@ -118,36 +104,32 @@ export const Newsletter: React.FC<NewsletterProps> = ({
                 />
               </div>
             )}
-          </Container>
+          </div>
         </Section>
       );
 
     case 'with-description':
       return (
-        <Section darkMode={darkMode} className={className}>
-          <Container maxWidth="7xl">
-            <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-2">
-              <div>
-                <NewsletterHeader content={content} centered={false} />
-                {content.features && content.features.length > 0 && (
-                  <NewsletterFeatures
-                    features={content.features}
-                    darkMode={darkMode}
-                  />
-                )}
-              </div>
-              <div className="lg:flex lg:flex-col lg:justify-center">
-                <NewsletterForm content={content} darkMode={darkMode} />
-              </div>
+        <Section className={className} maxWidth="7xl">
+          <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-2">
+            <div>
+              <NewsletterHeader content={content} centered={false} />
+              {content.features && content.features.length > 0 && (
+                <NewsletterFeatures
+                  features={content.features}
+                />
+              )}
             </div>
-          </Container>
+            <div className="lg:flex lg:flex-col lg:justify-center">
+              <NewsletterForm content={content} />
+            </div>
+          </div>
         </Section>
       );
 
     default:
       return (
         <Section
-          darkMode={darkMode}
           className={className}
           maxWidth="2xl"
           centered
@@ -156,7 +138,6 @@ export const Newsletter: React.FC<NewsletterProps> = ({
           <NewsletterForm
             content={content}
             className="mt-6"
-            darkMode={darkMode}
           />
         </Section>
       );

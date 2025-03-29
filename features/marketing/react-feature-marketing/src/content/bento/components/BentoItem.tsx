@@ -8,14 +8,12 @@ import React from 'react';
 
 interface BentoItemProps {
   item: Bento['items'][0];
-  darkMode: boolean;
   variant: 'three-column' | 'two-row';
   className?: string;
 }
 
 export const BentoItem: React.FC<BentoItemProps> = ({
   item,
-  darkMode,
   variant,
   className,
 }) => {
@@ -42,7 +40,7 @@ export const BentoItem: React.FC<BentoItemProps> = ({
   }
 
   // Background color for the item
-  const itemBgColor = item.color || (darkMode ? 'bg-gray-800' : 'bg-gray-100');
+  const itemBgColor = item.color || 'bg-gray-100';
 
   return (
     <div
@@ -80,11 +78,7 @@ export const BentoItem: React.FC<BentoItemProps> = ({
       <h3 className="mb-2 text-lg font-semibold">{item.title}</h3>
 
       {/* Description */}
-      <p
-        className={cn('text-sm', darkMode ? 'text-gray-300' : 'text-gray-600')}
-      >
-        {item.description}
-      </p>
+      <p className={cn('text-sm', 'text-gray-600')}>{item.description}</p>
     </div>
   );
 };

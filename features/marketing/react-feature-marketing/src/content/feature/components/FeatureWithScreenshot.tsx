@@ -1,4 +1,4 @@
-import { Container } from '@/shared/components/Container';
+
 import { Section } from '@/shared/components/Section';
 import React from 'react';
 import { FeatureComponentProps } from './FeatureTypes';
@@ -21,7 +21,6 @@ export const FeatureWithScreenshot: React.FC<FeatureComponentProps> = ({
 
   return (
     <Section className="overflow-hidden">
-      <Container padding="lg">
         <div className="grid grid-cols-1 gap-16 lg:mx-0 lg:max-w-none lg:grid-cols-2">
           <div className="lg:pr-8 lg:pt-4">
             <div className="lg:max-w-lg">
@@ -50,7 +49,6 @@ export const FeatureWithScreenshot: React.FC<FeatureComponentProps> = ({
             className="max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 md:-ml-4 lg:-ml-0"
           />
         </div>
-      </Container>
     </Section>
   );
 };

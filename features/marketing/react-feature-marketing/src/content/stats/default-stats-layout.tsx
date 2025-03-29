@@ -21,7 +21,6 @@ export class DefaultStatsLayout extends LayoutConfiguration<StatsContent> {
   static readonly typeDescriptor = new TypeDescriptor(this.schemaName, this);
 
   readonly variant?: StatsVariant;
-  readonly darkMode?: boolean;
 
   constructor(props?: Partial<DefaultStatsLayout>) {
     super({
@@ -30,7 +29,6 @@ export class DefaultStatsLayout extends LayoutConfiguration<StatsContent> {
     });
 
     this.variant = props?.variant || 'simple';
-    this.darkMode = props?.darkMode || false;
   }
 
   render(content: StatsContent): React.ReactNode {

@@ -52,17 +52,13 @@ export function FAQQuestion({
   isOpen,
   onToggle,
   className = '',
-  darkMode = false,
 }: {
   question: string;
   answer: any;
   isOpen: boolean;
   onToggle: () => void;
   className?: string;
-  darkMode?: boolean;
 }) {
-  const textColorClass = darkMode ? 'text-white' : 'text-gray-900';
-  const answerColorClass = darkMode ? 'text-gray-300' : 'text-gray-600';
 
   const { plugins } = useVyuh();
 
@@ -71,10 +67,7 @@ export function FAQQuestion({
       <dt>
         <button
           type="button"
-          className={cn(
-            'flex w-full cursor-pointer items-start justify-between text-left',
-            textColorClass,
-          )}
+          className="flex w-full cursor-pointer items-start justify-between text-left text-gray-900"
           onClick={onToggle}
           aria-expanded={isOpen}
         >
@@ -116,7 +109,7 @@ export function FAQQuestion({
       </dt>
       {isOpen && (
         <dd className="mt-2 pr-12">
-          <div className={cn('text-base leading-7', answerColorClass)}>
+          <div className="text-base leading-7 text-gray-600">
             {answer && plugins.content.render(answer)}
           </div>
         </dd>
@@ -131,17 +124,13 @@ export function FAQQuestion({
 export function FAQContact({
   contactInfo,
   className = '',
-  darkMode = false,
 }: {
   contactInfo?: FAQ['contactInfo'];
   className?: string;
-  darkMode?: boolean;
 }) {
   if (!contactInfo) return null;
 
   const { title, description, email, phone, action } = contactInfo;
-  const textColorClass = darkMode ? 'text-indigo-400' : 'text-indigo-600';
-  const descColorClass = darkMode ? 'text-gray-300' : 'text-gray-600';
 
   const handleActionClick = () => {
     if (action) {
@@ -155,22 +144,16 @@ export function FAQContact({
     <div
       className={cn(
         'w-full rounded-2xl bg-white px-6 py-10 shadow-md',
-        darkMode ? 'bg-gray-800' : 'bg-white',
         className,
       )}
     >
       {title && (
-        <h3
-          className={cn(
-            'text-2xl font-bold leading-10 tracking-tight',
-            textColorClass,
-          )}
-        >
+        <h3 className="text-2xl font-bold leading-10 tracking-tight text-indigo-600">
           {title}
         </h3>
       )}
       {description && (
-        <p className={cn('mt-4 leading-7', descColorClass)}>{description}</p>
+        <p className="mt-4 leading-7 text-gray-600">{description}</p>
       )}
 
       <dl className="mt-8 space-y-6">
@@ -179,20 +162,14 @@ export function FAQContact({
             <dt className="flex-none">
               <span className="sr-only">Email</span>
               <Mail
-                className={cn(
-                  'h-7 w-6',
-                  darkMode ? 'text-gray-400' : 'text-gray-500',
-                )}
+                className="h-7 w-6 text-gray-500"
                 aria-hidden="true"
               />
             </dt>
             <dd>
               <a
                 href={`mailto:${email}`}
-                className={cn(
-                  'hover:underline',
-                  darkMode ? 'text-gray-300' : 'text-gray-700',
-                )}
+                className="hover:underline text-gray-700"
               >
                 {email}
               </a>
@@ -204,20 +181,14 @@ export function FAQContact({
             <dt className="flex-none">
               <span className="sr-only">Telephone</span>
               <Phone
-                className={cn(
-                  'h-7 w-6',
-                  darkMode ? 'text-gray-400' : 'text-gray-500',
-                )}
+                className="h-7 w-6 text-gray-500"
                 aria-hidden="true"
               />
             </dt>
             <dd>
               <a
                 href={`tel:${phone}`}
-                className={cn(
-                  'hover:underline',
-                  darkMode ? 'text-gray-300' : 'text-gray-700',
-                )}
+                className="hover:underline text-gray-700"
               >
                 {phone}
               </a>

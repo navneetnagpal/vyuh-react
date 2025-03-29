@@ -7,21 +7,19 @@ import React from 'react';
 interface TeamMemberProps {
   member: Team['members'][0];
   className?: string;
-  darkMode?: boolean;
   variant?: string;
 }
 
 export const TeamMember: React.FC<TeamMemberProps> = ({
   member,
   className,
-  darkMode = false,
   variant = 'simple-grid',
 }) => {
   const { getImageUrl } = useMediaUtils();
 
-  const nameColor = darkMode ? 'text-white' : 'text-gray-900';
-  const roleColor = darkMode ? 'text-gray-300' : 'text-gray-600';
-  const bioColor = darkMode ? 'text-gray-400' : 'text-gray-500';
+  const nameColor = 'text-gray-900';
+  const roleColor = 'text-gray-600';
+  const bioColor = 'text-gray-500';
 
   const isCardVariant = variant === 'card-grid';
   const isLargeImageVariant = variant === 'with-large-images';
@@ -44,8 +42,7 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
     <div
       className={cn(
         isCardVariant && 'rounded-lg p-6 ring-1',
-        isCardVariant &&
-          (darkMode ? 'bg-gray-800 ring-gray-700' : 'bg-white ring-gray-200'),
+        isCardVariant && 'bg-white ring-gray-200',
         member.featured && 'ring-2 ring-indigo-500',
         className,
       )}
@@ -77,7 +74,7 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
                   key={index}
                   href={link.url}
                   className={cn(
-                    'text-gray-400 hover:text-gray-500 dark:hover:text-gray-300',
+                    'text-gray-400 hover:text-gray-500',
                   )}
                   target="_blank"
                   rel="noopener noreferrer"

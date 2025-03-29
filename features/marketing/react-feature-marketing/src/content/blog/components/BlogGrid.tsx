@@ -10,7 +10,6 @@ interface BlogGridProps {
   posts: Blog['posts'];
   variant: string;
   columns: number;
-  darkMode: boolean;
   className?: string;
 }
 
@@ -18,7 +17,6 @@ export const BlogGrid: React.FC<BlogGridProps> = ({
   posts,
   variant,
   columns,
-  darkMode,
   className,
 }) => {
   if (variant === 'with-featured-post') {
@@ -28,7 +26,7 @@ export const BlogGrid: React.FC<BlogGridProps> = ({
     return (
       <div className={className}>
         {featuredPost && (
-          <BlogFeaturedPost post={featuredPost} darkMode={darkMode} />
+          <BlogFeaturedPost post={featuredPost} />
         )}
         <div
           className={cn('grid gap-16', {
@@ -39,7 +37,7 @@ export const BlogGrid: React.FC<BlogGridProps> = ({
           })}
         >
           {regularPosts.map((post, index) => (
-            <BlogPostCard key={index} post={post} darkMode={darkMode} />
+            <BlogPostCard key={index} post={post} />
           ))}
         </div>
       </div>
@@ -61,7 +59,7 @@ export const BlogGrid: React.FC<BlogGridProps> = ({
         )}
       >
         {posts.map((post, index) => (
-          <BlogPostCard key={index} post={post} darkMode={darkMode} />
+          <BlogPostCard key={index} post={post} />
         ))}
       </div>
     );
@@ -71,7 +69,7 @@ export const BlogGrid: React.FC<BlogGridProps> = ({
     return (
       <div className={cn('space-y-8', className)}>
         {posts.map((post, index) => (
-          <BlogImageListItem key={index} post={post} darkMode={darkMode} />
+          <BlogImageListItem key={index} post={post} />
         ))}
       </div>
     );
@@ -82,12 +80,12 @@ export const BlogGrid: React.FC<BlogGridProps> = ({
       <div
         className={cn(
           'rounded-lg',
-          darkMode ? 'bg-gray-800' : 'bg-gray-50',
+          'bg-gray-50',
           className,
         )}
       >
         {posts.map((post, index) => (
-          <BlogListItem key={index} post={post} darkMode={darkMode} />
+          <BlogListItem key={index} post={post} />
         ))}
       </div>
     );
@@ -108,7 +106,7 @@ export const BlogGrid: React.FC<BlogGridProps> = ({
       )}
     >
       {posts.map((post, index) => (
-        <BlogPostCard key={index} post={post} darkMode={darkMode} />
+        <BlogPostCard key={index} post={post} />
       ))}
     </div>
   );

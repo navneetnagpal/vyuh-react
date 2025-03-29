@@ -21,7 +21,6 @@ export class DefaultTeamLayout extends LayoutConfiguration<TeamContent> {
   static readonly typeDescriptor = new TypeDescriptor(this.schemaName, this);
 
   readonly variant?: TeamVariant;
-  readonly darkMode?: boolean;
 
   constructor(props?: Partial<DefaultTeamLayout>) {
     super({
@@ -30,7 +29,6 @@ export class DefaultTeamLayout extends LayoutConfiguration<TeamContent> {
     });
 
     this.variant = props?.variant || 'simple-grid';
-    this.darkMode = props?.darkMode || false;
   }
 
   render(content: TeamContent): React.ReactNode {

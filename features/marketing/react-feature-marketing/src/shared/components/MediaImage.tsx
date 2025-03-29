@@ -108,7 +108,7 @@ export const MediaImage: React.FC<MediaImageProps> = ({
           objectFitClasses[objectFit],
           roundedClasses[rounded as keyof typeof roundedClasses],
           shadowClasses[shadow as keyof typeof shadowClasses],
-          border && 'border border-gray-200 dark:border-gray-700',
+          border && 'border border-gray-200',
           imgClassName,
         )}
       />

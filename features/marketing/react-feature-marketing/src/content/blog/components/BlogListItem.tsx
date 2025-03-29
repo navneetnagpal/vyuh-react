@@ -6,13 +6,11 @@ import React from 'react';
 
 interface BlogListItemProps {
   post: Blog['posts'][0];
-  darkMode: boolean;
   className?: string;
 }
 
 export const BlogListItem: React.FC<BlogListItemProps> = ({
   post,
-  darkMode,
   className,
 }) => {
   const { getImageUrl } = useMediaUtils();
@@ -31,17 +29,13 @@ export const BlogListItem: React.FC<BlogListItemProps> = ({
     <div
       className={cn(
         'flex cursor-pointer flex-col border-b py-4 last:border-b-0 md:flex-row md:items-center',
-        darkMode ? 'border-gray-700' : 'border-gray-200',
+        'border-gray-200',
         className,
       )}
       onClick={() => new Action(post.action).execute()}
     >
       {/* Date */}
-      <div
-        className={cn(
-          'mb-2 w-24 shrink-0 text-sm md:mb-0',
-          darkMode ? 'text-gray-400' : 'text-gray-500',
-        )}
+      <div className="mb-2 w-24 shrink-0 text-sm text-gray-500 md:mb-0"
       >
         {formatDate(post.date)}
       </div>
@@ -54,12 +48,7 @@ export const BlogListItem: React.FC<BlogListItemProps> = ({
             {post.categories.map((category, idx) => (
               <span
                 key={idx}
-                className={cn(
-                  'inline-block rounded-full px-2 py-0.5 text-xs',
-                  darkMode
-                    ? 'bg-gray-700 text-gray-200'
-                    : 'bg-gray-200 text-gray-700',
-                )}
+                className="inline-block rounded-full px-2 py-0.5 text-xs bg-gray-200 text-gray-700"
               >
                 {category}
               </span>
@@ -70,11 +59,7 @@ export const BlogListItem: React.FC<BlogListItemProps> = ({
 
       {/* Author */}
       {post.author && (
-        <div
-          className={cn(
-            'mt-2 flex items-center md:mt-0 md:w-40 md:justify-end',
-            darkMode ? 'text-gray-400' : 'text-gray-500',
-          )}
+        <div className="mt-2 flex items-center text-gray-500 md:mt-0 md:w-40 md:justify-end"
         >
           {post.author.avatar && (
             <img

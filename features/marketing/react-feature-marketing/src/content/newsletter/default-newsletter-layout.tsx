@@ -24,7 +24,6 @@ export class DefaultNewsletterLayout extends LayoutConfiguration<NewsletterConte
   static readonly typeDescriptor = new TypeDescriptor(this.schemaName, this);
 
   readonly variant?: NewsletterVariant;
-  readonly darkMode?: boolean;
 
   constructor(props?: Partial<DefaultNewsletterLayout>) {
     super({
@@ -33,7 +32,6 @@ export class DefaultNewsletterLayout extends LayoutConfiguration<NewsletterConte
     });
 
     this.variant = props?.variant || 'simple-centered';
-    this.darkMode = props?.darkMode || false;
   }
 
   render(content: NewsletterContent): React.ReactNode {

@@ -226,20 +226,13 @@ export const defaultFooterLayout = defineType({
       initialValue: 'simple-centered',
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: 'darkMode',
-      title: 'Dark Mode',
-      type: 'boolean',
-      description: 'Whether this footer should be displayed in dark mode',
-      initialValue: true,
-    }),
+
   ],
   preview: {
     select: {
       variant: 'variant',
-      darkMode: 'darkMode',
     },
-    prepare({ variant, darkMode }) {
+    prepare({ variant }) {
       const variantDisplay: string =
         {
           'simple-centered': 'Simple Centered',
@@ -248,12 +241,9 @@ export const defaultFooterLayout = defineType({
           'with-social-links': 'With Social Links',
         }[variant] || 'Default';
 
-      const features = [];
-      if (darkMode) features.push('Dark Mode');
-
       return {
         title: `Footer Layout: ${variantDisplay}`,
-        subtitle: features.length > 0 ? features.join(', ') : 'Default',
+        subtitle: 'Default',
       };
     },
   },

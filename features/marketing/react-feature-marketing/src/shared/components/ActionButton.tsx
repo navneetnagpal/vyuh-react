@@ -13,10 +13,7 @@ export interface ActionButtonProps {
    */
   className?: string;
 
-  /**
-   * Whether to use dark mode styling
-   */
-  darkMode?: boolean;
+
 
   /**
    * The variant of the button
@@ -50,7 +47,6 @@ export interface ActionButtonProps {
 export const ActionButton: React.FC<ActionButtonProps> = ({
   action,
   className,
-  darkMode = false,
   variant = 'primary',
   size = 'md',
   fullWidth = false,
@@ -70,21 +66,11 @@ export const ActionButton: React.FC<ActionButtonProps> = ({
 
   // Variant classes
   const variantClasses = {
-    primary: darkMode
-      ? 'bg-indigo-500 text-white hover:bg-indigo-400'
-      : 'bg-indigo-600 text-white hover:bg-indigo-500',
-    secondary: darkMode
-      ? 'bg-white text-gray-900 hover:bg-gray-100'
-      : 'bg-gray-100 text-gray-900 hover:bg-gray-200',
-    outline: darkMode
-      ? 'border border-gray-600 text-white hover:bg-gray-800'
-      : 'border border-gray-300 text-gray-700 hover:bg-gray-50',
-    ghost: darkMode
-      ? 'text-white hover:bg-gray-800'
-      : 'text-gray-700 hover:bg-gray-100',
-    link: darkMode
-      ? 'text-indigo-400 hover:text-indigo-300 shadow-none'
-      : 'text-indigo-600 hover:text-indigo-500 shadow-none',
+    primary: 'bg-indigo-600 text-white hover:bg-indigo-500',
+    secondary: 'bg-gray-100 text-gray-900 hover:bg-gray-200',
+    outline: 'border border-gray-300 text-gray-700 hover:bg-gray-50',
+    ghost: 'text-gray-700 hover:bg-gray-100',
+    link: 'text-indigo-600 hover:text-indigo-500 shadow-none',
   };
 
   return (

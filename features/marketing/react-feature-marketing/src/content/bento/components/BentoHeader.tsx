@@ -4,13 +4,11 @@ import React from 'react';
 
 interface BentoHeaderProps {
   content: Pick<Bento, 'title' | 'subtitle'>;
-  darkMode: boolean;
   className?: string;
 }
 
 export const BentoHeader: React.FC<BentoHeaderProps> = ({
   content,
-  darkMode,
   className,
 }) => {
   return (
@@ -20,7 +18,7 @@ export const BentoHeader: React.FC<BentoHeaderProps> = ({
         <p
           className={cn(
             'mx-auto max-w-2xl text-lg',
-            darkMode ? 'text-gray-300' : 'text-gray-600',
+            'text-gray-600',
           )}
         >
           {content.subtitle}

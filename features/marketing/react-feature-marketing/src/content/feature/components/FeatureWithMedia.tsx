@@ -1,4 +1,4 @@
-import { Container } from '@/shared/components/Container';
+
 import { Section } from '@/shared/components/Section';
 import React from 'react';
 import { FeatureComponentProps } from './FeatureTypes';
@@ -32,7 +32,6 @@ export const FeatureWithMedia: React.FC<FeatureWithMediaProps> = ({
 
   return (
     <Section className="overflow-hidden">
-      <Container padding="lg">
         <div className="grid grid-cols-1 gap-16 lg:mx-0 lg:max-w-none lg:grid-cols-2">
           <div
             className={`lg:pt-4 ${contentOrderClass} ${mediaPosition === 'left' ? 'lg:pl-8' : 'lg:pr-8'}`}
@@ -65,7 +64,6 @@ export const FeatureWithMedia: React.FC<FeatureWithMediaProps> = ({
             />
           </div>
         </div>
-      </Container>
     </Section>
   );
 };

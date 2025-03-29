@@ -1,19 +1,18 @@
 import { Pricing } from '@/content/pricing/pricing';
 import { cn } from '@/shared/utils';
+import { Action } from '@vyuh/react-core';
 import { CheckIcon } from 'lucide-react';
 import React from 'react';
 
 interface PricingPlanProps {
   plan: Pricing['plans'][0];
   className?: string;
-  darkMode?: boolean;
   showAnnual?: boolean;
 }
 
 export const PricingPlan: React.FC<PricingPlanProps> = ({
   plan,
   className,
-  darkMode = false,
   showAnnual = false,
 }) => {
   const price =
@@ -29,31 +28,27 @@ export const PricingPlan: React.FC<PricingPlanProps> = ({
     }).format(price);
   };
 
+  // Use CSS classes
   const ringColor = plan.featured
     ? 'ring-indigo-600'
-    : darkMode
-      ? 'ring-gray-700'
-      : 'ring-gray-200';
+    : 'ring-gray-200';
+
   const bgColor = plan.featured
     ? 'bg-indigo-600'
-    : darkMode
-      ? 'bg-gray-800'
-      : 'bg-white';
+    : 'bg-white';
+
   const textColor = plan.featured
     ? 'text-white'
-    : darkMode
-      ? 'text-white'
-      : 'text-gray-900';
+    : 'text-gray-900';
+
   const featureColor = plan.featured
     ? 'text-indigo-200'
-    : darkMode
-      ? 'text-gray-300'
-      : 'text-gray-600';
+    : 'text-gray-600';
+
   const checkColor = plan.featured
     ? 'text-indigo-300'
-    : darkMode
-      ? 'text-indigo-400'
-      : 'text-indigo-600';
+    : 'text-indigo-600';
+
   const buttonColor = plan.featured
     ? 'bg-white text-indigo-600 hover:bg-gray-50'
     : 'bg-indigo-600 text-white hover:bg-indigo-500';
@@ -84,7 +79,7 @@ export const PricingPlan: React.FC<PricingPlanProps> = ({
         </span>
       </p>
       <button
-        onClick={() => plan.action.execute()}
+        onClick={() => new Action(plan.action).execute()}
         className={cn(
           'mt-6 block w-full rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 shadow-sm',
           buttonColor,

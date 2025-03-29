@@ -205,8 +205,8 @@ export function HeroMedia({
     return null;
   }
 
-  // Container with optional styling
-  const Container = ({ children }: { children: React.ReactNode }) => (
+  // Wrapper with optional styling
+  const Wrapper = ({ children }: { children: React.ReactNode }) => (
     <div className={`${containerClassName}`}>{children}</div>
   );
 
@@ -216,7 +216,7 @@ export function HeroMedia({
       if (!media.image) return null;
 
       return (
-        <Container>
+        <Wrapper>
           <MediaImage
             image={media.image}
             alt="Hero Image"
@@ -225,14 +225,14 @@ export function HeroMedia({
             shadow={'2xl'}
             className={`ring-1 ring-gray-900/10 ${className}`}
           />
-        </Container>
+        </Wrapper>
       );
 
     case 'video':
       if (!media.video) return null;
 
       return (
-        <Container>
+        <Wrapper>
           <div
             className={`relative overflow-hidden rounded-md shadow-2xl ring-1 ring-gray-900/10 ${className}`}
           >
@@ -245,7 +245,7 @@ export function HeroMedia({
               className="h-full w-full object-cover"
             />
           </div>
-        </Container>
+        </Wrapper>
       );
 
     default:

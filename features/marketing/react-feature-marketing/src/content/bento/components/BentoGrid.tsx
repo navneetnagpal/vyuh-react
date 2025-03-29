@@ -6,7 +6,6 @@ import { BentoItem } from './BentoItem';
 interface BentoGridProps {
   items: Bento['items'];
   variant: 'three-column' | 'two-row';
-  darkMode: boolean;
   gapClasses: string;
   className?: string;
 }
@@ -14,7 +13,6 @@ interface BentoGridProps {
 export const BentoGrid: React.FC<BentoGridProps> = ({
   items,
   variant,
-  darkMode,
   gapClasses,
   className,
 }) => {
@@ -28,12 +26,7 @@ export const BentoGrid: React.FC<BentoGridProps> = ({
         )}
       >
         {items.map((item, index) => (
-          <BentoItem
-            key={index}
-            item={item}
-            darkMode={darkMode}
-            variant={variant}
-          />
+          <BentoItem key={index} item={item} variant={variant} />
         ))}
       </div>
     );
@@ -45,12 +38,7 @@ export const BentoGrid: React.FC<BentoGridProps> = ({
       className={cn('grid grid-cols-2 md:grid-cols-4', gapClasses, className)}
     >
       {items.map((item, index) => (
-        <BentoItem
-          key={index}
-          item={item}
-          darkMode={darkMode}
-          variant={variant}
-        />
+        <BentoItem key={index} item={item} variant={variant} />
       ))}
     </div>
   );

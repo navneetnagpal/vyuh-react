@@ -6,7 +6,11 @@ import React from 'react';
 /**
  * Logo layout variant type
  */
-export type LogoVariant = 'simple-grid' | 'with-borders' | 'grayscale' | 'carousel';
+export type LogoVariant =
+  | 'simple-grid'
+  | 'with-borders'
+  | 'grayscale'
+  | 'carousel';
 
 /**
  * Default layout for Logo section content items
@@ -16,7 +20,6 @@ export class DefaultLogoLayout extends LayoutConfiguration<Logo> {
   static readonly typeDescriptor = new TypeDescriptor(this.schemaName, this);
 
   readonly variant?: LogoVariant;
-  readonly darkMode?: boolean;
   readonly columns?: number;
 
   constructor(props?: Partial<DefaultLogoLayout>) {
@@ -26,7 +29,6 @@ export class DefaultLogoLayout extends LayoutConfiguration<Logo> {
     });
 
     this.variant = props?.variant || 'simple-grid';
-    this.darkMode = props?.darkMode || false;
     this.columns = props?.columns || 4;
   }
 

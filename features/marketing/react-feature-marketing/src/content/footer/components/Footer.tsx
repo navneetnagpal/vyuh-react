@@ -22,19 +22,12 @@ export const Footer: React.FC<FooterProps> = ({
   className,
 }) => {
   const variant = layout.variant || 'simple-centered';
-  const darkMode = layout.darkMode || false;
 
-  // Background color classes based on dark mode
-  const backgroundClasses = darkMode
-    ? 'bg-gray-900 text-white'
-    : 'bg-gray-100 text-gray-900';
-
-  // Text color classes based on dark mode
-  const textClasses = darkMode ? 'text-gray-300' : 'text-gray-600';
-  const headingClasses = darkMode ? 'text-white' : 'text-gray-900';
-  const linkClasses = darkMode
-    ? 'text-gray-300 hover:text-white'
-    : 'text-gray-600 hover:text-gray-900';
+  // Text color classes
+  const backgroundClasses = 'bg-gray-100 text-gray-900';
+  const textClasses = 'text-gray-600';
+  const headingClasses = 'text-gray-900';
+  const linkClasses = 'text-gray-600 hover:text-gray-900';
 
   // Render the footer based on the variant
   const renderFooter = () => {
@@ -211,8 +204,6 @@ export const Footer: React.FC<FooterProps> = ({
             <div
               className={cn(
                 `mt-12 flex items-center justify-between border-t pt-8 max-sm:flex-col md:flex-row`,
-                { 'border-neutral-200': !darkMode },
-                { 'border-neutral-700': darkMode },
               )}
             >
               <div className="mb-4 md:mb-0">

@@ -238,13 +238,7 @@ export const defaultHeaderLayout = defineType({
       initialValue: 'simple',
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: 'darkMode',
-      title: 'Dark Mode',
-      type: 'boolean',
-      description: 'Whether this header should be displayed in dark mode',
-      initialValue: false,
-    }),
+
     defineField({
       name: 'sticky',
       title: 'Sticky Header',
@@ -257,10 +251,9 @@ export const defaultHeaderLayout = defineType({
   preview: {
     select: {
       variant: 'variant',
-      darkMode: 'darkMode',
       sticky: 'sticky',
     },
-    prepare({ variant, darkMode, sticky }) {
+    prepare({ variant, sticky }) {
       // Format the variant name for display
       const variantDisplay = variant
         ? variant
@@ -271,7 +264,6 @@ export const defaultHeaderLayout = defineType({
 
       // Create a descriptive subtitle based on settings
       const features = [];
-      if (darkMode) features.push('Dark Mode');
       if (sticky) features.push('Sticky');
 
       // Choose an appropriate icon based on the variant

@@ -6,7 +6,6 @@ import { LogoItem } from './LogoItem';
 interface LogoGridProps {
   items: Logo['items'];
   variant: string;
-  darkMode: boolean;
   columns: number;
   className?: string;
 }
@@ -14,7 +13,6 @@ interface LogoGridProps {
 export const LogoGrid: React.FC<LogoGridProps> = ({
   items,
   variant,
-  darkMode,
   columns,
   className,
 }) => {
@@ -25,13 +23,13 @@ export const LogoGrid: React.FC<LogoGridProps> = ({
         <div className="animate-marquee flex space-x-8 py-4">
           {items.map((item, index) => (
             <div key={index} className="flex-shrink-0">
-              <LogoItem item={item} variant={variant} darkMode={darkMode} />
+              <LogoItem item={item} variant={variant} />
             </div>
           ))}
           {/* Duplicate items for continuous scrolling effect */}
           {items.map((item, index) => (
             <div key={`dup-${index}`} className="flex-shrink-0">
-              <LogoItem item={item} variant={variant} darkMode={darkMode} />
+              <LogoItem item={item} variant={variant} />
             </div>
           ))}
         </div>
@@ -58,7 +56,6 @@ export const LogoGrid: React.FC<LogoGridProps> = ({
           key={index}
           item={item}
           variant={variant}
-          darkMode={darkMode}
         />
       ))}
     </div>

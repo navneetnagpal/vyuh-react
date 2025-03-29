@@ -6,13 +6,11 @@ import React from 'react';
 
 interface ActionButtonsProps {
   actions?: Header['actions'];
-  darkMode?: boolean;
   className?: string;
 }
 
 export const ActionButtons: React.FC<ActionButtonsProps> = ({
   actions,
-  darkMode = false,
   className,
 }) => {
   if (!actions || actions.length === 0) {

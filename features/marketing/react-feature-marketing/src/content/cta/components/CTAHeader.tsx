@@ -16,7 +16,6 @@ export const CTAHeader: React.FC<CTAHeaderProps> = ({
   // Text color classes based on the background type
   const textClasses = {
     light: 'text-gray-900',
-    dark: 'text-white',
     brand: 'text-white',
     'light-brand': 'text-gray-900',
   };
@@ -24,7 +23,6 @@ export const CTAHeader: React.FC<CTAHeaderProps> = ({
   // Subtitle color classes based on the background type
   const subtitleClasses = {
     light: 'text-gray-600',
-    dark: 'text-gray-300',
     brand: 'text-indigo-200',
     'light-brand': 'text-gray-600',
   };

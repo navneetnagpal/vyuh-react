@@ -156,20 +156,13 @@ export const defaultFaqLayout = defineType({
       },
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: 'darkMode',
-      title: 'Dark Mode',
-      type: 'boolean',
-      description: 'Whether this section should be displayed in dark mode',
-      initialValue: false,
-    }),
+
   ],
   preview: {
     select: {
       variant: 'variant',
-      darkMode: 'darkMode',
     },
-    prepare({ variant, darkMode }) {
+    prepare({ variant }) {
       // Format the variant name for display
       const variantDisplay = variant
         ? variant
@@ -180,7 +173,7 @@ export const defaultFaqLayout = defineType({
 
       return {
         title: `FAQ Layout: ${variantDisplay}`,
-        subtitle: darkMode ? 'Dark Mode' : undefined,
+        subtitle: undefined,
         media: Icon,
       };
     },

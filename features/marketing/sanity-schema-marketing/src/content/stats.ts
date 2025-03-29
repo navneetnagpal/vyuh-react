@@ -142,20 +142,13 @@ export const defaultStatsLayout = defineType({
       initialValue: 'simple',
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: 'darkMode',
-      title: 'Dark Mode',
-      type: 'boolean',
-      description: 'Whether this section should be displayed in dark mode',
-      initialValue: false,
-    }),
+
   ],
   preview: {
     select: {
       variant: 'variant',
-      darkMode: 'darkMode',
     },
-    prepare({ variant, darkMode }) {
+    prepare({ variant }) {
       const variantDisplay = variant
         ? variant
             .split('-')
@@ -163,12 +156,9 @@ export const defaultStatsLayout = defineType({
             .join(' ')
         : 'Simple';
 
-      const features = [];
-      if (darkMode) features.push('Dark Mode');
-
       return {
         title: `Stats Layout: ${variantDisplay}`,
-        subtitle: features.length > 0 ? features.join(', ') : 'Default',
+        subtitle: 'Default',
         media: Icon,
       };
     },

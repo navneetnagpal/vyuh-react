@@ -6,13 +6,11 @@ import React from 'react';
 
 interface BlogFeaturedPostProps {
   post: Blog['posts'][0];
-  darkMode: boolean;
   className?: string;
 }
 
 export const BlogFeaturedPost: React.FC<BlogFeaturedPostProps> = ({
   post,
-  darkMode,
   className,
 }) => {
   const { getImageUrl } = useMediaUtils();
@@ -31,7 +29,7 @@ export const BlogFeaturedPost: React.FC<BlogFeaturedPostProps> = ({
     <div
       className={cn(
         'mb-8 grid grid-cols-1 gap-8 overflow-hidden rounded-lg md:grid-cols-2',
-        darkMode ? 'bg-gray-800' : 'bg-gray-50',
+        'bg-gray-50',
         'cursor-pointer',
         className,
       )}
@@ -60,12 +58,7 @@ export const BlogFeaturedPost: React.FC<BlogFeaturedPostProps> = ({
             {post.categories.map((category, idx) => (
               <span
                 key={idx}
-                className={cn(
-                  'inline-block rounded-full px-3 py-1 text-xs font-medium',
-                  darkMode
-                    ? 'bg-gray-700 text-gray-200'
-                    : 'bg-gray-200 text-gray-700',
-                )}
+                className="inline-block rounded-full px-3 py-1 text-xs font-medium bg-gray-200 text-gray-700"
               >
                 {category}
               </span>
@@ -77,11 +70,7 @@ export const BlogFeaturedPost: React.FC<BlogFeaturedPostProps> = ({
         <h3 className="mb-3 text-2xl font-bold">{post.title}</h3>
 
         {/* Date and author */}
-        <div
-          className={cn(
-            'mb-4 flex items-center text-sm',
-            darkMode ? 'text-gray-400' : 'text-gray-600',
-          )}
+        <div className="mb-4 flex items-center text-sm text-gray-600"
         >
           <span>{formatDate(post.date)}</span>
           {post.author && (
@@ -108,11 +97,7 @@ export const BlogFeaturedPost: React.FC<BlogFeaturedPostProps> = ({
 
         {/* Excerpt */}
         {post.excerpt && (
-          <p
-            className={cn(
-              'mb-6 text-base',
-              darkMode ? 'text-gray-300' : 'text-gray-600',
-            )}
+          <p className="mb-6 text-base text-gray-600"
           >
             {post.excerpt}
           </p>
@@ -120,11 +105,7 @@ export const BlogFeaturedPost: React.FC<BlogFeaturedPostProps> = ({
 
         {/* Read more link */}
         <div>
-          <span
-            className={cn(
-              'inline-flex items-center font-medium',
-              darkMode ? 'text-blue-400' : 'text-blue-600',
-            )}
+          <span className="inline-flex items-center font-medium text-blue-600"
           >
             Read more
             <svg

@@ -237,7 +237,7 @@ export const defaultFeatureLayout = defineType({
           { title: 'Centered Grid', value: 'centered-grid' },
           { title: 'Three Column', value: 'three-column' },
           { title: 'With Screenshot', value: 'with-screenshot' },
-          { title: 'With Screenshot (Dark)', value: 'with-screenshot-dark' },
+          { title: 'With Alternate Screenshot', value: 'with-screenshot-alternate' },
           { title: 'With Media Left', value: 'with-media-left' },
           { title: 'With Media Right', value: 'with-media-right' },
         ],

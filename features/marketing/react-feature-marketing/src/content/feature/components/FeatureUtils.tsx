@@ -41,8 +41,7 @@ export const FeatureItem: React.FC<{
   description?: string;
   icon?: string;
   className?: string;
-  dark?: boolean;
-}> = ({ title, description, icon, className = '', dark = false }) => (
+}> = ({ title, description, icon, className = '' }) => (
   <div className={`relative ${className}`}>
     {icon && (
       <div className="absolute flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white">
@@ -50,19 +49,11 @@ export const FeatureItem: React.FC<{
       </div>
     )}
     <div className={icon ? 'ml-16' : ''}>
-      <h3
-        className={cn('text-lg font-medium text-gray-900', {
-          'text-white': dark,
-        })}
-      >
+      <h3 className="text-lg font-medium text-gray-900">
         {title}
       </h3>
       {description && (
-        <p
-          className={cn('mt-2 text-base text-gray-500', {
-            'text-gray-300': dark,
-          })}
-        >
+        <p className="mt-2 text-base text-gray-500">
           {description}
         </p>
       )}

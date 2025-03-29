@@ -12,10 +12,7 @@ export interface CardProps {
    */
   className?: string;
 
-  /**
-   * Whether to use dark mode styling
-   */
-  darkMode?: boolean;
+
 
   /**
    * Whether the card should be highlighted
@@ -44,7 +41,6 @@ export interface CardProps {
 export const Card: React.FC<CardProps> = ({
   children,
   className,
-  darkMode = false,
   highlighted = false,
   padding = 'md',
   hoverable = false,
@@ -52,13 +48,9 @@ export const Card: React.FC<CardProps> = ({
 }) => {
   const baseClasses = 'rounded-lg ring-1';
 
-  const colorClasses = darkMode
-    ? highlighted
-      ? 'bg-gray-800 ring-indigo-500 ring-2'
-      : 'bg-gray-800 ring-gray-700'
-    : highlighted
-      ? 'bg-white ring-indigo-500 ring-2'
-      : 'bg-white ring-gray-200';
+  const colorClasses = highlighted
+    ? 'bg-white ring-indigo-500 ring-2'
+    : 'bg-white ring-gray-200';
 
   const paddingClasses = {
     none: '',

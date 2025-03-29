@@ -20,7 +20,6 @@ export class DefaultFooterLayout extends LayoutConfiguration<Footer> {
   static readonly typeDescriptor = new TypeDescriptor(this.schemaName, this);
 
   readonly variant?: FooterVariant;
-  readonly darkMode?: boolean;
   readonly companyMission?: string;
 
   constructor(props?: Partial<DefaultFooterLayout>) {
@@ -30,7 +29,6 @@ export class DefaultFooterLayout extends LayoutConfiguration<Footer> {
     });
 
     this.variant = props?.variant || 'simple-centered';
-    this.darkMode = props?.darkMode || false;
   }
 
   render(content: Footer): React.ReactNode {

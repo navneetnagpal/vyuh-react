@@ -23,7 +23,6 @@ export class DefaultTestimonialsLayout extends LayoutConfiguration<TestimonialsC
   static readonly typeDescriptor = new TypeDescriptor(this.schemaName, this);
 
   readonly variant?: TestimonialsVariant;
-  readonly darkMode?: boolean;
 
   constructor(props?: Partial<DefaultTestimonialsLayout>) {
     super({
@@ -32,7 +31,6 @@ export class DefaultTestimonialsLayout extends LayoutConfiguration<TestimonialsC
     });
 
     this.variant = props?.variant || 'simple-centered';
-    this.darkMode = props?.darkMode || false;
   }
 
   render(content: TestimonialsContent): React.ReactNode {

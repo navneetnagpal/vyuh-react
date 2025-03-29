@@ -13,18 +13,13 @@ interface TeamProps {
 
 export const Team: React.FC<TeamProps> = ({ content, layout, className }) => {
   const variant = layout.variant || 'simple-grid';
-  const darkMode = layout.darkMode || false;
 
-  const backgroundClasses = darkMode
-    ? 'bg-gray-900 text-white'
-    : 'bg-white text-gray-900';
+  const backgroundClasses = 'bg-white text-gray-900';
 
   const renderAction = () => {
     if (!content.action) return null;
 
-    const buttonClasses = darkMode
-      ? 'bg-indigo-500 text-white hover:bg-indigo-400'
-      : 'bg-indigo-600 text-white hover:bg-indigo-500';
+    const buttonClasses = 'bg-indigo-600 text-white hover:bg-indigo-500';
 
     return (
       <div className="mt-10 flex justify-center">
@@ -55,7 +50,7 @@ export const Team: React.FC<TeamProps> = ({ content, layout, className }) => {
                   <TeamMember
                     key={index}
                     member={member}
-                    darkMode={darkMode}
+
                     variant={variant}
                   />
                 ))}
@@ -79,7 +74,7 @@ export const Team: React.FC<TeamProps> = ({ content, layout, className }) => {
                   <TeamMember
                     key={index}
                     member={member}
-                    darkMode={darkMode}
+
                     variant={variant}
                   />
                 ))}
@@ -103,7 +98,7 @@ export const Team: React.FC<TeamProps> = ({ content, layout, className }) => {
                   <TeamMember
                     key={index}
                     member={member}
-                    darkMode={darkMode}
+
                     variant={variant}
                   />
                 ))}
@@ -119,7 +114,7 @@ export const Team: React.FC<TeamProps> = ({ content, layout, className }) => {
         <div
           className={cn(
             'px-6 py-16',
-            darkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900',
+            'bg-gray-50 text-gray-900',
             className,
           )}
         >
@@ -133,7 +128,7 @@ export const Team: React.FC<TeamProps> = ({ content, layout, className }) => {
                   <TeamMember
                     key={index}
                     member={member}
-                    darkMode={darkMode}
+
                     variant={variant}
                   />
                 ))}
@@ -149,7 +144,7 @@ export const Team: React.FC<TeamProps> = ({ content, layout, className }) => {
         <div
           className={cn(
             'px-6 py-16',
-            darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900',
+            'bg-gray-100 text-gray-900',
             className,
           )}
         >
@@ -163,7 +158,7 @@ export const Team: React.FC<TeamProps> = ({ content, layout, className }) => {
                   <TeamMember
                     key={index}
                     member={member}
-                    darkMode={darkMode}
+
                     variant={variant}
                   />
                 ))}
@@ -187,7 +182,7 @@ export const Team: React.FC<TeamProps> = ({ content, layout, className }) => {
                   <TeamMember
                     key={index}
                     member={member}
-                    darkMode={darkMode}
+
                     variant={variant}
                   />
                 ))}

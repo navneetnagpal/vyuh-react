@@ -5,21 +5,15 @@ import React from 'react';
 interface NewsletterFormProps {
   content: Newsletter;
   className?: string;
-  darkMode?: boolean;
 }
 
 export const NewsletterForm: React.FC<NewsletterFormProps> = ({
   content,
   className,
-  darkMode = false,
 }) => {
-  const buttonClasses = darkMode
-    ? 'bg-white text-gray-900 hover:bg-gray-100'
-    : 'bg-indigo-600 text-white hover:bg-indigo-500';
+  const buttonClasses = 'bg-indigo-600 text-white hover:bg-indigo-500';
 
-  const inputClasses = darkMode
-    ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500'
-    : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:ring-indigo-500 focus:border-indigo-500';
+  const inputClasses = 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:ring-indigo-500 focus:border-indigo-500';
 
   return (
     <form action={content.formAction} method="POST" className={className}>
@@ -53,7 +47,7 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({
         <p
           className={cn(
             'mt-4 text-sm',
-            darkMode ? 'text-gray-400' : 'text-gray-500',
+            'text-gray-500',
           )}
         >
           {content.privacyText}

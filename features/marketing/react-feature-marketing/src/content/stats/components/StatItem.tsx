@@ -6,20 +6,18 @@ import React from 'react';
 interface StatItemProps {
   stat: Stats['stats'][0];
   className?: string;
-  darkMode?: boolean;
   variant?: string;
 }
 
 export const StatItem: React.FC<StatItemProps> = ({
   stat,
   className,
-  darkMode = false,
   variant = 'simple',
 }) => {
-  const valueColor = darkMode ? 'text-white' : 'text-gray-900';
-  const labelColor = darkMode ? 'text-gray-300' : 'text-gray-600';
-  const descriptionColor = darkMode ? 'text-gray-400' : 'text-gray-500';
-  const iconColor = darkMode ? 'text-indigo-400' : 'text-indigo-600';
+  const valueColor = 'text-gray-900';
+  const labelColor = 'text-gray-600';
+  const descriptionColor = 'text-gray-500';
+  const iconColor = 'text-indigo-600';
 
   const isCardVariant = variant === 'card-grid';
 
@@ -27,8 +25,7 @@ export const StatItem: React.FC<StatItemProps> = ({
     <div
       className={cn(
         isCardVariant && 'rounded-lg p-6 ring-1',
-        isCardVariant &&
-          (darkMode ? 'bg-gray-800 ring-gray-700' : 'bg-white ring-gray-200'),
+        isCardVariant && 'bg-white ring-gray-200',
         className,
       )}
     >
