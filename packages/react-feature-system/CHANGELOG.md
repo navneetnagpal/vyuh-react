@@ -1,5 +1,14 @@
 # @vyuh/react-feature-system
 
+## 0.2.4
+
+### Patch Changes
+
+- Styling updates to make it more seamless
+- Updated dependencies
+  - @vyuh/react-core@0.2.4
+  - @vyuh/react-extension-content@0.2.4
+
 ## 0.2.3
 
 ### Patch Changes

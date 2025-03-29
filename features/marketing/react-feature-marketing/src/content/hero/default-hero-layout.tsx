@@ -1,5 +1,4 @@
 import {
-  HeroBackgroundImage,
   HeroCentered,
   HeroImageBelow,
   HeroSplitLeft,
@@ -21,7 +20,6 @@ export type HeroVariant =
   | 'centered'
   | 'split-right'
   | 'split-left'
-  | 'bg-image'
   | 'image-below'
   | 'offset-image';
 
@@ -39,9 +37,8 @@ export class DefaultHeroLayout extends LayoutConfiguration<Hero> {
 
   readonly variant: HeroVariant;
   readonly background?: {
-    type: 'none' | 'color' | 'image' | 'gradient';
+    type: 'none' | 'color' | 'gradient';
     color?: string;
-    image?: ImageReference;
     gradient?: string;
   };
 
@@ -94,8 +91,6 @@ const HeroView: React.FC<HeroViewProps> = ({ content, layout }) => {
       return <HeroSplitRight content={content} layout={layout} />;
     case 'split-left':
       return <HeroSplitLeft content={content} layout={layout} />;
-    case 'bg-image':
-      return <HeroBackgroundImage content={content} layout={layout} />;
     case 'image-below':
       return <HeroImageBelow content={content} layout={layout} />;
     default:

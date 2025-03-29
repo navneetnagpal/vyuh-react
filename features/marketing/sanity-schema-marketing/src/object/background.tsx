@@ -14,7 +14,6 @@ export const backgroundField = () =>
           list: [
             { title: 'None', value: 'none' },
             { title: 'Color', value: 'color' },
-            { title: 'Image', value: 'image' },
             { title: 'Gradient', value: 'gradient' },
           ],
         },
@@ -34,14 +33,6 @@ export const backgroundField = () =>
         description: 'The type of gradient to use',
         hidden: ({ parent }) => parent?.type !== 'gradient',
       }),
-      defineField({
-        name: 'image',
-        title: 'Background Image',
-        type: 'image',
-        options: {
-          hotspot: true,
-        },
-        hidden: ({ parent }) => parent?.type !== 'image',
-      }),
+
     ],
   });

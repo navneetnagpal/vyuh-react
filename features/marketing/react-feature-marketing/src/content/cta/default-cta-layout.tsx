@@ -12,8 +12,7 @@ export type CTAVariant =
   | 'centered-panel'
   | 'simple-justified'
   | 'split-image-left'
-  | 'split-image-right'
-  | 'image-tiles';
+  | 'split-image-right';
 
 /**
  * The background style for the CTA

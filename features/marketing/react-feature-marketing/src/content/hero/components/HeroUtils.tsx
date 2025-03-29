@@ -137,18 +137,6 @@ export function useBackgroundStyles(
       return { backgroundColor: background.color };
     case 'gradient':
       return { backgroundImage: background.gradient };
-    case 'image':
-      // Use MediaUtils to get the image URL
-      if (!background.image) return {};
-
-      const imageUrl = getImageUrl(background.image);
-      if (!imageUrl) return {};
-
-      return {
-        backgroundImage: `url(${imageUrl})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      };
     default:
       return {};
   }
@@ -157,22 +145,15 @@ export function useBackgroundStyles(
 export function HeroBackgroundImage({ content, layout }: HeroComponentProps) {
   const { title, subtitle, actions } = content;
   const { background } = layout;
-  const { getImageUrl } = useMediaUtils();
 
-  const fallbackImage =
-    'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2830&q=80&blend=111827&blend-mode=multiply&sat=-100&exp=15';
-
-  const bgImageUrl =
-    background?.type === 'image' && background.image
-      ? getImageUrl(background.image, fallbackImage)
-      : fallbackImage;
+  // Use a gradient background instead of an image
+  const fallbackBackground = 'linear-gradient(to right, #4f46e5, #7c3aed)';
 
   return (
-    <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
-      <img
-        src={bgImageUrl}
-        alt=""
-        className="absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center"
+    <div className="relative isolate overflow-hidden py-24 sm:py-32">
+      <div
+        className="absolute inset-0 -z-10 h-full w-full"
+        style={{ background: fallbackBackground }}
       />
       <div
         className="hidden sm:absolute sm:-top-10 sm:right-1/2 sm:-z-10 sm:mr-10 sm:block sm:transform-gpu sm:blur-3xl"
@@ -263,42 +244,6 @@ export function HeroMedia({
               controls={false}
               className="h-full w-full object-cover"
             />
-          </div>
-        </Container>
-      );
-
-    case 'image-tiles':
-      if (!media.imageTiles || media.imageTiles.length === 0) return null;
-
-      // Check if we should use the special layout with first tile larger
-      const useSpecialLayout = containerClassName.includes('w-full');
-
-      return (
-        <Container>
-          <div
-            className={`grid items-stretch p-2 ${useSpecialLayout ? 'grid-cols-2 sm:grid-cols-3 md:grid-cols-5' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'} gap-4 ${className}`}
-          >
-            {media.imageTiles.map((image, index) => {
-              // Special class for the first tile in special layout
-              const specialFirstTileClass =
-                useSpecialLayout && index === 0
-                  ? 'col-span-2 row-span-2 sm:col-span-1 sm:row-span-1 md:col-span-2 md:row-span-2'
-                  : '';
-
-              return (
-                <div
-                  key={index}
-                  className={`overflow-hidden rounded-md shadow-md ring-1 ring-gray-900/10 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl ${specialFirstTileClass}`}
-                >
-                  <MediaImage
-                    image={image}
-                    alt={`Image Tile ${index + 1}`}
-                    className="h-full w-full"
-                    fill={true}
-                  />
-                </div>
-              );
-            })}
           </div>
         </Container>
       );

@@ -13,7 +13,7 @@ export const HERO_SCHEMA_TYPE = 'marketing.hero';
  * Heroes can include:
  * - Title and subtitle
  * - Background configuration
- * - Media content (images, videos, image tiles)
+ * - Media content (images, videos)
  * - Call-to-action buttons
  */
 export interface Hero extends ContentItem {
@@ -31,10 +31,9 @@ export interface Hero extends ContentItem {
    * Media content for the hero section
    */
   readonly media?: {
-    type: 'none' | 'image' | 'video' | 'image-tiles';
+    type: 'none' | 'image' | 'video';
     image?: ImageReference;
     video?: ObjectReference;
-    imageTiles?: ImageReference[];
   };
 
   /**

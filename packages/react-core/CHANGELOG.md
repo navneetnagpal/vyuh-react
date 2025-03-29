@@ -1,5 +1,11 @@
 # @vyuh/react-core
 
+## 0.2.4
+
+### Patch Changes
+
+- Styling updates to make it more seamless
+
 ## 0.2.3
 
 ## 0.2.2

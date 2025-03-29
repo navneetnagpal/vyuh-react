@@ -42,9 +42,8 @@ export class DefaultFeatureLayout extends LayoutConfiguration<Feature> {
 
   readonly variant: FeatureVariant;
   readonly background?: {
-    type: 'none' | 'color' | 'image' | 'gradient';
+    type: 'none' | 'color' | 'gradient';
     color?: string;
-    image?: ImageReference;
     gradient?: string;
   };
 

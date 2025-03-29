@@ -241,45 +241,6 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
         </div>
       );
 
-    case 'image-tiles':
-      return (
-        <div
-          className={cn(
-            'px-6 py-12',
-            backgroundClasses[background as keyof typeof backgroundClasses],
-            className,
-          )}
-        >
-          <div className="mx-auto max-w-6xl">
-            <div className="mb-12 text-center">
-              <CTAHeader content={content} background={background} />
-
-              <div className="mt-8 flex justify-center">
-                <CTAButtonGroup
-                  primaryAction={content.primaryAction}
-                  secondaryAction={content.secondaryAction}
-                  background={background}
-                />
-              </div>
-
-              {renderAdditionalInfo(content.additionalInfo, background)}
-            </div>
-
-            {content.imageTiles && content.imageTiles.length > 0 && (
-              <div className="grid grid-cols-2 gap-16 md:grid-cols-3">
-                {content.imageTiles.map((image, index) => (
-                  <CTAImage
-                    key={index}
-                    image={image}
-                    alt={`${content.title} - ${index + 1}`}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-      );
-
     default:
       return (
         <div

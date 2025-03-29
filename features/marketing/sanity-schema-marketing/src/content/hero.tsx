@@ -45,7 +45,6 @@ export const heroSchema = defineType({
               { title: 'None', value: 'none' },
               { title: 'Image', value: 'image' },
               { title: 'Video', value: 'video' },
-              { title: 'Image Tiles', value: 'image-tiles' },
             ],
           },
           initialValue: 'none',
@@ -69,13 +68,6 @@ export const heroSchema = defineType({
           hidden: ({ parent }) => parent?.type !== 'video',
         }),
 
-        defineField({
-          name: 'imageTiles',
-          title: 'Image Tiles',
-          type: 'array',
-          of: [{ type: 'image' }],
-          hidden: ({ parent }) => parent?.type !== 'image-tiles',
-        }),
       ],
     }),
     defineField({

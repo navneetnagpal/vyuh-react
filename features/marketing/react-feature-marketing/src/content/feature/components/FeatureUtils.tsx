@@ -179,18 +179,6 @@ export function useBackgroundStyles(
       return { backgroundColor: background.color };
     case 'gradient':
       return { backgroundImage: background.gradient };
-    case 'image':
-      // Use MediaUtils to get the image URL
-      if (!background.image) return {};
-
-      const imageUrl = getImageUrl(background.image);
-      if (!imageUrl) return {};
-
-      return {
-        backgroundImage: `url(${imageUrl})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      };
     default:
       return {};
   }

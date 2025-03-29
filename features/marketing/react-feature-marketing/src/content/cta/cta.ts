@@ -8,7 +8,7 @@ export const CTA_SCHEMA_TYPE = 'marketing.cta';
  * CTAs can include:
  * - Title and subtitle
  * - Primary and secondary action buttons
- * - Optional image or image tiles
+ * - Optional image
  * - Additional information text
  */
 export interface CTA extends ContentItem {
@@ -26,11 +26,6 @@ export interface CTA extends ContentItem {
    * The main image or screenshot for split variants
    */
   readonly image?: ImageReference;
-
-  /**
-   * Multiple images displayed in a grid for the image tiles variant
-   */
-  readonly imageTiles?: ImageReference[];
 
   /**
    * Primary call-to-action button

@@ -38,21 +38,7 @@ export const ctaSchema = defineType({
         hotspot: true,
       },
     }),
-    defineField({
-      name: 'imageTiles',
-      title: 'Image Tiles',
-      type: 'array',
-      of: [{ type: 'image' }],
-      description: 'Multiple images displayed in a grid',
-      validation: (Rule) =>
-        Rule.custom((value, context) => {
-          if (!value || value.length === 0) {
-            return 'At least one image is required for the image tiles variant';
-          }
 
-          return true;
-        }),
-    }),
     defineField({
       name: 'primaryAction',
       title: 'Primary Action',
@@ -139,7 +125,6 @@ export const defaultCTALayout = defineType({
           { title: 'Simple justified', value: 'simple-justified' },
           { title: 'Split with image on left', value: 'split-image-left' },
           { title: 'Split with image on right', value: 'split-image-right' },
-          { title: 'With image tiles', value: 'image-tiles' },
         ],
       },
       initialValue: 'simple-centered',

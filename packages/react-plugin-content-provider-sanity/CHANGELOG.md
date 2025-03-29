@@ -1,5 +1,13 @@
 # @vyuh/react-plugin-content-provider-sanity
 
+## 0.2.4
+
+### Patch Changes
+
+- Styling updates to make it more seamless
+- Updated dependencies
+  - @vyuh/react-core@0.2.4
+
 ## 0.2.3
 
 ### Patch Changes
