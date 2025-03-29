@@ -1,7 +1,7 @@
-import { defineField, defineType } from 'sanity';
-import { TbLayoutNavbar as Icon } from 'react-icons/tb';
 import { ContentDescriptor } from '@vyuh/sanity-schema-core';
 import React from 'react';
+import { TbLayoutNavbar as Icon } from 'react-icons/tb';
+import { defineField, defineType } from 'sanity';
 
 /**
  * Navigation dropdown item schema for header navigation

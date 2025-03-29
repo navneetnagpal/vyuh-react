@@ -31,7 +31,10 @@ function CardTitle({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="card-title"
-      className={cn('vfs:px-4 vfs:pt-4 vfs:font-semibold vfs:leading-none', className)}
+      className={cn(
+        'vfs:px-4 vfs:pt-4 vfs:font-semibold vfs:leading-none',
+        className,
+      )}
       {...props}
     />
   );
@@ -41,7 +44,10 @@ function CardDescription({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="card-description"
-      className={cn('vfs:text-muted-foreground vfs:px-4 vfs:text-sm', className)}
+      className={cn(
+        'vfs:text-muted-foreground vfs:px-4 vfs:text-sm',
+        className,
+      )}
       {...props}
     />
   );
@@ -74,7 +80,10 @@ function CardFooter({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="card-footer"
-      className={cn('vfs:[.border-t]:pt-6 vfs:flex vfs:items-center vfs:px-6', className)}
+      className={cn(
+        'vfs:[.border-t]:pt-6 vfs:flex vfs:items-center vfs:px-6',
+        className,
+      )}
       {...props}
     />
   );

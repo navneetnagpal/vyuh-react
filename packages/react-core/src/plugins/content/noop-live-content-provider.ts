@@ -1,6 +1,5 @@
 import { RouteBase } from '@/content/route-base';
 import { LiveContentProvider } from '@/plugins/content/content-provider';
-import React from 'react';
 import { Observable } from 'rxjs';
 
 /**

@@ -1,8 +1,4 @@
-import {
-  API_CONTENT_SCHEMA_TYPE,
-  APIConfiguration,
-  APIContent,
-} from '@/content/api-content/api-content';
+import { API_CONTENT_SCHEMA_TYPE, APIConfiguration, APIContent } from '@/content/api-content/api-content';
 import { LayoutConfiguration, TypeDescriptor } from '@vyuh/react-core';
 import { AsyncContentContainer } from '@vyuh/react-extension-content';
 import React from 'react';

@@ -1,6 +1,6 @@
-import { defineField, defineType } from 'sanity';
-import { TbCurrencyDollar as Icon } from 'react-icons/tb';
 import { ContentDescriptor } from '@vyuh/sanity-schema-core';
+import { TbCurrencyDollar as Icon } from 'react-icons/tb';
+import { defineField, defineType } from 'sanity';
 
 /**
  * Pricing section schema for marketing pages
@@ -50,7 +50,8 @@ export const pricingSchema = defineType({
           name: 'discount',
           title: 'Annual Discount Percentage',
           type: 'number',
-          description: 'Discount percentage for annual billing (e.g., 20 for 20%)',
+          description:
+            'Discount percentage for annual billing (e.g., 20 for 20%)',
           hidden: ({ parent }) => !parent?.enabled,
         }),
       ],
@@ -122,7 +123,13 @@ export const pricingSchema = defineType({
               featured: 'featured',
               featureCount: 'features.length',
             },
-            prepare({ name, price, currency = 'USD', featured, featureCount = 0 }) {
+            prepare({
+              name,
+              price,
+              currency = 'USD',
+              featured,
+              featureCount = 0,
+            }) {
               const formattedPrice = new Intl.NumberFormat('en-US', {
                 style: 'currency',
                 currency: currency,
@@ -143,7 +150,8 @@ export const pricingSchema = defineType({
       name: 'disclaimer',
       title: 'Disclaimer',
       type: 'text',
-      description: 'Optional disclaimer text to display below the pricing plans',
+      description:
+        'Optional disclaimer text to display below the pricing plans',
     }),
   ],
   preview: {

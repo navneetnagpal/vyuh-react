@@ -1,10 +1,6 @@
 'use client';
 
-import {
-  createAsyncResource,
-  IAsyncResource,
-  ILiveAsyncResource,
-} from '@/ui/async-resource';
+import { createAsyncResource, IAsyncResource, ILiveAsyncResource } from '@/ui/async-resource';
 import { ErrorBoundary } from '@/ui/error-boundary';
 import { useVyuh } from '@vyuh/react-core';
 import React, { Suspense, useCallback, useEffect, useState } from 'react';

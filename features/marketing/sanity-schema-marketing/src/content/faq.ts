@@ -1,6 +1,6 @@
 import { ContentDescriptor } from '@vyuh/sanity-schema-core';
-import { defineField, defineType } from 'sanity';
 import { TbQuestionMark as Icon } from 'react-icons/tb';
+import { defineField, defineType } from 'sanity';
 
 /**
  * FAQ section schema for marketing pages

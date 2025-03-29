@@ -4,7 +4,7 @@ export const ACCORDION_SCHEMA_TYPE = 'vyuh.accordion';
 
 /**
  * Accordion item for individual sections within an accordion
- * 
+ *
  * Each accordion item has:
  * - A title that serves as the trigger/header
  * - Optional icon identifier
@@ -29,7 +29,7 @@ export interface AccordionItem {
 
 /**
  * Accordion content item for displaying collapsible content sections
- * 
+ *
  * Accordions can include:
  * - Title and description for the overall accordion
  * - Multiple accordion items, each with their own title and content

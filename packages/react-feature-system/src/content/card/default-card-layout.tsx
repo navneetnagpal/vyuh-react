@@ -9,12 +9,7 @@ import {
   CardTitle,
 } from '@ui/components/card';
 import { cn } from '@ui/lib/utils';
-import {
-  Action,
-  LayoutConfiguration,
-  TypeDescriptor,
-  useVyuh,
-} from '@vyuh/react-core';
+import { Action, LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
 import React from 'react';
 
 /**

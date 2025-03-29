@@ -1,6 +1,6 @@
-import { defineField, defineType } from 'sanity';
-import { TbMail as Icon } from 'react-icons/tb';
 import { ContentDescriptor } from '@vyuh/sanity-schema-core';
+import { TbMail as Icon } from 'react-icons/tb';
+import { defineField, defineType } from 'sanity';
 
 /**
  * Newsletter section schema for marketing pages

@@ -1,10 +1,10 @@
-import { backgroundField } from '../object/background';
 import {
   ContentDescriptor,
   ContentSchemaBuilder,
 } from '@vyuh/sanity-schema-core';
-import { defineField, defineType } from 'sanity';
 import { TbLayoutList as Icon } from 'react-icons/tb';
+import { defineField, defineType } from 'sanity';
+import { backgroundField } from '../object/background';
 
 /**
  * Feature section schema for marketing pages
@@ -185,7 +185,9 @@ export const featureSchema = defineType({
         subtitleText.push(`Media: ${mediaType}`);
       }
       if (features.length) {
-        subtitleText.push(`${features.length} feature${features.length === 1 ? '' : 's'}`);
+        subtitleText.push(
+          `${features.length} feature${features.length === 1 ? '' : 's'}`,
+        );
       }
 
       return {

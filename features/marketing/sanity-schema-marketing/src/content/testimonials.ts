@@ -1,6 +1,6 @@
-import { defineField, defineType } from 'sanity';
-import { TbQuote as Icon } from 'react-icons/tb';
 import { ContentDescriptor } from '@vyuh/sanity-schema-core';
+import { TbQuote as Icon } from 'react-icons/tb';
+import { defineField, defineType } from 'sanity';
 
 /**
  * Testimonials section schema for marketing pages
@@ -83,7 +83,8 @@ export const testimonialsSchema = defineType({
 
                   return {
                     title: `Author: ${name || 'Untitled'}`,
-                    subtitle: subtitle.length > 0 ? subtitle.join(', ') : undefined,
+                    subtitle:
+                      subtitle.length > 0 ? subtitle.join(', ') : undefined,
                     media,
                   };
                 },

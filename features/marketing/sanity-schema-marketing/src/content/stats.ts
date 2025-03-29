@@ -1,6 +1,6 @@
-import { defineField, defineType } from 'sanity';
-import { TbChartBar as Icon } from 'react-icons/tb';
 import { ContentDescriptor } from '@vyuh/sanity-schema-core';
+import { TbChartBar as Icon } from 'react-icons/tb';
+import { defineField, defineType } from 'sanity';
 
 /**
  * Stats section schema for marketing pages
@@ -29,8 +29,8 @@ export const statsSchema = defineType({
       name: 'description',
       title: 'Description',
       type: 'text',
-      description: 'Detailed description for variants that include descriptions',
-
+      description:
+        'Detailed description for variants that include descriptions',
     }),
     defineField({
       name: 'image',
@@ -40,7 +40,6 @@ export const statsSchema = defineType({
       options: {
         hotspot: true,
       },
-
     }),
     defineField({
       name: 'stats',

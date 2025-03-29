@@ -1,6 +1,6 @@
-import { defineField, defineType } from 'sanity';
-import { TbArticle as Icon } from 'react-icons/tb';
 import { ContentDescriptor } from '@vyuh/sanity-schema-core';
+import { TbArticle as Icon } from 'react-icons/tb';
+import { defineField, defineType } from 'sanity';
 
 /**
  * Blog section schema for marketing pages
@@ -129,7 +129,9 @@ export const blogSchema = defineType({
               media: 'image',
             },
             prepare({ title, date, authorName, featured, media }) {
-              const formattedDate = date ? new Date(date).toLocaleDateString() : '';
+              const formattedDate = date
+                ? new Date(date).toLocaleDateString()
+                : '';
               const subtitle = [];
               if (authorName) subtitle.push(authorName);
               if (formattedDate) subtitle.push(formattedDate);
@@ -137,25 +139,29 @@ export const blogSchema = defineType({
 
               return {
                 title: `Post: ${title || 'Untitled'}`,
-                subtitle: subtitle.length > 0 ? subtitle.join(' • ') : undefined,
+                subtitle:
+                  subtitle.length > 0 ? subtitle.join(' • ') : undefined,
                 media,
               };
             },
           },
         },
       ],
-      validation: (Rule) => Rule.required().min(1).custom((posts, context) => {
-        if (context.parent?.variant === 'with-featured-post') {
-          const featuredPosts = posts.filter(post => post.featured);
-          if (featuredPosts.length === 0) {
-            return 'At least one post must be marked as featured for this variant';
-          }
-          if (featuredPosts.length > 1) {
-            return 'Only one post should be marked as featured for this variant';
-          }
-        }
-        return true;
-      }),
+      validation: (Rule) =>
+        Rule.required()
+          .min(1)
+          .custom((posts, context) => {
+            if (context.parent?.variant === 'with-featured-post') {
+              const featuredPosts = posts.filter((post) => post.featured);
+              if (featuredPosts.length === 0) {
+                return 'At least one post must be marked as featured for this variant';
+              }
+              if (featuredPosts.length > 1) {
+                return 'Only one post should be marked as featured for this variant';
+              }
+            }
+            return true;
+          }),
     }),
     defineField({
       name: 'action',
@@ -225,7 +231,8 @@ export const defaultBlogLayout = defineType({
         ],
       },
       initialValue: 3,
-      hidden: ({ parent }) => !['simple-grid', 'card-grid'].includes(parent?.variant),
+      hidden: ({ parent }) =>
+        !['simple-grid', 'card-grid'].includes(parent?.variant),
     }),
   ],
   preview: {
@@ -235,13 +242,14 @@ export const defaultBlogLayout = defineType({
       columns: 'columns',
     },
     prepare({ variant, darkMode, columns }) {
-      const variantDisplay = {
-        'simple-grid': 'Simple Grid',
-        'with-featured-post': 'With Featured Post',
-        'card-grid': 'Card Grid',
-        'list-with-image': 'List with Image',
-        'compact-list': 'Compact List',
-      }[variant] || 'Default';
+      const variantDisplay =
+        {
+          'simple-grid': 'Simple Grid',
+          'with-featured-post': 'With Featured Post',
+          'card-grid': 'Card Grid',
+          'list-with-image': 'List with Image',
+          'compact-list': 'Compact List',
+        }[variant] || 'Default';
 
       const features = [];
       if (darkMode) features.push('Dark Mode');

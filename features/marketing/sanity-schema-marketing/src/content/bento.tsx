@@ -1,6 +1,6 @@
-import { defineField, defineType } from 'sanity';
-import { TbLayoutGrid as Icon } from 'react-icons/tb';
 import { ContentDescriptor } from '@vyuh/sanity-schema-core';
+import { TbLayoutGrid as Icon } from 'react-icons/tb';
+import { defineField, defineType } from 'sanity';
 
 /**
  * Bento grid schema for marketing pages
@@ -99,7 +99,11 @@ export const bentoSchema = defineType({
               const spanText = span ? ` (${span})` : '';
               return {
                 title: `Item: ${title || 'Untitled'}${spanText}`,
-                subtitle: description ? (description.length > 40 ? description.substring(0, 40) + '...' : description) : 'No description',
+                subtitle: description
+                  ? description.length > 40
+                    ? description.substring(0, 40) + '...'
+                    : description
+                  : 'No description',
                 media: media || (icon ? Icon : undefined),
               };
             },

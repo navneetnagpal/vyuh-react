@@ -22,43 +22,37 @@ import {
   FeatureSectionDescriptor,
 } from './content/feature';
 import {
+  defaultFooterLayout,
   FooterDescriptor,
   footerSchema,
-  defaultFooterLayout,
 } from './content/footer';
 import {
   defaultHeaderLayout,
   HeaderDescriptor,
   headerSchema,
-  navigationDropdownItemSchema,
-  navigationItemSchema,
 } from './content/header';
 import { defaultHeroLayout, HeroDescriptor, heroSchema } from './content/hero';
-import { LogoDescriptor, logoSchema, defaultLogoLayout } from './content/logo';
+import { defaultLogoLayout, LogoDescriptor, logoSchema } from './content/logo';
 import {
-  newsletterSchema,
   defaultNewsletterLayout,
   NewsletterDescriptor,
+  newsletterSchema,
 } from './content/newsletter';
 import {
-  pricingSchema,
   defaultPricingLayout,
   PricingDescriptor,
+  pricingSchema,
 } from './content/pricing';
 import {
-  statsSchema,
   defaultStatsLayout,
   StatsDescriptor,
+  statsSchema,
 } from './content/stats';
+import { defaultTeamLayout, TeamDescriptor, teamSchema } from './content/team';
 import {
-  teamSchema,
-  defaultTeamLayout,
-  TeamDescriptor,
-} from './content/team';
-import {
-  testimonialsSchema,
   defaultTestimonialsLayout,
   TestimonialsDescriptor,
+  testimonialsSchema,
 } from './content/testimonials';
 
 export const marketing = new FeatureDescriptor({

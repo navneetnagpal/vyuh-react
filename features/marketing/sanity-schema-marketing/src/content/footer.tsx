@@ -1,6 +1,6 @@
-import { defineField, defineType } from 'sanity';
-import { TbLayoutBottombar as Icon } from 'react-icons/tb';
 import { ContentDescriptor } from '@vyuh/sanity-schema-core';
+import { TbLayoutBottombar as Icon } from 'react-icons/tb';
+import { defineField, defineType } from 'sanity';
 
 /**
  * Footer section schema for marketing pages
@@ -125,7 +125,8 @@ export const footerSchema = defineType({
               icon: 'icon',
             },
             prepare({ platform, url, icon }) {
-              const displayPlatform = platform === 'other' && icon ? icon : platform;
+              const displayPlatform =
+                platform === 'other' && icon ? icon : platform;
               return {
                 title: `Social: ${displayPlatform ? displayPlatform.charAt(0).toUpperCase() + displayPlatform.slice(1) : 'Untitled'}`,
                 subtitle: url ? url.replace(/^https?:\/\//, '') : 'No URL',

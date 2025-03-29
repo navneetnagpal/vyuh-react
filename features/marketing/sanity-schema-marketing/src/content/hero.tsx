@@ -3,8 +3,8 @@ import {
   ContentDescriptor,
   ContentSchemaBuilder,
 } from '@vyuh/sanity-schema-core';
-import { defineField, defineType } from 'sanity';
 import { TbLayoutBoard as Icon } from 'react-icons/tb';
+import { defineField, defineType } from 'sanity';
 
 /**
  * Hero section schema for marketing pages
@@ -67,7 +67,6 @@ export const heroSchema = defineType({
           },
           hidden: ({ parent }) => parent?.type !== 'video',
         }),
-
       ],
     }),
     defineField({
@@ -175,10 +174,9 @@ export const defaultHeroLayout = defineType({
       options: {
         list: [
           { title: 'Centered', value: 'centered' },
+          { title: 'With Image below', value: 'image-below' },
           { title: 'Split with Image on right', value: 'split-right' },
           { title: 'Split with Image on left', value: 'split-left' },
-          { title: 'With background Image', value: 'bg-image' },
-          { title: 'With Image below', value: 'image-below' },
         ],
       },
     }),

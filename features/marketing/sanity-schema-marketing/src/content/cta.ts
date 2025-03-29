@@ -1,10 +1,9 @@
-import { backgroundField } from '@/object/background';
 import {
   ContentDescriptor,
   ContentSchemaBuilder,
 } from '@vyuh/sanity-schema-core';
-import { defineField, defineType } from 'sanity';
 import { TbArrowRight as Icon } from 'react-icons/tb';
+import { defineField, defineType } from 'sanity';
 
 /**
  * CTA (Call to Action) section schema for marketing pages

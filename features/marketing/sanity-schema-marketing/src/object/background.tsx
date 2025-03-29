@@ -33,6 +33,5 @@ export const backgroundField = () =>
         description: 'The type of gradient to use',
         hidden: ({ parent }) => parent?.type !== 'gradient',
       }),
-
     ],
   });

@@ -1,6 +1,6 @@
-import { defineField, defineType } from 'sanity';
-import { TbBrandAirtable as Icon } from 'react-icons/tb';
 import { ContentDescriptor } from '@vyuh/sanity-schema-core';
+import { TbBrandAirtable as Icon } from 'react-icons/tb';
+import { defineField, defineType } from 'sanity';
 
 /**
  * Logo section schema for marketing pages

@@ -1,6 +1,6 @@
-import { defineField, defineType } from 'sanity';
-import { TbUsers as Icon } from 'react-icons/tb';
 import { ContentDescriptor } from '@vyuh/sanity-schema-core';
+import { TbUsers as Icon } from 'react-icons/tb';
+import { defineField, defineType } from 'sanity';
 
 /**
  * Team section schema for marketing pages
