@@ -1,5 +1,13 @@
 # @vyuh/react-extension-content
 
+## 0.2.5
+
+### Patch Changes
+
+- Adding prefix to all tailwind classes to avoid conflicts with an app-level tw
+- Updated dependencies
+  - @vyuh/react-core@0.2.5
+
 ## 0.2.4
 
 ### Patch Changes
