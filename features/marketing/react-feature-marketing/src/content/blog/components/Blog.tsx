@@ -21,7 +21,7 @@ export const Blog: React.FC<BlogProps> = ({ content, layout, className }) => {
   const backgroundClasses = 'bg-white text-gray-900';
 
   return (
-    <Section className={className} padding="lg">
+    <Section className={className}>
       {/* Section header */}
       <BlogHeader content={content} className="mb-10" />
 

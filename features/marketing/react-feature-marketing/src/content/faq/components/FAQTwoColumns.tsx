@@ -28,7 +28,7 @@ export const FAQTwoColumns: React.FC<FAQComponentProps> = ({
   const rightColumnQuestions = questions.slice(midpoint);
 
   return (
-    <Section padding="lg">
+    <Section>
       <div className="mx-auto max-w-4xl text-center">
         <FAQTitle title={title} className={titleClass} />
         <FAQSubtitle subtitle={subtitle} className={subtitleClass} />

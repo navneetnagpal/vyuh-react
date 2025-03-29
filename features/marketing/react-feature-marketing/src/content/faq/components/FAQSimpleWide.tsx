@@ -14,7 +14,7 @@ export const FAQSimpleWide: React.FC<FAQComponentProps> = ({
   const { toggleQuestion, isQuestionOpen } = useFAQQuestions(questions);
 
   return (
-    <Section padding="lg">
+    <Section>
       <div className="mx-auto max-w-4xl divide-y divide-gray-900/10">
         <div className="text-center">
           <FAQTitle title={title} className="text-gray-900" />

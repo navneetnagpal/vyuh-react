@@ -20,7 +20,7 @@ export const FeatureWithScreenshot: React.FC<FeatureComponentProps> = ({
   const { title, description, features, media, actions } = content;
 
   return (
-    <Section className="overflow-hidden">
+    <Section>
         <div className="grid grid-cols-1 gap-16 lg:mx-0 lg:max-w-none lg:grid-cols-2">
           <div className="lg:pr-8 lg:pt-4">
             <div className="lg:max-w-lg">

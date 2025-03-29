@@ -52,12 +52,7 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <Section
-      as="header"
-      className={cn('py-4 px-8', sticky && 'sticky top-0 z-50', className)}
-      padding="none"
-      constrained={false}
-    >
+    <Section className={cn(sticky && 'sticky top-0 z-50', className)}>
       {renderHeaderContent()}
     </Section>
   );

@@ -35,7 +35,7 @@ export const Stats: React.FC<StatsProps> = ({ content, layout }) => {
   };
 
   return (
-    <Section maxWidth="5xl" padding="lg">
+    <Section>
       {variant === 'simple' && (
         <>
           <StatsHeader content={content} />

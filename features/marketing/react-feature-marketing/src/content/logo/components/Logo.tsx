@@ -16,7 +16,7 @@ export const Logo: React.FC<LogoProps> = ({ content, layout, className }) => {
   const columns = layout.columns || 4;
 
   return (
-    <Section className={className} padding="lg">
+    <Section className={className}>
       {/* Section title */}
       <LogoHeader title={content.title} className="mb-8" />
 

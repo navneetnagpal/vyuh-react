@@ -53,7 +53,7 @@ export const Newsletter: React.FC<NewsletterProps> = ({
 
     default:
       return (
-        <Section className={className} maxWidth="2xl" centered>
+        <Section className={className}>
           <NewsletterHeader content={content} />
           <NewsletterForm content={content} className="mt-6" />
         </Section>
