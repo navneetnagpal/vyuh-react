@@ -1,5 +1,5 @@
-import { Action } from '@vyuh/react-core';
 import { cn } from '@/shared/utils';
+import { Action } from '@vyuh/react-core';
 import React from 'react';
 
 export interface ActionButtonProps {
@@ -7,37 +7,37 @@ export interface ActionButtonProps {
    * The action to execute when the button is clicked
    */
   action: Action;
-  
+
   /**
    * Additional CSS classes to apply to the button
    */
   className?: string;
-  
+
   /**
    * Whether to use dark mode styling
    */
   darkMode?: boolean;
-  
+
   /**
    * The variant of the button
    */
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'link';
-  
+
   /**
    * The size of the button
    */
   size?: 'sm' | 'md' | 'lg';
-  
+
   /**
    * Whether the button should take up the full width of its container
    */
   fullWidth?: boolean;
-  
+
   /**
    * Optional icon to display before the button text
    */
   icon?: React.ReactNode;
-  
+
   /**
    * Optional icon to display after the button text
    */
@@ -58,15 +58,16 @@ export const ActionButton: React.FC<ActionButtonProps> = ({
   trailingIcon,
 }) => {
   // Base button classes
-  const baseClasses = 'inline-flex items-center justify-center font-semibold rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500';
-  
+  const baseClasses =
+    'inline-flex items-center justify-center font-semibold rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500';
+
   // Size classes
   const sizeClasses = {
     sm: 'px-3 py-1.5 text-xs',
     md: 'px-4 py-2 text-sm',
     lg: 'px-6 py-3 text-base',
   };
-  
+
   // Variant classes
   const variantClasses = {
     primary: darkMode
@@ -85,7 +86,7 @@ export const ActionButton: React.FC<ActionButtonProps> = ({
       ? 'text-indigo-400 hover:text-indigo-300 shadow-none'
       : 'text-indigo-600 hover:text-indigo-500 shadow-none',
   };
-  
+
   return (
     <button
       onClick={() => action.execute()}
@@ -94,7 +95,7 @@ export const ActionButton: React.FC<ActionButtonProps> = ({
         sizeClasses[size],
         variantClasses[variant],
         fullWidth && 'w-full',
-        className
+        className,
       )}
     >
       {icon && <span className="mr-2">{icon}</span>}

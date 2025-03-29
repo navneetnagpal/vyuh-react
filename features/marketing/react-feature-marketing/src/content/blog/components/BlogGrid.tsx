@@ -1,10 +1,10 @@
 import { Blog } from '@/content/blog/blog';
 import { cn } from '@/shared/utils';
 import React from 'react';
-import { BlogPostCard } from './BlogPostCard';
 import { BlogFeaturedPost } from './BlogFeaturedPost';
-import { BlogListItem } from './BlogListItem';
 import { BlogImageListItem } from './BlogImageListItem';
+import { BlogListItem } from './BlogListItem';
+import { BlogPostCard } from './BlogPostCard';
 
 interface BlogGridProps {
   posts: Blog['posts'];

@@ -1,12 +1,6 @@
 import React from 'react';
 import { FAQComponentProps } from './FAQTypes';
-import {
-  FAQContact,
-  FAQQuestion,
-  FAQSubtitle,
-  FAQTitle,
-  useFAQQuestions,
-} from './FAQUtils';
+import { FAQContact, FAQQuestion, FAQSubtitle, FAQTitle, useFAQQuestions } from './FAQUtils';
 
 /**
  * FAQ layout with contact information
@@ -30,7 +24,7 @@ export const FAQWithContact: React.FC<FAQComponentProps> = ({
           <FAQTitle title={title} className={titleClass} />
           <FAQSubtitle subtitle={subtitle} className={subtitleClass} />
         </div>
-        <div className="mx-auto mt-16 grid max-w-7xl grid-cols-1 gap-8 lg:grid-cols-3">
+        <div className="mx-auto mt-16 grid max-w-7xl grid-cols-1 gap-0 md:gap-8 lg:grid-cols-3">
           <div className="col-span-2">
             <dl className="space-y-6 divide-y divide-gray-900/10">
               {questions.map((faq, index) => (
@@ -45,9 +39,7 @@ export const FAQWithContact: React.FC<FAQComponentProps> = ({
               ))}
             </dl>
           </div>
-          <div>
-            <FAQContact contactInfo={contactInfo} darkMode={darkMode} />
-          </div>
+          <FAQContact contactInfo={contactInfo} darkMode={darkMode} />
         </div>
       </div>
     </div>

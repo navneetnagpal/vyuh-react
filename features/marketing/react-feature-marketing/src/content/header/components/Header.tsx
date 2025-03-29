@@ -1,14 +1,12 @@
-import { Header as HeaderItem } from '@/content/header/header';
 import { DefaultHeaderLayout } from '@/content/header/default-header-layout';
-import { cn } from '@/shared/utils';
-import { Section } from '@/shared/components/Section';
+import { Header as HeaderItem } from '@/content/header/header';
 import { Container } from '@/shared/components/Container';
-import { Action, useVyuh } from '@vyuh/react-core';
-import { DynamicIcon, IconName } from 'lucide-react/dynamic';
+import { Section } from '@/shared/components/Section';
+import { cn } from '@/shared/utils';
 import React from 'react';
+import { ActionButtons } from './ActionButtons';
 import { Logo } from './Logo';
 import { Navigation } from './Navigation';
-import { ActionButtons } from './ActionButtons';
 
 interface HeaderProps {
   content: HeaderItem;

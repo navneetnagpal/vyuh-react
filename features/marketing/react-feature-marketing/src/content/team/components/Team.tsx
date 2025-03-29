@@ -1,5 +1,5 @@
-import { Team as TeamContent } from '@/content/team/team';
 import { DefaultTeamLayout } from '@/content/team/default-team-layout';
+import { Team as TeamContent } from '@/content/team/team';
 import { cn } from '@/shared/utils';
 import React from 'react';
 import { TeamHeader } from './TeamHeader';

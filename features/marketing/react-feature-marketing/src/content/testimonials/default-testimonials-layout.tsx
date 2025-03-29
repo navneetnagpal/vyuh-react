@@ -1,8 +1,8 @@
+import { Testimonials } from '@/content/testimonials/components/Testimonials';
 import {
   Testimonials as TestimonialsContent,
   TESTIMONIALS_SCHEMA_TYPE,
 } from '@/content/testimonials/testimonials';
-import { Testimonials } from '@/content/testimonials/components/Testimonials';
 import { LayoutConfiguration, TypeDescriptor } from '@vyuh/react-core';
 import React from 'react';
 

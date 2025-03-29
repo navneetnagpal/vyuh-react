@@ -2,18 +2,12 @@ import {
   FeatureCenteredGrid,
   FeatureSimple,
   FeatureThreeColumn,
-  FeatureWithCodeExample,
-  FeatureWithLeftScreenshot,
   FeatureWithScreenshot,
   FeatureWithScreenshotDark,
 } from '@/content/feature/components';
 import { FeatureWithMedia } from '@/content/feature/components/FeatureWithMedia';
 import { Feature, FEATURE_SCHEMA_TYPE } from '@/content/feature/feature';
-import {
-  ImageReference,
-  LayoutConfiguration,
-  TypeDescriptor,
-} from '@vyuh/react-core';
+import { LayoutConfiguration, TypeDescriptor } from '@vyuh/react-core';
 import React from 'react';
 
 /**

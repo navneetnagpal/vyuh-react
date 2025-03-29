@@ -1,5 +1,5 @@
-import { ImageReference } from '@vyuh/react-core';
 import { MediaImage } from '@/shared/components';
+import { ImageReference } from '@vyuh/react-core';
 import React from 'react';
 
 interface NewsletterImageProps {

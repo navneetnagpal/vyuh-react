@@ -1,8 +1,8 @@
+import { Pricing } from '@/content/pricing/components/Pricing';
 import {
   Pricing as PricingContent,
   PRICING_SCHEMA_TYPE,
 } from '@/content/pricing/pricing';
-import { Pricing } from '@/content/pricing/components/Pricing';
 import { LayoutConfiguration, TypeDescriptor } from '@vyuh/react-core';
 import React from 'react';
 

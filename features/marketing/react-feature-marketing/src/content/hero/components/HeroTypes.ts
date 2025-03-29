@@ -1,5 +1,5 @@
-import { DefaultHeroLayout } from '@/content/hero/default-hero-layout';
 import { Hero } from '@/content/hero';
+import { DefaultHeroLayout } from '@/content/hero/default-hero-layout';
 
 /**
  * Common interface for all hero components

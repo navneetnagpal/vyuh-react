@@ -1,11 +1,6 @@
 import React from 'react';
 import { FAQComponentProps } from './FAQTypes';
-import {
-  FAQQuestion,
-  FAQSubtitle,
-  FAQTitle,
-  useFAQQuestions,
-} from './FAQUtils';
+import { FAQQuestion, FAQSubtitle, FAQTitle, useFAQQuestions } from './FAQUtils';
 
 /**
  * Simple FAQ layout with wide questions

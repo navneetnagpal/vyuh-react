@@ -1,5 +1,5 @@
-import { Footer, FOOTER_SCHEMA_TYPE } from '@/content/footer/footer';
 import { Footer as FooterComponent } from '@/content/footer/components/Footer';
+import { Footer, FOOTER_SCHEMA_TYPE } from '@/content/footer/footer';
 import { LayoutConfiguration, TypeDescriptor } from '@vyuh/react-core';
 import React from 'react';
 

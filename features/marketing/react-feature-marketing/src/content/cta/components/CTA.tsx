@@ -1,11 +1,11 @@
 import { CTA as CTAContent } from '@/content/cta/cta';
 import { DefaultCTALayout } from '@/content/cta/default-cta-layout';
+import { useMediaUtils } from '@/shared/MediaUtils';
 import { cn } from '@/shared/utils';
 import React from 'react';
-import { CTAHeader } from './CTAHeader';
 import { CTAButtonGroup } from './CTAButtonGroup';
+import { CTAHeader } from './CTAHeader';
 import { CTAImage } from './CTAImage';
-import { useMediaUtils } from '@/shared/MediaUtils';
 
 interface CTAProps {
   content: CTAContent;

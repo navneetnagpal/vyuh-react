@@ -1,7 +1,7 @@
 import { Bento } from '@/content/bento/bento';
 import { MediaImage } from '@/shared/components';
-import { cn } from '@/shared/utils';
 import { useMediaUtils } from '@/shared/MediaUtils';
+import { cn } from '@/shared/utils';
 import { Action } from '@vyuh/react-core';
 import { DynamicIcon, IconName } from 'lucide-react/dynamic';
 import React from 'react';

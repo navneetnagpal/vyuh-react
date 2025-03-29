@@ -2,9 +2,9 @@ import { Banner as BannerItem } from '@/content/banner/banner';
 import { DefaultBannerLayout } from '@/content/banner/default-banner-layout';
 import { cn } from '@/shared/utils';
 import React from 'react';
-import { BannerIcon } from './BannerIcon';
 import { BannerContent } from './BannerContent';
 import { BannerDismiss } from './BannerDismiss';
+import { BannerIcon } from './BannerIcon';
 
 interface BannerProps {
   content: BannerItem;

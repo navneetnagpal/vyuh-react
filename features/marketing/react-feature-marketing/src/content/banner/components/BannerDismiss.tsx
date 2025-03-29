@@ -13,11 +13,7 @@ export const BannerDismiss: React.FC<BannerDismissProps> = ({
   onDismiss,
 }) => {
   return (
-    <span
-      title={dismissText}
-      className={className}
-      onClick={onDismiss}
-    >
+    <span title={dismissText} className={className} onClick={onDismiss}>
       <XCircleIcon className="h-5 w-5 cursor-pointer" />
     </span>
   );

@@ -1,14 +1,15 @@
-import { Header as HeaderContent, HEADER_SCHEMA_TYPE } from '@/content/header/header';
 import { Header } from '@/content/header/components/Header';
+import {
+  Header as HeaderContent,
+  HEADER_SCHEMA_TYPE,
+} from '@/content/header/header';
 import { LayoutConfiguration, TypeDescriptor } from '@vyuh/react-core';
 import React from 'react';
 
 /**
  * Header layout variant type
  */
-export type HeaderVariant =
-  | 'simple'
-  | 'with-navigation';
+export type HeaderVariant = 'simple' | 'with-navigation';
 
 /**
  * Default layout for Header content items

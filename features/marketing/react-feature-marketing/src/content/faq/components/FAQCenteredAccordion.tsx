@@ -1,12 +1,6 @@
 import React from 'react';
 import { FAQComponentProps } from './FAQTypes';
-import {
-  FAQQuestion,
-  FAQSubtitle,
-  FAQTitle,
-  groupQuestionsByCategory,
-  useFAQQuestions,
-} from './FAQUtils';
+import { FAQQuestion, FAQSubtitle, FAQTitle, groupQuestionsByCategory, useFAQQuestions } from './FAQUtils';
 
 /**
  * Centered accordion FAQ layout with category support

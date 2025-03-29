@@ -1,6 +1,8 @@
-import { Pricing as PricingContent } from '@/content/pricing/pricing';
 import { DefaultPricingLayout } from '@/content/pricing/default-pricing-layout';
+import { Pricing as PricingContent } from '@/content/pricing/pricing';
 import { cn } from '@/shared/utils';
+// Import at the top of the file
+import { CheckIcon } from 'lucide-react';
 import React, { useState } from 'react';
 import { PricingHeader } from './PricingHeader';
 import { PricingPlan } from './PricingPlan';
@@ -378,6 +380,3 @@ export const Pricing: React.FC<PricingProps> = ({
       );
   }
 };
-
-// Import at the top of the file
-import { CheckIcon } from 'lucide-react';

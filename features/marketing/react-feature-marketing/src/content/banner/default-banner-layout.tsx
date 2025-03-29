@@ -1,7 +1,4 @@
-import {
-  Banner as BannerContent,
-  BANNER_SCHEMA_TYPE,
-} from '@/content/banner/banner';
+import { Banner as BannerContent, BANNER_SCHEMA_TYPE } from '@/content/banner/banner';
 import { Banner } from '@/content/banner/components/Banner';
 import { LayoutConfiguration, TypeDescriptor } from '@vyuh/react-core';
 import React from 'react';

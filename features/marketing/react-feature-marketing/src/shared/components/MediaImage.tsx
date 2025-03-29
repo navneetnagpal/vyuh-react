@@ -1,7 +1,7 @@
-import { ImageReference } from '@vyuh/react-core';
-import { cn } from '@/shared/utils';
-import React from 'react';
 import { useMediaUtils } from '@/shared/MediaUtils';
+import { cn } from '@/shared/utils';
+import { ImageReference } from '@vyuh/react-core';
+import React from 'react';
 
 export interface MediaImageProps {
   /**

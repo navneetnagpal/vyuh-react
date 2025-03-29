@@ -1,8 +1,8 @@
 import { Testimonials } from '@/content/testimonials/testimonials';
-import { cn } from '@/shared/utils';
-import React from 'react';
 import { useMediaUtils } from '@/shared/MediaUtils';
+import { cn } from '@/shared/utils';
 import { QuoteIcon } from 'lucide-react';
+import React from 'react';
 
 interface TestimonialItemProps {
   testimonial: Testimonials['testimonials'][0];

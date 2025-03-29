@@ -1,5 +1,5 @@
-import { DefaultBannerLayout } from '@/content/banner/default-banner-layout';
 import { Banner, BANNER_SCHEMA_TYPE } from '@/content/banner/banner';
+import { DefaultBannerLayout } from '@/content/banner/default-banner-layout';
 import { ContentBuilder } from '@vyuh/react-extension-content';
 
 /**

@@ -59,14 +59,7 @@ export const Grid: React.FC<GridProps> = ({
   };
 
   return (
-    <div
-      className={cn(
-        'grid',
-        colClasses,
-        gapClasses[gap],
-        className
-      )}
-    >
+    <div className={cn('grid', colClasses, gapClasses[gap], className)}>
       {children}
     </div>
   );

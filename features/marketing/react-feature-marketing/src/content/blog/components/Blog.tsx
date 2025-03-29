@@ -2,9 +2,9 @@ import { Blog as BlogContent } from '@/content/blog/blog';
 import { DefaultBlogLayout } from '@/content/blog/default-blog-layout';
 import { cn } from '@/shared/utils';
 import React from 'react';
-import { BlogHeader } from './BlogHeader';
-import { BlogGrid } from './BlogGrid';
 import { BlogAction } from './BlogAction';
+import { BlogGrid } from './BlogGrid';
+import { BlogHeader } from './BlogHeader';
 
 interface BlogProps {
   content: BlogContent;

@@ -1,8 +1,5 @@
-import {
-  Stats as StatsContent,
-  STATS_SCHEMA_TYPE,
-} from '@/content/stats/stats';
 import { Stats } from '@/content/stats/components/Stats';
+import { Stats as StatsContent, STATS_SCHEMA_TYPE } from '@/content/stats/stats';
 import { LayoutConfiguration, TypeDescriptor } from '@vyuh/react-core';
 import React from 'react';
 

@@ -27,7 +27,7 @@ export class DefaultBentoLayout extends LayoutConfiguration<Bento> {
 
     this.variant = props?.variant || 'three-column';
     this.darkMode = props?.darkMode || false;
-    this.gap = props?.gap || 'medium';
+    this.gap = props?.gap || 'small';
   }
 
   render(content: Bento): React.ReactNode {

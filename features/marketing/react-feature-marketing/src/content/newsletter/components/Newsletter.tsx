@@ -1,12 +1,12 @@
-import { Newsletter as NewsletterContent } from '@/content/newsletter/newsletter';
 import { DefaultNewsletterLayout } from '@/content/newsletter/default-newsletter-layout';
-import { Section, Container, Card, MediaImage } from '@/shared/components';
-import React from 'react';
-import { NewsletterHeader } from './NewsletterHeader';
-import { NewsletterForm } from './NewsletterForm';
-import { NewsletterFeatures } from './NewsletterFeatures';
-import { NewsletterImage } from './NewsletterImage';
+import { Newsletter as NewsletterContent } from '@/content/newsletter/newsletter';
+import { Card, Container, MediaImage, Section } from '@/shared/components';
 import { cn } from '@/shared/utils';
+import React from 'react';
+import { NewsletterFeatures } from './NewsletterFeatures';
+import { NewsletterForm } from './NewsletterForm';
+import { NewsletterHeader } from './NewsletterHeader';
+import { NewsletterImage } from './NewsletterImage';
 
 interface NewsletterProps {
   content: NewsletterContent;

@@ -1,11 +1,11 @@
-import { Stats as StatsContent } from '@/content/stats/stats';
 import { DefaultStatsLayout } from '@/content/stats/default-stats-layout';
-import { cn } from '@/shared/utils';
-import { Section } from '@/shared/components/Section';
+import { Stats as StatsContent } from '@/content/stats/stats';
 import { Container } from '@/shared/components/Container';
+import { Section } from '@/shared/components/Section';
+import { cn } from '@/shared/utils';
 import React from 'react';
-import { StatsHeader } from './StatsHeader';
 import { StatItem } from './StatItem';
+import { StatsHeader } from './StatsHeader';
 import { StatsImage } from './StatsImage';
 
 interface StatsProps {
@@ -209,9 +209,7 @@ function StatsContainer({
 }) {
   return (
     <Section darkMode={darkMode} maxWidth="5xl">
-      <Container padding="lg">
-        {children}
-      </Container>
+      <Container padding="lg">{children}</Container>
     </Section>
   );
 }

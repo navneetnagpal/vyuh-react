@@ -1,8 +1,8 @@
 import { Team } from '@/content/team/team';
-import { cn } from '@/shared/utils';
-import React from 'react';
 import { useMediaUtils } from '@/shared/MediaUtils';
+import { cn } from '@/shared/utils';
 import { GithubIcon, LinkedinIcon, TwitterIcon } from 'lucide-react';
+import React from 'react';
 
 interface TeamMemberProps {
   member: Team['members'][0];

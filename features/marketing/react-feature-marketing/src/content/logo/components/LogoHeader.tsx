@@ -1,4 +1,3 @@
-import { Logo } from '@/content/logo/logo';
 import { cn } from '@/shared/utils';
 import React from 'react';
 

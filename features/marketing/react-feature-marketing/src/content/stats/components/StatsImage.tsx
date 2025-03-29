@@ -1,7 +1,6 @@
-import { ImageReference } from '@vyuh/react-core';
-import { cn } from '@/shared/utils';
-import React from 'react';
 import { useMediaUtils } from '@/shared/MediaUtils';
+import { ImageReference } from '@vyuh/react-core';
+import React from 'react';
 
 interface StatsImageProps {
   image: ImageReference;

@@ -1,4 +1,4 @@
-import { Action, ContentItem, ImageReference } from '@vyuh/react-core';
+import { ContentItem, ImageReference } from '@vyuh/react-core';
 
 export const NEWSLETTER_SCHEMA_TYPE = 'marketing.newsletter';
 

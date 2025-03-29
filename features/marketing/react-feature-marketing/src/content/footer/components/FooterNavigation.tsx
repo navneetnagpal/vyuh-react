@@ -23,7 +23,7 @@ export const FooterNavigation: React.FC<FooterNavigationProps> = ({
   return (
     <div
       className={cn(
-        'grid gap-16 max-sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4',
+        'grid gap-16 max-md:grid-cols-2 md:grid-cols-3 lg:grid-cols-4',
         className,
       )}
     >

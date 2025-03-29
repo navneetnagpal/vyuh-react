@@ -15,7 +15,26 @@ export interface ContainerProps {
   /**
    * The maximum width of the container
    */
-  maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | 'full' | 'min' | 'max' | 'prose' | 'screen-sm' | 'screen-md' | 'screen-lg' | 'screen-xl' | 'screen-2xl';
+  maxWidth?:
+    | 'sm'
+    | 'md'
+    | 'lg'
+    | 'xl'
+    | '2xl'
+    | '3xl'
+    | '4xl'
+    | '5xl'
+    | '6xl'
+    | '7xl'
+    | 'full'
+    | 'min'
+    | 'max'
+    | 'prose'
+    | 'screen-sm'
+    | 'screen-md'
+    | 'screen-lg'
+    | 'screen-xl'
+    | 'screen-2xl';
 
   /**
    * Whether to center the container horizontally
@@ -79,7 +98,7 @@ export const Container: React.FC<ContainerProps> = ({
         centered && 'mx-auto',
         maxWidthClasses[maxWidth],
         paddingClasses[padding],
-        className
+        className,
       )}
     >
       {children}

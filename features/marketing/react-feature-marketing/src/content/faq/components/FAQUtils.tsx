@@ -154,7 +154,7 @@ export function FAQContact({
   return (
     <div
       className={cn(
-        'rounded-2xl bg-white px-6 py-10 shadow-md',
+        'w-full rounded-2xl bg-white px-6 py-10 shadow-md',
         darkMode ? 'bg-gray-800' : 'bg-white',
         className,
       )}

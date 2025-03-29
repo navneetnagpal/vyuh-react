@@ -1,5 +1,5 @@
-import { DefaultBentoLayout } from '@/content/bento/default-bento-layout';
 import { Bento, BENTO_SCHEMA_TYPE } from '@/content/bento/bento';
+import { DefaultBentoLayout } from '@/content/bento/default-bento-layout';
 import { ContentBuilder } from '@vyuh/react-extension-content';
 
 /**

@@ -1,16 +1,6 @@
-import {
-  HeroCentered,
-  HeroImageBelow,
-  HeroSplitLeft,
-  HeroSplitRight,
-} from '@/content/hero/components';
+import { HeroCentered, HeroImageBelow, HeroSplitLeft, HeroSplitRight } from '@/content/hero/components';
 import { Hero, HERO_SCHEMA_TYPE } from '@/content/hero/hero';
-import {
-  ImageReference,
-  LayoutConfiguration,
-  TypeDescriptor,
-  useVyuh,
-} from '@vyuh/react-core';
+import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
 import React from 'react';
 
 /**

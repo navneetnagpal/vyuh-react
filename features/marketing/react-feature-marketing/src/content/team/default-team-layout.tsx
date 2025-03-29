@@ -1,8 +1,5 @@
-import {
-  Team as TeamContent,
-  TEAM_SCHEMA_TYPE,
-} from '@/content/team/team';
 import { Team } from '@/content/team/components/Team';
+import { Team as TeamContent, TEAM_SCHEMA_TYPE } from '@/content/team/team';
 import { LayoutConfiguration, TypeDescriptor } from '@vyuh/react-core';
 import React from 'react';
 

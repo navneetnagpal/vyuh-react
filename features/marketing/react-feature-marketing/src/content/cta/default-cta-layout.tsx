@@ -1,5 +1,5 @@
-import { CTA as CTAContent, CTA_SCHEMA_TYPE } from '@/content/cta/cta';
 import { CTA } from '@/content/cta/components/CTA';
+import { CTA as CTAContent, CTA_SCHEMA_TYPE } from '@/content/cta/cta';
 import { LayoutConfiguration, TypeDescriptor } from '@vyuh/react-core';
 import React from 'react';
 

@@ -1,12 +1,11 @@
-import { Testimonials as TestimonialsContent } from '@/content/testimonials/testimonials';
 import { DefaultTestimonialsLayout } from '@/content/testimonials/default-testimonials-layout';
+import { Testimonials as TestimonialsContent } from '@/content/testimonials/testimonials';
+import { Container } from '@/shared/components/Container';
+import { Section } from '@/shared/components/Section';
 import { cn } from '@/shared/utils';
 import React from 'react';
-import { TestimonialsHeader } from './TestimonialsHeader';
 import { TestimonialItem } from './TestimonialItem';
-import { useMediaUtils } from '@/shared/MediaUtils';
-import { Section } from '@/shared/components/Section';
-import { Container } from '@/shared/components/Container';
+import { TestimonialsHeader } from './TestimonialsHeader';
 
 interface TestimonialsProps {
   content: TestimonialsContent;

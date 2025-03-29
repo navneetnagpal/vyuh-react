@@ -1,5 +1,5 @@
-import { Logo, LOGO_SCHEMA_TYPE } from '@/content/logo/logo';
 import { Logo as LogoComponent } from '@/content/logo/components/Logo';
+import { Logo, LOGO_SCHEMA_TYPE } from '@/content/logo/logo';
 import { LayoutConfiguration, TypeDescriptor } from '@vyuh/react-core';
 import React from 'react';
 

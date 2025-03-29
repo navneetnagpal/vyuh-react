@@ -1,6 +1,6 @@
 import { Logo } from '@/content/logo/logo';
-import { cn } from '@/shared/utils';
 import { useMediaUtils } from '@/shared/MediaUtils';
+import { cn } from '@/shared/utils';
 import { Action } from '@vyuh/react-core';
 import React from 'react';
 

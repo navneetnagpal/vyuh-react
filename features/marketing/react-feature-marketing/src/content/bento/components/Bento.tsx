@@ -2,8 +2,8 @@ import { Bento as BentoContent } from '@/content/bento/bento';
 import { DefaultBentoLayout } from '@/content/bento/default-bento-layout';
 import { cn } from '@/shared/utils';
 import React from 'react';
-import { BentoHeader } from './BentoHeader';
 import { BentoGrid } from './BentoGrid';
+import { BentoHeader } from './BentoHeader';
 
 interface BentoProps {
   content: BentoContent;
@@ -14,7 +14,7 @@ interface BentoProps {
 export const Bento: React.FC<BentoProps> = ({ content, layout, className }) => {
   const variant = layout.variant || 'three-column';
   const darkMode = layout.darkMode || false;
-  const gap = layout.gap || 'medium';
+  const gap = layout.gap || 'small';
 
   // Background color classes based on dark mode
   const backgroundClasses = darkMode

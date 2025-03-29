@@ -6,10 +6,7 @@ interface BannerIconProps {
   className?: string;
 }
 
-export const BannerIcon: React.FC<BannerIconProps> = ({
-  icon,
-  className,
-}) => {
+export const BannerIcon: React.FC<BannerIconProps> = ({ icon, className }) => {
   if (!icon) {
     return null;
   }

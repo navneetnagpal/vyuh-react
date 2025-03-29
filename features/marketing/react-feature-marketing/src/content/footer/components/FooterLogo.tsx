@@ -1,6 +1,6 @@
 import { Footer } from '@/content/footer/footer';
-import { cn } from '@/shared/utils';
 import { useMediaUtils } from '@/shared/MediaUtils';
+import { cn } from '@/shared/utils';
 import React from 'react';
 
 interface FooterLogoProps {
