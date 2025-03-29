@@ -4,6 +4,7 @@ import {
   HeroTitle,
   useBackgroundStyles,
 } from '@/content/hero/components/HeroUtils';
+import { Section } from '@/shared/components';
 import React from 'react';
 import { HeroComponentProps } from './HeroTypes';
 
@@ -13,7 +14,7 @@ export function HeroCentered({ content, layout }: HeroComponentProps) {
   const bgStyles = useBackgroundStyles(background);
 
   return (
-    <div className="relative isolate px-6 pt-14 lg:px-8" style={bgStyles}>
+    <Section className={'relative'}>
       <div
         className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
         aria-hidden="true"
@@ -47,6 +48,6 @@ export function HeroCentered({ content, layout }: HeroComponentProps) {
           }}
         ></div>
       </div>
-    </div>
+    </Section>
   );
 }

@@ -65,13 +65,15 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
           </div>
         )}
 
+        <span className={'text-sm text-neutral-500'}>
+          {formatDate(post.date)}
+        </span>
+
         {/* Title */}
         <h3 className="mb-2 text-xl font-semibold">{post.title}</h3>
 
         {/* Date and author */}
-        <div className="mb-3 flex items-center justify-between text-sm text-gray-600"
-        >
-          <span>{formatDate(post.date)}</span>
+        <div className="mb-3 flex items-center justify-between text-sm text-gray-600">
           {post.author && (
             <div className={'flex items-center'}>
               {post.author.avatar && (
@@ -94,12 +96,7 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
 
         {/* Excerpt */}
         {post.excerpt && (
-          <p
-            className={cn(
-              'mb-4 flex-1 text-sm',
-              'text-gray-600',
-            )}
-          >
+          <p className={cn('mb-4 flex-1 text-sm', 'text-gray-600')}>
             {post.excerpt}
           </p>
         )}

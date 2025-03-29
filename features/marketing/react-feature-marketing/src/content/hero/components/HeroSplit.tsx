@@ -1,3 +1,4 @@
+import { Section } from '@/shared/components';
 import React from 'react';
 import { HeroComponentProps } from './HeroTypes';
 import {
@@ -15,7 +16,6 @@ type HeroSplitProps = HeroComponentProps & {
 export function HeroSplit({ content, layout, imagePosition }: HeroSplitProps) {
   const { title, subtitle, media, actions } = content;
   const { background } = layout;
-  const bgStyles = useBackgroundStyles(background);
   const hasMedia = media && media.type !== 'none';
 
   // Determine order classes based on image position
@@ -23,7 +23,7 @@ export function HeroSplit({ content, layout, imagePosition }: HeroSplitProps) {
   const mediaOrderClass = imagePosition === 'left' ? 'order-1' : 'order-2';
 
   return (
-    <div className="relative isolate" style={bgStyles}>
+    <Section>
       <div className="mx-auto items-stretch gap-16 pb-24 pt-10 sm:pb-32 lg:grid lg:grid-cols-2 lg:gap-16 lg:py-40">
         {/* Content section */}
         <div className={`pb-16 lg:py-4 lg:pb-0 ${contentOrderClass}`}>
@@ -47,6 +47,6 @@ export function HeroSplit({ content, layout, imagePosition }: HeroSplitProps) {
           )}
         </div>
       </div>
-    </div>
+    </Section>
   );
 }

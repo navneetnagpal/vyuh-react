@@ -1,5 +1,6 @@
 import { Bento as BentoContent } from '@/content/bento/bento';
 import { DefaultBentoLayout } from '@/content/bento/default-bento-layout';
+import { Section } from '@/shared/components';
 import { cn } from '@/shared/utils';
 import React from 'react';
 import { BentoGrid } from './BentoGrid';
@@ -26,19 +27,16 @@ export const Bento: React.FC<BentoProps> = ({ content, layout, className }) => {
   }[gap];
 
   return (
-    <section className={cn('px-6 py-12', backgroundClasses, className)}>
-      <div className="container mx-auto">
-        {/* Section header */}
-        <BentoHeader content={content} className="mb-10" />
+    <Section>
+      {/* Section header */}
+      <BentoHeader content={content} className="mb-10" />
 
-        {/* Bento grid */}
-        <BentoGrid
-          items={content.items}
-          variant={variant}
-
-          gapClasses={gapClasses}
-        />
-      </div>
-    </section>
+      {/* Bento grid */}
+      <BentoGrid
+        items={content.items}
+        variant={variant}
+        gapClasses={gapClasses}
+      />
+    </Section>
   );
 };

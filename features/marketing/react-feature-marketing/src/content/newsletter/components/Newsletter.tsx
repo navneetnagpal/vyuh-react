@@ -34,16 +34,16 @@ export const Newsletter: React.FC<NewsletterProps> = ({
     case 'split-with-image':
       return (
         <Section className={cn('overflow-hidden', className)}>
-          <div className="mx-auto max-w-7xl gap-0 lg:flex lg:items-center lg:gap-x-10">
+          <div className="mx-auto gap-0 lg:flex lg:items-center lg:gap-x-10">
             <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
               <NewsletterHeader content={content} centered={false} />
               <NewsletterForm content={content} className="mt-6" />
             </div>
             {content.image && (
-              <div className="mt-16 sm:mt-24 lg:mt-0 lg:flex-shrink-0">
+              <div className="mt-16 lg:mt-0 lg:flex-shrink-0">
                 <NewsletterImage
                   image={content.image}
-                  className="w-[40rem] max-w-full rounded-xl"
+                  className="h-64 max-w-full rounded-xl"
                 />
               </div>
             )}

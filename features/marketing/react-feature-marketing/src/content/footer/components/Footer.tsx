@@ -32,49 +32,6 @@ export const Footer: React.FC<FooterProps> = ({
   // Render the footer based on the variant
   const renderFooter = () => {
     switch (variant) {
-      case 'simple-centered':
-        return (
-          <div className="text-center">
-            <FooterLogo
-              content={content}
-              headingClasses={headingClasses}
-              className="mb-8 justify-center"
-            />
-
-            {content.navigationGroups && (
-              <FooterSimpleNavigation
-                navigationGroups={content.navigationGroups}
-                linkClasses={linkClasses}
-                className="mb-8"
-              />
-            )}
-
-            {content.socialLinks && (
-              <FooterSocialLinks
-                socialLinks={content.socialLinks}
-                linkClasses={linkClasses}
-                className="mx-auto mt-8"
-              />
-            )}
-
-            {content.legalLinks && (
-              <FooterLegalLinks
-                legalLinks={content.legalLinks}
-                linkClasses={linkClasses}
-                className="mt-6 justify-center"
-              />
-            )}
-
-            {content.copyright && (
-              <FooterCopyright
-                copyright={content.copyright}
-                textClasses={textClasses}
-                className="mt-8"
-              />
-            )}
-          </div>
-        );
-
       case 'with-social-links':
         return (
           <div>
@@ -102,7 +59,7 @@ export const Footer: React.FC<FooterProps> = ({
 
             <div
               className={cn(
-                `mt-12 flex items-center justify-between border-t pt-8 max-sm:flex-col md:flex-row`,
+                `mt-12 flex items-center justify-between border-t border-gray-300 pt-8 max-sm:flex-col md:flex-row`,
               )}
             >
               <div className="mb-4 md:mb-0">
@@ -135,6 +92,7 @@ export const Footer: React.FC<FooterProps> = ({
           </div>
         );
 
+      case 'simple-centered':
       default:
         return (
           <div className="text-center">
