@@ -1,7 +1,4 @@
-import {
-  FeatureSimple,
-  FeatureWithScreenshot,
-} from '@/content/feature/components';
+import { FeatureSimple, FeatureWithMedia } from '@/content/feature/components';
 import { Feature, FEATURE_SCHEMA_TYPE } from '@/content/feature/feature';
 import { LayoutConfiguration, TypeDescriptor } from '@vyuh/react-core';
 import React from 'react';
@@ -9,9 +6,7 @@ import React from 'react';
 /**
  * Feature layout variant type
  */
-export type FeatureVariant =
-  | 'simple'
-  | 'with-screenshot';
+export type FeatureVariant = 'simple' | 'with-media';
 
 /**
  * Default layout for feature content items
@@ -38,7 +33,7 @@ export class DefaultFeatureLayout extends LayoutConfiguration<Feature> {
       title: 'Default Feature Layout',
     });
 
-    this.variant = props?.variant ?? 'with-screenshot';
+    this.variant = props?.variant ?? 'with-media';
     this.background = props?.background;
   }
 
@@ -66,8 +61,8 @@ const FeatureView: React.FC<FeatureViewProps> = ({ content, layout }) => {
     case 'simple':
       return <FeatureSimple content={content} layout={layout} />;
 
-    case 'with-screenshot':
-      return <FeatureWithScreenshot content={content} layout={layout} />;
+    case 'with-media':
+      return <FeatureWithMedia content={content} layout={layout} />;
 
     default:
       return <FeatureSimple content={content} layout={layout} />;

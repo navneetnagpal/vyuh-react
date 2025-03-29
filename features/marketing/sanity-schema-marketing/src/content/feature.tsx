@@ -80,7 +80,6 @@ export const featureSchema = defineType({
               { title: 'None', value: 'none' },
               { title: 'Image', value: 'image' },
               { title: 'Video', value: 'video' },
-              { title: 'Code Example', value: 'code-example' },
             ],
           },
           initialValue: 'none',
@@ -96,34 +95,6 @@ export const featureSchema = defineType({
           title: 'Video',
           type: 'file',
           hidden: ({ parent }) => parent?.type !== 'video',
-        }),
-        defineField({
-          name: 'codeExample',
-          title: 'Code Example',
-          type: 'object',
-          hidden: ({ parent }) => parent?.type !== 'code-example',
-          fields: [
-            defineField({
-              name: 'code',
-              title: 'Code',
-              type: 'text',
-            }),
-            defineField({
-              name: 'language',
-              title: 'Language',
-              type: 'string',
-              options: {
-                list: [
-                  { title: 'JavaScript', value: 'javascript' },
-                  { title: 'TypeScript', value: 'typescript' },
-                  { title: 'HTML', value: 'html' },
-                  { title: 'CSS', value: 'css' },
-                  { title: 'JSON', value: 'json' },
-                ],
-              },
-              initialValue: 'javascript',
-            }),
-          ],
         }),
       ],
     }),
@@ -234,7 +205,7 @@ export const defaultFeatureLayout = defineType({
       options: {
         list: [
           { title: 'Simple', value: 'simple' },
-          { title: 'With Screenshot', value: 'with-screenshot' },
+          { title: 'With Media', value: 'with-media' },
         ],
       },
     }),
