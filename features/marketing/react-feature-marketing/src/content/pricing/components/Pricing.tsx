@@ -22,9 +22,7 @@ const PricingDisclaimer: React.FC<{ disclaimer?: string }> = ({
 }) => {
   if (!disclaimer) return null;
 
-  return (
-    <p className="mt-10 text-center text-sm text-gray-500">{disclaimer}</p>
-  );
+  return <p className="mt-10 text-center text-sm opacity-60">{disclaimer}</p>;
 };
 
 /**
@@ -62,7 +60,7 @@ export const Pricing: React.FC<PricingProps> = ({
     switch (variant) {
       case 'two-tiers-highlighted':
         return (
-          <div className="mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:grid lg:max-w-4xl lg:grid-cols-2 lg:grid-rows-[auto_auto_auto_auto_1fr]">
+          <div className="mx-auto mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 md:grid-rows-[auto_auto_auto_auto_1fr] lg:max-w-4xl">
             {content.plans.map((plan, index) => (
               <PricingPlan key={index} plan={plan} showAnnual={showAnnual} />
             ))}
@@ -72,7 +70,7 @@ export const Pricing: React.FC<PricingProps> = ({
       // Default to simple-three-tiers
       default:
         return (
-          <div className="mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:grid lg:max-w-4xl lg:grid-cols-3 lg:grid-rows-[auto_auto_auto_auto_1fr]">
+          <div className="mx-auto mt-10 grid grid-cols-1 gap-8 md:grid-cols-2 lg:max-w-4xl lg:grid-cols-3 lg:grid-rows-[auto_auto_auto_auto_1fr]">
             {content.plans.map((plan, index) => (
               <PricingPlan key={index} plan={plan} showAnnual={showAnnual} />
             ))}

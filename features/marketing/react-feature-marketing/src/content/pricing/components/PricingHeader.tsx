@@ -17,7 +17,7 @@ export const PricingHeader: React.FC<PricingHeaderProps> = ({
         {content.title}
       </h2>
       {content.subtitle && (
-        <p className="mt-4 text-lg text-gray-600">
+        <p className="mt-4 text-lg opacity-70">
           {content.subtitle}
         </p>
       )}

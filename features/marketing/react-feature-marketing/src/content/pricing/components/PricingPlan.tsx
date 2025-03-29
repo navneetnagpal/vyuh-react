@@ -8,7 +8,6 @@ interface PricingPlanProps {
   plan: Pricing['plans'][0];
   className?: string;
   showAnnual?: boolean;
-  useSubgrid?: boolean;
 }
 
 export const PricingPlan: React.FC<PricingPlanProps> = ({
@@ -29,71 +28,67 @@ export const PricingPlan: React.FC<PricingPlanProps> = ({
     }).format(price);
   };
 
-  // Use CSS classes
-  const ringColor = plan.featured ? 'ring-indigo-600' : 'ring-gray-200';
-
-  const bgColor = plan.featured ? 'bg-indigo-600' : 'bg-white';
-
-  const textColor = plan.featured ? 'text-white' : 'text-gray-900';
-
-  const featureColor = plan.featured ? 'text-indigo-200' : 'text-gray-600';
-
-  const checkColor = plan.featured ? 'text-indigo-300' : 'text-indigo-600';
-
-  const buttonColor = plan.featured
-    ? 'bg-white text-indigo-600 hover:bg-gray-50'
-    : 'bg-indigo-600 text-white hover:bg-indigo-500';
+  // Determine theme based on featured status
+  const cardTheme = plan.featured ? 'primary' : 'base-100';
 
   return (
     <div
       className={cn(
-        'rounded-3xl p-8 ring-1 xl:p-10',
-        'row-span-5 grid grid-rows-subgrid gap-y-4',
-        ringColor,
-        bgColor,
+        'card rounded-3xl shadow-sm border row-span-5 grid grid-rows-subgrid gap-y-4 p-8 xl:p-10',
+        plan.featured ? 'bg-primary text-primary-content border-primary border-2' : 'bg-base-100 border-base-300',
         className,
       )}
+      data-theme={cardTheme}
     >
-      <h3 className={cn('text-lg font-semibold leading-8', textColor)}>
+      {/* Title - Row 1 */}
+      <h3 className="text-lg font-semibold">
         {plan.name}
       </h3>
+
+      {/* Description - Row 2 */}
       <div>
         {plan.description && (
-          <p className={cn('text-sm leading-6', featureColor)}>
+          <p className="text-sm opacity-80">
             {plan.description}
           </p>
         )}
       </div>
+
+      {/* Price - Row 3 */}
       <div className="flex items-baseline gap-x-1">
-        <span className={cn('text-4xl font-bold tracking-tight', textColor)}>
+        <span className="text-4xl font-bold">
           {formatPrice(price)}
         </span>
-        <span className={cn('text-sm font-semibold leading-6', featureColor)}>
+        <span className="text-sm font-semibold opacity-80">
           {period}
         </span>
       </div>
+
+      {/* Button - Row 4 */}
       <div>
         <button
           onClick={() => new Action(plan.action).execute()}
           className={cn(
-            'block w-full rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 shadow-sm',
-            buttonColor,
+            'btn w-full',
+            plan.featured ? 'bg-white text-primary hover:bg-gray-100' : 'btn-primary',
           )}
         >
           {plan.action.title || 'Get started'}
         </button>
       </div>
+
+      {/* Features - Row 5 */}
       <div>
-        <ul className="space-y-3 text-sm leading-6">
+        <ul className="space-y-3 text-sm">
           {plan.features &&
             plan.features.length > 0 &&
             plan.features.map((feature, index) => (
               <li key={index} className="flex gap-x-3">
                 <CheckIcon
-                  className={cn('h-6 w-5 flex-none', checkColor)}
+                  className={cn('h-6 w-5 flex-none', plan.featured ? 'text-primary-content' : 'text-primary')}
                   aria-hidden="true"
                 />
-                <span className={featureColor}>{feature}</span>
+                <span className="opacity-80">{feature}</span>
               </li>
             ))}
         </ul>
