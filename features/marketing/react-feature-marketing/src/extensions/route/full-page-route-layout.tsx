@@ -6,7 +6,7 @@ import {
   useVyuh,
 } from '@vyuh/react-core';
 import { Region, Route } from '@vyuh/react-feature-system';
-import React from 'react';
+import React, { Fragment } from 'react';
 
 /**
  * Gap size options for the full page layout
@@ -76,21 +76,19 @@ function FullPageRouteComponent({
   const gapClass = gapClasses[gap];
 
   return (
-    <div className={`vfs:flex vfs:flex-col ${gapClass}`}>
+    <div className={`flex flex-col ${gapClass}`}>
       {showTitle && (
-        <h1 className="vfs:text-3xl vfs:font-bold vfs:text-black vfs:mb-8">
-          {route.title}
-        </h1>
+        <h1 className="mb-8 text-3xl font-bold text-black">{route.title}</h1>
       )}
 
       {route.regions.map((region: Region) => (
-        <div key={region.identifier} className="vfs:w-full">
+        <Fragment key={region.identifier}>
           {region.items.map((item: ContentItem, itemIndex: number) => (
-            <div key={itemIndex} className="vfs:w-full">
+            <div key={itemIndex} className="w-full">
               {plugins.content.render(item)}
             </div>
           ))}
-        </div>
+        </Fragment>
       ))}
     </div>
   );

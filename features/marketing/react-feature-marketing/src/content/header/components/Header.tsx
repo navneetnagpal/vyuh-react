@@ -22,7 +22,7 @@ export const Header: React.FC<HeaderProps> = ({
   const mobileMenuId = 'mobile-menu-drawer';
 
   return (
-    <Section className="drawer">
+    <header className="drawer container mx-auto">
       <input id={mobileMenuId} type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         {/* Navbar */}
@@ -55,6 +55,6 @@ export const Header: React.FC<HeaderProps> = ({
         navigationItems={content.navigationItems}
         actions={content.actions}
       />
-    </Section>
+    </header>
   );
 };

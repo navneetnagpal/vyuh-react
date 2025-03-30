@@ -56,7 +56,7 @@ export const Banner: React.FC<BannerProps> = ({
   return (
     <div
       className={cn(
-        `alert flex items-center justify-between rounded-none p-4 transition-all duration-300`,
+        `alert flex items-center justify-between rounded-none border-none p-4 shadow-none transition-all duration-300`,
         colorClasses[colorScheme],
         className,
       )}
