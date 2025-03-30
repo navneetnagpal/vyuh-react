@@ -116,29 +116,38 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
         aria-label="close sidebar"
         className="drawer-overlay"
       ></label>
-      <ul className="menu menu-lg bg-base-100 text-base-content min-h-full w-80 p-4">
-        {navigationItems && navigationItems.length > 0 && (
-          <>
-            {navigationItems.map((item, index) => (
-              <MobileMenuItem key={index} item={item} />
-            ))}
-          </>
-        )}
+      <div className="bg-base-100 min-h-full w-80">
+        {/* Close button at the top right */}
+        <div className="flex justify-end p-4">
+          <label htmlFor={id} className="btn btn-sm btn-circle btn-ghost">
+            ✕
+          </label>
+        </div>
 
-        {navigationItems && navigationItems.length > 0 && actions && actions.length > 0 && (
-          <li>
-            <div className="divider"></div>
-          </li>
-        )}
+        <ul className="menu menu-lg text-base-content px-4 pb-4">
+          {navigationItems && navigationItems.length > 0 && (
+            <>
+              {navigationItems.map((item, index) => (
+                <MobileMenuItem key={index} item={item} />
+              ))}
+            </>
+          )}
 
-        {actions && actions.length > 0 && (
-          <>
-            {actions.map((actionItem, index) => (
-              <MobileMenuActionItem key={index} actionItem={actionItem} />
-            ))}
-          </>
-        )}
-      </ul>
+          {navigationItems && navigationItems.length > 0 && actions && actions.length > 0 && (
+            <li>
+              <div className="divider"></div>
+            </li>
+          )}
+
+          {actions && actions.length > 0 && (
+            <>
+              {actions.map((actionItem, index) => (
+                <MobileMenuActionItem key={index} actionItem={actionItem} />
+              ))}
+            </>
+          )}
+        </ul>
+      </div>
     </div>
   );
 };
