@@ -29,7 +29,9 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
     <div
       className={cn(
         'flex flex-col overflow-hidden rounded-lg transition-all hover:shadow-md',
-        'bg-gray-50',
+        post.featured
+          ? 'bg-primary/15 border-primary/20 border'
+          : 'bg-base-100 border-base-300 border',
         'cursor-pointer',
         className,
       )}
@@ -56,7 +58,9 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
                 key={idx}
                 className={cn(
                   'inline-block rounded-full px-3 py-1 text-xs font-medium',
-                  'bg-gray-200 text-gray-700',
+                  post.featured
+                    ? 'bg-primary/10 text-primary'
+                    : 'bg-base-300 text-base-content',
                 )}
               >
                 {category}
@@ -70,7 +74,14 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
         </span>
 
         {/* Title */}
-        <h3 className="mb-2 text-xl font-semibold">{post.title}</h3>
+        <h3
+          className={cn(
+            'mb-2 font-semibold',
+            post.featured ? 'text-2xl md:text-3xl' : 'text-xl',
+          )}
+        >
+          {post.title}
+        </h3>
 
         {/* Date and author */}
         <div className="mb-3 flex items-center justify-between text-xs text-gray-600">
@@ -87,7 +98,9 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
                 <span>{post.author.name}</span>
 
                 {post.author.role && (
-                  <span className="text-[10px] opacity-75">{post.author.role}</span>
+                  <span className="text-[10px] opacity-75">
+                    {post.author.role}
+                  </span>
                 )}
               </div>
             </div>
@@ -104,7 +117,10 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
         {/* Read more button */}
         <div className="mt-auto">
           <button
-            className="btn btn-link btn-sm text-blue-600 p-0 h-auto min-h-0 no-underline group"
+            className={cn(
+              'btn btn-link btn-sm group h-auto min-h-0 p-0 no-underline',
+              post.featured ? 'text-primary' : 'text-blue-600',
+            )}
             onClick={(e) => {
               e.stopPropagation();
               new Action(post.action).execute();

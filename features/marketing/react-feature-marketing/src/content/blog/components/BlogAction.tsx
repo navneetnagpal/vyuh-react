@@ -21,7 +21,7 @@ export const BlogAction: React.FC<BlogActionProps> = ({
         'btn btn-primary',
         className,
       )}
-      onClick={() => action.execute()}
+      onClick={() => new Action(action).execute()}
     >
       {action.title || 'Read more'}
     </button>

@@ -149,19 +149,7 @@ export const blogSchema = defineType({
       ],
       validation: (Rule) =>
         Rule.required()
-          .min(1)
-          .custom((posts, context) => {
-            if (context.parent?.variant === 'with-featured-post') {
-              const featuredPosts = posts.filter((post) => post.featured);
-              if (featuredPosts.length === 0) {
-                return 'At least one post must be marked as featured for this variant';
-              }
-              if (featuredPosts.length > 1) {
-                return 'Only one post should be marked as featured for this variant';
-              }
-            }
-            return true;
-          }),
+          .min(1),
     }),
     defineField({
       name: 'action',
@@ -202,7 +190,6 @@ export const defaultBlogLayout = defineType({
       options: {
         list: [
           { title: 'Simple grid', value: 'simple-grid' },
-          { title: 'With featured post', value: 'with-featured-post' },
         ],
       },
       initialValue: 'simple-grid',
@@ -221,7 +208,7 @@ export const defaultBlogLayout = defineType({
           { title: '4 columns', value: 4 },
         ],
       },
-      initialValue: 3,
+      initialValue: 2,
       hidden: ({ parent }) =>
         !['simple-grid', 'card-grid'].includes(parent?.variant),
     }),
@@ -235,7 +222,6 @@ export const defaultBlogLayout = defineType({
       const variantDisplay =
         {
           'simple-grid': 'Simple Grid',
-          'with-featured-post': 'With Featured Post',
           'card-grid': 'Card Grid',
           'list-with-image': 'List with Image',
           'compact-list': 'Compact List',

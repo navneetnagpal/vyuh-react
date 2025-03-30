@@ -1,0 +1,24 @@
+import { Testimonials } from '@/content/testimonials/testimonials';
+import React from 'react';
+import { TestimonialItem } from './TestimonialItem';
+
+interface TestimonialSimpleCenteredProps {
+  testimonials: Testimonials['testimonials'];
+}
+
+export const TestimonialSimpleCentered: React.FC<TestimonialSimpleCenteredProps> = ({
+  testimonials,
+}) => {
+  return (
+    <div className="mx-auto mt-10 max-w-2xl">
+      {testimonials?.map((testimonial, index) => (
+        <TestimonialItem
+          key={index}
+          testimonial={testimonial}
+          variant="simple-centered"
+          className={index > 0 ? 'mt-8' : ''}
+        />
+      ))}
+    </div>
+  );
+};

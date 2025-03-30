@@ -6,9 +6,7 @@ import React from 'react';
 /**
  * Blog layout variant type
  */
-export type BlogVariant =
-  | 'simple-grid'
-  | 'with-featured-post';
+export type BlogVariant = 'simple-grid';
 
 /**
  * Default layout for Blog section content items
@@ -27,7 +25,7 @@ export class DefaultBlogLayout extends LayoutConfiguration<Blog> {
     });
 
     this.variant = props?.variant || 'simple-grid';
-    this.columns = props?.columns || 3;
+    this.columns = props?.columns || 2;
   }
 
   render(content: Blog): React.ReactNode {

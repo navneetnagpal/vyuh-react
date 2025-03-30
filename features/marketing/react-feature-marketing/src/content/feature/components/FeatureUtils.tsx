@@ -91,7 +91,7 @@ export const FeatureActions: React.FC<{
           <button
             key={index}
             className={cn('btn', buttonClasses)}
-            onClick={() => action.action.execute()}
+            onClick={() => new Action(action.action).execute()}
           >
             {action.action.title}
           </button>

@@ -13,7 +13,7 @@ export const MobileMenuItem: React.FC<MobileMenuItemProps> = ({ item }) => {
   if (!hasChildren) {
     return (
       <li>
-        <a onClick={() => item.action && item.action.execute()}>
+        <a onClick={() => item.action && new Action(item.action).execute()}>
           {item.action?.title}
         </a>
       </li>
@@ -23,13 +23,13 @@ export const MobileMenuItem: React.FC<MobileMenuItemProps> = ({ item }) => {
   return (
     <li>
       <details>
-        <summary onClick={() => item.action && item.action.execute()}>
+        <summary onClick={() => item.action && new Action(item.action).execute()}>
           {item.action?.title}
         </summary>
         <ul className="p-2">
           {item.children.map((child, childIndex) => (
             <li key={childIndex}>
-              <a onClick={() => child.action && child.action.execute()}>
+              <a onClick={() => child.action && new Action(child.action).execute()}>
                 {child.action?.title}
               </a>
             </li>
@@ -50,7 +50,7 @@ export const MobileMenuActionItem: React.FC<MobileMenuActionItemProps> = ({
 }) => {
   return (
     <li>
-      <a onClick={() => actionItem.action && actionItem.action.execute()}>
+      <a onClick={() => actionItem.action && new Action(actionItem.action).execute()}>
         {actionItem.icon && (
           <span className="mr-2">
             <DynamicIcon

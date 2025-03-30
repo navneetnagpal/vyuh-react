@@ -1,7 +1,6 @@
 import { Blog } from '@/content/blog/blog';
 import { cn } from '@/shared/utils';
 import React from 'react';
-import { BlogFeaturedPost } from './BlogFeaturedPost';
 import { BlogPostCard } from './BlogPostCard';
 
 interface BlogGridProps {
@@ -17,42 +16,14 @@ export const BlogGrid: React.FC<BlogGridProps> = ({
   columns,
   className,
 }) => {
-  if (variant === 'with-featured-post') {
-    const featuredPost = posts.find((post) => post.featured);
-    const regularPosts = posts.filter((post) => !post.featured);
-
-    return (
-      <div className={className}>
-        {featuredPost && (
-          <BlogFeaturedPost post={featuredPost} />
-        )}
-        <div
-          className={cn('grid gap-16', {
-            'grid-cols-1': columns === 1,
-            'grid-cols-1 md:grid-cols-2': columns === 2,
-            'grid-cols-1 md:grid-cols-2 lg:grid-cols-3': columns === 3,
-            'grid-cols-1 md:grid-cols-2 lg:grid-cols-4': columns === 4,
-          })}
-        >
-          {regularPosts.map((post, index) => (
-            <BlogPostCard key={index} post={post} />
-          ))}
-        </div>
-      </div>
-    );
-  }
+  // All posts are displayed in the grid, featured posts will stand out with styling
 
   // Default to simple-grid
   return (
     <div
       className={cn(
-        'grid gap-16',
-        {
-          'grid-cols-1': columns === 1,
-          'grid-cols-1 md:grid-cols-2': columns === 2,
-          'grid-cols-1 md:grid-cols-2 lg:grid-cols-3': columns === 3,
-          'grid-cols-1 md:grid-cols-2 lg:grid-cols-4': columns === 4,
-        },
+        'grid grid-flow-dense gap-8',
+        'grid-cols-1 md:grid-cols-2 lg:grid-cols-3',
         className,
       )}
     >
