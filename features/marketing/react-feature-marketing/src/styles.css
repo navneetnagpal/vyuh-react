@@ -3,3 +3,49 @@
 @plugin 'daisyui';
 
 @source './';
+
+/* Custom styles */
+.btn-primary {
+  @apply hover:brightness-110 hover:shadow-md transition-all duration-200 hover:scale-[1.02];
+}
+
+.btn-secondary {
+  @apply hover:brightness-110 hover:shadow-md transition-all duration-200 hover:scale-[1.02];
+}
+
+.btn-outline:hover {
+  @apply shadow-md transition-all duration-200 scale-[1.02];
+}
+
+.btn-link {
+  @apply transition-all duration-200;
+}
+
+/* FAQ accordion styles */
+.collapse.collapse-arrow {
+  @apply transition-all duration-200;
+}
+
+.collapse.collapse-arrow:hover {
+  @apply shadow-md;
+}
+
+.collapse.collapse-arrow .collapse-title:after {
+  @apply transition-transform duration-200;
+}
+
+.collapse-content {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.collapse-content > * {
+  @apply transition-opacity duration-300 ease-in-out;
+}
+
+.collapse:not(.collapse-open) .collapse-content > * {
+  @apply opacity-0;
+}
+
+.collapse.collapse-open .collapse-content > * {
+  @apply opacity-100;
+}

@@ -17,16 +17,11 @@ export const Stats: React.FC<StatsProps> = ({ content, layout }) => {
   const renderAction = () => {
     if (!content.action) return null;
 
-    const buttonClasses = 'bg-indigo-600 text-white hover:bg-indigo-500';
-
     return (
       <div className="mt-8 flex justify-center">
         <button
           onClick={() => content.action?.execute()}
-          className={cn(
-            'rounded-md px-3.5 py-2.5 text-sm font-semibold shadow-sm',
-            buttonClasses,
-          )}
+          className="btn btn-primary"
         >
           {content.action.title || 'Learn more'}
         </button>

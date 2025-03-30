@@ -11,9 +11,7 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({
   content,
   className,
 }) => {
-  const buttonClasses = 'bg-indigo-600 text-white hover:bg-indigo-500';
-
-  const inputClasses = 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:ring-indigo-500 focus:border-indigo-500';
+  // Using DaisyUI classes for button and input
 
   return (
     <form action={content.formAction} method="POST" className={className}>
@@ -27,29 +25,18 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({
           type="email"
           autoComplete="email"
           required
-          className={cn(
-            'min-w-0 flex-auto rounded-md border px-3.5 py-2',
-            inputClasses,
-          )}
+          className="input input-bordered w-full"
           placeholder={content.placeholderText || 'Enter your email'}
         />
         <button
           type="submit"
-          className={cn(
-            'flex-none rounded-md px-3.5 py-2.5 text-sm font-semibold shadow-sm',
-            buttonClasses,
-          )}
+          className="btn btn-primary font-semibold"
         >
           {content.buttonText}
         </button>
       </div>
       {content.privacyText && (
-        <p
-          className={cn(
-            'mt-4 text-sm',
-            'text-gray-500',
-          )}
-        >
+        <p className="mt-4 text-sm text-base-content/60">
           {content.privacyText}
         </p>
       )}

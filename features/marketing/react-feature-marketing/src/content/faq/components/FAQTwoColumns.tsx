@@ -1,11 +1,11 @@
 import { Section } from '@/shared/components/Section';
+import { cn } from '@/shared/utils';
+import { useVyuh } from '@vyuh/react-core';
 import React from 'react';
 import { FAQComponentProps } from './FAQTypes';
 import {
-  FAQQuestion,
   FAQSubtitle,
   FAQTitle,
-  useFAQQuestions,
 } from './FAQUtils';
 
 /**
@@ -16,11 +16,11 @@ export const FAQTwoColumns: React.FC<FAQComponentProps> = ({
   layout,
 }) => {
   const { title, subtitle, questions } = content;
-  const { toggleQuestion, isQuestionOpen } = useFAQQuestions(questions);
+  const { plugins } = useVyuh();
 
-  const bgClass = 'bg-white';
-  const titleClass = 'text-gray-900';
-  const subtitleClass = 'text-gray-600';
+  const bgClass = 'bg-base-100';
+  const titleClass = 'text-base-content';
+  const subtitleClass = 'text-base-content/70';
 
   // Split questions into two columns
   const midpoint = Math.ceil(questions.length / 2);
@@ -34,27 +34,35 @@ export const FAQTwoColumns: React.FC<FAQComponentProps> = ({
         <FAQSubtitle subtitle={subtitle} className={subtitleClass} />
       </div>
       <div className="mx-auto mt-16 grid max-w-5xl grid-cols-1 gap-6 lg:grid-cols-2">
-        <div className="space-y-6">
-          {leftColumnQuestions.map((faq, index) => (
-            <FAQQuestion
-              key={index}
-              question={faq.question}
-              answer={faq.answer}
-              isOpen={isQuestionOpen(index)}
-              onToggle={() => toggleQuestion(index)}
-            />
-          ))}
+        <div className="space-y-4">
+          <div className="join join-vertical w-full">
+            {leftColumnQuestions.map((faq, index) => (
+              <div key={index} className="collapse collapse-arrow join-item border border-base-300 hover:bg-base-200 transition-colors duration-200">
+                <input type="checkbox" />
+                <div className="collapse-title text-base-content font-medium">
+                  {faq.question}
+                </div>
+                <div className="collapse-content text-base-content/70">
+                  {faq.answer && plugins.content.render(faq.answer)}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="space-y-6">
-          {rightColumnQuestions.map((faq, index) => (
-            <FAQQuestion
-              key={index + midpoint}
-              question={faq.question}
-              answer={faq.answer}
-              isOpen={isQuestionOpen(index + midpoint)}
-              onToggle={() => toggleQuestion(index + midpoint)}
-            />
-          ))}
+        <div className="space-y-4">
+          <div className="join join-vertical w-full">
+            {rightColumnQuestions.map((faq, index) => (
+              <div key={index + midpoint} className="collapse collapse-arrow join-item border border-base-300 hover:bg-base-200 transition-colors duration-200">
+                <input type="checkbox" />
+                <div className="collapse-title text-base-content font-medium">
+                  {faq.question}
+                </div>
+                <div className="collapse-content text-base-content/70">
+                  {faq.answer && plugins.content.render(faq.answer)}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </Section>

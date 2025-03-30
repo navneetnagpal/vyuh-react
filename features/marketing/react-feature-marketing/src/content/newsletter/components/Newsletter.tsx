@@ -20,7 +20,7 @@ export const Newsletter: React.FC<NewsletterProps> = ({
 }) => {
   const variant = layout.variant || 'simple-centered';
 
-  const backgroundClasses = 'bg-white text-gray-900';
+  const backgroundClasses = 'bg-base-100 text-base-content';
 
   switch (variant) {
     case 'simple-centered':

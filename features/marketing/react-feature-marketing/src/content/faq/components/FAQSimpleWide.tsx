@@ -1,7 +1,9 @@
 import { Section } from '@/shared/components/Section';
+import { cn } from '@/shared/utils';
+import { useVyuh } from '@vyuh/react-core';
 import React from 'react';
 import { FAQComponentProps } from './FAQTypes';
-import { FAQQuestion, FAQSubtitle, FAQTitle, useFAQQuestions } from './FAQUtils';
+import { FAQSubtitle, FAQTitle } from './FAQUtils';
 
 /**
  * Simple FAQ layout with wide questions
@@ -11,26 +13,30 @@ export const FAQSimpleWide: React.FC<FAQComponentProps> = ({
   layout,
 }) => {
   const { title, subtitle, questions } = content;
-  const { toggleQuestion, isQuestionOpen } = useFAQQuestions(questions);
+  const { plugins } = useVyuh();
 
   return (
     <Section>
-      <div className="mx-auto max-w-4xl divide-y divide-gray-900/10">
+      <div className="mx-auto max-w-4xl">
         <div className="text-center">
-          <FAQTitle title={title} className="text-gray-900" />
-          <FAQSubtitle subtitle={subtitle} className="text-gray-600" />
+          <FAQTitle title={title} className="text-base-content" />
+          <FAQSubtitle subtitle={subtitle} className="text-base-content/70" />
         </div>
-        <dl className="mt-10 space-y-6 divide-y divide-gray-900/10">
-          {questions.map((faq, index) => (
-            <FAQQuestion
-              key={index}
-              question={faq.question}
-              answer={faq.answer}
-              isOpen={isQuestionOpen(index)}
-              onToggle={() => toggleQuestion(index)}
-            />
-          ))}
-        </dl>
+        <div className="mt-10">
+          <div className="join join-vertical w-full">
+            {questions.map((faq, index) => (
+              <div key={index} className="collapse collapse-arrow join-item border border-base-300 hover:bg-base-200 transition-colors duration-200">
+                <input type="checkbox" />
+                <div className="collapse-title text-base-content font-medium">
+                  {faq.question}
+                </div>
+                <div className="collapse-content text-base-content/70">
+                  {faq.answer && plugins.content.render(faq.answer)}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </Section>
   );

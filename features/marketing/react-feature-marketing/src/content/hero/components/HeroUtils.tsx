@@ -15,7 +15,7 @@ export function HeroTitle({
 }) {
   return (
     <h1
-      className={`text-4xl font-bold tracking-tight sm:text-6xl ${className}`}
+      className={`text-4xl font-bold tracking-tight sm:text-6xl text-base-content ${className}`}
     >
       {title}
     </h1>
@@ -30,7 +30,7 @@ export function HeroSubtitle({
   className?: string;
 }) {
   if (!subtitle) return null;
-  return <p className={`mt-6 text-lg leading-8 opacity-70 ${className}`}>{subtitle}</p>;
+  return <p className={`mt-6 text-lg leading-8 text-base-content/70 ${className}`}>{subtitle}</p>;
 }
 
 type ActionVariant = 'primary' | 'secondary' | 'tertiary' | 'link';
@@ -74,7 +74,7 @@ const HeroActionButton: React.FC<{
       <button
         key={index}
         onClick={(e) => handleActionClick(e, action)}
-        className="btn btn-primary"
+        className="btn btn-primary w-full sm:w-auto"
       >
         {actionTitle}
       </button>
@@ -86,7 +86,7 @@ const HeroActionButton: React.FC<{
       <button
         key={index}
         onClick={(e) => handleActionClick(e, action)}
-        className="btn btn-secondary"
+        className="btn btn-secondary w-full sm:w-auto"
       >
         {actionTitle}
       </button>
@@ -98,9 +98,9 @@ const HeroActionButton: React.FC<{
       <button
         key={index}
         onClick={(e) => handleActionClick(e, action)}
-        className="btn btn-link text-primary"
+        className="btn btn-link text-primary no-underline hover:underline group w-full sm:w-auto"
       >
-        {actionTitle} <span aria-hidden="true">→</span>
+        {actionTitle} <span aria-hidden="true" className="ml-1 transition-transform duration-200 group-hover:translate-x-1">→</span>
       </button>
     );
   }
@@ -110,16 +110,16 @@ const HeroActionButton: React.FC<{
     <button
       key={index}
       onClick={(e) => handleActionClick(e, action)}
-      className="btn btn-outline btn-primary"
+      className="btn btn-outline btn-primary group w-full sm:w-auto"
     >
-      {actionTitle} <span aria-hidden="true">→</span>
+      {actionTitle} <span aria-hidden="true" className="ml-1 transition-transform duration-200 group-hover:translate-x-1">→</span>
     </button>
   );
 };
 
   return (
     <div
-      className={`mt-10 flex items-center ${centered ? 'justify-center' : 'justify-start'} gap-x-6 ${className}`}
+      className={`mt-10 flex flex-col sm:flex-row items-center ${centered ? 'justify-center' : 'justify-start'} gap-4 ${className}`}
     >
       {actions.map((actionItem, index) => (
         <HeroActionButton

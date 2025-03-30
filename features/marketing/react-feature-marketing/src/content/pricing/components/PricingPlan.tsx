@@ -65,7 +65,7 @@ export const PricingPlan: React.FC<PricingPlanProps> = ({
           className={cn(
             'btn w-full',
             plan.featured
-              ? 'text-primary bg-white hover:bg-gray-100'
+              ? 'btn-outline'
               : 'btn-primary',
           )}
         >

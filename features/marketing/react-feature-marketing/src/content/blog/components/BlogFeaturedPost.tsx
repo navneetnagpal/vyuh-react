@@ -103,9 +103,14 @@ export const BlogFeaturedPost: React.FC<BlogFeaturedPostProps> = ({
           </p>
         )}
 
-        {/* Read more link */}
+        {/* Read more button */}
         <div>
-          <span className="inline-flex items-center font-medium text-blue-600"
+          <button
+            className="btn btn-link btn-sm text-blue-600 p-0 h-auto min-h-0 no-underline hover:underline"
+            onClick={(e) => {
+              e.stopPropagation();
+              new Action(post.action).execute();
+            }}
           >
             Read more
             <svg
@@ -122,7 +127,7 @@ export const BlogFeaturedPost: React.FC<BlogFeaturedPostProps> = ({
                 d="M9 5l7 7-7 7"
               />
             </svg>
-          </span>
+          </button>
         </div>
       </div>
     </div>

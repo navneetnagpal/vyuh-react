@@ -23,11 +23,11 @@ export const Footer: React.FC<FooterProps> = ({
 }) => {
   const variant = layout.variant || 'simple-centered';
 
-  // Text color classes
-  const backgroundClasses = 'bg-gray-100 text-gray-900';
-  const textClasses = 'text-gray-600';
-  const headingClasses = 'text-gray-900';
-  const linkClasses = 'text-gray-600 hover:text-gray-900';
+  // Text color classes using DaisyUI
+  const backgroundClasses = 'bg-base-200 text-base-content';
+  const textClasses = 'text-base-content/70';
+  const headingClasses = 'text-base-content';
+  const linkClasses = 'text-base-content/70 hover:text-base-content';
 
   // Render the footer based on the variant
   const renderFooter = () => {
@@ -59,7 +59,7 @@ export const Footer: React.FC<FooterProps> = ({
 
             <div
               className={cn(
-                `mt-12 flex items-center justify-between border-t border-gray-300 pt-8 max-sm:flex-col md:flex-row`,
+                `mt-12 flex items-center justify-between border-t border-base-300 pt-8 max-sm:flex-col md:flex-row`,
               )}
             >
               <div className="mb-4 md:mb-0">

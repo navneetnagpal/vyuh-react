@@ -12,23 +12,21 @@ export default function Counter() {
         <button
           onClick={() => setCounter(counter - 1)}
           disabled={counter <= 0}
-          className={`flex items-center justify-center gap-2 ${counter <= 0 ? 'cursor-not-allowed bg-gray-400 opacity-70' : 'transform cursor-pointer bg-gradient-to-r from-indigo-500 to-purple-600 hover:scale-105 hover:from-indigo-600 hover:to-purple-700'} rounded-xl px-6 py-4 font-bold text-white shadow-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50`}
+          className="btn btn-primary btn-lg gap-2"
           aria-label="Decrement counter"
           aria-disabled={counter <= 0}
         >
-          <Minus className="h-7 w-7 text-white" />
-          <span className="font-semibold text-white">Decrement</span>
+          <Minus className="h-6 w-6" />
+          <span>Decrement</span>
         </button>
 
         <button
           onClick={() => setCounter(counter + 1)}
-          className={
-            'flex transform cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-4 font-bold text-white shadow-lg transition-all duration-200 hover:scale-105 hover:from-indigo-600 hover:to-purple-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50'
-          }
+          className="btn btn-primary btn-lg gap-2"
           aria-label="Increment counter"
         >
-          <Plus className="h-7 w-7 text-white" />
-          <span className="font-semibold text-white">Increment</span>
+          <Plus className="h-6 w-6" />
+          <span>Increment</span>
         </button>
       </div>
 

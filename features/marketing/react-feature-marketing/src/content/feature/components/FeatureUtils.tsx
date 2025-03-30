@@ -71,36 +71,32 @@ export const FeatureActions: React.FC<{
   if (!actions || actions.length === 0) return null;
 
   return (
-    <div className={`mt-8 ${className}`}>
+    <div className={cn('mt-8 flex gap-4', className)}>
       {actions.map((action, index) => {
-        const baseClasses =
-          'inline-flex items-center rounded-md px-4 py-2 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2';
-        let variantClasses = '';
+        let buttonClasses = '';
 
         switch (action.variant) {
           case 'primary':
-            variantClasses = 'bg-indigo-600 text-white hover:bg-indigo-700';
+            buttonClasses = 'btn-primary';
             break;
           case 'secondary':
-            variantClasses =
-              'bg-white text-gray-700 ring-1 ring-inset ring-gray-300 hover:bg-gray-50';
+            buttonClasses = 'btn-secondary';
             break;
           case 'tertiary':
-            variantClasses = 'bg-indigo-50 text-indigo-700 hover:bg-indigo-100';
+            buttonClasses = 'btn-outline btn-primary';
             break;
           case 'link':
-            variantClasses =
-              'text-indigo-600 hover:text-indigo-500 shadow-none';
+            buttonClasses = 'btn-link';
             break;
+          default:
+            buttonClasses = 'btn-primary';
         }
 
         return (
           <button
             key={index}
-            className={`${baseClasses} ${variantClasses} ${index > 0 ? 'ml-4' : ''}`}
-            onClick={() => {
-              // Handle action
-            }}
+            className={cn('btn', buttonClasses)}
+            onClick={() => action.action.execute()}
           >
             {action.action.title}
           </button>

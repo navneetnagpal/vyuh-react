@@ -21,9 +21,9 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
 
   // Background color classes based on the background type
   const backgroundClasses = {
-    light: 'bg-base-100',
+    light: 'bg-base-100 text-base-content',
     brand: 'bg-primary text-primary-content',
-    'light-brand': 'bg-primary-content',
+    'light-brand': 'bg-primary-content text-base-content',
   };
 
 /**
@@ -38,12 +38,8 @@ const CTAAdditionalInfo: React.FC<{
   return (
     <p
       className={cn(
-        'mt-4 text-sm',
-        background === 'light'
-          ? 'opacity-70'
-          : background === 'brand'
-            ? 'opacity-80'
-            : 'opacity-70',
+        'mt-4 text-sm opacity-70',
+        background === 'brand' ? 'text-primary-content' : 'text-base-content'
       )}
     >
       {additionalInfo}

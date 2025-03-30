@@ -15,16 +15,16 @@ export const CTAHeader: React.FC<CTAHeaderProps> = ({
 }) => {
   // Text color classes based on the background type
   const textClasses = {
-    light: '',
+    light: 'text-base-content',
     brand: 'text-primary-content',
-    'light-brand': '',
+    'light-brand': 'text-base-content',
   };
 
   // Subtitle color classes based on the background type
   const subtitleClasses = {
-    light: 'opacity-70',
-    brand: 'opacity-80',
-    'light-brand': 'opacity-70',
+    light: 'text-base-content/70',
+    brand: 'text-primary-content/80',
+    'light-brand': 'text-base-content/70',
   };
 
   return (

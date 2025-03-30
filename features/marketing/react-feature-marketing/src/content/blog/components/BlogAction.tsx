@@ -18,7 +18,7 @@ export const BlogAction: React.FC<BlogActionProps> = ({
   return (
     <button
       className={cn(
-        'bg-primary hover:bg-primary/90 rounded-md px-4 py-2 text-white shadow-sm',
+        'btn btn-primary',
         className,
       )}
       onClick={() => action.execute()}
