@@ -20,7 +20,7 @@ export const StatsHeader: React.FC<StatsHeaderProps> = ({
   return (
     <div className={cn(centered && 'text-center', className)}>
       {content.title && (
-        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-base-content">
           {content.title}
         </h2>
       )}

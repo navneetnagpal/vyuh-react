@@ -35,7 +35,7 @@ export const Stats: React.FC<StatsProps> = ({ content, layout }) => {
         <>
           <StatsHeader content={content} />
 
-          <dl className="mt-10 grid grid-cols-1 gap-16 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
             {content.stats &&
               content.stats.length > 0 &&
               content.stats.map((stat, index) => (
@@ -45,7 +45,7 @@ export const Stats: React.FC<StatsProps> = ({ content, layout }) => {
                   variant={variant}
                 />
               ))}
-          </dl>
+          </div>
 
           {renderAction()}
         </>
@@ -64,7 +64,7 @@ export const Stats: React.FC<StatsProps> = ({ content, layout }) => {
             )}
             {renderAction()}
           </div>
-          <dl className="grid grid-cols-1 gap-16 sm:grid-cols-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {content.stats &&
               content.stats.length > 0 &&
               content.stats.map((stat, index) => (
@@ -74,7 +74,7 @@ export const Stats: React.FC<StatsProps> = ({ content, layout }) => {
                   variant={variant}
                 />
               ))}
-          </dl>
+          </div>
         </div>
       )}
 
@@ -82,7 +82,7 @@ export const Stats: React.FC<StatsProps> = ({ content, layout }) => {
         <>
           <StatsHeader content={content} />
 
-          <dl className="mt-10 grid grid-cols-1 gap-16 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
             {content.stats &&
               content.stats.length > 0 &&
               content.stats.map((stat, index) => (
@@ -92,7 +92,7 @@ export const Stats: React.FC<StatsProps> = ({ content, layout }) => {
                   variant="simple"
                 />
               ))}
-          </dl>
+          </div>
 
           {renderAction()}
         </>

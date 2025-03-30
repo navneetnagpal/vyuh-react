@@ -14,37 +14,31 @@ export const StatItem: React.FC<StatItemProps> = ({
   className,
   variant = 'simple',
 }) => {
-  const valueColor = 'text-base-content';
-  const labelColor = 'text-base-content/70';
-  const descriptionColor = 'text-base-content/60';
-  const iconColor = 'text-primary';
-
   const isCardVariant = variant === 'card-grid';
 
   return (
-    <div
-      className={cn(
-        isCardVariant && 'card p-6',
-        isCardVariant && 'bg-base-100 border border-base-300',
-        className,
-      )}
-    >
+    <div className={cn(
+      'card bg-base-100 border border-base-300 shadow-sm p-6 h-full',
+      className
+    )}>
+      <div className="stat p-0 bg-transparent">
       {stat.icon && (
-        <div className="mb-4">
+        <div className="stat-figure text-primary md:absolute md:top-4 md:right-4">
           <DynamicIcon
             name={stat.icon as IconName}
-            className={cn('h-8 w-8', iconColor)}
+            className="h-8 w-8"
             aria-hidden="true"
           />
         </div>
       )}
-      <div className={cn('text-3xl font-bold', valueColor)}>{stat.value}</div>
-      <div className={cn('text-sm font-medium', labelColor)}>{stat.label}</div>
+      <div className="stat-value text-3xl md:text-4xl break-words">{stat.value}</div>
+      <div className="stat-title whitespace-normal break-words">{stat.label}</div>
       {stat.description && (
-        <p className={cn('mt-2 text-sm', descriptionColor)}>
+        <div className="stat-desc whitespace-normal break-words">
           {stat.description}
-        </p>
+        </div>
       )}
+      </div>
     </div>
   );
 };
