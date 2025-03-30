@@ -12,6 +12,7 @@
   "dependencies": {
     "@vyuh/react-core": "^0.2.5",
     "@vyuh/react-extension-content": "^0.2.5",
+    "@vyuh/react-feature-blog": "^0.2.3",
     "@vyuh/react-feature-marketing": "^0.2.3",
     "@vyuh/react-feature-system": "^0.2.5",
     "@vyuh/react-plugin-content-provider-sanity": "^0.2.5",
@@ -19,8 +20,8 @@
     "clsx": "^2.1.1",
     "lucide-react": "^0.482.0",
     "next": "^15.2.4",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "tailwind-merge": "^3.0.2"
   },
   "devDependencies": {

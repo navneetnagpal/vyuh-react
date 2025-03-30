@@ -1,20 +1,18 @@
 {
-  "name": "@vyuh/react-feature-marketing",
-  "version": "0.2.3",
-  "description": "The Marketing feature package for the Vyuh React framework",
+  "name": "@vyuh/sanity-schema-blog",
+  "version": "0.1.0",
+  "description": "The Sanity schema package for the Blog content blocks",
   "type": "module",
   "scripts": {
-    "build": "NODE_ENV=production tsup && pnpm build:tw",
-    "build:tw": "tailwindcss -i src/styles.css -o dist/styles.css",
-    "dev:tw": "pnpm build:tw --watch",
+    "build": "NODE_ENV=production tsup",
     "lint": "eslint \"src/**/*.ts*\"",
     "lint:fix": "eslint \"src/**/*.ts*\" --fix"
   },
   "keywords": [
     "vyuh",
-    "react",
-    "feature",
-    "marketing"
+    "sanity",
+    "schema",
+    "blog"
   ],
   "homepage": "https://vyuh.tech",
   "bugs": {
@@ -33,34 +31,27 @@
     "react-dom": "^19.0.0"
   },
   "dependencies": {
-    "@vyuh/react-core": "^0.2.5",
-    "@vyuh/react-extension-content": "^0.2.5",
-    "@vyuh/react-feature-system": "^0.2.5",
-    "lucide-react": "^0.482.0",
-    "zustand": "^5.0.3"
+    "@sanity/client": "^6.28.4",
+    "react-icons": "^5.5.0"
   },
   "devDependencies": {
-    "@tailwindcss/cli": "^4.0.17",
-    "@tailwindcss/postcss": "^4.0.17",
-    "tailwindcss": "^4.0.17",
-    "daisyui": "^5.0.9",
     "@types/node": "^22.13.14",
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
     "@typescript-eslint/eslint-plugin": "^8.28.0",
     "@typescript-eslint/parser": "^8.28.0",
-    "clsx": "^2.1.1",
+    "@vyuh/sanity-schema-core": "^2.0.0",
+    "@vyuh/sanity-schema-system": "^2.0.0",
     "eslint": "^9.23.0",
     "eslint-plugin-react": "^7.37.4",
-    "eslint-plugin-react-hooks": "^5.2.0",
+    "sanity": "^3.81.0",
     "tsup": "^8.4.0",
     "typescript": "^5.8.2"
   },
   "exports": {
     ".": {
       "import": "./src/index.ts"
-    },
-    "./styles.css": "./src/styles.css"
+    }
   },
   "files": [
     "*.md",
@@ -72,8 +63,7 @@
       ".": {
         "types": "./dist/index.d.ts",
         "import": "./dist/index.js"
-      },
-      "./styles.css": "./dist/styles.css"
+      }
     }
   }
 }

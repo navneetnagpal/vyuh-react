@@ -1,7 +1,7 @@
 {
-  "name": "@vyuh/react-feature-marketing",
+  "name": "@vyuh/react-feature-blog",
   "version": "0.2.3",
-  "description": "The Marketing feature package for the Vyuh React framework",
+  "description": "The Blog feature package for the Vyuh React framework",
   "type": "module",
   "scripts": {
     "build": "NODE_ENV=production tsup && pnpm build:tw",
@@ -14,7 +14,7 @@
     "vyuh",
     "react",
     "feature",
-    "marketing"
+    "blog"
   ],
   "homepage": "https://vyuh.tech",
   "bugs": {
@@ -35,30 +35,30 @@
   "dependencies": {
     "@vyuh/react-core": "^0.2.5",
     "@vyuh/react-extension-content": "^0.2.5",
-    "@vyuh/react-feature-system": "^0.2.5",
-    "lucide-react": "^0.482.0",
-    "zustand": "^5.0.3"
+    "lucide-react": "^0.482.0"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.0.17",
     "@tailwindcss/postcss": "^4.0.17",
-    "tailwindcss": "^4.0.17",
-    "daisyui": "^5.0.9",
     "@types/node": "^22.13.14",
     "@types/react": "^19.0.12",
     "@types/react-dom": "^19.0.4",
     "@typescript-eslint/eslint-plugin": "^8.28.0",
     "@typescript-eslint/parser": "^8.28.0",
     "clsx": "^2.1.1",
+    "daisyui": "^5.0.9",
     "eslint": "^9.23.0",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.2.0",
+    "react-icons": "^5.5.0",
+    "tailwind-merge": "^3.0.2",
+    "tailwindcss": "^4.0.17",
     "tsup": "^8.4.0",
     "typescript": "^5.8.2"
   },
   "exports": {
     ".": {
-      "import": "./src/index.ts"
+      "import": "./src/index.tsx"
     },
     "./styles.css": "./src/styles.css"
   },

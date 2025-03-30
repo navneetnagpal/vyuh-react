@@ -1,33 +1,21 @@
 import { BannerContentBuilder } from '@/content/banner/banner-builder';
-import { BannerDescriptor } from '@/content/banner/banner-descriptor';
 import { BentoContentBuilder } from '@/content/bento/bento-builder';
-import { BentoDescriptor } from '@/content/bento/bento-descriptor';
-import { BlogContentBuilder } from '@/content/blog/blog-builder';
-import { BlogDescriptor } from '@/content/blog/blog-descriptor';
 import { CTAContentBuilder } from '@/content/cta/cta-builder';
-import { CTADescriptor } from '@/content/cta/cta-descriptor';
 import { FAQContentBuilder } from '@/content/faq/faq-builder';
 import { FeatureContentBuilder } from '@/content/feature/feature-builder';
 import { FooterContentBuilder } from '@/content/footer/footer-builder';
-import { FooterDescriptor } from '@/content/footer/footer-descriptor';
 import { HeaderContentBuilder } from '@/content/header/header-builder';
-import { HeaderDescriptor } from '@/content/header/header-descriptor';
 import { HeroContentBuilder } from '@/content/hero/hero-builder';
-import { HeroDescriptor } from '@/content/hero/hero-descriptor';
 import { LogoContentBuilder } from '@/content/logo/logo-builder';
-import { LogoDescriptor } from '@/content/logo/logo-descriptor';
 import { NewsletterContentBuilder } from '@/content/newsletter/newsletter-builder';
-import { NewsletterDescriptor } from '@/content/newsletter/newsletter-descriptor';
 import { PricingContentBuilder } from '@/content/pricing/pricing-builder';
-import { PricingDescriptor } from '@/content/pricing/pricing-descriptor';
 import { StatsContentBuilder } from '@/content/stats/stats-builder';
-import { StatsDescriptor } from '@/content/stats/stats-descriptor';
 import { TeamContentBuilder } from '@/content/team/team-builder';
-import { TeamDescriptor } from '@/content/team/team-descriptor';
 import { TestimonialsContentBuilder } from '@/content/testimonials/testimonials-builder';
-import { TestimonialsDescriptor } from '@/content/testimonials/testimonials-descriptor';
+import { FullPageRouteLayout } from '@/extensions/route/full-page-route-layout';
 import { FeatureDescriptor } from '@vyuh/react-core';
 import { ContentExtensionDescriptor } from '@vyuh/react-extension-content';
+import { RouteDescriptor } from '@vyuh/react-feature-system';
 
 /**
  * Marketing feature descriptor
@@ -38,7 +26,6 @@ import { ContentExtensionDescriptor } from '@vyuh/react-extension-content';
  * - CTA sections
  * - Header components
  * - Bento grid layouts
- * - Blog sections
  * - Footer components
  * - Logo sections
  * - Newsletter sections
@@ -54,6 +41,11 @@ export const marketing = new FeatureDescriptor({
   icon: 'layout-grid',
   extensions: [
     new ContentExtensionDescriptor({
+      contents: [
+        new RouteDescriptor({
+          layouts: [FullPageRouteLayout.typeDescriptor],
+        }),
+      ],
       contentBuilders: [
         new HeroContentBuilder(),
         new FeatureContentBuilder(),
@@ -62,7 +54,6 @@ export const marketing = new FeatureDescriptor({
         new CTAContentBuilder(),
         new HeaderContentBuilder(),
         new BentoContentBuilder(),
-        new BlogContentBuilder(),
         new FooterContentBuilder(),
         new LogoContentBuilder(),
         new NewsletterContentBuilder(),

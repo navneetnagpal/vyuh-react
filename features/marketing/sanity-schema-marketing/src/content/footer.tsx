@@ -221,7 +221,6 @@ export const defaultFooterLayout = defineType({
       initialValue: 'simple-centered',
       validation: (Rule) => Rule.required(),
     }),
-
   ],
   preview: {
     select: {
@@ -231,8 +230,6 @@ export const defaultFooterLayout = defineType({
       const variantDisplay: string =
         {
           'simple-centered': 'Simple Centered',
-          'simple-mission': 'Simple with Mission',
-          'four-columns-mission': 'Four Columns with Mission',
           'with-social-links': 'With Social Links',
         }[variant] || 'Default';
 

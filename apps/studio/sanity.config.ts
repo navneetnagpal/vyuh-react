@@ -1,4 +1,5 @@
 import { vyuh } from '@vyuh/sanity-plugin-structure';
+import { blog } from '@vyuh/sanity-schema-blog';
 import { marketing } from '@vyuh/sanity-schema-marketing';
 import { system } from '@vyuh/sanity-schema-system';
 import { defineConfig } from 'sanity';
@@ -12,7 +13,7 @@ export default defineConfig({
 
   plugins: [
     vyuh({
-      features: [system, marketing],
+      features: [system, marketing, blog],
     }),
   ],
 });

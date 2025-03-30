@@ -1,16 +1,16 @@
-import { Blog } from '@/content/blog/blog';
-import { useMediaUtils } from '@/shared/MediaUtils';
-import { cn } from '@/shared/utils';
 import { Action } from '@vyuh/react-core';
 import React from 'react';
+import { useMediaUtils } from '../../../shared/MediaUtils';
+import { cn } from '../../../shared/utils';
+import { BlogPostSummary } from '../blog-post-summary';
 
 interface BlogPostCardProps {
-  post: Blog['posts'][0];
+  content: BlogPostSummary;
   className?: string;
 }
 
 export const BlogPostCard: React.FC<BlogPostCardProps> = ({
-  post,
+  content,
   className,
 }) => {
   const { getImageUrl } = useMediaUtils();
@@ -29,20 +29,20 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
     <div
       className={cn(
         'flex flex-col overflow-hidden rounded-lg transition-all hover:shadow-md',
-        post.featured
+        content.featured
           ? 'bg-primary/15 border-primary/20 border'
           : 'bg-base-100 border-base-300 border',
         'cursor-pointer',
         className,
       )}
-      onClick={() => new Action(post.action).execute()}
+      onClick={() => new Action(content.action).execute()}
     >
       {/* Featured image */}
-      {post.image && (
+      {content.image && (
         <div className="aspect-video overflow-hidden">
           <img
-            src={getImageUrl(post.image)}
-            alt={post.title}
+            src={getImageUrl(content.image)}
+            alt={content.title}
             className="h-full w-full object-cover"
           />
         </div>
@@ -51,14 +51,14 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
       {/* Content */}
       <div className="flex flex-1 flex-col p-6">
         {/* Categories */}
-        {post.categories && post.categories.length > 0 && (
+        {content.categories && content.categories.length > 0 && (
           <div className="mb-2 flex flex-wrap gap-2">
-            {post.categories.map((category, idx) => (
+            {content.categories.map((category, idx) => (
               <span
                 key={idx}
                 className={cn(
                   'inline-block rounded-full px-3 py-1 text-xs font-medium',
-                  post.featured
+                  content.featured
                     ? 'bg-primary/10 text-primary'
                     : 'bg-base-300 text-base-content',
                 )}
@@ -70,36 +70,36 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
         )}
 
         <span className={'text-xs text-neutral-500'}>
-          {formatDate(post.date)}
+          {formatDate(content.date)}
         </span>
 
         {/* Title */}
         <h3
           className={cn(
             'mb-2 font-semibold',
-            post.featured ? 'text-2xl md:text-3xl' : 'text-xl',
+            content.featured ? 'text-2xl md:text-3xl' : 'text-xl',
           )}
         >
-          {post.title}
+          {content.title}
         </h3>
 
         {/* Date and author */}
         <div className="mb-3 flex items-center justify-between text-xs text-gray-600">
-          {post.author && (
+          {content.author && (
             <div className={'flex items-center'}>
-              {post.author.avatar && (
+              {content.author.avatar && (
                 <img
-                  src={getImageUrl(post.author.avatar)}
-                  alt={post.author.name}
+                  src={getImageUrl(content.author.avatar)}
+                  alt={content.author.name}
                   className="mr-2 h-6 w-6 rounded-full"
                 />
               )}
               <div className={'flex flex-col items-start justify-start'}>
-                <span>{post.author.name}</span>
+                <span>{content.author.name}</span>
 
-                {post.author.role && (
+                {content.author.role && (
                   <span className="text-[10px] opacity-75">
-                    {post.author.role}
+                    {content.author.role}
                   </span>
                 )}
               </div>
@@ -108,9 +108,9 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
         </div>
 
         {/* Excerpt */}
-        {post.excerpt && (
+        {content.excerpt && (
           <p className={cn('mb-4 flex-1 text-sm', 'text-gray-600')}>
-            {post.excerpt}
+            {content.excerpt}
           </p>
         )}
 
@@ -119,11 +119,11 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
           <button
             className={cn(
               'btn btn-link btn-sm group h-auto min-h-0 p-0 no-underline',
-              post.featured ? 'text-primary' : 'text-blue-600',
+              content.featured ? 'text-primary' : 'text-blue-600',
             )}
             onClick={(e) => {
               e.stopPropagation();
-              new Action(post.action).execute();
+              new Action(content.action).execute();
             }}
           >
             Read more

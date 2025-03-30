@@ -1,0 +1,22 @@
+@import 'tailwindcss';
+
+@plugin 'daisyui';
+
+@source './';
+
+/* Custom styles */
+.btn-primary {
+  @apply transition-all duration-200 hover:scale-[1.02] hover:shadow-md hover:brightness-110;
+}
+
+.btn-secondary {
+  @apply transition-all duration-200 hover:scale-[1.02] hover:shadow-md hover:brightness-110;
+}
+
+.btn-outline:hover {
+  @apply scale-[1.02] shadow-md transition-all duration-200;
+}
+
+.btn-link {
+  @apply no-underline transition-all duration-200 hover:no-underline;
+}

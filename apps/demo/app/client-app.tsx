@@ -1,20 +1,21 @@
 'use client';
 
-// Styles
-// NOTE: Make sure to import the App styles first and then the feature styles
-import '@/app/globals.css';
-
-import { RouterProvider } from '@/components/router-provider';
-import { marketing } from '@vyuh/react-feature-marketing';
-import { misc } from '@/features/misc-feature';
-import { NextNavigationPlugin } from '@/plugins/next-navigation-plugin';
 import { PluginDescriptor, VyuhProvider } from '@vyuh/react-core';
+import { ReactNode } from 'react';
+
+// Plugins
+import { NextNavigationPlugin } from '@/plugins/next-navigation-plugin';
+import { RouterProvider } from '@/components/router-provider';
 import { DefaultContentPlugin } from '@vyuh/react-extension-content';
+import { SanityContentProvider } from '@vyuh/react-plugin-content-provider-sanity';
 
 // Features
-import { feature as system } from '@vyuh/react-feature-system';
-import { SanityContentProvider } from '@vyuh/react-plugin-content-provider-sanity';
-import { ReactNode } from 'react';
+import { system } from '@vyuh/react-feature-system';
+import { marketing } from '@vyuh/react-feature-marketing';
+import { blog } from '@vyuh/react-feature-blog';
+import { misc } from '@/features/misc-feature';
+
+import '@/app/globals.css';
 
 /**
  * Configure Sanity content provider
@@ -50,7 +51,7 @@ const plugins = new PluginDescriptor({
  * Feature configuration
  * Returns all features used in the application
  */
-const getFeatures = () => [system, misc, marketing];
+const getFeatures = () => [system, misc, marketing, blog];
 
 export default function ClientApp({ children }: { children: ReactNode }) {
   return (

@@ -1,9 +1,9 @@
-import { Blog } from '@/content/blog/blog';
-import { cn } from '@/shared/utils';
 import React from 'react';
+import { cn } from '../../../shared/utils';
+import { BlogGroup } from '../blog-group';
 
 interface BlogHeaderProps {
-  content: Pick<Blog, 'title' | 'subtitle'>;
+  content: Pick<BlogGroup, 'title' | 'subtitle'>;
   className?: string;
 }
 

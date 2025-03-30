@@ -1,5 +1,6 @@
 import { DefaultHeaderLayout } from '@/content/header/default-header-layout';
 import { Header as HeaderItem } from '@/content/header/header';
+import { Section } from '@/shared/components';
 import React from 'react';
 import { DesktopNavigation } from './DesktopNavigation';
 import { Logo } from './Logo';
@@ -21,7 +22,7 @@ export const Header: React.FC<HeaderProps> = ({
   const mobileMenuId = 'mobile-menu-drawer';
 
   return (
-    <div className="drawer">
+    <Section className="drawer">
       <input id={mobileMenuId} type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         {/* Navbar */}
@@ -54,6 +55,6 @@ export const Header: React.FC<HeaderProps> = ({
         navigationItems={content.navigationItems}
         actions={content.actions}
       />
-    </div>
+    </Section>
   );
 };

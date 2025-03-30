@@ -3,6 +3,7 @@ import {
   FeatureDescriptor,
 } from '@vyuh/sanity-schema-core';
 import { RouteDescriptor } from '@vyuh/sanity-schema-system';
+import { fullPageRouteLayout } from './extensions/route';
 import {
   BannerDescriptor,
   bannerSchema,
@@ -13,7 +14,6 @@ import {
   bentoSchema,
   defaultBentoLayout,
 } from './content/bento';
-import { BlogDescriptor, blogSchema, defaultBlogLayout } from './content/blog';
 import { CTADescriptor, ctaSchema, defaultCTALayout } from './content/cta';
 import { defaultFaqLayout, FAQDescriptor, faqSchema } from './content/faq';
 import {
@@ -85,9 +85,6 @@ export const marketing = new FeatureDescriptor({
     new LogoDescriptor({
       layouts: [defaultLogoLayout],
     }),
-    new BlogDescriptor({
-      layouts: [defaultBlogLayout],
-    }),
     new BentoDescriptor({
       layouts: [defaultBentoLayout],
     }),
@@ -107,6 +104,7 @@ export const marketing = new FeatureDescriptor({
       layouts: [defaultTestimonialsLayout],
     }),
     new RouteDescriptor({
+      layouts: [fullPageRouteLayout],
       regionItems: [
         { type: bannerSchema.name },
         { type: headerSchema.name },
@@ -120,7 +118,6 @@ export const marketing = new FeatureDescriptor({
         { type: faqSchema.name },
         { type: ctaSchema.name },
         { type: newsletterSchema.name },
-        { type: blogSchema.name },
         { type: teamSchema.name },
         { type: footerSchema.name },
       ],
@@ -139,7 +136,6 @@ export const marketing = new FeatureDescriptor({
     new BuiltContentSchemaBuilder(faqSchema),
     new BuiltContentSchemaBuilder(ctaSchema),
     new BuiltContentSchemaBuilder(newsletterSchema),
-    new BuiltContentSchemaBuilder(blogSchema),
     new BuiltContentSchemaBuilder(teamSchema),
     new BuiltContentSchemaBuilder(footerSchema),
   ],

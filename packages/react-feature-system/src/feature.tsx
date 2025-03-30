@@ -28,13 +28,19 @@ import { VIDEO_PLAYER_SCHEMA_TYPE } from '@/content/video-player/video-player';
 import { VideoPlayerContentBuilder } from '@/content/video-player/video-player-builder';
 import { VideoPlayerDescriptor } from '@/content/video-player/video-player-descriptor';
 import { FeatureDescriptor } from '@vyuh/react-core';
-import { ContentExtensionBuilder, ContentExtensionDescriptor } from '@vyuh/react-extension-content';
+import {
+  ContentExtensionBuilder,
+  ContentExtensionDescriptor,
+} from '@vyuh/react-extension-content';
 import { Command } from 'lucide-react';
 import React from 'react';
 import { NavigateAction } from './action/navigate-action';
 import { OpenUrlAction } from './action/open-url-action';
 import { BooleanCondition } from './condition/boolean-condition';
-import { API_CONTENT_SCHEMA_TYPE, APIContentDescriptor } from './content/api-content/api-content';
+import {
+  API_CONTENT_SCHEMA_TYPE,
+  APIContentDescriptor,
+} from './content/api-content/api-content';
 import { APIContentBuilder } from './content/api-content/api-content-builder';
 
 /**
@@ -42,7 +48,7 @@ import { APIContentBuilder } from './content/api-content/api-content-builder';
  *
  * Provides core content types and functionality:
  */
-export const feature = new FeatureDescriptor({
+export const system = new FeatureDescriptor({
   name: 'system',
   title: 'System',
   description: 'Core building blocks of the Vyuh React framework',

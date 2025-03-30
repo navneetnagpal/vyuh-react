@@ -1,4 +1,5 @@
 import { Header } from '@/content/header/header';
+import { Action } from '@vyuh/react-core';
 import { DynamicIcon, IconName } from 'lucide-react/dynamic';
 import React from 'react';
 
@@ -13,7 +14,9 @@ export const MobileMenuItem: React.FC<MobileMenuItemProps> = ({ item }) => {
   if (!hasChildren) {
     return (
       <li>
-        <a onClick={() => item.action && new Action(item.action).execute()}>
+        <a
+          onClick={() => item.action && new Action(item.action).execute()}
+        >
           {item.action?.title}
         </a>
       </li>
@@ -23,13 +26,17 @@ export const MobileMenuItem: React.FC<MobileMenuItemProps> = ({ item }) => {
   return (
     <li>
       <details>
-        <summary onClick={() => item.action && new Action(item.action).execute()}>
+        <summary
+          onClick={() => item.action && new Action(item.action).execute()}
+        >
           {item.action?.title}
         </summary>
-        <ul className="p-2">
+        <ul className="menu">
           {item.children.map((child, childIndex) => (
             <li key={childIndex}>
-              <a onClick={() => child.action && new Action(child.action).execute()}>
+              <a
+                onClick={() => child.action && new Action(child.action).execute()}
+              >
                 {child.action?.title}
               </a>
             </li>
@@ -50,14 +57,13 @@ export const MobileMenuActionItem: React.FC<MobileMenuActionItemProps> = ({
 }) => {
   return (
     <li>
-      <a onClick={() => actionItem.action && new Action(actionItem.action).execute()}>
+      <a
+        onClick={() => actionItem.action && new Action(actionItem.action).execute()}
+      >
         {actionItem.icon && (
-          <span className="mr-2">
-            <DynamicIcon
-              name={actionItem.icon as IconName}
-              className="h-4 w-4"
-            />
-          </span>
+          <DynamicIcon
+            name={actionItem.icon as IconName}
+          />
         )}
         {actionItem.action?.title}
       </a>
@@ -110,21 +116,23 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
         aria-label="close sidebar"
         className="drawer-overlay"
       ></label>
-      <ul className="menu menu-sm bg-base-100 text-base-content min-h-full w-80 gap-2 p-4">
+      <ul className="menu menu-lg bg-base-100 text-base-content min-h-full w-80 p-4">
         {navigationItems && navigationItems.length > 0 && (
           <>
-            <li className="menu-title mb-2 text-lg font-bold">Menu</li>
             {navigationItems.map((item, index) => (
               <MobileMenuItem key={index} item={item} />
             ))}
           </>
         )}
 
+        {navigationItems && navigationItems.length > 0 && actions && actions.length > 0 && (
+          <li>
+            <div className="divider"></div>
+          </li>
+        )}
+
         {actions && actions.length > 0 && (
           <>
-            <li className="menu-title pt-4">
-              <span>Actions</span>
-            </li>
             {actions.map((actionItem, index) => (
               <MobileMenuActionItem key={index} actionItem={actionItem} />
             ))}

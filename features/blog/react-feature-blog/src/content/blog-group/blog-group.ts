@@ -1,6 +1,6 @@
 import { Action, ContentItem, ImageReference } from '@vyuh/react-core';
 
-export const BLOG_SCHEMA_TYPE = 'marketing.blog';
+export const BLOG_GROUP_SCHEMA_TYPE = 'blog.group';
 
 /**
  * Blog section content item for displaying blog posts
@@ -10,7 +10,7 @@ export const BLOG_SCHEMA_TYPE = 'marketing.blog';
  * - Blog posts with various metadata
  * - Call-to-action button
  */
-export interface Blog extends ContentItem {
+export interface BlogGroup extends ContentItem {
   /**
    * The main title for the blog section
    */

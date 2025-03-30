@@ -19,7 +19,8 @@ export const Banner: React.FC<BannerProps> = ({
 }) => {
   const [isVisible, setIsVisible] = useState(true);
   const colorScheme = layout.colorScheme || 'default';
-  const cookieId = content.cookieId || `banner-${content.text.substring(0, 20)}`;
+  const cookieId =
+    content.cookieId || `banner-${content.text.substring(0, 20)}`;
 
   // Check if banner has been dismissed before
   useEffect(() => {
@@ -55,7 +56,7 @@ export const Banner: React.FC<BannerProps> = ({
   return (
     <div
       className={cn(
-        `alert flex items-center justify-between p-4 transition-all duration-300`,
+        `alert flex items-center justify-between rounded-none p-4 transition-all duration-300`,
         colorClasses[colorScheme],
         className,
       )}

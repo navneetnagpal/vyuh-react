@@ -20,8 +20,6 @@ export const Newsletter: React.FC<NewsletterProps> = ({
 }) => {
   const variant = layout.variant || 'simple-centered';
 
-  const backgroundClasses = 'bg-base-100 text-base-content';
-
   switch (variant) {
     case 'simple-centered':
       return (
@@ -34,7 +32,7 @@ export const Newsletter: React.FC<NewsletterProps> = ({
     case 'split-with-image':
       return (
         <Section className={cn('overflow-hidden', className)}>
-          <div className="mx-auto gap-0 lg:flex lg:items-center lg:gap-x-10">
+          <div className="mx-auto justify-center gap-0 lg:flex lg:items-center lg:gap-x-10">
             <div className="mx-auto max-w-2xl lg:mx-0 lg:flex-auto">
               <NewsletterHeader content={content} centered={false} />
               <NewsletterForm content={content} className="mt-6" />
