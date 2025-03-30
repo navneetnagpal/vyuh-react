@@ -18,25 +18,20 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
   }
 
   return (
-    <div className={cn('flex items-center space-x-4', className)}>
+    <div className={cn('flex items-center gap-2', className)}>
       {actions.map((actionItem, index) => (
         <button
           key={index}
-          className={cn('btn btn-xs')}
+          className={cn('btn btn-ghost btn-xs')}
           onClick={() => new Action(actionItem.action).execute()}
         >
-          <div className="flex items-center">
-            {actionItem.icon && (
-              <DynamicIcon
-                className={cn(
-                  'h-4 w-4',
-                  actionItem.action?.title ? 'mr-2' : '',
-                )}
-                name={actionItem.icon as IconName}
-              />
-            )}
-            {actionItem.action?.title && <span>{actionItem.action.title}</span>}
-          </div>
+          {actionItem.icon && (
+            <DynamicIcon
+              className={cn('h-4 w-4', actionItem.action?.title ? 'mr-1' : '')}
+              name={actionItem.icon as IconName}
+            />
+          )}
+          {actionItem.action?.title && <span>{actionItem.action.title}</span>}
         </button>
       ))}
     </div>

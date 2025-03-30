@@ -1,11 +1,9 @@
 import { DefaultHeaderLayout } from '@/content/header/default-header-layout';
 import { Header as HeaderItem } from '@/content/header/header';
-import { Section } from '@/shared/components/Section';
-import { cn } from '@/shared/utils';
 import React from 'react';
-import { ActionButtons } from './ActionButtons';
+import { DesktopNavigation } from './DesktopNavigation';
 import { Logo } from './Logo';
-import { Navigation } from './Navigation';
+import { MobileMenu, MobileMenuButton } from './MobileMenu';
 
 interface HeaderProps {
   content: HeaderItem;
@@ -20,40 +18,42 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const variant = layout.variant || 'simple';
   const sticky = layout.sticky || false;
-
-  // Render the header content based on the variant
-  const renderHeaderContent = () => {
-    switch (variant) {
-      case 'simple':
-        return (
-          <div className="flex items-center justify-between">
-            <Logo content={content} />
-          </div>
-        );
-
-      case 'with-navigation':
-        return (
-          <div className="flex items-center justify-between">
-            <Logo content={content} />
-            <div className="hidden items-center space-x-6 md:flex">
-              <Navigation items={content.navigationItems} />
-              <ActionButtons actions={content.actions} />
-            </div>
-          </div>
-        );
-
-      default:
-        return (
-          <div className="flex items-center justify-between">
-            <Logo content={content} />
-          </div>
-        );
-    }
-  };
+  const mobileMenuId = 'mobile-menu-drawer';
 
   return (
-    <Section className={cn(sticky && 'sticky top-0 z-50', className)}>
-      {renderHeaderContent()}
-    </Section>
+    <div className="drawer">
+      <input id={mobileMenuId} type="checkbox" className="drawer-toggle" />
+      <div className="drawer-content">
+        {/* Navbar */}
+        <div className="navbar bg-base-100 px-0">
+          {/* Logo section - always visible */}
+          <div className="navbar-start">
+            <Logo content={content} className="navbar-item" />
+          </div>
+
+          {variant === 'with-navigation' && (
+            <>
+              {/* Mobile menu button */}
+              <div className="navbar-end lg:hidden">
+                <MobileMenuButton id={mobileMenuId} />
+              </div>
+
+              {/* Desktop navigation and actions */}
+              <DesktopNavigation
+                navigationItems={content.navigationItems}
+                actions={content.actions}
+              />
+            </>
+          )}
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      <MobileMenu
+        id={mobileMenuId}
+        navigationItems={content.navigationItems}
+        actions={content.actions}
+      />
+    </div>
   );
 };

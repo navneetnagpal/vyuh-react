@@ -106,7 +106,7 @@ export const BlogFeaturedPost: React.FC<BlogFeaturedPostProps> = ({
         {/* Read more button */}
         <div>
           <button
-            className="btn btn-link btn-sm text-blue-600 p-0 h-auto min-h-0 no-underline hover:underline"
+            className="btn btn-link btn-sm text-blue-600 p-0 h-auto min-h-0 no-underline group"
             onClick={(e) => {
               e.stopPropagation();
               new Action(post.action).execute();
@@ -114,7 +114,7 @@ export const BlogFeaturedPost: React.FC<BlogFeaturedPostProps> = ({
           >
             Read more
             <svg
-              className="ml-1 h-4 w-4"
+              className="ml-1 h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

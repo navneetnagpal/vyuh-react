@@ -102,7 +102,7 @@ export function HeroActions({
         <button
           key={index}
           onClick={(e) => handleActionClick(e, action)}
-          className="btn btn-link text-primary group w-full no-underline hover:underline sm:w-auto"
+          className="btn btn-link text-primary group w-full no-underline sm:w-auto"
         >
           {actionTitle}{' '}
           <span

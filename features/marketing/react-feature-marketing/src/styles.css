@@ -18,8 +18,10 @@
 }
 
 .btn-link {
-  @apply transition-all duration-200;
+  @apply transition-all duration-200 no-underline hover:no-underline;
 }
+
+/* No custom dropdown styles - using pure DaisyUI */
 
 /* FAQ accordion styles */
 .collapse.collapse-arrow {

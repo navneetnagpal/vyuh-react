@@ -13,25 +13,19 @@ export const Logo: React.FC<LogoProps> = ({ content, className }) => {
 
   return (
     <div className={cn('flex items-center', className)}>
-      {content.logo && (
-        <img
-          src={plugins.content.provider.image(content.logo, {
-            width: 48,
-            height: 48,
-          })}
-          alt={content.logoText || 'Logo'}
-          className="h-[32px] w-auto"
-        />
-      )}
-      {content.logoText && (
-        <span
-          className={cn('ml-2 text-base font-semibold md:text-lg', {
-            'ml-0': !content.logo,
-          })}
-        >
-          {content.logoText}
-        </span>
-      )}
+      <a href="/" className="btn btn-ghost text-base normal-case md:text-xl">
+        {content.logo && (
+          <img
+            src={plugins.content.provider.image(content.logo, {
+              width: 48,
+              height: 48,
+            })}
+            alt={content.logoText || 'Logo'}
+            className="mr-2 h-[24px] w-auto md:h-[32px]"
+          />
+        )}
+        {content.logoText && <span>{content.logoText}</span>}
+      </a>
     </div>
   );
 };
