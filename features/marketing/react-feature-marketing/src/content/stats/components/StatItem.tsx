@@ -14,18 +14,18 @@ export const StatItem: React.FC<StatItemProps> = ({
   className,
   variant = 'simple',
 }) => {
-  const valueColor = 'text-gray-900';
-  const labelColor = 'text-gray-600';
-  const descriptionColor = 'text-gray-500';
-  const iconColor = 'text-indigo-600';
+  const valueColor = 'text-base-content';
+  const labelColor = 'text-base-content/70';
+  const descriptionColor = 'text-base-content/60';
+  const iconColor = 'text-primary';
 
   const isCardVariant = variant === 'card-grid';
 
   return (
     <div
       className={cn(
-        isCardVariant && 'rounded-lg p-6 ring-1',
-        isCardVariant && 'bg-white ring-gray-200',
+        isCardVariant && 'card p-6',
+        isCardVariant && 'bg-base-100 border border-base-300',
         className,
       )}
     >

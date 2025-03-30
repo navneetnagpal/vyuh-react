@@ -17,9 +17,9 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
 }) => {
   const { getImageUrl } = useMediaUtils();
 
-  const nameColor = 'text-gray-900';
-  const roleColor = 'text-gray-600';
-  const bioColor = 'text-gray-500';
+  const nameColor = 'text-base-content';
+  const roleColor = 'text-base-content/70';
+  const bioColor = 'text-base-content/60';
 
   const isCardVariant = variant === 'card-grid';
   const isLargeImageVariant = variant === 'with-large-images';
@@ -41,9 +41,9 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
   return (
     <div
       className={cn(
-        isCardVariant && 'rounded-lg p-6 ring-1',
-        isCardVariant && 'bg-white ring-gray-200',
-        member.featured && 'ring-2 ring-indigo-500',
+        isCardVariant && 'card p-6',
+        isCardVariant && 'bg-base-100 border border-base-300',
+        member.featured && 'border-2 border-primary',
         className,
       )}
     >
@@ -73,9 +73,7 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
                 <a
                   key={index}
                   href={link.url}
-                  className={cn(
-                    'text-gray-400 hover:text-gray-500',
-                  )}
+                  className="text-base-content/40 hover:text-base-content/70"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

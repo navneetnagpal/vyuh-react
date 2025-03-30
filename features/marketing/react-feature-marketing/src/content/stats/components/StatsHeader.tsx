@@ -25,7 +25,7 @@ export const StatsHeader: React.FC<StatsHeaderProps> = ({
         </h2>
       )}
       {content.subtitle && (
-        <p className="mt-4 text-lg text-gray-600">
+        <p className="mt-4 text-lg text-base-content/70">
           {content.subtitle}
         </p>
       )}

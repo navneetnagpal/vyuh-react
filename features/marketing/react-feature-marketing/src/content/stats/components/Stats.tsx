@@ -57,7 +57,7 @@ export const Stats: React.FC<StatsProps> = ({ content, layout }) => {
             <StatsHeader content={content} centered={false} />
             {content.description && (
               <p
-                className="mt-6 text-base leading-7 text-gray-600"
+                className="mt-6 text-base leading-7 text-base-content/70"
               >
                 {content.description}
               </p>

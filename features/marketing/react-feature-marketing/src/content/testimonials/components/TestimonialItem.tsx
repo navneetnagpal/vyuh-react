@@ -17,9 +17,9 @@ export const TestimonialItem: React.FC<TestimonialItemProps> = ({
 }) => {
   const { getImageUrl } = useMediaUtils();
 
-  const quoteColor = 'text-gray-900';
-  const nameColor = 'text-gray-900';
-  const roleColor = 'text-gray-600';
+  const quoteColor = 'text-base-content';
+  const nameColor = 'text-base-content';
+  const roleColor = 'text-base-content/70';
 
   const isCardVariant = variant === 'card-grid';
   const isLargeAvatarVariant = variant === 'with-large-avatar';
@@ -27,9 +27,9 @@ export const TestimonialItem: React.FC<TestimonialItemProps> = ({
   return (
     <div
       className={cn(
-        isCardVariant && 'rounded-lg p-6 ring-1',
-        isCardVariant && 'bg-white ring-gray-200',
-        testimonial.featured && 'ring-2 ring-indigo-500',
+        isCardVariant && 'card p-6',
+        isCardVariant && 'bg-base-100 border border-base-300',
+        testimonial.featured && 'border-2 border-primary',
         className,
       )}
     >
@@ -37,7 +37,7 @@ export const TestimonialItem: React.FC<TestimonialItemProps> = ({
         <QuoteIcon
           className={cn(
             'mb-4 h-8 w-8',
-            'text-indigo-600',
+            'text-primary',
           )}
         />
 

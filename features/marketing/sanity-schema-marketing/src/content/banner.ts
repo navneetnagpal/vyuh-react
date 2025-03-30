@@ -107,15 +107,13 @@ export const defaultBannerLayout = defineType({
       },
       initialValue: 'default',
     }),
-    backgroundField(),
   ],
   preview: {
     select: {
       variant: 'variant',
       colorScheme: 'colorScheme',
-      background: 'background.type',
     },
-    prepare({ variant, colorScheme, background }) {
+    prepare({ variant, colorScheme }) {
       // Format the variant name for display
       const variantDisplay = variant
         ? variant
@@ -124,11 +122,9 @@ export const defaultBannerLayout = defineType({
             .join(' ')
         : 'Simple';
 
-      let bgDisplay = `Background: ${background ?? 'None'}`;
-
       return {
         title: `Banner Layout: ${variantDisplay}`,
-        subtitle: `Color: ${colorScheme || 'Default'}, ${bgDisplay}`,
+        subtitle: `Color: ${colorScheme || 'Default'}`,
         media: Icon,
       };
     },
