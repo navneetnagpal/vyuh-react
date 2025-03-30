@@ -53,7 +53,7 @@ export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
     <Section
       className={cn(
         bgClass,
-        'border-base-300 hover:border-base-300/70 to-primary/25 rounded-xl border bg-gradient-to-br from-transparent transition-all duration-300 hover:shadow-xl',
+        'border-base-300 md:hover:border-base-300/70 to-primary/25 rounded-none border-none bg-gradient-to-br from-transparent transition-all duration-300 hover:shadow-xl md:rounded-xl md:border',
         className,
       )}
     >

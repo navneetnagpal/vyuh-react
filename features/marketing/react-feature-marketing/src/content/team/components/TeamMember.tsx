@@ -42,21 +42,21 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
     <div
       className={cn(
         isCardVariant && 'card p-6',
-        isCardVariant && 'bg-base-100 border border-base-300',
-        member.featured && 'border-2 border-primary',
+        isCardVariant && 'bg-base-100 border-base-300 border',
+        member.featured && 'border-primary border-2',
         className,
       )}
     >
-      <img
-        src={getImageUrl(member.image)}
-        alt={member.name}
-        className={cn(
-          'mx-auto',
-          isLargeImageVariant
-            ? 'h-56 w-56 rounded-full object-cover'
-            : 'h-24 w-24 rounded-full object-cover',
-        )}
-      />
+      <div className="avatar mx-auto">
+        <div
+          className={cn(
+            'ring-base-200 rounded-full ring-4 ring-offset-0 transition-all duration-300 hover:ring-offset-2',
+            isLargeImageVariant ? 'h-56 w-56' : 'h-24 w-24',
+          )}
+        >
+          <img src={getImageUrl(member.image)} alt={member.name} />
+        </div>
+      </div>
       <div className={cn('mt-4', isLargeImageVariant ? 'mt-6' : 'mt-4')}>
         <h3 className={cn('text-lg font-semibold', nameColor)}>
           {member.name}

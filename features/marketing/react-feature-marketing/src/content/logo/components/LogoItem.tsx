@@ -32,7 +32,7 @@ export const LogoItem: React.FC<LogoItemProps> = ({
         onClick={() => new Action(item.action!).execute()}
         className={cn(
           'flex items-center justify-center p-4',
-          variant === 'with-borders' && 'border border-base-300',
+          variant === 'with-borders' && 'border-base-100 border',
           'rounded-lg transition-all hover:opacity-80',
           className,
         )}
@@ -47,7 +47,7 @@ export const LogoItem: React.FC<LogoItemProps> = ({
     <div
       className={cn(
         'flex items-center justify-center p-4',
-        variant === 'with-borders' && 'border border-base-300',
+        variant === 'with-borders' && 'border-base-300 border',
         'rounded-lg',
         className,
       )}
