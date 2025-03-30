@@ -4,9 +4,13 @@ import { cn } from '@/shared/utils';
 
 interface ThemeToggleProps {
   className?: string;
+  showLabel?: boolean;
 }
 
-export const ThemeToggle: React.FC<ThemeToggleProps> = ({ className }) => {
+export const ThemeToggle: React.FC<ThemeToggleProps> = ({
+  className,
+  showLabel = false,
+}) => {
   // Available themes
   const themes = ['light', 'dracula', 'corporate', 'lofi', 'winter'];
 
@@ -40,13 +44,17 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({ className }) => {
       <button
         onClick={toggleTheme}
         className={cn(
-          'btn btn-ghost btn-circle',
+          {
+            'btn btn-ghost btn-circle': !showLabel,
+            'flex flex-row items-center gap-2': showLabel,
+          },
           'transition-colors duration-200',
           className,
         )}
         aria-label="Toggle theme"
       >
         <Icon className="h-5 w-5" />
+        {showLabel && <span>Change Theme</span>}
       </button>
     </div>
   );

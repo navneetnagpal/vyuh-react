@@ -17,7 +17,7 @@ export const MobileMenuItem: React.FC<MobileMenuItemProps> = ({ item }) => {
       <li>
         <a
           onClick={() => item.action && new Action(item.action).execute()}
-          className="transition-colors duration-200"
+          className="w-full transition-colors duration-200"
         >
           {item.action?.title}
         </a>
@@ -37,8 +37,10 @@ export const MobileMenuItem: React.FC<MobileMenuItemProps> = ({ item }) => {
           {item.children.map((child, childIndex) => (
             <li key={childIndex}>
               <a
-                onClick={() => child.action && new Action(child.action).execute()}
-                className="transition-colors duration-200"
+                onClick={() =>
+                  child.action && new Action(child.action).execute()
+                }
+                className="w-full transition-colors duration-200"
               >
                 {child.action?.title}
               </a>
@@ -61,14 +63,12 @@ export const MobileMenuActionItem: React.FC<MobileMenuActionItemProps> = ({
   return (
     <li>
       <a
-        onClick={() => actionItem.action && new Action(actionItem.action).execute()}
-        className="transition-colors duration-200"
+        onClick={() =>
+          actionItem.action && new Action(actionItem.action).execute()
+        }
+        className="w-full transition-colors duration-200"
       >
-        {actionItem.icon && (
-          <DynamicIcon
-            name={actionItem.icon as IconName}
-          />
-        )}
+        {actionItem.icon && <DynamicIcon name={actionItem.icon as IconName} />}
         {actionItem.action?.title}
       </a>
     </li>
@@ -130,7 +130,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
           </label>
         </div>
 
-        <ul className="menu menu-lg text-base-content px-4 pb-4">
+        <ul className="menu menu-lg text-base-content w-full px-4 pb-4">
           {navigationItems && navigationItems.length > 0 && (
             <>
               {navigationItems.map((item, index) => (
@@ -139,11 +139,14 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
             </>
           )}
 
-          {navigationItems && navigationItems.length > 0 && actions && actions.length > 0 && (
-            <li>
-              <div className="divider"></div>
-            </li>
-          )}
+          {navigationItems &&
+            navigationItems.length > 0 &&
+            actions &&
+            actions.length > 0 && (
+              <li>
+                <div className="divider my-1 opacity-30"></div>
+              </li>
+            )}
 
           {actions && actions.length > 0 && (
             <>
@@ -157,11 +160,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
           {showThemeSwitch && (
             <>
               <li>
-                <div className="divider"></div>
-              </li>
-              <li className="flex items-center">
-                <span className="flex-grow">Theme</span>
-                <ThemeToggle />
+                <ThemeToggle showLabel={true} />
               </li>
             </>
           )}
