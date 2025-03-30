@@ -33,6 +33,8 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({ className }) => {
     document.documentElement.setAttribute('data-theme', newTheme);
   };
 
+  const Icon = theme === 'light' ? Sun : theme === 'dracula' ? Moon : Palette;
+
   return (
     <div className="tooltip tooltip-bottom" data-tip={`Theme: ${theme}`}>
       <button
@@ -44,13 +46,7 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({ className }) => {
         )}
         aria-label="Toggle theme"
       >
-        {theme === 'light' ? (
-          <Sun className="h-5 w-5" />
-        ) : theme === 'dark' ? (
-          <Moon className="h-5 w-5" />
-        ) : (
-          <Palette className="h-5 w-5" />
-        )}
+        <Icon className="h-5 w-5" />
       </button>
     </div>
   );

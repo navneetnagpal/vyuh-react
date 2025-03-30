@@ -1,7 +1,7 @@
 import { DefaultHeaderLayout } from '@/content/header/default-header-layout';
 import { Header as HeaderItem } from '@/content/header/header';
 import { cn } from '@/shared/utils';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { DesktopNavigation } from './DesktopNavigation';
 import { Logo } from './Logo';
 import { MobileMenu, MobileMenuButton } from './MobileMenu';
@@ -19,14 +19,44 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const variant = layout.variant || 'simple';
   const showThemeSwitch = layout.showThemeSwitch ?? true; // Default to true if not specified
+  const sticky = layout.sticky ?? false; // Default to false if not specified
   const mobileMenuId = 'mobile-menu-drawer';
 
+  // State to track if the page has been scrolled
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Effect to handle scroll events
+  useEffect(() => {
+    if (!sticky) return; // Only add scroll listener if sticky is enabled
+
+    const handleScroll = () => {
+      // Check if page is scrolled more than 10px to add shadow
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    // Add scroll event listener
+    window.addEventListener('scroll', handleScroll);
+
+    // Initial check
+    handleScroll();
+
+    // Clean up event listener
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [sticky]);
+
   return (
-    <header className={cn('drawer', className)}>
+    <header
+      className={cn('drawer bg-base-100/50 backdrop-blur-xl', className, {
+        'sticky top-0 z-30 transition-shadow duration-200': sticky,
+        'shadow-md': sticky && isScrolled,
+      })}
+    >
       <input id={mobileMenuId} type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         <div className="container mx-auto px-4">
-          <div className="navbar bg-base-100 px-0">
+          <div className={cn('navbar px-0')}>
             {/* Logo section - always visible */}
             <div className="navbar-start">
               <Logo content={content} className="navbar-item" />

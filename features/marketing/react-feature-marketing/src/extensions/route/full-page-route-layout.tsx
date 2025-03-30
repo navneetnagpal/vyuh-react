@@ -84,9 +84,7 @@ function FullPageRouteComponent({
       {route.regions.map((region: Region) => (
         <Fragment key={region.identifier}>
           {region.items.map((item: ContentItem, itemIndex: number) => (
-            <div key={itemIndex} className="w-full overflow-visible">
-              {plugins.content.render(item)}
-            </div>
+            <Fragment key={itemIndex}>{plugins.content.render(item)}</Fragment>
           ))}
         </Fragment>
       ))}

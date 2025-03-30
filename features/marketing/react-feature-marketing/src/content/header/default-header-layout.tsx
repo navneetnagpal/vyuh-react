@@ -20,6 +20,7 @@ export class DefaultHeaderLayout extends LayoutConfiguration<HeaderContent> {
 
   readonly variant?: HeaderVariant;
   readonly showThemeSwitch?: boolean;
+  readonly sticky?: boolean;
 
   constructor(props?: Partial<DefaultHeaderLayout>) {
     super({
@@ -29,6 +30,7 @@ export class DefaultHeaderLayout extends LayoutConfiguration<HeaderContent> {
 
     this.variant = props?.variant || 'simple';
     this.showThemeSwitch = props?.showThemeSwitch ?? true; // Default to true
+    this.sticky = props?.sticky ?? false; // Default to false
   }
 
   render(content: HeaderContent): React.ReactNode {
