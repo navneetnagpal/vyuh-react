@@ -1,13 +1,7 @@
 import { Section } from '@/shared/components';
 import React from 'react';
 import { HeroComponentProps } from './HeroTypes';
-import {
-  HeroActions,
-  HeroMedia,
-  HeroSubtitle,
-  HeroTitle,
-  useBackgroundStyles,
-} from './HeroUtils';
+import { HeroActions, HeroMedia, HeroSubtitle, HeroTitle } from './HeroUtils';
 
 type HeroSplitProps = HeroComponentProps & {
   imagePosition: 'left' | 'right';
@@ -15,7 +9,6 @@ type HeroSplitProps = HeroComponentProps & {
 
 export function HeroSplit({ content, layout, imagePosition }: HeroSplitProps) {
   const { title, subtitle, media, actions } = content;
-  const { background } = layout;
   const hasMedia = media && media.type !== 'none';
 
   // Determine order classes based on image position

@@ -21,11 +21,6 @@ export class DefaultFeatureLayout extends LayoutConfiguration<Feature> {
   static readonly typeDescriptor = new TypeDescriptor(this.schemaName, this);
 
   readonly variant: FeatureVariant;
-  readonly background?: {
-    type: 'none' | 'color' | 'gradient';
-    color?: string;
-    gradient?: string;
-  };
 
   constructor(props?: Partial<DefaultFeatureLayout>) {
     super({
@@ -34,7 +29,6 @@ export class DefaultFeatureLayout extends LayoutConfiguration<Feature> {
     });
 
     this.variant = props?.variant ?? 'with-media';
-    this.background = props?.background;
   }
 
   /**
@@ -54,7 +48,7 @@ interface FeatureViewProps {
 }
 
 const FeatureView: React.FC<FeatureViewProps> = ({ content, layout }) => {
-  const { variant, background } = layout;
+  const { variant } = layout;
 
   // Render the appropriate variant
   switch (variant) {

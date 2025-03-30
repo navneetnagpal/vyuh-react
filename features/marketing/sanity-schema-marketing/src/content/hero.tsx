@@ -1,4 +1,3 @@
-import { backgroundField } from '@/object/background';
 import {
   ContentDescriptor,
   ContentSchemaBuilder,
@@ -178,14 +177,12 @@ export const defaultHeroLayout = defineType({
         ],
       },
     }),
-    backgroundField(),
   ],
   preview: {
     select: {
       variant: 'variant',
-      background: 'background.type',
     },
-    prepare({ variant, background }) {
+    prepare({ variant }) {
       // Format the variant name for display
       const variantDisplay = variant
         ? variant
@@ -194,12 +191,8 @@ export const defaultHeroLayout = defineType({
             .join(' ')
         : 'Centered';
 
-      // Create a descriptive subtitle based on background settings
-      let bgDisplay = `Background: ${background ?? 'None'}`;
-
       return {
         title: `Hero Layout: ${variantDisplay}`,
-        subtitle: bgDisplay || 'No background',
         media: Icon,
       };
     },

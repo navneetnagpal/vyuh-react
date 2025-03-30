@@ -12,7 +12,6 @@ export const HERO_SCHEMA_TYPE = 'marketing.hero';
  *
  * Heroes can include:
  * - Title and subtitle
- * - Background configuration
  * - Media content (images, videos)
  * - Call-to-action buttons
  */

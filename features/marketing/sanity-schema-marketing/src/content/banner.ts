@@ -1,4 +1,3 @@
-import { backgroundField } from '@/object/background';
 import { ContentDescriptor } from '@vyuh/sanity-schema-core';
 import { TbFlag as Icon } from 'react-icons/tb';
 import { defineField, defineType } from 'sanity';

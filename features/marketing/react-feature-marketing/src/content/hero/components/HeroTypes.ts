@@ -6,8 +6,5 @@ import { DefaultHeroLayout } from '@/content/hero/default-hero-layout';
  */
 export interface HeroComponentProps {
   content: Hero;
-  layout: {
-    variant: string;
-    background?: DefaultHeroLayout['background'];
-  };
+  layout: DefaultHeroLayout;
 }

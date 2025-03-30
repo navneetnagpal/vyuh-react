@@ -1,6 +1,5 @@
-import { DefaultFeatureLayout } from '@/content/feature/default-feature-layout';
 import { MediaImage } from '@/shared/components';
-import { MediaVideo, useMediaUtils } from '@/shared/MediaUtils';
+import { MediaVideo } from '@/shared/MediaUtils';
 import { cn } from '@/shared/utils';
 import { DynamicIcon, IconName } from 'lucide-react/dynamic';
 import React from 'react';
@@ -49,13 +48,9 @@ export const FeatureItem: React.FC<{
       </div>
     )}
     <div className={icon ? 'ml-16' : ''}>
-      <h3 className="text-lg font-medium text-gray-900">
-        {title}
-      </h3>
+      <h3 className="text-lg font-medium text-gray-900">{title}</h3>
       {description && (
-        <p className="mt-2 text-base text-gray-500">
-          {description}
-        </p>
+        <p className="mt-2 text-base text-gray-500">{description}</p>
       )}
     </div>
   </div>
@@ -150,23 +145,3 @@ export const FeatureMedia: React.FC<{
       return null;
   }
 };
-
-/**
- * Hook for generating background styles based on layout configuration
- */
-export function useBackgroundStyles(
-  background?: DefaultFeatureLayout['background'],
-) {
-  const { getImageUrl } = useMediaUtils();
-
-  if (!background) return {};
-
-  switch (background.type) {
-    case 'color':
-      return { backgroundColor: background.color };
-    case 'gradient':
-      return { backgroundImage: background.gradient };
-    default:
-      return {};
-  }
-}

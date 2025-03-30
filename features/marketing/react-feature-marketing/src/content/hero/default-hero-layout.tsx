@@ -6,9 +6,7 @@ import React from 'react';
 /**
  * Hero layout variant type
  */
-export type HeroVariant =
-  | 'centered'
-  | 'split-right';
+export type HeroVariant = 'centered' | 'split-right';
 
 /**
  * Default layout for hero content items
@@ -23,11 +21,6 @@ export class DefaultHeroLayout extends LayoutConfiguration<Hero> {
   static readonly typeDescriptor = new TypeDescriptor(this.schemaName, this);
 
   readonly variant: HeroVariant;
-  readonly background?: {
-    type: 'none' | 'color' | 'gradient';
-    color?: string;
-    gradient?: string;
-  };
 
   constructor(props?: Partial<DefaultHeroLayout>) {
     super({
@@ -36,22 +29,13 @@ export class DefaultHeroLayout extends LayoutConfiguration<Hero> {
     });
 
     this.variant = props?.variant ?? 'centered';
-    this.background = props?.background;
   }
 
   /**
    * Render the hero content based on the selected variant
    */
   render(content: Hero): React.ReactNode {
-    return (
-      <HeroView
-        content={content}
-        layout={{
-          variant: this.variant,
-          background: this.background,
-        }}
-      />
-    );
+    return <HeroView content={content} layout={this} />;
   }
 }
 
@@ -60,15 +44,11 @@ export class DefaultHeroLayout extends LayoutConfiguration<Hero> {
  */
 interface HeroViewProps {
   content: Hero;
-  layout: {
-    variant: HeroVariant;
-    background?: DefaultHeroLayout['background'];
-  };
+  layout: DefaultHeroLayout;
 }
 
 const HeroView: React.FC<HeroViewProps> = ({ content, layout }) => {
-  const { plugins } = useVyuh();
-  const { variant, background } = layout;
+  const { variant } = layout;
 
   // Render the appropriate variant
   switch (variant) {

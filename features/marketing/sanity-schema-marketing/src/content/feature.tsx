@@ -4,7 +4,6 @@ import {
 } from '@vyuh/sanity-schema-core';
 import { TbLayoutList as Icon } from 'react-icons/tb';
 import { defineField, defineType } from 'sanity';
-import { backgroundField } from '../object/background';
 
 /**
  * Feature section schema for marketing pages
@@ -209,14 +208,12 @@ export const defaultFeatureLayout = defineType({
         ],
       },
     }),
-    backgroundField(),
   ],
   preview: {
     select: {
       variant: 'variant',
-      background: 'background.type',
     },
-    prepare({ variant, background }) {
+    prepare({ variant }) {
       // Format the variant name for display
       const variantDisplay = variant
         ? variant
@@ -225,11 +222,8 @@ export const defaultFeatureLayout = defineType({
             .join(' ')
         : 'With Screenshot';
 
-      let bgDisplay = `Background: ${background ?? 'None'}`;
-
       return {
         title: `Feature Layout: ${variantDisplay}`,
-        subtitle: bgDisplay || 'No background',
         media: Icon,
       };
     },
