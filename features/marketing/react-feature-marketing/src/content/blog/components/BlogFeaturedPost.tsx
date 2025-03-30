@@ -70,7 +70,7 @@ export const BlogFeaturedPost: React.FC<BlogFeaturedPostProps> = ({
         <h3 className="mb-3 text-2xl font-bold">{post.title}</h3>
 
         {/* Date and author */}
-        <div className="mb-4 flex items-center text-sm text-gray-600"
+        <div className="mb-4 flex items-center text-xs text-gray-600"
         >
           <span>{formatDate(post.date)}</span>
           {post.author && (
@@ -86,7 +86,7 @@ export const BlogFeaturedPost: React.FC<BlogFeaturedPostProps> = ({
                 )}
                 <span>{post.author.name}</span>
                 {post.author.role && (
-                  <span className="ml-1 text-xs opacity-75">
+                  <span className="ml-1 text-[10px] opacity-75">
                     {post.author.role}
                   </span>
                 )}

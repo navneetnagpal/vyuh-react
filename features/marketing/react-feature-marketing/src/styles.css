@@ -1,4 +1,4 @@
-@import 'tailwindcss' source(none);
+@import 'tailwindcss';
 
 @plugin 'daisyui';
 
@@ -6,50 +6,17 @@
 
 /* Custom styles */
 .btn-primary {
-  @apply hover:brightness-110 hover:shadow-md transition-all duration-200 hover:scale-[1.02];
+  @apply transition-all duration-200 hover:scale-[1.02] hover:shadow-md hover:brightness-110;
 }
 
 .btn-secondary {
-  @apply hover:brightness-110 hover:shadow-md transition-all duration-200 hover:scale-[1.02];
+  @apply transition-all duration-200 hover:scale-[1.02] hover:shadow-md hover:brightness-110;
 }
 
 .btn-outline:hover {
-  @apply shadow-md transition-all duration-200 scale-[1.02];
+  @apply scale-[1.02] shadow-md transition-all duration-200;
 }
 
 .btn-link {
-  @apply transition-all duration-200 no-underline hover:no-underline;
-}
-
-/* No custom dropdown styles - using pure DaisyUI */
-
-/* No custom stats styles - using grid layout */
-
-/* FAQ accordion styles */
-.collapse.collapse-arrow {
-  @apply transition-all duration-200;
-}
-
-.collapse.collapse-arrow:hover {
-  @apply shadow-md;
-}
-
-.collapse.collapse-arrow .collapse-title:after {
-  @apply transition-transform duration-200;
-}
-
-.collapse-content {
-  @apply transition-all duration-300 ease-in-out;
-}
-
-.collapse-content > * {
-  @apply transition-opacity duration-300 ease-in-out;
-}
-
-.collapse:not(.collapse-open) .collapse-content > * {
-  @apply opacity-0;
-}
-
-.collapse.collapse-open .collapse-content > * {
-  @apply opacity-100;
+  @apply no-underline transition-all duration-200 hover:no-underline;
 }

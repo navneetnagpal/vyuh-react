@@ -65,7 +65,7 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
           </div>
         )}
 
-        <span className={'text-sm text-neutral-500'}>
+        <span className={'text-xs text-neutral-500'}>
           {formatDate(post.date)}
         </span>
 
@@ -73,7 +73,7 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
         <h3 className="mb-2 text-xl font-semibold">{post.title}</h3>
 
         {/* Date and author */}
-        <div className="mb-3 flex items-center justify-between text-sm text-gray-600">
+        <div className="mb-3 flex items-center justify-between text-xs text-gray-600">
           {post.author && (
             <div className={'flex items-center'}>
               {post.author.avatar && (
@@ -87,7 +87,7 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
                 <span>{post.author.name}</span>
 
                 {post.author.role && (
-                  <span className="text-xs opacity-75">{post.author.role}</span>
+                  <span className="text-[10px] opacity-75">{post.author.role}</span>
                 )}
               </div>
             </div>

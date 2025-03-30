@@ -154,7 +154,13 @@ export const defaultFaqLayout = defineType({
       },
       validation: (Rule) => Rule.required(),
     }),
-
+    defineField({
+      name: 'showContact',
+      title: 'Show Contact Section',
+      type: 'boolean',
+      description: 'Whether to display the contact section at the bottom of the FAQ',
+      initialValue: true,
+    }),
   ],
   preview: {
     select: {

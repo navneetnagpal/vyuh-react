@@ -7,9 +7,7 @@ import React from 'react';
 /**
  * FAQ layout variant type
  */
-export type FAQVariant =
-  | 'simple-wide'
-  | 'two-columns';
+export type FAQVariant = 'simple-wide' | 'two-columns';
 
 /**
  * Default layout for FAQ content items
@@ -24,6 +22,7 @@ export class DefaultFAQLayout extends LayoutConfiguration<FAQ> {
   static readonly typeDescriptor = new TypeDescriptor(this.schemaName, this);
 
   readonly variant: FAQVariant;
+  readonly showContact: boolean;
 
   constructor(props?: Partial<DefaultFAQLayout>) {
     super({
@@ -32,6 +31,7 @@ export class DefaultFAQLayout extends LayoutConfiguration<FAQ> {
     });
 
     this.variant = props?.variant ?? 'simple-wide';
+    this.showContact = props?.showContact ?? true;
   }
 
   /**

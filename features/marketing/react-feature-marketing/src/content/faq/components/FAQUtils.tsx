@@ -2,7 +2,39 @@ import { FAQ } from '@/content/faq/faq';
 import { cn } from '@/shared/utils';
 import { Action, useVyuh } from '@vyuh/react-core';
 import { Mail, Phone } from 'lucide-react';
-import React, { useState } from 'react';
+import React from 'react';
+
+/**
+ * Group questions by category
+ */
+export function groupQuestionsByCategory(
+  questions: FAQ['questions'],
+  categories?: string[],
+) {
+  if (!categories || categories.length === 0) {
+    return { uncategorized: questions };
+  }
+
+  const groupedQuestions: Record<string, any[]> = {
+    uncategorized: [],
+  };
+
+  // Initialize categories
+  categories.forEach((category) => {
+    groupedQuestions[category] = [];
+  });
+
+  // Group questions by category
+  questions.forEach((question) => {
+    if (question.category && groupedQuestions[question.category]) {
+      groupedQuestions[question.category].push(question);
+    } else {
+      groupedQuestions.uncategorized.push(question);
+    }
+  });
+
+  return groupedQuestions;
+}
 
 /**
  * FAQ section title component
@@ -16,10 +48,7 @@ export function FAQTitle({
 }) {
   return (
     <h2
-      className={cn(
-        'text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl',
-        className,
-      )}
+      className={cn('text-3xl font-bold tracking-tight sm:text-4xl', className)}
     >
       {title}
     </h2>
@@ -38,9 +67,7 @@ export function FAQSubtitle({
 }) {
   if (!subtitle) return null;
 
-  return (
-    <p className={cn('mt-4 text-lg text-gray-600', className)}>{subtitle}</p>
-  );
+  return <p className={cn('mt-4 text-lg opacity-70', className)}>{subtitle}</p>;
 }
 
 /**
@@ -49,71 +76,30 @@ export function FAQSubtitle({
 export function FAQQuestion({
   question,
   answer,
-  isOpen,
-  onToggle,
   className = '',
+  category = '',
 }: {
   question: string;
   answer: any;
-  isOpen: boolean;
-  onToggle: () => void;
   className?: string;
+  category?: string;
 }) {
-
   const { plugins } = useVyuh();
 
   return (
-    <div className={cn('px-6 py-3 hover:shadow-md', className)}>
-      <dt>
-        <button
-          type="button"
-          className="flex w-full cursor-pointer items-start justify-between text-left text-gray-900"
-          onClick={onToggle}
-          aria-expanded={isOpen}
-        >
-          <span className="text-base font-semibold leading-7">{question}</span>
-          <span className="ml-6 flex h-7 items-center">
-            {isOpen ? (
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M18 12H6"
-                />
-              </svg>
-            ) : (
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 6v12m6-6H6"
-                />
-              </svg>
-            )}
-          </span>
-        </button>
-      </dt>
-      {isOpen && (
-        <dd className="mt-2 pr-12">
-          <div className="text-base leading-7 text-gray-600">
-            {answer && plugins.content.render(answer)}
-          </div>
-        </dd>
+    <div
+      className={cn(
+        'collapse-arrow join-item border-base-300 collapse border',
+        className,
       )}
+    >
+      <input type="checkbox" />
+      <div className="collapse-title text-base-content font-semibold">
+        {question}
+      </div>
+      <div className="collapse-content text-base-content/80">
+        {answer && plugins.content.render(answer)}
+      </div>
     </div>
   );
 }
@@ -143,70 +129,60 @@ export function FAQContact({
   return (
     <div
       className={cn(
-        'w-full rounded-2xl bg-white px-6 py-10 shadow-md',
+        'card bg-base-100 border-base-300 w-full border shadow-lg',
         className,
       )}
     >
-      {title && (
-        <h3 className="text-2xl font-bold leading-10 tracking-tight text-indigo-600">
-          {title}
-        </h3>
-      )}
-      {description && (
-        <p className="mt-4 leading-7 text-gray-600">{description}</p>
-      )}
+      <div className="card-body text-center">
+        {title && (
+          <h3 className="card-title text-primary justify-center text-2xl font-bold">
+            {title || 'Need help?'}
+          </h3>
+        )}
+        {description && (
+          <p className="text-base-content/80 mt-2">
+            {description || 'Our team is here to assist you'}
+          </p>
+        )}
 
-      <dl className="mt-8 space-y-6">
-        {email && (
-          <div className="flex gap-x-4">
-            <dt className="flex-none">
-              <span className="sr-only">Email</span>
-              <Mail
-                className="h-7 w-6 text-gray-500"
-                aria-hidden="true"
-              />
-            </dt>
-            <dd>
+        <div className="divider"></div>
+
+        <div className="space-y-4">
+          {email && (
+            <div className="flex items-center justify-center gap-3">
+              <Mail className="text-primary h-5 w-5" aria-hidden="true" />
               <a
                 href={`mailto:${email}`}
-                className="hover:underline text-gray-700"
+                className="link link-hover text-base-content"
               >
                 {email}
               </a>
-            </dd>
-          </div>
-        )}
-        {phone && (
-          <div className="flex gap-x-4">
-            <dt className="flex-none">
-              <span className="sr-only">Telephone</span>
-              <Phone
-                className="h-7 w-6 text-gray-500"
-                aria-hidden="true"
-              />
-            </dt>
-            <dd>
+            </div>
+          )}
+          {phone && (
+            <div className="flex items-center justify-center gap-3">
+              <Phone className="text-primary h-5 w-5" aria-hidden="true" />
               <a
                 href={`tel:${phone}`}
-                className="hover:underline text-gray-700"
+                className="link link-hover text-base-content"
               >
                 {phone}
               </a>
-            </dd>
+            </div>
+          )}
+        </div>
+
+        {action && (
+          <div className="card-actions mt-6 justify-center">
+            <button
+              onClick={handleActionClick}
+              className="btn btn-primary btn-wide"
+            >
+              {action.title || 'Contact Us'}
+            </button>
           </div>
         )}
-      </dl>
-
-      {action && (
-        <div className="mt-8">
-          <button
-            onClick={handleActionClick}
-            className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            {action.title}
-          </button>
-        </div>
-      )}
+      </div>
     </div>
   );
 }
@@ -214,53 +190,9 @@ export function FAQContact({
 /**
  * Hook for managing FAQ question state
  */
-export function useFAQQuestions(questions: FAQ['questions']) {
-  const [openQuestions, setOpenQuestions] = useState<Record<number, boolean>>(
-    {},
-  );
-
-  const toggleQuestion = (index: number) => {
-    setOpenQuestions((prev) => ({
-      ...prev,
-      [index]: !prev[index],
-    }));
-  };
-
-  const isQuestionOpen = (index: number) => !!openQuestions[index];
-
-  return {
-    toggleQuestion,
-    isQuestionOpen,
-  };
-}
+// Hook removed as we're now using DaisyUI's collapse component
 
 /**
- * Group questions by category
+ * FAQ section title component
  */
-export function groupQuestionsByCategory(
-  questions: FAQ['questions'],
-  categories?: string[],
-) {
-  if (!categories || categories.length === 0) {
-    return { uncategorized: questions };
-  }
-
-  const grouped: Record<string, typeof questions> = {};
-
-  // Initialize categories
-  categories.forEach((category) => {
-    grouped[category] = [];
-  });
-  grouped.uncategorized = [];
-
-  // Group questions
-  questions.forEach((question) => {
-    if (question.category && categories.includes(question.category)) {
-      grouped[question.category].push(question);
-    } else {
-      grouped.uncategorized.push(question);
-    }
-  });
-
-  return grouped;
-}
+// Function moved to the top of the file
