@@ -21,7 +21,7 @@ export const Stats: React.FC<StatsProps> = ({ content, layout }) => {
       <div className="mt-8 flex justify-center">
         <button
           onClick={() => content.action?.execute()}
-          className="btn btn-primary"
+          className="btn btn-primary transition-all duration-200 hover:scale-[1.02] hover:shadow-md"
         >
           {content.action.title || 'Learn more'}
         </button>

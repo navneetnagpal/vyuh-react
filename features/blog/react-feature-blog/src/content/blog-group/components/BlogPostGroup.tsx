@@ -20,8 +20,8 @@ export const BlogPostGroup: React.FC<BlogProps> = ({
   const variant = layout.variant || 'simple-grid';
   const columns = layout.columns || 3;
 
-  // Background color classes
-  const backgroundClasses = 'bg-white text-gray-900';
+  // Background color classes using Daisy UI theme variables
+  const backgroundClasses = 'bg-base-100 text-base-content';
 
   return (
     <Section className={className}>

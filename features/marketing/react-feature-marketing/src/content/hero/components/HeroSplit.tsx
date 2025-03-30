@@ -34,7 +34,7 @@ export function HeroSplit({ content, layout, imagePosition }: HeroSplitProps) {
           {hasMedia && (
             <HeroMedia
               media={media}
-              className="h-full ring-1 ring-white/10 md:w-auto"
+              className="h-full md:w-auto"
               containerClassName="w-full h-full md:w-auto"
             />
           )}

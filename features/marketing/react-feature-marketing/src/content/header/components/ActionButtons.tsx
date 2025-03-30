@@ -22,7 +22,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
       {actions.map((actionItem, index) => (
         <button
           key={index}
-          className={cn('btn btn-ghost btn-xs')}
+          className={cn('btn btn-ghost px-3 text-base')}
           onClick={() => new Action(actionItem.action).execute()}
         >
           {actionItem.icon && (

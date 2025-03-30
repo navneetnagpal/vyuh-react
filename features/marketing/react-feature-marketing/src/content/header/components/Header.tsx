@@ -1,6 +1,6 @@
 import { DefaultHeaderLayout } from '@/content/header/default-header-layout';
 import { Header as HeaderItem } from '@/content/header/header';
-import { Section } from '@/shared/components';
+import { cn } from '@/shared/utils';
 import React from 'react';
 import { DesktopNavigation } from './DesktopNavigation';
 import { Logo } from './Logo';
@@ -18,34 +18,36 @@ export const Header: React.FC<HeaderProps> = ({
   className,
 }) => {
   const variant = layout.variant || 'simple';
-  const sticky = layout.sticky || false;
+  const showThemeSwitch = layout.showThemeSwitch ?? true; // Default to true if not specified
   const mobileMenuId = 'mobile-menu-drawer';
 
   return (
-    <header className="drawer container mx-auto">
+    <header className={cn('drawer', className)}>
       <input id={mobileMenuId} type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
-        {/* Navbar */}
-        <div className="navbar bg-base-100 px-0">
-          {/* Logo section - always visible */}
-          <div className="navbar-start">
-            <Logo content={content} className="navbar-item" />
+        <div className="container mx-auto px-4">
+          <div className="navbar bg-base-100 px-0">
+            {/* Logo section - always visible */}
+            <div className="navbar-start">
+              <Logo content={content} className="navbar-item" />
+            </div>
+
+            {variant === 'with-navigation' && (
+              <>
+                {/* Mobile menu button */}
+                <div className="navbar-end lg:hidden">
+                  <MobileMenuButton id={mobileMenuId} />
+                </div>
+
+                {/* Desktop navigation and actions */}
+                <DesktopNavigation
+                  navigationItems={content.navigationItems}
+                  actions={content.actions}
+                  showThemeSwitch={showThemeSwitch}
+                />
+              </>
+            )}
           </div>
-
-          {variant === 'with-navigation' && (
-            <>
-              {/* Mobile menu button */}
-              <div className="navbar-end lg:hidden">
-                <MobileMenuButton id={mobileMenuId} />
-              </div>
-
-              {/* Desktop navigation and actions */}
-              <DesktopNavigation
-                navigationItems={content.navigationItems}
-                actions={content.actions}
-              />
-            </>
-          )}
         </div>
       </div>
 
@@ -54,6 +56,7 @@ export const Header: React.FC<HeaderProps> = ({
         id={mobileMenuId}
         navigationItems={content.navigationItems}
         actions={content.actions}
+        showThemeSwitch={showThemeSwitch}
       />
     </header>
   );

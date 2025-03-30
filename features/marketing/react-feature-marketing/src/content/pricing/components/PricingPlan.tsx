@@ -28,8 +28,7 @@ export const PricingPlan: React.FC<PricingPlanProps> = ({
     }).format(price);
   };
 
-  // Determine theme based on featured status
-  const cardTheme = plan.featured ? 'primary' : 'base-100';
+  // We'll use CSS classes instead of data-theme for better theme compatibility
 
   return (
     <div
@@ -40,7 +39,7 @@ export const PricingPlan: React.FC<PricingPlanProps> = ({
           : 'bg-base-100 border-base-300',
         className,
       )}
-      data-theme={cardTheme}
+      /* Using CSS classes instead of data-theme for better theme compatibility */
     >
       {/* Title - Row 1 */}
       <h3 className="text-lg font-semibold">{plan.name}</h3>
@@ -83,7 +82,7 @@ export const PricingPlan: React.FC<PricingPlanProps> = ({
                 <CheckIcon
                   className={cn(
                     'h-6 w-5 flex-none',
-                    plan.featured ? 'text-primary-content' : 'text-primary',
+                    plan.featured ? 'opacity-90' : 'text-primary',
                   )}
                   aria-hidden="true"
                 />

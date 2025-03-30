@@ -69,22 +69,15 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
           </div>
         )}
 
-        <span className={'text-xs text-neutral-500'}>
+        <span className={'text-base-content/60 text-xs'}>
           {formatDate(content.date)}
         </span>
 
         {/* Title */}
-        <h3
-          className={cn(
-            'mb-2 font-semibold',
-            content.featured ? 'text-2xl md:text-3xl' : 'text-xl',
-          )}
-        >
-          {content.title}
-        </h3>
+        <h3 className={cn('mb-2 font-semibold')}>{content.title}</h3>
 
         {/* Date and author */}
-        <div className="mb-3 flex items-center justify-between text-xs text-gray-600">
+        <div className="text-base-content/60 mb-3 flex items-center justify-between text-xs">
           {content.author && (
             <div className={'flex items-center'}>
               {content.author.avatar && (
@@ -109,7 +102,7 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
 
         {/* Excerpt */}
         {content.excerpt && (
-          <p className={cn('mb-4 flex-1 text-sm', 'text-gray-600')}>
+          <p className={cn('mb-4 flex-1 text-sm', 'text-base-content/70')}>
             {content.excerpt}
           </p>
         )}
@@ -119,7 +112,7 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
           <button
             className={cn(
               'btn btn-link btn-sm group h-auto min-h-0 p-0 no-underline',
-              content.featured ? 'text-primary' : 'text-blue-600',
+              content.featured ? 'text-primary' : 'text-primary',
             )}
             onClick={(e) => {
               e.stopPropagation();

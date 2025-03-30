@@ -48,7 +48,7 @@ export function FAQTitle({
 }) {
   return (
     <h2
-      className={cn('text-3xl font-bold tracking-tight sm:text-4xl', className)}
+      className={cn('text-3xl font-bold tracking-tight text-base-content sm:text-4xl', className)}
     >
       {title}
     </h2>
@@ -67,7 +67,7 @@ export function FAQSubtitle({
 }) {
   if (!subtitle) return null;
 
-  return <p className={cn('mt-4 text-lg opacity-70', className)}>{subtitle}</p>;
+  return <p className={cn('mt-4 text-lg text-base-content/70', className)}>{subtitle}</p>;
 }
 
 /**
@@ -153,7 +153,7 @@ export function FAQContact({
               <Mail className="text-primary h-5 w-5" aria-hidden="true" />
               <a
                 href={`mailto:${email}`}
-                className="link link-hover text-base-content"
+                className="link link-hover text-base-content transition-colors duration-200"
               >
                 {email}
               </a>
@@ -164,7 +164,7 @@ export function FAQContact({
               <Phone className="text-primary h-5 w-5" aria-hidden="true" />
               <a
                 href={`tel:${phone}`}
-                className="link link-hover text-base-content"
+                className="link link-hover text-base-content transition-colors duration-200"
               >
                 {phone}
               </a>
@@ -176,7 +176,7 @@ export function FAQContact({
           <div className="card-actions mt-6 justify-center">
             <button
               onClick={handleActionClick}
-              className="btn btn-primary btn-wide"
+              className="btn btn-primary btn-wide transition-all duration-200 hover:scale-[1.02] hover:shadow-md"
             >
               {action.title || 'Contact Us'}
             </button>

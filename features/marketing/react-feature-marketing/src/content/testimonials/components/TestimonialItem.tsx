@@ -28,7 +28,7 @@ export const TestimonialItem: React.FC<TestimonialItemProps> = ({
     <div
       className={cn(
         isCardVariant && 'card p-6',
-        isCardVariant && 'bg-base-100 border border-base-300',
+        isCardVariant && 'bg-base-100 border border-base-300 transition-all duration-200 hover:shadow-md',
         testimonial.featured && 'border-2 border-primary',
         className,
       )}

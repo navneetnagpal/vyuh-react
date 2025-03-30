@@ -17,7 +17,7 @@ export const BlogAction: React.FC<BlogActionProps> = ({
 
   return (
     <button
-      className={cn('btn btn-primary', className)}
+      className={cn('btn btn-primary transition-all duration-200 hover:scale-[1.02] hover:shadow-md', className)}
       onClick={() => new Action(action).execute()}
     >
       {action.title || 'Read more'}

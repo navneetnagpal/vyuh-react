@@ -61,7 +61,7 @@ export const ContentHeader: React.FC<ContentHeaderProps> = ({
       {eyebrow && (
         <p
           className={cn(
-            'text-sm font-semibold uppercase tracking-wide text-indigo-600',
+            'text-sm font-semibold uppercase tracking-wide text-primary',
             eyebrowClassName,
           )}
         >
@@ -79,7 +79,7 @@ export const ContentHeader: React.FC<ContentHeaderProps> = ({
       {subtitle && (
         <p
           className={cn(
-            'mt-4 text-lg text-gray-600',
+            'mt-4 text-lg text-base-content/70',
             subtitleClassName,
           )}
         >

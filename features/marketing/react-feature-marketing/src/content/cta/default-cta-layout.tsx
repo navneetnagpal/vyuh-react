@@ -6,14 +6,16 @@ import React from 'react';
 /**
  * CTA layout variant type
  */
-export type CTAVariant =
-  | 'simple-centered'
-  | 'split-image-right';
+export type CTAVariant = 'simple-centered' | 'split-image-right';
 
 /**
  * The background style for the CTA
+ * - light: Uses base-100 background with base-content text
+ * - brand: Uses primary background with primary-content text
+ * - neutral: Uses neutral background with neutral-content text
+ * - accent: Uses accent background with accent-content text
  */
-export type CTABackground = 'light' | 'brand' | 'light-brand';
+export type CTABackground = 'light' | 'brand' | 'neutral' | 'accent';
 
 /**
  * Default layout for CTA content items

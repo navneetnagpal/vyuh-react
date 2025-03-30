@@ -102,7 +102,7 @@ export function HeroActions({
         <button
           key={index}
           onClick={(e) => handleActionClick(e, action)}
-          className="btn btn-link text-primary group w-full no-underline sm:w-auto"
+          className="btn btn-link text-primary group w-full no-underline sm:w-auto transition-colors duration-200"
         >
           {actionTitle}{' '}
           <span
@@ -120,7 +120,7 @@ export function HeroActions({
       <button
         key={index}
         onClick={(e) => handleActionClick(e, action)}
-        className="btn btn-outline btn-primary group w-full sm:w-auto"
+        className="btn btn-outline btn-primary group w-full sm:w-auto transition-all duration-200"
       >
         {actionTitle}{' '}
         <span
@@ -182,7 +182,7 @@ export function HeroMedia({
             fill={true}
             rounded={'md'}
             shadow={'2xl'}
-            className={`border-base-300 border ${className}`}
+            className={`border-base-300 border shadow-md ${className}`}
           />
         </Wrapper>
       );

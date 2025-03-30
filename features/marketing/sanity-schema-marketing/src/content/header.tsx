@@ -247,13 +247,22 @@ export const defaultHeaderLayout = defineType({
         'Whether the header should stick to the top of the page when scrolling',
       initialValue: false,
     }),
+
+    defineField({
+      name: 'showThemeSwitch',
+      title: 'Show Theme Switch',
+      type: 'boolean',
+      description: 'Show a theme switch button in the header',
+      initialValue: false,
+    }),
   ],
   preview: {
     select: {
       variant: 'variant',
       sticky: 'sticky',
+      showThemeSwitch: 'showThemeSwitch',
     },
-    prepare({ variant, sticky }) {
+    prepare({ variant, sticky, showThemeSwitch }) {
       // Format the variant name for display
       const variantDisplay = variant
         ? variant
@@ -279,9 +288,13 @@ export const defaultHeaderLayout = defineType({
           variantIcon = Icon;
       }
 
+      const themeSwitch = showThemeSwitch
+        ? 'Show Theme Switch'
+        : 'Hide Theme Switch';
+
       return {
         title: `Header Layout: ${variantDisplay}`,
-        subtitle: features.length > 0 ? features.join(', ') : 'Default',
+        subtitle: `${features.length > 0 ? features.join(', ') : 'Default'} • ${themeSwitch}`,
         media: variantIcon,
       };
     },

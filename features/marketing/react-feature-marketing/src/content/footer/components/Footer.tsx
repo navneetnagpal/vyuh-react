@@ -23,11 +23,11 @@ export const Footer: React.FC<FooterProps> = ({
 }) => {
   const variant = layout.variant || 'simple-centered';
 
-  // Text color classes using DaisyUI
+  // Text color classes using DaisyUI with consistent opacity values
   const backgroundClasses = 'bg-base-200 text-base-content';
   const textClasses = 'text-base-content/70';
   const headingClasses = 'text-base-content';
-  const linkClasses = 'text-base-content/70 hover:text-base-content';
+  const linkClasses = 'text-base-content/70 hover:text-base-content transition-colors duration-200';
 
   // Render the footer based on the variant
   const renderFooter = () => {

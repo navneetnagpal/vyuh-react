@@ -13,7 +13,7 @@ export const FeatureTitle: React.FC<{ title: string; className?: string }> = ({
   className = '',
 }) => (
   <h2
-    className={`text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl ${className}`}
+    className={`text-3xl font-bold tracking-tight text-base-content sm:text-4xl ${className}`}
   >
     {title}
   </h2>
@@ -28,7 +28,7 @@ export const FeatureDescription: React.FC<{
 }> = ({ description, className = '' }) => {
   if (!description) return null;
   return (
-    <p className={`mt-4 text-lg text-gray-500 ${className}`}>{description}</p>
+    <p className={`mt-4 text-lg text-base-content/70 ${className}`}>{description}</p>
   );
 };
 
@@ -43,14 +43,14 @@ export const FeatureItem: React.FC<{
 }> = ({ title, description, icon, className = '' }) => (
   <div className={`relative ${className}`}>
     {icon && (
-      <div className="absolute flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white">
+      <div className="absolute flex h-12 w-12 items-center justify-center rounded-md bg-primary text-primary-content">
         <DynamicIcon className="h-6 w-6" name={icon as IconName} />
       </div>
     )}
     <div className={icon ? 'ml-16' : ''}>
-      <h3 className="text-lg font-medium text-gray-900">{title}</h3>
+      <h3 className="text-lg font-medium text-base-content">{title}</h3>
       {description && (
-        <p className="mt-2 text-base text-gray-500">{description}</p>
+        <p className="mt-2 text-base text-base-content/70">{description}</p>
       )}
     </div>
   </div>
@@ -134,9 +134,9 @@ export const FeatureMedia: React.FC<{
     case 'code-example':
       return (
         <div
-          className={`overflow-hidden rounded-lg bg-gray-800 p-4 ${className}`}
+          className={`overflow-hidden rounded-lg bg-neutral p-4 ${className}`}
         >
-          <pre className="text-sm text-gray-100">
+          <pre className="text-sm text-neutral-content">
             <code>{media.codeExample?.code || ''}</code>
           </pre>
         </div>

@@ -2,6 +2,7 @@ import { Header } from '@/content/header/header';
 import { Action } from '@vyuh/react-core';
 import { DynamicIcon, IconName } from 'lucide-react/dynamic';
 import React from 'react';
+import { ThemeToggle } from './ThemeToggle';
 
 // Mobile Menu Item Component
 interface MobileMenuItemProps {
@@ -16,6 +17,7 @@ export const MobileMenuItem: React.FC<MobileMenuItemProps> = ({ item }) => {
       <li>
         <a
           onClick={() => item.action && new Action(item.action).execute()}
+          className="transition-colors duration-200"
         >
           {item.action?.title}
         </a>
@@ -36,6 +38,7 @@ export const MobileMenuItem: React.FC<MobileMenuItemProps> = ({ item }) => {
             <li key={childIndex}>
               <a
                 onClick={() => child.action && new Action(child.action).execute()}
+                className="transition-colors duration-200"
               >
                 {child.action?.title}
               </a>
@@ -59,6 +62,7 @@ export const MobileMenuActionItem: React.FC<MobileMenuActionItemProps> = ({
     <li>
       <a
         onClick={() => actionItem.action && new Action(actionItem.action).execute()}
+        className="transition-colors duration-200"
       >
         {actionItem.icon && (
           <DynamicIcon
@@ -102,12 +106,14 @@ interface MobileMenuProps {
   id: string;
   navigationItems?: Header['navigationItems'];
   actions?: Header['actions'];
+  showThemeSwitch?: boolean;
 }
 
 export const MobileMenu: React.FC<MobileMenuProps> = ({
   id,
   navigationItems,
   actions,
+  showThemeSwitch = true,
 }) => {
   return (
     <div className="drawer-side z-50">
@@ -116,7 +122,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
         aria-label="close sidebar"
         className="drawer-overlay"
       ></label>
-      <div className="bg-base-100 min-h-full w-80">
+      <div className="bg-base-100 min-h-full w-80 overflow-y-auto">
         {/* Close button at the top right */}
         <div className="flex justify-end p-4">
           <label htmlFor={id} className="btn btn-sm btn-circle btn-ghost">
@@ -144,6 +150,19 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
               {actions.map((actionItem, index) => (
                 <MobileMenuActionItem key={index} actionItem={actionItem} />
               ))}
+            </>
+          )}
+
+          {/* Theme toggle - only show if enabled */}
+          {showThemeSwitch && (
+            <>
+              <li>
+                <div className="divider"></div>
+              </li>
+              <li className="flex items-center">
+                <span className="flex-grow">Theme</span>
+                <ThemeToggle />
+              </li>
             </>
           )}
         </ul>

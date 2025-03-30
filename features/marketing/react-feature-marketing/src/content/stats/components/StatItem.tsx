@@ -18,7 +18,7 @@ export const StatItem: React.FC<StatItemProps> = ({
 
   return (
     <div className={cn(
-      'card bg-base-100 border border-base-300 shadow-sm p-6 h-full',
+      'card bg-base-100 border border-base-300 shadow-sm p-6 h-full transition-all duration-200 hover:shadow-md',
       className
     )}>
       <div className="stat p-0 bg-transparent">

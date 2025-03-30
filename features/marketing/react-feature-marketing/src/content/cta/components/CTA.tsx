@@ -1,6 +1,5 @@
 import { CTA as CTAContent } from '@/content/cta/cta';
 import { DefaultCTALayout } from '@/content/cta/default-cta-layout';
-import { useMediaUtils } from '@/shared/MediaUtils';
 import { Section } from '@/shared/components/Section';
 import { cn } from '@/shared/utils';
 import React from 'react';
@@ -16,43 +15,48 @@ interface CTAProps {
 
 export const CTA: React.FC<CTAProps> = ({ content, layout, className }) => {
   const variant = layout.variant || 'simple-centered';
-  const background = layout.background || 'light';
-  const { getImageUrl } = useMediaUtils();
+  const background = layout.background || 'default';
 
   // Background color classes based on the background type
+  // Using Daisy UI theme-compatible classes with slight transparency
   const backgroundClasses = {
-    light: 'bg-base-100 text-base-content',
-    brand: 'bg-primary text-primary-content',
-    'light-brand': 'bg-primary-content text-base-content',
+    light: 'bg-primary/25 backdrop-blur-sm text-base-content shadow-md',
+    brand: 'bg-primary/25 backdrop-blur-sm text-base-content shadow-md',
+    neutral: 'bg-neutral/25 backdrop-blur-sm text-neutral-content shadow-md',
+    accent: 'bg-accent/25 backdrop-blur-sm text-accent-content shadow-md',
+    // Add default case for any other background
+    default: 'bg-primary/25 backdrop-blur-sm text-base-content shadow-md',
   };
 
-/**
- * CTAAdditionalInfo component for rendering additional information text
- */
-const CTAAdditionalInfo: React.FC<{
-  additionalInfo?: string;
-  background: string;
-}> = ({ additionalInfo, background }) => {
-  if (!additionalInfo) return null;
+  /**
+   * CTAAdditionalInfo component for rendering additional information text
+   */
+  const CTAAdditionalInfo: React.FC<{
+    additionalInfo?: string;
+    background: string;
+  }> = ({ additionalInfo, background }) => {
+    if (!additionalInfo) return null;
+
+    return (
+      <p className={cn('mt-4 text-sm', 'text-base-content/70')}>
+        {additionalInfo}
+      </p>
+    );
+  };
+
+  // Get the background class for the section with fallback to default
+  const bgClass =
+    backgroundClasses[background as keyof typeof backgroundClasses] ||
+    backgroundClasses.default;
 
   return (
-    <p
+    <Section
       className={cn(
-        'mt-4 text-sm opacity-70',
-        background === 'brand' ? 'text-primary-content' : 'text-base-content'
+        bgClass,
+        'border-base-300 hover:border-base-300/70 to-primary/25 rounded-xl border bg-gradient-to-br from-transparent transition-all duration-300 hover:shadow-xl',
+        className,
       )}
     >
-      {additionalInfo}
-    </p>
-  );
-};
-
-  // Get the background class for the section
-  const bgClass =
-    backgroundClasses[background as keyof typeof backgroundClasses];
-
-  return (
-    <Section className={cn(bgClass, className)}>
       {variant === 'simple-centered' && (
         <div className="mx-auto max-w-3xl text-center">
           <CTAHeader content={content} background={background} />
@@ -65,7 +69,10 @@ const CTAAdditionalInfo: React.FC<{
             />
           </div>
 
-          <CTAAdditionalInfo additionalInfo={content.additionalInfo} background={background} />
+          <CTAAdditionalInfo
+            additionalInfo={content.additionalInfo}
+            background={background}
+          />
         </div>
       )}
 
@@ -86,7 +93,10 @@ const CTAAdditionalInfo: React.FC<{
               />
             </div>
 
-            <CTAAdditionalInfo additionalInfo={content.additionalInfo} background={background} />
+            <CTAAdditionalInfo
+              additionalInfo={content.additionalInfo}
+              background={background}
+            />
           </div>
 
           {content.image && (
@@ -107,7 +117,10 @@ const CTAAdditionalInfo: React.FC<{
             />
           </div>
 
-          <CTAAdditionalInfo additionalInfo={content.additionalInfo} background={background} />
+          <CTAAdditionalInfo
+            additionalInfo={content.additionalInfo}
+            background={background}
+          />
         </div>
       )}
     </Section>

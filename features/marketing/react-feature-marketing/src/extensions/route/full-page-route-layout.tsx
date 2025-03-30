@@ -76,7 +76,7 @@ function FullPageRouteComponent({
   const gapClass = gapClasses[gap];
 
   return (
-    <div className={`flex flex-col ${gapClass}`}>
+    <div className={`flex flex-col ${gapClass} overflow-visible`}>
       {showTitle && (
         <h1 className="mb-8 text-3xl font-bold text-black">{route.title}</h1>
       )}
@@ -84,7 +84,7 @@ function FullPageRouteComponent({
       {route.regions.map((region: Region) => (
         <Fragment key={region.identifier}>
           {region.items.map((item: ContentItem, itemIndex: number) => (
-            <div key={itemIndex} className="w-full">
+            <div key={itemIndex} className="w-full overflow-visible">
               {plugins.content.render(item)}
             </div>
           ))}

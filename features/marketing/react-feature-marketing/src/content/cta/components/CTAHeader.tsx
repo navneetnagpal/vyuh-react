@@ -13,18 +13,26 @@ export const CTAHeader: React.FC<CTAHeaderProps> = ({
   background,
   className,
 }) => {
-  // Text color classes based on the background type
+  // Text color classes - using base-content for all backgrounds since we're using transparent primary
+  // Using Daisy UI theme-compatible classes
   const textClasses = {
     light: 'text-base-content',
-    brand: 'text-primary-content',
-    'light-brand': 'text-base-content',
+    brand: 'text-base-content',
+    neutral: 'text-base-content',
+    accent: 'text-base-content',
+    // Add default case for any other background
+    default: 'text-base-content',
   };
 
-  // Subtitle color classes based on the background type
+  // Subtitle color classes - using base-content with opacity for all backgrounds
+  // Using Daisy UI theme-compatible classes with consistent opacity
   const subtitleClasses = {
     light: 'text-base-content/70',
-    brand: 'text-primary-content/80',
-    'light-brand': 'text-base-content/70',
+    brand: 'text-base-content/70',
+    neutral: 'text-base-content/70',
+    accent: 'text-base-content/70',
+    // Add default case for any other background
+    default: 'text-base-content/70',
   };
 
   return (
@@ -32,7 +40,8 @@ export const CTAHeader: React.FC<CTAHeaderProps> = ({
       <h2
         className={cn(
           'text-3xl font-bold sm:text-4xl',
-          textClasses[background as keyof typeof textClasses],
+          textClasses[background as keyof typeof textClasses] ||
+            textClasses.default,
         )}
       >
         {content.title}
@@ -41,7 +50,8 @@ export const CTAHeader: React.FC<CTAHeaderProps> = ({
         <p
           className={cn(
             'mx-auto mt-4 max-w-2xl text-lg',
-            subtitleClasses[background as keyof typeof subtitleClasses],
+            subtitleClasses[background as keyof typeof subtitleClasses] ||
+              subtitleClasses.default,
           )}
         >
           {content.subtitle}

@@ -14,7 +14,7 @@ export const TestimonialAction: React.FC<TestimonialActionProps> = ({
     <div className="mt-10 flex justify-center">
       <button
         onClick={() => new Action(action).execute()}
-        className="btn btn-primary"
+        className="btn btn-primary transition-all duration-200 hover:scale-[1.02] hover:shadow-md"
       >
         {action.title || 'Learn more'}
       </button>

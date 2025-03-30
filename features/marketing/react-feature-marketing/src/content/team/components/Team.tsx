@@ -25,7 +25,7 @@ export const Team: React.FC<TeamProps> = ({ content, layout, className }) => {
       <div className="mt-10 flex justify-center">
         <button
           onClick={() => new Action(content.action).execute()}
-          className="btn btn-primary"
+          className="btn btn-primary transition-all duration-200 hover:scale-[1.02] hover:shadow-md"
         >
           {content.action.title || 'Learn more'}
         </button>

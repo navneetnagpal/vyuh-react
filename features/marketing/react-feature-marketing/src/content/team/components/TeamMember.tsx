@@ -73,7 +73,7 @@ export const TeamMember: React.FC<TeamMemberProps> = ({
                 <a
                   key={index}
                   href={link.url}
-                  className="text-base-content/40 hover:text-base-content/70"
+                  className="text-base-content/40 hover:text-base-content/70 transition-colors duration-200"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

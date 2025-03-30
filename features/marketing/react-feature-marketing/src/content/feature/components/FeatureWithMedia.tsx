@@ -45,7 +45,7 @@ export const FeatureWithMedia: React.FC<FeatureComponentProps> = ({
 
         <FeatureMedia
           media={media}
-          className="max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 md:-ml-4 lg:-ml-0"
+          className="max-w-none rounded-xl shadow-xl md:-ml-4 lg:-ml-0"
         />
       </div>
     </Section>

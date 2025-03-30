@@ -16,8 +16,8 @@ export const Bento: React.FC<BentoProps> = ({ content, layout, className }) => {
   const variant = layout.variant || 'three-column';
   const gap = layout.gap || 'small';
 
-  // Background color classes
-  const backgroundClasses = 'bg-white text-gray-900';
+  // Background color classes using Daisy UI theme variables
+  const backgroundClasses = 'bg-base-100 text-base-content';
 
   // Gap classes based on the gap size
   const gapClasses = {

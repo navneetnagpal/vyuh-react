@@ -19,7 +19,7 @@ const SimpleNavItem: React.FC<SimpleNavItemProps> = ({ item }) => {
         role="button"
         onClick={() => new Action(item.action).execute()}
         className={cn(
-          'btn btn-ghost normal-case',
+          'btn btn-ghost normal-case px-3 text-base',
           item.isActive ? 'btn-active' : '',
         )}
       >
@@ -59,7 +59,7 @@ const NavItemWithSubmenu: React.FC<NavItemWithSubmenuProps> = ({ item }) => {
         tabIndex={0}
         role="button"
         className={cn(
-          'btn btn-ghost flex items-center gap-1 normal-case',
+          'btn btn-ghost flex items-center gap-1 normal-case px-3 text-base',
           item.isActive ? 'btn-active' : '',
         )}
         onClick={() => new Action(item.action).execute()}
