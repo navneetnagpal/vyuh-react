@@ -3,14 +3,10 @@
 @plugin 'daisyui' {
   themes:
     light --default,
-    dark,
-    bumblebee,
-    cupcake,
+    dracula,
     corporate,
     lofi,
-    dracula,
-    winter,
-    wireframe;
+    winter;
 }
 
 @source './';

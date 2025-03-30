@@ -8,17 +8,7 @@ interface ThemeToggleProps {
 
 export const ThemeToggle: React.FC<ThemeToggleProps> = ({ className }) => {
   // Available themes
-  const themes = [
-    'light',
-    'dark',
-    'bumblebee',
-    'cupcake',
-    'corporate',
-    'lofi',
-    'dracula',
-    'winter',
-    'wireframe',
-  ];
+  const themes = ['light', 'dracula', 'corporate', 'lofi', 'winter'];
 
   // Get the current theme from localStorage or default to 'light'
   const [theme, setTheme] = useState<string>('light');

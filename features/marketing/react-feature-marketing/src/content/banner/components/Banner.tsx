@@ -45,7 +45,8 @@ export const Banner: React.FC<BannerProps> = ({
     <div
       className={cn(
         `alert flex items-center justify-between rounded-none border-none p-4 shadow-none transition-all duration-300`,
-        colorClasses[colorScheme as keyof typeof colorClasses] || colorClasses.fallback,
+        colorClasses[colorScheme as keyof typeof colorClasses] ||
+          colorClasses.fallback,
         className,
       )}
     >
