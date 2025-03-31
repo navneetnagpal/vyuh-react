@@ -28,11 +28,8 @@ export const MobileMenuItem: React.FC<MobileMenuItemProps> = ({ item }) => {
   return (
     <li>
       <details>
-        <summary
-          onClick={() => item.action && new Action(item.action).execute()}
-        >
-          {item.action?.title}
-        </summary>
+        {/* We don't execute the action here, because it would close the menu */}
+        <summary>{item.action?.title}</summary>
         <ul className="menu">
           {item.children.map((child, childIndex) => (
             <li key={childIndex}>
@@ -142,11 +139,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
           {navigationItems &&
             navigationItems.length > 0 &&
             actions &&
-            actions.length > 0 && (
-              <li>
-                <div className="divider my-1 opacity-30"></div>
-              </li>
-            )}
+            actions.length > 0 && <div className="divider my-1" />}
 
           {actions && actions.length > 0 && (
             <>
@@ -158,11 +151,9 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({
 
           {/* Theme toggle - only show if enabled */}
           {showThemeSwitch && (
-            <>
-              <li>
-                <ThemeToggle showLabel={true} />
-              </li>
-            </>
+            <li>
+              <ThemeToggle showLabel={true} />
+            </li>
           )}
         </ul>
       </div>

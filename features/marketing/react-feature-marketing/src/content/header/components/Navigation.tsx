@@ -201,9 +201,6 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
 
       {actions && actions.length > 0 && (
         <>
-          <li className="menu-title pt-4">
-            <span>Actions</span>
-          </li>
           {actions.map((actionItem, index) => (
             <li key={`action-${index}`}>
               <a onClick={() => new Action(actionItem.action).execute()}>
