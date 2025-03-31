@@ -4,7 +4,6 @@
   "description": "The Sanity schema package for the Blog content blocks",
   "type": "module",
   "scripts": {
-    "build": "NODE_ENV=production tsup",
     "lint": "eslint \"src/**/*.ts*\"",
     "lint:fix": "eslint \"src/**/*.ts*\" --fix"
   },
@@ -53,10 +52,6 @@
       "import": "./src/index.ts"
     }
   },
-  "files": [
-    "*.md",
-    "dist"
-  ],
   "publishConfig": {
     "access": "public"
   }
