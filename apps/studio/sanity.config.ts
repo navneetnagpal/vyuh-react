@@ -13,6 +13,7 @@ export default defineConfig({
   dataset: 'production',
 
   plugins: [
+    // @ts-ignore
     vyuh({
       features: [system, misc, marketing, blog],
     }),

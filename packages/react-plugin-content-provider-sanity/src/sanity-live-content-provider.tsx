@@ -1,4 +1,4 @@
-import { makeRouteQuery } from '@/utils';
+import { makeRouteQuery, SanityConfig } from '@/utils';
 import { getQueryState, SanityInstance } from '@sanity/sdk';
 import { LiveContentProvider, RouteBase } from '@vyuh/react-core';
 import React from 'react';
@@ -6,10 +6,13 @@ import { Observable } from 'rxjs';
 
 export class SanityLiveContentProvider implements LiveContentProvider {
   private readonly sanityInstance: SanityInstance;
+  private readonly config: SanityConfig;
+
   readonly title: string = 'Sanity Live Content Provider';
 
-  constructor(sanityInstance: SanityInstance) {
+  constructor(sanityInstance: SanityInstance, config: SanityConfig) {
     this.sanityInstance = sanityInstance;
+    this.config = config;
   }
 
   async init(): Promise<void> {
@@ -23,12 +26,15 @@ export class SanityLiveContentProvider implements LiveContentProvider {
   private liveFetch<T>(options: {
     query: string;
     params?: Record<string, any>;
-    perspective?: 'published' | 'drafts';
+    includeDrafts?: boolean;
   }) {
     const { query, params } = options;
 
+    const isDraftMode =
+      options.includeDrafts || this.config.perspective === 'drafts';
     const source = getQueryState<T>(this.sanityInstance, query, {
       params,
+      perspective: isDraftMode ? 'drafts' : 'published',
     });
 
     return source.observable;
@@ -46,6 +52,7 @@ export class SanityLiveContentProvider implements LiveContentProvider {
     return this.liveFetch({
       query,
       params,
+      includeDrafts: options.includeDrafts,
     });
   }
 
@@ -59,6 +66,7 @@ export class SanityLiveContentProvider implements LiveContentProvider {
     return this.liveFetch({
       query,
       params: options.params,
+      includeDrafts: options.includeDrafts,
     });
   }
 
@@ -72,6 +80,7 @@ export class SanityLiveContentProvider implements LiveContentProvider {
     return this.liveFetch({
       query,
       params: options.params,
+      includeDrafts: options.includeDrafts,
     });
   }
 
@@ -85,6 +94,7 @@ export class SanityLiveContentProvider implements LiveContentProvider {
     return this.liveFetch({
       query,
       params,
+      includeDrafts: options.includeDrafts,
     });
   }
 

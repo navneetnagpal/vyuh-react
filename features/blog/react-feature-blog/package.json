@@ -61,7 +61,7 @@
   ],
   "exports": {
     ".": {
-      "import": "./src/index.tsx"
+      "import": "./src/index.ts"
     },
     "./styles.css": "./src/styles.css"
   },

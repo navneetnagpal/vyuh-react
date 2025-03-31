@@ -42,7 +42,6 @@ const newSanityProvider = new SanityContentProvider({
  * Plugin configuration
  */
 const plugins = new PluginDescriptor({
-  // content: new DefaultContentPlugin(oldSanityProvider),
   content: new DefaultContentPlugin(newSanityProvider),
   navigation: new NextNavigationPlugin(),
 });

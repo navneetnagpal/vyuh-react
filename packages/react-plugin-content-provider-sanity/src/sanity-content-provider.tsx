@@ -1,5 +1,5 @@
 import { SanityLiveContentProvider } from '@/sanity-live-content-provider';
-import { makeRouteQuery } from '@/utils';
+import { makeRouteQuery, SanityConfig } from '@/utils';
 import { getFile, getImage } from '@sanity/asset-utils';
 import {
   createSanityInstance,
@@ -21,15 +21,6 @@ const fieldKeyMap: Record<FieldKey, string> = {
   [FieldKey.ref]: '_ref',
   [FieldKey.key]: '_key',
 };
-
-export interface SanityConfig {
-  projectId: string;
-  dataset: string;
-  apiVersion?: string;
-  useCdn?: boolean;
-  perspective?: 'published' | 'drafts' | 'raw';
-  token?: string;
-}
 
 export class SanityContentProvider extends ContentProvider {
   private readonly config: SanityConfig;
@@ -53,7 +44,7 @@ export class SanityContentProvider extends ContentProvider {
       },
     });
 
-    this._live = new SanityLiveContentProvider(this.sanityInstance);
+    this._live = new SanityLiveContentProvider(this.sanityInstance, config);
   }
 
   async init(): Promise<void> {

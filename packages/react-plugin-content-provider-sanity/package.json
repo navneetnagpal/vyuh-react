@@ -34,8 +34,8 @@
     "@sanity/asset-utils": "^2.2.1",
     "@sanity/client": "^6.28.4",
     "@sanity/image-url": "^1.1.0",
-    "@sanity/sdk": "0.0.0-rc.2",
-    "@sanity/sdk-react": "0.0.0-rc.2",
+    "@sanity/sdk": "0.0.0-rc.3",
+    "@sanity/sdk-react": "0.0.0-rc.3",
     "@vyuh/react-core": "^0.2.7",
     "next-sanity": "^9.9.6",
     "rxjs": "^7.8.2"

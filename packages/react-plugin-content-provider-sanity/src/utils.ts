@@ -31,3 +31,12 @@ export const makeRouteQuery = (path?: string, routeId?: string) => {
     params,
   };
 };
+
+export interface SanityConfig {
+  projectId: string;
+  dataset: string;
+  apiVersion?: string;
+  useCdn?: boolean;
+  perspective?: 'published' | 'drafts' | 'raw';
+  token?: string;
+}
