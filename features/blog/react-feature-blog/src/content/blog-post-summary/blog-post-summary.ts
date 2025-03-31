@@ -33,7 +33,7 @@ export interface BlogPostSummary extends ContentItem {
   /**
    * Publication date of the blog post
    */
-  readonly date: string;
+  readonly date?: string;
 
   /**
    * Author information
@@ -42,7 +42,7 @@ export interface BlogPostSummary extends ContentItem {
     /**
      * Author's name
      */
-    readonly name: string;
+    readonly name?: string;
 
     /**
      * Author's role or title
@@ -68,5 +68,5 @@ export interface BlogPostSummary extends ContentItem {
   /**
    * Link to the full post
    */
-  readonly action: Action;
+  readonly action?: Action;
 }

@@ -35,15 +35,15 @@ function CarouselGroupView({ content }: { content: Group }) {
   const { plugins } = useVyuh();
 
   return (
-    <div className="w-full space-y-4">
+    <div className="vfs:w-full vfs:space-y-4">
       {/* Header */}
       {(content.title || content.description) && (
         <div>
           {content.title && (
-            <h3 className="text-xl font-semibold">{content.title}</h3>
+            <h3 className="vfs:text-xl vfs:font-semibold">{content.title}</h3>
           )}
           {content.description && (
-            <p className="text-muted-foreground text-sm">
+            <p className="vfs:text-muted-foreground vfs:text-sm">
               {content.description}
             </p>
           )}
@@ -57,12 +57,12 @@ function CarouselGroupView({ content }: { content: Group }) {
           loop: true,
           dragFree: true,
         }}
-        className="w-full"
+        className="vfs:w-full"
       >
         <CarouselContent>
           {content.items.map((item, index) => (
-            <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-              <div className="p-1">{plugins.content.render(item)}</div>
+            <CarouselItem key={index} className="vfs:md:basis-1/2 vfs:lg:basis-1/3">
+              <div className="vfs:p-1">{plugins.content.render(item)}</div>
             </CarouselItem>
           ))}
         </CarouselContent>

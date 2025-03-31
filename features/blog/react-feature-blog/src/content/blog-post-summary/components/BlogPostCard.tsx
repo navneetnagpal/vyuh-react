@@ -16,7 +16,11 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
   const { getImageUrl } = useMediaUtils();
 
   // Format date to a readable string
-  const formatDate = (dateString: string) => {
+  const formatDate = (dateString: string | undefined) => {
+    if (!dateString || dateString.trim() === '') {
+      return null;
+    }
+
     const date = new Date(dateString);
     return new Intl.DateTimeFormat('en-US', {
       year: 'numeric',

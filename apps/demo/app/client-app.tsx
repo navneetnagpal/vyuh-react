@@ -1,19 +1,19 @@
 'use client';
 
-import { PluginDescriptor, VyuhProvider } from '@vyuh/react-core';
-import { ReactNode } from 'react';
+import { RouterProvider } from '@/components/router-provider';
+import { misc } from '@/features/misc-feature';
 
 // Plugins
 import { NextNavigationPlugin } from '@/plugins/next-navigation-plugin';
-import { RouterProvider } from '@/components/router-provider';
+import { PluginDescriptor, VyuhProvider } from '@vyuh/react-core';
 import { DefaultContentPlugin } from '@vyuh/react-extension-content';
-import { SanityContentProvider } from '@vyuh/react-plugin-content-provider-sanity';
+import { blog } from '@vyuh/react-feature-blog';
+import { marketing } from '@vyuh/react-feature-marketing';
 
 // Features
 import { system } from '@vyuh/react-feature-system';
-import { marketing } from '@vyuh/react-feature-marketing';
-import { blog } from '@vyuh/react-feature-blog';
-import { misc } from '@/features/misc-feature';
+import { SanityContentProvider } from '@vyuh/react-plugin-content-provider-sanity';
+import { ReactNode } from 'react';
 
 import '@/app/globals.css';
 
