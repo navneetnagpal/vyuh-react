@@ -39,15 +39,11 @@ export const BentoItem: React.FC<BentoItemProps> = ({
     }[item.span || 'normal'];
   }
 
-  // Background color for the item
-  const itemBgColor = item.color || 'bg-base-200';
-
   return (
     <div
       className={cn(
-        'flex h-full flex-col rounded-xl p-6 transition-all hover:shadow-md',
+        'bg-primary/10 flex h-full flex-col rounded-xl p-6 transition-all hover:shadow-md',
         spanClasses,
-        itemBgColor,
         item.action && 'cursor-pointer',
         className,
       )}
@@ -56,7 +52,7 @@ export const BentoItem: React.FC<BentoItemProps> = ({
       {/* Icon or Image */}
       {item.icon && (
         <div className="mb-4 text-2xl">
-          <span className="bg-primary inline-block rounded-full p-2 text-primary-content">
+          <span className="bg-primary text-primary-content inline-block rounded-full p-2">
             <DynamicIcon className="h-6 w-6" name={item.icon as IconName} />
           </span>
         </div>
@@ -78,7 +74,7 @@ export const BentoItem: React.FC<BentoItemProps> = ({
       <h3 className="mb-2 text-lg font-semibold">{item.title}</h3>
 
       {/* Description */}
-      <p className="text-sm text-base-content/70">{item.description}</p>
+      <p className="text-base-content/70 text-sm">{item.description}</p>
     </div>
   );
 };

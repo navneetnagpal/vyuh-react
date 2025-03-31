@@ -80,12 +80,6 @@ export const bentoSchema = defineType({
               },
               initialValue: 'normal',
             }),
-            defineField({
-              name: 'color',
-              title: 'Background Color',
-              type: 'string',
-              description: 'Background color for this grid item',
-            }),
           ],
           preview: {
             select: {

@@ -53,10 +53,5 @@ export interface Bento extends ContentItem {
      * How much space this item should take in the grid
      */
     readonly span?: 'normal' | 'wide' | 'tall' | 'large';
-
-    /**
-     * Background color for this grid item
-     */
-    readonly color?: string;
   }[];
 }

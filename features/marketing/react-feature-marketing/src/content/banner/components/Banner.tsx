@@ -1,6 +1,7 @@
 import { Banner as BannerItem } from '@/content/banner/banner';
 import { DefaultBannerLayout } from '@/content/banner/default-banner-layout';
 import { cn } from '@/shared/utils';
+import { Action } from '@vyuh/react-core';
 import React, { useState } from 'react';
 import { BannerContent } from './BannerContent';
 import { BannerDismiss } from './BannerDismiss';
@@ -50,11 +51,20 @@ export const Banner: React.FC<BannerProps> = ({
         className,
       )}
     >
-      <div className="flex">
+      <div className="flex items-center">
         {content.icon && (
           <BannerIcon icon={content.icon} className="mr-3 flex-shrink-0" />
         )}
         <BannerContent text={content.text} />
+        {content.action && (
+          <button
+            type="button"
+            className="btn btn-link"
+            onClick={() => new Action(content.action).execute()}
+          >
+            {content.action.title}
+          </button>
+        )}
       </div>
 
       {content.dismissible && (

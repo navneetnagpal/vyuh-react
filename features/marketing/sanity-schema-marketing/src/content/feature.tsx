@@ -122,20 +122,7 @@ export const featureSchema = defineType({
             defineField({
               name: 'action',
               title: 'Action',
-              type: 'object',
-              fields: [
-                defineField({
-                  name: 'title',
-                  title: 'Title',
-                  type: 'string',
-                  validation: (Rule) => Rule.required(),
-                }),
-                defineField({
-                  name: 'url',
-                  title: 'URL',
-                  type: 'string',
-                }),
-              ],
+              type: 'vyuh.action',
             }),
           ],
         },
