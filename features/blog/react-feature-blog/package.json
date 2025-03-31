@@ -60,18 +60,13 @@
     },
     "./styles.css": "./src/styles.css"
   },
-  "files": [
-    "*.md",
-    "dist"
-  ],
   "publishConfig": {
     "access": "public",
     "exports": {
       ".": {
         "types": "./dist/index.d.ts",
         "import": "./dist/index.js"
-      },
-      "./styles.css": "./dist/styles.css"
+      }
     }
   }
 }

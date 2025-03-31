@@ -4,11 +4,11 @@ export default defineConfig({
   entry: ['src/index.ts'],
   format: ['esm'], // ESM only
   dts: true,
-  splitting: false,
+  splitting: true,
   sourcemap: false,
   clean: true,
   treeshake: true,
-  minify: false,
+  minify: true,
   external: ['react', 'react-dom'],
   esbuildOptions(options) {
     options.banner = {
