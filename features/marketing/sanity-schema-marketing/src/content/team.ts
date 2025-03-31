@@ -1,4 +1,7 @@
-import { ContentDescriptor } from '@vyuh/sanity-schema-core';
+import {
+  ContentDescriptor,
+  ContentSchemaBuilder,
+} from '@vyuh/sanity-schema-core';
 import { TbUsers as Icon } from 'react-icons/tb';
 import { defineField, defineType } from 'sanity';
 
@@ -6,162 +9,23 @@ import { defineField, defineType } from 'sanity';
  * Team section schema for marketing pages
  * Based on common patterns from Tailwind UI team sections
  */
-export const teamSchema = defineType({
-  name: 'marketing.team',
-  title: 'Team Section',
-  type: 'object',
-  icon: Icon,
-  fields: [
-    defineField({
-      name: 'title',
-      title: 'Title',
-      type: 'string',
-      description: 'The main title for the team section',
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'subtitle',
-      title: 'Subtitle',
-      type: 'text',
-      description: 'A supporting text that appears below the title',
-    }),
 
-    defineField({
-      name: 'members',
-      title: 'Team Members',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            defineField({
-              name: 'name',
-              title: 'Name',
-              type: 'string',
-              validation: (Rule) => Rule.required(),
-            }),
-            defineField({
-              name: 'role',
-              title: 'Role',
-              type: 'string',
-              validation: (Rule) => Rule.required(),
-            }),
-            defineField({
-              name: 'image',
-              title: 'Photo',
-              type: 'image',
-              options: {
-                hotspot: true,
-              },
-              validation: (Rule) => Rule.required(),
-            }),
-            defineField({
-              name: 'bio',
-              title: 'Bio',
-              type: 'text',
-              description: 'Short biography of the team member',
-            }),
-            defineField({
-              name: 'featured',
-              title: 'Featured Member',
-              type: 'boolean',
-              description: 'Whether this member should be highlighted',
-              initialValue: false,
-            }),
-            defineField({
-              name: 'socialLinks',
-              title: 'Social Links',
-              type: 'array',
-              of: [
-                {
-                  type: 'object',
-                  fields: [
-                    defineField({
-                      name: 'platform',
-                      title: 'Platform',
-                      type: 'string',
-                      options: {
-                        list: [
-                          { title: 'Twitter', value: 'twitter' },
-                          { title: 'LinkedIn', value: 'linkedin' },
-                          { title: 'GitHub', value: 'github' },
-                          { title: 'Instagram', value: 'instagram' },
-                          { title: 'Facebook', value: 'facebook' },
-                          { title: 'Website', value: 'website' },
-                        ],
-                      },
-                      validation: (Rule) => Rule.required(),
-                    }),
-                    defineField({
-                      name: 'action',
-                      title: 'Social Link',
-                      type: 'vyuh.action',
-                      validation: (Rule) => Rule.required(),
-                    }),
-                  ],
-                  preview: {
-                    select: {
-                      platform: 'platform',
-                      title: 'action.title',
-                      url: 'action.url',
-                    },
-                    prepare({ platform, title, url }) {
-                      return {
-                        title: `${platform ? platform.charAt(0).toUpperCase() + platform.slice(1) : 'Social'}: ${title || url || 'Untitled'}`,
-                      };
-                    },
-                  },
-                },
-              ],
-            }),
-          ],
-          preview: {
-            select: {
-              name: 'name',
-              role: 'role',
-              featured: 'featured',
-              media: 'image',
-              socialCount: 'socialLinks.length',
-            },
-            prepare({ name, role, featured, media, socialCount = 0 }) {
-              return {
-                title: `Member: ${name || 'Untitled'}`,
-                subtitle: `${role || 'No role'}${featured ? ' • Featured' : ''}${socialCount > 0 ? ` • ${socialCount} social link${socialCount === 1 ? '' : 's'}` : ''}`,
-                media,
-              };
-            },
-          },
-        },
-      ],
-      validation: (Rule) => Rule.required().min(1),
-    }),
-    defineField({
-      name: 'action',
-      title: 'Action',
-      type: 'vyuh.action',
-      description: 'Optional call-to-action button',
-    }),
-  ],
-  preview: {
-    select: {
-      title: 'title',
-      members: 'members',
-    },
-    prepare({ title, members = [] }) {
-      return {
-        title: `Team: ${title || 'Untitled'}`,
-        subtitle: `${members.length} member${members.length === 1 ? '' : 's'}`,
-        media: Icon,
-      };
-    },
-  },
-});
+/**
+ * Content descriptor for team content items
+ */
+export class TeamDescriptor extends ContentDescriptor {
+  static readonly schemaName = 'marketing.team';
+
+  constructor(props: Partial<TeamDescriptor>) {
+    super(TeamDescriptor.schemaName, props);
+  }
+}
 
 /**
  * Default layout schema for team content items
  */
 export const defaultTeamLayout = defineType({
-  name: `${teamSchema.name}.layout.default`,
+  name: `${TeamDescriptor.schemaName}.layout.default`,
   title: 'Default',
   type: 'object',
   icon: Icon,
@@ -203,13 +67,163 @@ export const defaultTeamLayout = defineType({
   },
 });
 
-/**
- * Content descriptor for team content items
- */
-export class TeamDescriptor extends ContentDescriptor {
-  static readonly schemaName = teamSchema.name;
+export class TeamSchemaBuilder extends ContentSchemaBuilder {
+  private schema = defineType({
+    name: TeamDescriptor.schemaName,
+    title: 'Team Section',
+    type: 'object',
+    icon: Icon,
+    fields: [
+      defineField({
+        name: 'title',
+        title: 'Title',
+        type: 'string',
+        description: 'The main title for the team section',
+        validation: (Rule) => Rule.required(),
+      }),
+      defineField({
+        name: 'subtitle',
+        title: 'Subtitle',
+        type: 'text',
+        description: 'A supporting text that appears below the title',
+      }),
 
-  constructor(props: Partial<TeamDescriptor>) {
-    super(TeamDescriptor.schemaName, props);
+      defineField({
+        name: 'members',
+        title: 'Team Members',
+        type: 'array',
+        of: [
+          {
+            type: 'object',
+            fields: [
+              defineField({
+                name: 'name',
+                title: 'Name',
+                type: 'string',
+                validation: (Rule) => Rule.required(),
+              }),
+              defineField({
+                name: 'role',
+                title: 'Role',
+                type: 'string',
+                validation: (Rule) => Rule.required(),
+              }),
+              defineField({
+                name: 'image',
+                title: 'Photo',
+                type: 'image',
+                options: {
+                  hotspot: true,
+                },
+                validation: (Rule) => Rule.required(),
+              }),
+              defineField({
+                name: 'bio',
+                title: 'Bio',
+                type: 'text',
+                description: 'Short biography of the team member',
+              }),
+              defineField({
+                name: 'featured',
+                title: 'Featured Member',
+                type: 'boolean',
+                description: 'Whether this member should be highlighted',
+                initialValue: false,
+              }),
+              defineField({
+                name: 'socialLinks',
+                title: 'Social Links',
+                type: 'array',
+                of: [
+                  {
+                    type: 'object',
+                    fields: [
+                      defineField({
+                        name: 'platform',
+                        title: 'Platform',
+                        type: 'string',
+                        options: {
+                          list: [
+                            { title: 'Twitter', value: 'twitter' },
+                            { title: 'LinkedIn', value: 'linkedin' },
+                            { title: 'GitHub', value: 'github' },
+                            { title: 'Instagram', value: 'instagram' },
+                            { title: 'Facebook', value: 'facebook' },
+                            { title: 'Website', value: 'website' },
+                          ],
+                        },
+                        validation: (Rule) => Rule.required(),
+                      }),
+                      defineField({
+                        name: 'action',
+                        title: 'Social Link',
+                        type: 'vyuh.action',
+                        validation: (Rule) => Rule.required(),
+                      }),
+                    ],
+                    preview: {
+                      select: {
+                        platform: 'platform',
+                        title: 'action.title',
+                        url: 'action.url',
+                      },
+                      prepare({ platform, title, url }) {
+                        return {
+                          title: `${platform ? platform.charAt(0).toUpperCase() + platform.slice(1) : 'Social'}: ${title || url || 'Untitled'}`,
+                        };
+                      },
+                    },
+                  },
+                ],
+              }),
+            ],
+            preview: {
+              select: {
+                name: 'name',
+                role: 'role',
+                featured: 'featured',
+                media: 'image',
+                socialCount: 'socialLinks.length',
+              },
+              prepare({ name, role, featured, media, socialCount = 0 }) {
+                return {
+                  title: `Member: ${name || 'Untitled'}`,
+                  subtitle: `${role || 'No role'}${featured ? ' • Featured' : ''}${socialCount > 0 ? ` • ${socialCount} social link${socialCount === 1 ? '' : 's'}` : ''}`,
+                  media,
+                };
+              },
+            },
+          },
+        ],
+        validation: (Rule) => Rule.required().min(1),
+      }),
+      defineField({
+        name: 'action',
+        title: 'Action',
+        type: 'vyuh.action',
+        description: 'Optional call-to-action button',
+      }),
+    ],
+    preview: {
+      select: {
+        title: 'title',
+        members: 'members',
+      },
+      prepare({ title, members = [] }) {
+        return {
+          title: `Team: ${title || 'Untitled'}`,
+          subtitle: `${members.length} member${members.length === 1 ? '' : 's'}`,
+          media: Icon,
+        };
+      },
+    },
+  });
+
+  constructor() {
+    super(TeamDescriptor.schemaName);
+  }
+
+  build(descriptors: ContentDescriptor[]) {
+    return this.schema;
   }
 }

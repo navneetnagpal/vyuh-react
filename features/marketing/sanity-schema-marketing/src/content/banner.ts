@@ -1,76 +1,25 @@
-import { ContentDescriptor } from '@vyuh/sanity-schema-core';
+import {
+  ContentDescriptor,
+  ContentSchemaBuilder,
+} from '@vyuh/sanity-schema-core';
 import { TbFlag as Icon } from 'react-icons/tb';
 import { defineField, defineType } from 'sanity';
+
+export class BannerDescriptor extends ContentDescriptor {
+  static readonly schemaName = 'marketing.banner';
+
+  constructor(props: Partial<BannerDescriptor>) {
+    super(BannerDescriptor.schemaName, props);
+  }
+}
 
 /**
  * Banner element schema for marketing pages
  * Based on common patterns from Tailwind UI banner elements
  */
-export const bannerSchema = defineType({
-  name: 'marketing.banner',
-  title: 'Banner',
-  type: 'object',
-  icon: Icon,
-  fields: [
-    defineField({
-      name: 'text',
-      title: 'Banner Text',
-      type: 'string',
-      description: 'The main text to display in the banner',
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'icon',
-      title: 'Icon',
-      type: 'string',
-      description: 'Optional icon name from your icon library',
-    }),
-    defineField({
-      name: 'action',
-      title: 'Action',
-      type: 'vyuh.action',
-      description: 'Call-to-action button for the banner',
-    }),
-    defineField({
-      name: 'dismissible',
-      title: 'Dismissible',
-      type: 'boolean',
-      description: 'Whether the banner can be dismissed by the user',
-      initialValue: false,
-    }),
-    defineField({
-      name: 'dismissText',
-      title: 'Dismiss Text',
-      type: 'string',
-      description: 'Text for the dismiss button (e.g., "Dismiss" or "Close")',
-      initialValue: 'Dismiss',
-      hidden: ({ parent }) => !parent?.dismissible,
-    }),
-    defineField({
-      name: 'cookieId',
-      title: 'Cookie ID',
-      type: 'string',
-      description: 'Unique identifier for storing dismiss state in cookies',
-      hidden: ({ parent }) => !parent?.dismissible,
-    }),
-  ],
-  preview: {
-    select: {
-      title: 'text',
-      dismissible: 'dismissible',
-    },
-    prepare({ title, dismissible }) {
-      return {
-        title: `Banner: ${title || 'Untitled'}`,
-        subtitle: dismissible ? 'Dismissible' : undefined,
-        media: Icon,
-      };
-    },
-  },
-});
 
 export const defaultBannerLayout = defineType({
-  name: `${bannerSchema.name}.layout.default`,
+  name: `${BannerDescriptor.schemaName}.layout.default`,
   title: 'Default',
   type: 'object',
   icon: Icon,
@@ -130,10 +79,75 @@ export const defaultBannerLayout = defineType({
   },
 });
 
-export class BannerDescriptor extends ContentDescriptor {
-  static readonly schemaName = bannerSchema.name;
+export class BannerSchemaBuilder extends ContentSchemaBuilder {
+  private schema = defineType({
+    name: 'marketing.banner',
+    title: 'Banner',
+    type: 'object',
+    icon: Icon,
+    fields: [
+      defineField({
+        name: 'text',
+        title: 'Banner Text',
+        type: 'string',
+        description: 'The main text to display in the banner',
+        validation: (Rule) => Rule.required(),
+      }),
+      defineField({
+        name: 'icon',
+        title: 'Icon',
+        type: 'string',
+        description: 'Optional icon name from your icon library',
+      }),
+      defineField({
+        name: 'action',
+        title: 'Action',
+        type: 'vyuh.action',
+        description: 'Call-to-action button for the banner',
+      }),
+      defineField({
+        name: 'dismissible',
+        title: 'Dismissible',
+        type: 'boolean',
+        description: 'Whether the banner can be dismissed by the user',
+        initialValue: false,
+      }),
+      defineField({
+        name: 'dismissText',
+        title: 'Dismiss Text',
+        type: 'string',
+        description: 'Text for the dismiss button (e.g., "Dismiss" or "Close")',
+        initialValue: 'Dismiss',
+        hidden: ({ parent }) => !parent?.dismissible,
+      }),
+      defineField({
+        name: 'cookieId',
+        title: 'Cookie ID',
+        type: 'string',
+        description: 'Unique identifier for storing dismiss state in cookies',
+        hidden: ({ parent }) => !parent?.dismissible,
+      }),
+    ],
+    preview: {
+      select: {
+        title: 'text',
+        dismissible: 'dismissible',
+      },
+      prepare({ title, dismissible }) {
+        return {
+          title: `Banner: ${title || 'Untitled'}`,
+          subtitle: dismissible ? 'Dismissible' : undefined,
+          media: Icon,
+        };
+      },
+    },
+  });
 
-  constructor(props: Partial<BannerDescriptor>) {
-    super(BannerDescriptor.schemaName, props);
+  constructor() {
+    super(BannerDescriptor.schemaName);
+  }
+
+  build(descriptors: ContentDescriptor[]) {
+    return this.schema;
   }
 }

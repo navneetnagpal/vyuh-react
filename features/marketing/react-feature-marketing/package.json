@@ -1,12 +1,10 @@
 {
   "name": "@vyuh/react-feature-marketing",
-  "version": "0.2.3",
+  "version": "0.2.7",
   "description": "The Marketing feature package for the Vyuh React framework",
   "type": "module",
   "scripts": {
-    "build": "NODE_ENV=production tsup && pnpm build:tw",
-    "build:tw": "tailwindcss -i src/styles.css -o dist/styles.css",
-    "dev:tw": "pnpm build:tw --watch",
+    "build": "NODE_ENV=production tsup",
     "lint": "eslint \"src/**/*.ts*\"",
     "lint:fix": "eslint \"src/**/*.ts*\" --fix"
   },
@@ -33,9 +31,9 @@
     "react-dom": "^19.0.0"
   },
   "dependencies": {
-    "@vyuh/react-core": "^0.2.5",
-    "@vyuh/react-extension-content": "^0.2.5",
-    "@vyuh/react-feature-system": "^0.2.5",
+    "@vyuh/react-core": "^0.2.7",
+    "@vyuh/react-extension-content": "^0.2.7",
+    "@vyuh/react-feature-system": "^0.2.7",
     "lucide-react": "^0.482.0",
     "zustand": "^5.0.3"
   },
@@ -62,18 +60,13 @@
     },
     "./styles.css": "./src/styles.css"
   },
-  "files": [
-    "*.md",
-    "dist"
-  ],
   "publishConfig": {
     "access": "public",
     "exports": {
       ".": {
         "types": "./dist/index.d.ts",
         "import": "./dist/index.js"
-      },
-      "./styles.css": "./dist/styles.css"
+      }
     }
   }
 }

@@ -1,5 +1,13 @@
 # @vyuh/react-core
 
+## 0.2.7
+
+## 0.2.6
+
+### Patch Changes
+
+- Fixing layouts, styles and general refactoring
+
 ## 0.2.5
 
 ### Patch Changes

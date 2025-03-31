@@ -1,4 +1,7 @@
-import { ContentDescriptor } from '@vyuh/sanity-schema-core';
+import {
+  ContentDescriptor,
+  ContentSchemaBuilder,
+} from '@vyuh/sanity-schema-core';
 import React from 'react';
 import { TbLayoutNavbar as Icon } from 'react-icons/tb';
 import { defineField, defineType } from 'sanity';
@@ -103,123 +106,20 @@ export const navigationItemSchema = defineType({
  * Header section schema for marketing pages
  * Based on common patterns from Tailwind UI header sections
  */
-export const headerSchema = defineType({
-  name: 'marketing.header',
-  title: 'Header Section',
-  type: 'object',
-  icon: Icon,
-  fields: [
-    defineField({
-      name: 'logo',
-      title: 'Logo',
-      type: 'image',
-      description: 'The logo to display in the header',
-      options: {
-        hotspot: true,
-      },
-    }),
-    defineField({
-      name: 'logoText',
-      title: 'Logo Text',
-      type: 'string',
-      description: 'Text to display alongside or instead of the logo',
-    }),
 
-    defineField({
-      name: 'navigationItems',
-      title: 'Navigation Items',
-      type: 'array',
-      of: [navigationItemSchema],
-      validation: (Rule) =>
-        Rule.custom((value, context) => {
-          // Validation will be handled by the layout
-          return true;
-        }),
-    }),
-    defineField({
-      name: 'actions',
-      title: 'Actions',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          name: 'marketing.header.action',
-          fields: [
-            {
-              name: 'action',
-              title: 'Action',
-              type: 'vyuh.action',
-              validation: (Rule) => Rule.required(),
-            },
-            {
-              name: 'icon',
-              title: 'Icon',
-              type: 'string',
-              description: 'Optional icon name from your icon library',
-            },
-          ],
-          preview: {
-            select: {
-              title: 'action.title',
-              actionType: 'action.configuration.0._type',
-              icon: 'icon',
-            },
-            prepare({ title, actionType, icon }) {
-              return {
-                title: title || 'Action Button',
-                subtitle: actionType ?? 'No Action',
-              };
-            },
-          },
-        },
-      ],
-      description: 'Action buttons to display in the header',
-      validation: (Rule) =>
-        Rule.custom((value, context) => {
-          // Validation will be handled by the layout
-          return true;
-        }),
-    }),
-  ],
-  preview: {
-    select: {
-      title: 'logoText',
-      logo: 'logo',
-      navItems: 'navigationItems',
-      actions: 'actions',
-    },
-    prepare({ title, logo, navItems = [], actions = [] }) {
-      const details = [];
+export class HeaderDescriptor extends ContentDescriptor {
+  static readonly schemaName = 'marketing.header';
 
-      if (navItems.length > 0) {
-        details.push(
-          `${navItems.length} navigation item${navItems.length === 1 ? '' : 's'}`,
-        );
-      }
-
-      if (actions.length > 0) {
-        details.push(
-          `${actions.length} action${actions.length === 1 ? '' : 's'}`,
-        );
-      }
-
-      return {
-        title: `Header: ${title || 'Untitled'}`,
-        subtitle:
-          details.length > 0
-            ? details.join(' | ')
-            : 'No navigation items or actions',
-        media: logo || Icon,
-      };
-    },
-  },
-});
+  constructor(props: Partial<HeaderDescriptor>) {
+    super(HeaderDescriptor.schemaName, props);
+  }
+}
 
 /**
  * Default layout schema for header content items
  */
 export const defaultHeaderLayout = defineType({
-  name: `${headerSchema.name}.layout.default`,
+  name: `${HeaderDescriptor.schemaName}.layout.default`,
   title: 'Default',
   type: 'object',
   icon: Icon,
@@ -301,10 +201,124 @@ export const defaultHeaderLayout = defineType({
   },
 });
 
-export class HeaderDescriptor extends ContentDescriptor {
-  static readonly schemaName = headerSchema.name;
+export class HeaderSchemaBuilder extends ContentSchemaBuilder {
+  private schema = defineType({
+    name: HeaderDescriptor.schemaName,
+    title: 'Header Section',
+    type: 'object',
+    icon: Icon,
+    fields: [
+      defineField({
+        name: 'logo',
+        title: 'Logo',
+        type: 'image',
+        description: 'The logo to display in the header',
+        options: {
+          hotspot: true,
+        },
+      }),
+      defineField({
+        name: 'logoText',
+        title: 'Logo Text',
+        type: 'string',
+        description: 'Text to display alongside or instead of the logo',
+      }),
 
-  constructor(props: Partial<HeaderDescriptor>) {
-    super(HeaderDescriptor.schemaName, props);
+      defineField({
+        name: 'navigationItems',
+        title: 'Navigation Items',
+        type: 'array',
+        of: [navigationItemSchema],
+        validation: (Rule) =>
+          Rule.custom((value, context) => {
+            // Validation will be handled by the layout
+            return true;
+          }),
+      }),
+      defineField({
+        name: 'actions',
+        title: 'Actions',
+        type: 'array',
+        of: [
+          {
+            type: 'object',
+            name: 'marketing.header.action',
+            fields: [
+              {
+                name: 'action',
+                title: 'Action',
+                type: 'vyuh.action',
+                validation: (Rule) => Rule.required(),
+              },
+              {
+                name: 'icon',
+                title: 'Icon',
+                type: 'string',
+                description: 'Optional icon name from your icon library',
+              },
+            ],
+            preview: {
+              select: {
+                title: 'action.title',
+                actionType: 'action.configuration.0._type',
+                icon: 'icon',
+              },
+              prepare({ title, actionType, icon }) {
+                return {
+                  title: title || 'Action Button',
+                  subtitle: actionType ?? 'No Action',
+                };
+              },
+            },
+          },
+        ],
+        description: 'Action buttons to display in the header',
+        validation: (Rule) =>
+          Rule.custom((value, context) => {
+            // Validation will be handled by the layout
+            return true;
+          }),
+      }),
+    ],
+    preview: {
+      select: {
+        title: 'logoText',
+        logo: 'logo',
+        navItems: 'navigationItems',
+        actions: 'actions',
+      },
+      prepare({ title, logo, navItems = [], actions = [] }) {
+        const details = [];
+
+        if (navItems.length > 0) {
+          details.push(
+            `${navItems.length} navigation item${navItems.length === 1 ? '' : 's'}`,
+          );
+        }
+
+        if (actions.length > 0) {
+          details.push(
+            `${actions.length} action${actions.length === 1 ? '' : 's'}`,
+          );
+        }
+
+        return {
+          title: `Header: ${title || 'Untitled'}`,
+          subtitle:
+            details.length > 0
+              ? details.join(' | ')
+              : 'No navigation items or actions',
+          media: logo || Icon,
+        };
+      },
+    },
+  });
+
+  constructor() {
+    super(HeaderDescriptor.schemaName);
+  }
+
+  build(descriptors: ContentDescriptor[]) {
+    return this.schema;
   }
 }

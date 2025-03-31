@@ -1,4 +1,7 @@
-import { ContentDescriptor } from '@vyuh/sanity-schema-core';
+import {
+  ContentDescriptor,
+  ContentSchemaBuilder,
+} from '@vyuh/sanity-schema-core';
 import { TbBrandAirtable as Icon } from 'react-icons/tb';
 import { defineField, defineType } from 'sanity';
 
@@ -6,68 +9,86 @@ import { defineField, defineType } from 'sanity';
  * Logo section schema for marketing pages
  * Used for logo clouds, partner logos, etc.
  */
-export const logoSchema = defineType({
-  name: 'marketing.logo',
-  title: 'Logo Section',
-  type: 'object',
-  icon: Icon,
-  fields: [
-    defineField({
-      name: 'title',
-      title: 'Title',
-      type: 'string',
-      description: 'E.g., "Trusted by" or "Our partners"',
-    }),
-    defineField({
-      name: 'items',
-      title: 'Logo Items',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            defineField({
-              name: 'image',
-              title: 'Logo Image',
-              type: 'image',
-              validation: (Rule) => Rule.required(),
-            }),
-            defineField({
-              name: 'alt',
-              title: 'Alt Text',
-              type: 'string',
-              validation: (Rule) => Rule.required(),
-            }),
-            defineField({
-              name: 'action',
-              title: 'Logo Link',
-              type: 'vyuh.action',
-            }),
-          ],
-        },
-      ],
-    }),
-  ],
-  preview: {
-    select: {
-      title: 'title',
-      items: 'items',
+export class LogoDescriptor extends ContentDescriptor {
+  static readonly schemaName = 'marketing.logo';
+
+  constructor(props: Partial<LogoDescriptor>) {
+    super(LogoDescriptor.schemaName, props);
+  }
+}
+
+export class LogoSchemaBuilder extends ContentSchemaBuilder {
+  private schema = defineType({
+    name: LogoDescriptor.schemaName,
+    title: 'Logo Section',
+    type: 'object',
+    icon: Icon,
+    fields: [
+      defineField({
+        name: 'title',
+        title: 'Title',
+        type: 'string',
+        description: 'E.g., "Trusted by" or "Our partners"',
+      }),
+      defineField({
+        name: 'items',
+        title: 'Logo Items',
+        type: 'array',
+        of: [
+          {
+            type: 'object',
+            fields: [
+              defineField({
+                name: 'image',
+                title: 'Logo Image',
+                type: 'image',
+                validation: (Rule) => Rule.required(),
+              }),
+              defineField({
+                name: 'alt',
+                title: 'Alt Text',
+                type: 'string',
+                validation: (Rule) => Rule.required(),
+              }),
+              defineField({
+                name: 'action',
+                title: 'Logo Link',
+                type: 'vyuh.action',
+              }),
+            ],
+          },
+        ],
+      }),
+    ],
+    preview: {
+      select: {
+        title: 'title',
+        items: 'items',
+      },
+      prepare({ title, items = [] }) {
+        return {
+          title: `Logo: ${title || 'Untitled'}`,
+          subtitle: `${items.length} logo${items.length === 1 ? '' : 's'}`,
+          media: Icon,
+        };
+      },
     },
-    prepare({ title, items = [] }) {
-      return {
-        title: `Logo: ${title || 'Untitled'}`,
-        subtitle: `${items.length} logo${items.length === 1 ? '' : 's'}`,
-        media: Icon,
-      };
-    },
-  },
-});
+  });
+
+  constructor() {
+    super(LogoDescriptor.schemaName);
+  }
+
+  build(descriptors: ContentDescriptor[]) {
+    return this.schema;
+  }
+}
 
 /**
  * Default layout schema for logo content items
  */
 export const defaultLogoLayout = defineType({
-  name: `${logoSchema.name}.layout.default`,
+  name: `${LogoDescriptor.schemaName}.layout.default`,
   title: 'Default',
   type: 'object',
   icon: Icon,
@@ -126,11 +147,3 @@ export const defaultLogoLayout = defineType({
     },
   },
 });
-
-export class LogoDescriptor extends ContentDescriptor {
-  static readonly schemaName = logoSchema.name;
-
-  constructor(props: Partial<LogoDescriptor>) {
-    super(LogoDescriptor.schemaName, props);
-  }
-}

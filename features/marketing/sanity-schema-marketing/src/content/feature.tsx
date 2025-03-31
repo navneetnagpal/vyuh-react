@@ -9,176 +9,179 @@ import { defineField, defineType } from 'sanity';
  * Feature section schema for marketing pages
  * Based on common patterns from Tailwind UI feature sections
  */
-export const featureSchema = defineType({
-  name: 'marketing.feature',
-  title: 'Feature Section',
-  type: 'object',
-  icon: Icon,
-  fields: [
-    defineField({
-      name: 'title',
-      title: 'Title',
-      type: 'string',
-      description: 'The main title for the feature section',
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'text',
-      description: 'A supporting description that explains the features',
-    }),
-    defineField({
-      name: 'features',
-      title: 'Features',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            defineField({
-              name: 'title',
-              title: 'Title',
-              type: 'string',
-              validation: (Rule) => Rule.required(),
-            }),
-            defineField({
-              name: 'description',
-              title: 'Description',
-              type: 'text',
-            }),
-            defineField({
-              name: 'icon',
-              title: 'Icon',
-              type: 'string',
-              description: (
-                <div>
-                  Icon identifier from the{' '}
-                  <a href="https://lucide.dev/icons/" target="_blank">
-                    lucide-react
-                  </a>{' '}
-                  library
-                </div>
-              ),
-            }),
-          ],
-        },
-      ],
-    }),
-    defineField({
-      name: 'media',
-      title: 'Media',
-      type: 'object',
-      fields: [
-        defineField({
-          name: 'type',
-          title: 'Media Type',
-          type: 'string',
-          options: {
-            list: [
-              { title: 'None', value: 'none' },
-              { title: 'Image', value: 'image' },
-              { title: 'Video', value: 'video' },
-            ],
-          },
-          initialValue: 'none',
-        }),
-        defineField({
-          name: 'image',
-          title: 'Image',
-          type: 'image',
-          hidden: ({ parent }) => parent?.type !== 'image',
-        }),
-        defineField({
-          name: 'video',
-          title: 'Video',
-          type: 'file',
-          hidden: ({ parent }) => parent?.type !== 'video',
-        }),
-      ],
-    }),
-    defineField({
-      name: 'actions',
-      title: 'Actions',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            defineField({
-              name: 'variant',
-              title: 'Variant',
-              type: 'string',
-              options: {
-                list: [
-                  { title: 'Primary', value: 'primary' },
-                  { title: 'Secondary', value: 'secondary' },
-                  { title: 'Tertiary', value: 'tertiary' },
-                  { title: 'Link', value: 'link' },
-                ],
-              },
-              initialValue: 'primary',
-            }),
-            defineField({
-              name: 'action',
-              title: 'Action',
-              type: 'vyuh.action',
-            }),
-          ],
-        },
-      ],
-    }),
-  ],
-  preview: {
-    select: {
-      title: 'title',
-      description: 'description',
-      mediaType: 'media.type',
-      features: 'features',
-    },
-    prepare({ title, description, mediaType, features = [] }) {
-      const subtitleText = [];
-      if (mediaType && mediaType !== 'none') {
-        subtitleText.push(`Media: ${mediaType}`);
-      }
-      if (features.length) {
-        subtitleText.push(
-          `${features.length} feature${features.length === 1 ? '' : 's'}`,
-        );
-      }
-
-      return {
-        title: `Feature: ${title || 'Untitled'}`,
-        subtitle:
-          subtitleText.length > 0
-            ? subtitleText.join(' | ')
-            : description
-              ? description.substring(0, 50)
-              : 'No content',
-        media: Icon,
-      };
-    },
-  },
-});
 
 export class FeatureSectionDescriptor extends ContentDescriptor {
+  static readonly schemaName = 'marketing.feature';
+
   constructor(props?: Partial<FeatureSectionDescriptor>) {
-    super(featureSchema.name, props || {});
+    super(FeatureSectionDescriptor.schemaName, props || {});
   }
 }
 
 export class FeatureSectionSchemaBuilder extends ContentSchemaBuilder {
+  private schema = defineType({
+    name: FeatureSectionDescriptor.schemaName,
+    title: 'Feature Section',
+    type: 'object',
+    icon: Icon,
+    fields: [
+      defineField({
+        name: 'title',
+        title: 'Title',
+        type: 'string',
+        description: 'The main title for the feature section',
+        validation: (Rule) => Rule.required(),
+      }),
+      defineField({
+        name: 'description',
+        title: 'Description',
+        type: 'text',
+        description: 'A supporting description that explains the features',
+      }),
+      defineField({
+        name: 'features',
+        title: 'Features',
+        type: 'array',
+        of: [
+          {
+            type: 'object',
+            fields: [
+              defineField({
+                name: 'title',
+                title: 'Title',
+                type: 'string',
+                validation: (Rule) => Rule.required(),
+              }),
+              defineField({
+                name: 'description',
+                title: 'Description',
+                type: 'text',
+              }),
+              defineField({
+                name: 'icon',
+                title: 'Icon',
+                type: 'string',
+                description: (
+                  <div>
+                    Icon identifier from the{' '}
+                    <a href="https://lucide.dev/icons/" target="_blank">
+                      lucide-react
+                    </a>{' '}
+                    library
+                  </div>
+                ),
+              }),
+            ],
+          },
+        ],
+      }),
+      defineField({
+        name: 'media',
+        title: 'Media',
+        type: 'object',
+        fields: [
+          defineField({
+            name: 'type',
+            title: 'Media Type',
+            type: 'string',
+            options: {
+              list: [
+                { title: 'None', value: 'none' },
+                { title: 'Image', value: 'image' },
+                { title: 'Video', value: 'video' },
+              ],
+            },
+            initialValue: 'none',
+          }),
+          defineField({
+            name: 'image',
+            title: 'Image',
+            type: 'image',
+            hidden: ({ parent }) => parent?.type !== 'image',
+          }),
+          defineField({
+            name: 'video',
+            title: 'Video',
+            type: 'file',
+            hidden: ({ parent }) => parent?.type !== 'video',
+          }),
+        ],
+      }),
+      defineField({
+        name: 'actions',
+        title: 'Actions',
+        type: 'array',
+        of: [
+          {
+            type: 'object',
+            fields: [
+              defineField({
+                name: 'variant',
+                title: 'Variant',
+                type: 'string',
+                options: {
+                  list: [
+                    { title: 'Primary', value: 'primary' },
+                    { title: 'Secondary', value: 'secondary' },
+                    { title: 'Tertiary', value: 'tertiary' },
+                    { title: 'Link', value: 'link' },
+                  ],
+                },
+                initialValue: 'primary',
+              }),
+              defineField({
+                name: 'action',
+                title: 'Action',
+                type: 'vyuh.action',
+              }),
+            ],
+          },
+        ],
+      }),
+    ],
+    preview: {
+      select: {
+        title: 'title',
+        description: 'description',
+        mediaType: 'media.type',
+        features: 'features',
+      },
+      prepare({ title, description, mediaType, features = [] }) {
+        const subtitleText = [];
+        if (mediaType && mediaType !== 'none') {
+          subtitleText.push(`Media: ${mediaType}`);
+        }
+        if (features.length) {
+          subtitleText.push(
+            `${features.length} feature${features.length === 1 ? '' : 's'}`,
+          );
+        }
+
+        return {
+          title: `Feature: ${title || 'Untitled'}`,
+          subtitle:
+            subtitleText.length > 0
+              ? subtitleText.join(' | ')
+              : description
+                ? description.substring(0, 50)
+                : 'No content',
+          media: Icon,
+        };
+      },
+    },
+  });
+
   constructor() {
-    super(featureSchema.name);
+    super(FeatureSectionDescriptor.schemaName);
   }
 
   build(descriptors: ContentDescriptor[]) {
-    return featureSchema;
+    return this.schema;
   }
 }
 
 export const defaultFeatureLayout = defineType({
-  name: `${featureSchema.name}.layout.default`,
+  name: `${FeatureSectionDescriptor.schemaName}.layout.default`,
   title: 'Default',
   type: 'object',
   icon: Icon,

@@ -1,5 +1,19 @@
 # @vyuh/react-extension-content
 
+## 0.2.7
+
+### Patch Changes
+
+- @vyuh/react-core@0.2.7
+
+## 0.2.6
+
+### Patch Changes
+
+- Fixing layouts, styles and general refactoring
+- Updated dependencies
+  - @vyuh/react-core@0.2.6
+
 ## 0.2.5
 
 ### Patch Changes

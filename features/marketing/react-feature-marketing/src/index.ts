@@ -1,67 +1,49 @@
-import { BannerContentBuilder } from '@/content/banner/banner-builder';
-import { BentoContentBuilder } from '@/content/bento/bento-builder';
-import { CTAContentBuilder } from '@/content/cta/cta-builder';
-import { FAQContentBuilder } from '@/content/faq/faq-builder';
-import { FeatureContentBuilder } from '@/content/feature/feature-builder';
-import { FooterContentBuilder } from '@/content/footer/footer-builder';
-import { HeaderContentBuilder } from '@/content/header/header-builder';
-import { HeroContentBuilder } from '@/content/hero/hero-builder';
-import { LogoContentBuilder } from '@/content/logo/logo-builder';
-import { NewsletterContentBuilder } from '@/content/newsletter/newsletter-builder';
-import { PricingContentBuilder } from '@/content/pricing/pricing-builder';
-import { StatsContentBuilder } from '@/content/stats/stats-builder';
-import { TeamContentBuilder } from '@/content/team/team-builder';
-import { TestimonialsContentBuilder } from '@/content/testimonials/testimonials-builder';
-import { FullPageRouteLayout } from '@/extensions/route/full-page-route-layout';
-import { FeatureDescriptor } from '@vyuh/react-core';
-import { ContentExtensionDescriptor } from '@vyuh/react-extension-content';
-import { RouteDescriptor } from '@vyuh/react-feature-system';
+export { type Banner, BANNER_SCHEMA_TYPE } from './content/banner/banner';
+export { BannerDescriptor } from './content/banner/banner-descriptor';
 
-/**
- * Marketing feature descriptor
- *
- * Provides components for building marketing pages:
- * - Hero sections
- * - Banner sections
- * - CTA sections
- * - Header components
- * - Bento grid layouts
- * - Footer components
- * - Logo sections
- * - Newsletter sections
- * - Pricing sections
- * - Stats sections
- * - Team sections
- * - Testimonials sections
- */
-export const marketing = new FeatureDescriptor({
-  name: 'marketing',
-  title: 'Marketing',
-  description: 'Marketing components for building marketing pages',
-  icon: 'layout-grid',
-  extensions: [
-    new ContentExtensionDescriptor({
-      contents: [
-        new RouteDescriptor({
-          layouts: [FullPageRouteLayout.typeDescriptor],
-        }),
-      ],
-      contentBuilders: [
-        new HeroContentBuilder(),
-        new FeatureContentBuilder(),
-        new BannerContentBuilder(),
-        new FAQContentBuilder(),
-        new CTAContentBuilder(),
-        new HeaderContentBuilder(),
-        new BentoContentBuilder(),
-        new FooterContentBuilder(),
-        new LogoContentBuilder(),
-        new NewsletterContentBuilder(),
-        new PricingContentBuilder(),
-        new StatsContentBuilder(),
-        new TeamContentBuilder(),
-        new TestimonialsContentBuilder(),
-      ],
-    }),
-  ],
-});
+export { type Bento, BENTO_SCHEMA_TYPE } from './content/bento/bento';
+export { BentoDescriptor } from './content/bento/bento-descriptor';
+
+export { type CTA, CTA_SCHEMA_TYPE } from './content/cta/cta';
+export { CTADescriptor } from './content/cta/cta-descriptor';
+
+export { type FAQ, FAQ_SCHEMA_TYPE } from './content/faq/faq';
+export { FAQDescriptor } from './content/faq/faq-descriptor';
+
+export { type Feature, FEATURE_SCHEMA_TYPE } from './content/feature/feature';
+export { FeatureSectionDescriptor } from './content/feature/feature-section-descriptor';
+
+export { type Footer, FOOTER_SCHEMA_TYPE } from './content/footer/footer';
+export { FooterDescriptor } from './content/footer/footer-descriptor';
+
+export { type Header, HEADER_SCHEMA_TYPE } from './content/header/header';
+export { HeaderDescriptor } from './content/header/header-descriptor';
+
+export { type Hero, HERO_SCHEMA_TYPE } from './content/hero/hero';
+export { HeroDescriptor } from './content/hero/hero-descriptor';
+
+export { type Logo, LOGO_SCHEMA_TYPE } from './content/logo/logo';
+export { LogoDescriptor } from './content/logo/logo-descriptor';
+
+export {
+  type Newsletter,
+  NEWSLETTER_SCHEMA_TYPE,
+} from './content/newsletter/newsletter';
+export { NewsletterDescriptor } from './content/newsletter/newsletter-descriptor';
+
+export { type Pricing, PRICING_SCHEMA_TYPE } from './content/pricing/pricing';
+export { PricingDescriptor } from './content/pricing/pricing-descriptor';
+
+export { type Stats, STATS_SCHEMA_TYPE } from './content/stats/stats';
+export { StatsDescriptor } from './content/stats/stats-descriptor';
+
+export { type Team, TEAM_SCHEMA_TYPE } from './content/team/team';
+export { TeamDescriptor } from './content/team/team-descriptor';
+
+export {
+  type Testimonials,
+  TESTIMONIALS_SCHEMA_TYPE,
+} from './content/testimonials/testimonials';
+export { TestimonialsDescriptor } from './content/testimonials/testimonials-descriptor';
+
+export * from './feature';

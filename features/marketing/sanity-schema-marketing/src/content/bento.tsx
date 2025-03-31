@@ -1,4 +1,7 @@
-import { ContentDescriptor } from '@vyuh/sanity-schema-core';
+import {
+  ContentDescriptor,
+  ContentSchemaBuilder,
+} from '@vyuh/sanity-schema-core';
 import { TbLayoutGrid as Icon } from 'react-icons/tb';
 import { defineField, defineType } from 'sanity';
 
@@ -6,127 +9,20 @@ import { defineField, defineType } from 'sanity';
  * Bento grid schema for marketing pages
  * Based on common patterns from Tailwind UI bento grid sections
  */
-export const bentoSchema = defineType({
-  name: 'marketing.bento',
-  title: 'Bento Grid',
-  type: 'object',
-  icon: Icon,
-  fields: [
-    defineField({
-      name: 'title',
-      title: 'Title',
-      type: 'string',
-      description: 'The main title for the bento grid section',
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'subtitle',
-      title: 'Subtitle',
-      type: 'text',
-      description: 'A supporting text that appears below the title',
-    }),
-    defineField({
-      name: 'items',
-      title: 'Grid Items',
-      type: 'array',
-      of: [
-        {
-          type: 'object',
-          fields: [
-            defineField({
-              name: 'title',
-              title: 'Title',
-              type: 'string',
-              validation: (Rule) => Rule.required(),
-            }),
-            defineField({
-              name: 'description',
-              title: 'Description',
-              type: 'text',
-              validation: (Rule) => Rule.required(),
-            }),
-            defineField({
-              name: 'icon',
-              title: 'Icon',
-              type: 'string',
-              description: 'Icon name from your icon library',
-            }),
-            defineField({
-              name: 'image',
-              title: 'Image',
-              type: 'image',
-              options: {
-                hotspot: true,
-              },
-            }),
-            defineField({
-              name: 'action',
-              title: 'Action',
-              type: 'vyuh.action',
-              description: 'Optional action for this grid item',
-            }),
-            defineField({
-              name: 'span',
-              title: 'Grid Span',
-              type: 'string',
-              description: 'How much space this item should take in the grid',
-              options: {
-                list: [
-                  { title: 'Normal (1x1)', value: 'normal' },
-                  { title: 'Wide (2x1)', value: 'wide' },
-                  { title: 'Tall (1x2)', value: 'tall' },
-                  { title: 'Large (2x2)', value: 'large' },
-                ],
-              },
-              initialValue: 'normal',
-            }),
-          ],
-          preview: {
-            select: {
-              title: 'title',
-              description: 'description',
-              span: 'span',
-              media: 'image',
-              icon: 'icon',
-            },
-            prepare({ title, description, span, media, icon }) {
-              const spanText = span ? ` (${span})` : '';
-              return {
-                title: `Item: ${title || 'Untitled'}${spanText}`,
-                subtitle: description
-                  ? description.length > 40
-                    ? description.substring(0, 40) + '...'
-                    : description
-                  : 'No description',
-                media: media || (icon ? Icon : undefined),
-              };
-            },
-          },
-        },
-      ],
-      validation: (Rule) => Rule.required().min(3),
-    }),
-  ],
-  preview: {
-    select: {
-      title: 'title',
-      items: 'items',
-    },
-    prepare({ title, items = [] }) {
-      return {
-        title: `Bento: ${title || 'Untitled'}`,
-        subtitle: `${items.length} item${items.length === 1 ? '' : 's'}`,
-        media: Icon,
-      };
-    },
-  },
-});
+
+export class BentoDescriptor extends ContentDescriptor {
+  static readonly schemaName = 'marketing.bento';
+
+  constructor(props: Partial<BentoDescriptor>) {
+    super(BentoDescriptor.schemaName, props);
+  }
+}
 
 /**
  * Default layout schema for bento grid content items
  */
 export const defaultBentoLayout = defineType({
-  name: `${bentoSchema.name}.layout.default`,
+  name: `${BentoDescriptor.schemaName}.layout.default`,
   title: 'Default',
   type: 'object',
   icon: Icon,
@@ -185,10 +81,128 @@ export const defaultBentoLayout = defineType({
   },
 });
 
-export class BentoDescriptor extends ContentDescriptor {
-  static readonly schemaName = bentoSchema.name;
+export class BentoSchemaBuilder extends ContentSchemaBuilder {
+  private schema = defineType({
+    name: BentoDescriptor.schemaName,
+    title: 'Bento Grid',
+    type: 'object',
+    icon: Icon,
+    fields: [
+      defineField({
+        name: 'title',
+        title: 'Title',
+        type: 'string',
+        description: 'The main title for the bento grid section',
+        validation: (Rule) => Rule.required(),
+      }),
+      defineField({
+        name: 'subtitle',
+        title: 'Subtitle',
+        type: 'text',
+        description: 'A supporting text that appears below the title',
+      }),
+      defineField({
+        name: 'items',
+        title: 'Grid Items',
+        type: 'array',
+        of: [
+          {
+            type: 'object',
+            fields: [
+              defineField({
+                name: 'title',
+                title: 'Title',
+                type: 'string',
+                validation: (Rule) => Rule.required(),
+              }),
+              defineField({
+                name: 'description',
+                title: 'Description',
+                type: 'text',
+                validation: (Rule) => Rule.required(),
+              }),
+              defineField({
+                name: 'icon',
+                title: 'Icon',
+                type: 'string',
+                description: 'Icon name from your icon library',
+              }),
+              defineField({
+                name: 'image',
+                title: 'Image',
+                type: 'image',
+                options: {
+                  hotspot: true,
+                },
+              }),
+              defineField({
+                name: 'action',
+                title: 'Action',
+                type: 'vyuh.action',
+                description: 'Optional action for this grid item',
+              }),
+              defineField({
+                name: 'span',
+                title: 'Grid Span',
+                type: 'string',
+                description: 'How much space this item should take in the grid',
+                options: {
+                  list: [
+                    { title: 'Normal (1x1)', value: 'normal' },
+                    { title: 'Wide (2x1)', value: 'wide' },
+                    { title: 'Tall (1x2)', value: 'tall' },
+                    { title: 'Large (2x2)', value: 'large' },
+                  ],
+                },
+                initialValue: 'normal',
+              }),
+            ],
+            preview: {
+              select: {
+                title: 'title',
+                description: 'description',
+                span: 'span',
+                media: 'image',
+                icon: 'icon',
+              },
+              prepare({ title, description, span, media, icon }) {
+                const spanText = span ? ` (${span})` : '';
+                return {
+                  title: `Item: ${title || 'Untitled'}${spanText}`,
+                  subtitle: description
+                    ? description.length > 40
+                      ? description.substring(0, 40) + '...'
+                      : description
+                    : 'No description',
+                  media: media || (icon ? Icon : undefined),
+                };
+              },
+            },
+          },
+        ],
+        validation: (Rule) => Rule.required().min(3),
+      }),
+    ],
+    preview: {
+      select: {
+        title: 'title',
+        items: 'items',
+      },
+      prepare({ title, items = [] }) {
+        return {
+          title: `Bento: ${title || 'Untitled'}`,
+          subtitle: `${items.length} item${items.length === 1 ? '' : 's'}`,
+          media: Icon,
+        };
+      },
+    },
+  });
 
-  constructor(props: Partial<BentoDescriptor>) {
-    super(BentoDescriptor.schemaName, props);
+  constructor() {
+    super(BentoDescriptor.schemaName);
+  }
+
+  build(descriptors: ContentDescriptor[]) {
+    return this.schema;
   }
 }

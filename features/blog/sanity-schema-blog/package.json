@@ -1,6 +1,6 @@
 {
   "name": "@vyuh/sanity-schema-blog",
-  "version": "0.1.0",
+  "version": "0.2.7",
   "description": "The Sanity schema package for the Blog content blocks",
   "type": "module",
   "scripts": {
@@ -58,12 +58,6 @@
     "dist"
   ],
   "publishConfig": {
-    "access": "public",
-    "exports": {
-      ".": {
-        "types": "./dist/index.d.ts",
-        "import": "./dist/index.js"
-      }
-    }
+    "access": "public"
   }
 }
