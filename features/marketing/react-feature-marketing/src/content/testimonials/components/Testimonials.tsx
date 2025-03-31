@@ -18,6 +18,17 @@ export const Testimonials: React.FC<TestimonialsProps> = ({
   layout,
   className,
 }) => {
+  // Ensure content and layout are defined
+  if (!content || !layout) {
+    return null;
+  }
+
+  // Ensure testimonials array is present
+  if (!content.testimonials || content.testimonials.length === 0) {
+    console.warn('Testimonials component missing testimonials array');
+    return null;
+  }
+
   const variant = layout.variant || 'simple-centered';
 
   const renderAction = () => {

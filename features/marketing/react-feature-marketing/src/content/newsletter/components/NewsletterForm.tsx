@@ -11,8 +11,18 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({
   content,
   className,
 }) => {
-  // Using DaisyUI classes for button and input
+  // Ensure content is defined
+  if (!content) {
+    return null;
+  }
 
+  // Ensure required fields are present
+  if (!content.formAction || !content.buttonText) {
+    console.warn('NewsletterForm missing required fields');
+    return null;
+  }
+
+  // Using DaisyUI classes for button and input
   return (
     <form action={content.formAction} method="POST" className={className}>
       <div className="flex flex-col gap-3 sm:flex-row">

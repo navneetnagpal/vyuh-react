@@ -11,6 +11,11 @@ interface LogoProps {
 export const Logo: React.FC<LogoProps> = ({ content, className }) => {
   const { plugins } = useVyuh();
 
+  // Ensure content is defined
+  if (!content) {
+    return null;
+  }
+
   return (
     <div className={cn('flex items-center', className)}>
       <a href="/" className="btn btn-ghost text-base normal-case md:text-lg px-2">

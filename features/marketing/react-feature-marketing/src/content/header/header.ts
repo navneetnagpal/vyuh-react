@@ -42,7 +42,7 @@ export interface Header extends ContentItem {
       /**
        * The dropdown link
        */
-      readonly action: Action;
+      readonly action?: Action;
 
       /**
        * Optional description for flyout menu items

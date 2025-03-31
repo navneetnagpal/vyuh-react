@@ -1,6 +1,7 @@
 import { Header } from '@/content/header/header';
 import { cn } from '@/shared/utils';
 import { Action } from '@vyuh/react-core';
+import { DynamicIcon, IconName } from 'lucide-react/dynamic';
 import React from 'react';
 
 // Types
@@ -19,7 +20,7 @@ const SimpleNavItem: React.FC<SimpleNavItemProps> = ({ item }) => {
         role="button"
         onClick={() => new Action(item.action).execute()}
         className={cn(
-          'btn btn-ghost normal-case px-3 text-base',
+          'btn btn-ghost px-3 text-base normal-case',
           item.isActive ? 'btn-active' : '',
         )}
       >
@@ -37,11 +38,8 @@ interface NavChildItemProps {
 const NavChildItem: React.FC<NavChildItemProps> = ({ child }) => {
   return (
     <li>
-      <a
-        onClick={() => new Action(child.action).execute()}
-        className={child.isActive ? 'active' : ''}
-      >
-        {child.action.title}
+      <a onClick={() => new Action(child.action).execute()}>
+        {child.action?.title}
       </a>
     </li>
   );
@@ -53,36 +51,51 @@ interface NavItemWithSubmenuProps {
 }
 
 const NavItemWithSubmenu: React.FC<NavItemWithSubmenuProps> = ({ item }) => {
+  if (!item.children || item.children.length === 0) {
+    return null;
+  }
+
+  // Filter out children without an action or title
+  const validItems = item.children.filter(
+    (child) => child.action && child.action.title,
+  );
+
+  const hasChildren = validItems.length > 0;
+
   return (
     <li className="dropdown dropdown-hover">
       <div
         tabIndex={0}
         role="button"
         className={cn(
-          'btn btn-ghost flex items-center gap-1 normal-case px-3 text-base',
+          'btn btn-ghost flex items-center gap-1 px-3 text-base normal-case',
           item.isActive ? 'btn-active' : '',
         )}
         onClick={() => new Action(item.action).execute()}
       >
         {item.action.title}
-        <svg
-          className="fill-current"
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-        >
-          <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
-        </svg>
+        {hasChildren && (
+          <svg
+            className="fill-current"
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+          >
+            <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+          </svg>
+        )}
       </div>
-      <ul
-        tabIndex={0}
-        className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
-      >
-        {item.children?.map((child, childIndex) => (
-          <NavChildItem key={childIndex} child={child} />
-        ))}
-      </ul>
+      {hasChildren && (
+        <ul
+          tabIndex={0}
+          className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+        >
+          {validItems.map((child, childIndex) => (
+            <NavChildItem key={childIndex} child={child} />
+          ))}
+        </ul>
+      )}
     </li>
   );
 };
@@ -137,13 +150,13 @@ const MobileNavItem: React.FC<MobileNavItemProps> = ({ item }) => {
   return (
     <li>
       <details>
-        <summary onClick={() => item.action && item.action.execute()}>
+        <summary onClick={() => new Action(item.action).execute()}>
           {item.action?.title}
         </summary>
         <ul className="p-2">
           {item.children.map((child, childIndex) => (
             <li key={childIndex}>
-              <a onClick={() => child.action && child.action.execute()}>
+              <a onClick={() => new Action(child.action).execute()}>
                 {child.action?.title}
               </a>
             </li>
@@ -193,9 +206,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
           </li>
           {actions.map((actionItem, index) => (
             <li key={`action-${index}`}>
-              <a
-                onClick={() => actionItem.action && actionItem.action.execute()}
-              >
+              <a onClick={() => new Action(actionItem.action).execute()}>
                 {actionItem.icon && (
                   <span className="mr-2">
                     <DynamicIcon

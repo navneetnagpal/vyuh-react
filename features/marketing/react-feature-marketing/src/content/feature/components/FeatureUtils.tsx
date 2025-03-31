@@ -1,6 +1,7 @@
 import { MediaImage } from '@/shared/components';
 import { MediaVideo } from '@/shared/MediaUtils';
 import { cn } from '@/shared/utils';
+import { Action } from '@vyuh/react-core';
 import { DynamicIcon, IconName } from 'lucide-react/dynamic';
 import React from 'react';
 import { FeatureComponentProps } from './FeatureTypes';
@@ -8,16 +9,20 @@ import { FeatureComponentProps } from './FeatureTypes';
 /**
  * Renders the feature section title
  */
-export const FeatureTitle: React.FC<{ title: string; className?: string }> = ({
+export const FeatureTitle: React.FC<{ title?: string; className?: string }> = ({
   title,
   className = '',
-}) => (
-  <h2
-    className={`text-3xl font-bold tracking-tight text-base-content sm:text-4xl ${className}`}
-  >
-    {title}
-  </h2>
-);
+}) => {
+  if (!title) return null;
+
+  return (
+    <h2
+      className={`text-base-content text-3xl font-bold tracking-tight sm:text-4xl ${className}`}
+    >
+      {title}
+    </h2>
+  );
+};
 
 /**
  * Renders the feature section description
@@ -28,7 +33,9 @@ export const FeatureDescription: React.FC<{
 }> = ({ description, className = '' }) => {
   if (!description) return null;
   return (
-    <p className={`mt-4 text-lg text-base-content/70 ${className}`}>{description}</p>
+    <p className={`text-base-content/70 mt-4 text-lg ${className}`}>
+      {description}
+    </p>
   );
 };
 
@@ -36,25 +43,29 @@ export const FeatureDescription: React.FC<{
  * Renders a feature item with title, description and optional icon
  */
 export const FeatureItem: React.FC<{
-  title: string;
+  title?: string;
   description?: string;
   icon?: string;
   className?: string;
-}> = ({ title, description, icon, className = '' }) => (
-  <div className={`relative ${className}`}>
-    {icon && (
-      <div className="absolute flex h-12 w-12 items-center justify-center rounded-md bg-primary text-primary-content">
-        <DynamicIcon className="h-6 w-6" name={icon as IconName} />
-      </div>
-    )}
-    <div className={icon ? 'ml-16' : ''}>
-      <h3 className="text-lg font-medium text-base-content">{title}</h3>
-      {description && (
-        <p className="mt-2 text-base text-base-content/70">{description}</p>
+}> = ({ title, description, icon, className = '' }) => {
+  if (!title) return null;
+
+  return (
+    <div className={`relative ${className}`}>
+      {icon && (
+        <div className="bg-primary text-primary-content absolute flex h-12 w-12 items-center justify-center rounded-md">
+          <DynamicIcon className="h-6 w-6" name={icon as IconName} />
+        </div>
       )}
+      <div className={icon ? 'ml-16' : ''}>
+        <h3 className="text-base-content text-lg font-medium">{title}</h3>
+        {description && (
+          <p className="text-base-content/70 mt-2 text-base">{description}</p>
+        )}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 /**
  * Renders the feature section actions/buttons
@@ -68,6 +79,9 @@ export const FeatureActions: React.FC<{
   return (
     <div className={cn('mt-8 flex gap-4', className)}>
       {actions.map((action, index) => {
+        // Skip if action or action.action is undefined
+        if (!action || !action.action) return null;
+
         let buttonClasses = '';
 
         switch (action.variant) {
@@ -93,7 +107,7 @@ export const FeatureActions: React.FC<{
             className={cn('btn', buttonClasses)}
             onClick={() => new Action(action.action).execute()}
           >
-            {action.action.title}
+            {action.action.title || 'Action'}
           </button>
         );
       })}
@@ -112,6 +126,8 @@ export const FeatureMedia: React.FC<{
 
   switch (media.type) {
     case 'image':
+      // Check if image is defined
+      if (!media.image) return null;
       return (
         <div className={`h-full overflow-hidden rounded-lg ${className}`}>
           <MediaImage
@@ -124,6 +140,8 @@ export const FeatureMedia: React.FC<{
         </div>
       );
     case 'video':
+      // Check if video is defined
+      if (!media.video) return null;
       return (
         <div
           className={`flex items-center overflow-hidden rounded-lg bg-black ${className}`}
@@ -132,12 +150,14 @@ export const FeatureMedia: React.FC<{
         </div>
       );
     case 'code-example':
+      // Check if codeExample is defined
+      if (!media.codeExample) return null;
       return (
         <div
-          className={`overflow-hidden rounded-lg bg-neutral p-4 ${className}`}
+          className={`bg-neutral overflow-hidden rounded-lg p-4 ${className}`}
         >
-          <pre className="text-sm text-neutral-content">
-            <code>{media.codeExample?.code || ''}</code>
+          <pre className="text-neutral-content text-sm">
+            <code>{media.codeExample.code || ''}</code>
           </pre>
         </div>
       );

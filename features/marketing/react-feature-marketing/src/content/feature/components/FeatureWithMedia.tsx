@@ -16,6 +16,11 @@ export const FeatureWithMedia: React.FC<FeatureComponentProps> = ({
   content,
   layout,
 }) => {
+  // Ensure content is defined
+  if (!content) {
+    return null;
+  }
+
   const { title, description, features, media, actions } = content;
 
   return (
@@ -29,7 +34,7 @@ export const FeatureWithMedia: React.FC<FeatureComponentProps> = ({
             {features && features.length > 0 && (
               <div className="mt-10 max-w-xl space-y-8">
                 {features.map((feature, index) => (
-                  <FeatureItem
+                  feature && <FeatureItem
                     key={index}
                     title={feature.title}
                     description={feature.description}

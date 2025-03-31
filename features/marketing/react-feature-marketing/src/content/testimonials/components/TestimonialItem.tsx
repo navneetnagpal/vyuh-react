@@ -15,6 +15,17 @@ export const TestimonialItem: React.FC<TestimonialItemProps> = ({
   className,
   variant = 'simple-centered',
 }) => {
+  // Ensure testimonial is defined
+  if (!testimonial) {
+    return null;
+  }
+
+  // Ensure required fields are present
+  if (!testimonial.quote || !testimonial.author || !testimonial.author.name) {
+    console.warn('TestimonialItem missing required fields');
+    return null;
+  }
+
   const { getImageUrl } = useMediaUtils();
 
   const quoteColor = 'text-base-content';

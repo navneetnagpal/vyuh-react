@@ -13,6 +13,16 @@ export const NewsletterHeader: React.FC<NewsletterHeaderProps> = ({
   className,
   centered = true,
 }) => {
+  // Ensure content is defined
+  if (!content) {
+    return null;
+  }
+
+  // Ensure title is present
+  if (!content.title) {
+    return null;
+  }
+
   return (
     <ContentHeader
       title={content.title}

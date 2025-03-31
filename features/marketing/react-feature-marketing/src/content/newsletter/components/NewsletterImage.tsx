@@ -3,7 +3,7 @@ import { ImageReference } from '@vyuh/react-core';
 import React from 'react';
 
 interface NewsletterImageProps {
-  image: ImageReference;
+  image?: ImageReference;
   alt?: string;
   className?: string;
 }
@@ -13,6 +13,7 @@ export const NewsletterImage: React.FC<NewsletterImageProps> = ({
   alt = 'Newsletter image',
   className,
 }) => {
+  // Ensure image is defined
   if (!image) {
     return null;
   }

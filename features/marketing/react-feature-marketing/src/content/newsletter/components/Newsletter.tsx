@@ -18,6 +18,17 @@ export const Newsletter: React.FC<NewsletterProps> = ({
   layout,
   className,
 }) => {
+  // Ensure content and layout are defined
+  if (!content || !layout) {
+    return null;
+  }
+
+  // Ensure required fields are present
+  if (!content.title || !content.formAction || !content.buttonText) {
+    console.warn('Newsletter component missing required fields');
+    return null;
+  }
+
   const variant = layout.variant || 'simple-centered';
 
   switch (variant) {
