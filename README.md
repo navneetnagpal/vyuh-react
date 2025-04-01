@@ -160,6 +160,75 @@ function MyComponent() {
 }
 ```
 
+## Example Features
+
+The Vyuh React framework includes modular features that demonstrate different
+content patterns and use cases. Here's an overview of two key features:
+
+### [Marketing Feature](./packages/react-feature-marketing)
+
+![](./_images/marketing-feature.png)
+
+The Marketing feature (`@vyuh/react-feature-marketing`) provides components for
+building marketing pages:
+
+- **Feature Sections**: Display product features with different layouts:
+  - `simple` variant: Text-based feature lists with icons
+  - `with-media` variant: Features with accompanying media (images, videos, code
+    examples)
+- **Banner Sections**: Announcement components with customizable content
+- **Bento Grid Layouts**: Flexible grid components for visual content
+  organization
+- **CTA Sections**: Call-to-action components with configurable buttons
+- **FAQ Sections**: Expandable question and answer components
+- **Header & Footer**: Navigation and site information components
+- **Hero Sections**: Page introduction components with various layouts
+- **Logo Sections**: Brand showcase components
+- **Newsletter Sections**: Email signup components
+- **Pricing Sections**: Product/service pricing displays
+- **Stats Sections**: Numerical data visualization components
+- **Team Sections**: Team member profile components
+- **Testimonials Sections**: Customer quote components
+
+Each component is implemented as a content builder that can be rendered through
+the content plugin system.
+
+### [Blog Feature](./packages/react-feature-blog)
+
+The Blog feature (`@vyuh/react-feature-blog`) offers components for content
+publishing:
+
+- **Blog Group**: Collections of blog posts with customizable layouts
+- **Blog Post Summary**: Preview components for individual blog posts
+
+### Reference Implementation Patterns
+
+These features serve as reference implementations that demonstrate scalable
+patterns for building your own features:
+
+1. **Content Type Definition**: How to structure and validate content schemas
+2. **Component Layouts**: Implementing multiple layouts for the same content
+   type
+3. **Content Descriptors**: Extending and customizing content descriptors for a
+   type
+4. **Content Builders**: Connecting components to the content system
+5. **Feature Composition**: Organizing related components into cohesive features
+6. **Plugin Integration**: Leveraging core plugins for authentication, routing,
+   etc.
+7. **Conditional Rendering**: Displaying content based on user state or other
+   conditions
+8. **Content Relationships**: Managing references between different content
+   types
+
+The patterns demonstrated in these features can be applied to build more complex
+features like e-commerce systems, user dashboards, or interactive applications.
+They provide a foundation that scales from simple content display to
+sophisticated, data-driven experiences.
+
+By studying these reference implementations, developers can understand how to
+structure their own features in a way that maintains separation of concerns
+while enabling business teams to control content through the CMS.
+
 ## Contact
 
 Follow us, stay up to date or reach out on:
@@ -175,8 +244,6 @@ We welcome contributions from the community! Please check out our
 [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on how to contribute
 to the Vyuh Framework.
 
-## License
-
-The framework is [MIT Licensed](LICENSE).
+---
 
 <p align="center">Made with ❤️ by <a href="https://vyuh.tech">Vyuh</a></p>
