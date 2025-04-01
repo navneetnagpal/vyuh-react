@@ -1,5 +1,3 @@
-# Vyuh Framework for React
-
 <p align="center">
   <a href="https://vyuh.tech">
     <img src="https://github.com/vyuh-tech.png" alt="Vyuh Logo" height="128" />
