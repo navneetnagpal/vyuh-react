@@ -1,7 +1,7 @@
 'use client';
 
 import { AsyncContentContainer } from '@/ui/async-content-container';
-import { ContentItem, useVyuh } from '@vyuh/react-core';
+import { ContentItem, useVyuh, useVyuhStore } from '@vyuh/react-core';
 import { RefreshCcw } from 'lucide-react';
 import React, { useCallback, useState } from 'react';
 import { Observable } from 'rxjs';
@@ -95,13 +95,15 @@ export function DocumentLoader<TContent extends ContentItem>({
  */
 export function fetchWithQuery<TContent extends ContentItem>(
   query: string,
-  queryParams?: Record<string, any>,
-  live = false,
+  options?: {
+    queryParams?: Record<string, any>;
+    live?: boolean;
+  },
 ) {
   return () => {
-    const { plugins } = useVyuh();
+    const { plugins } = useVyuhStore.getState();
 
-    if (live) {
+    if (options?.live) {
       const supportsLive = plugins.content.provider.supportsLive;
       const liveProvider = plugins.content.provider.live;
       if (!supportsLive || !liveProvider) {
@@ -109,12 +111,12 @@ export function fetchWithQuery<TContent extends ContentItem>(
       }
 
       return liveProvider.fetchSingle<TContent>(query, {
-        params: queryParams,
+        params: options?.queryParams,
         includeDrafts: process.env.NODE_ENV === 'development',
       });
     } else {
       return plugins.content.provider.fetchSingle<TContent>(query, {
-        queryParams,
+        queryParams: options?.queryParams,
       });
     }
   };
@@ -125,12 +127,14 @@ export function fetchWithQuery<TContent extends ContentItem>(
  */
 export function fetchWithId<TContent extends ContentItem>(
   documentId: string,
-  live = false,
+  options?: {
+    live?: boolean;
+  },
 ) {
   return () => {
-    const { plugins } = useVyuh();
+    const { plugins } = useVyuhStore.getState();
 
-    if (live) {
+    if (options?.live) {
       const supportsLive = plugins.content.provider.supportsLive;
       const liveProvider = plugins.content.provider.live;
       if (!supportsLive || !liveProvider) {

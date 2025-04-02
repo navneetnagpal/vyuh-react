@@ -1,3 +1,4 @@
+export * from './ui/document-loader';
 export * from './ui/route-loader';
 export * from './ui/async-content-container';
 
