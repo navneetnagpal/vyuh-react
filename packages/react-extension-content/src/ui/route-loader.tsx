@@ -1,12 +1,11 @@
 'use client';
 
-import { AsyncContentContainer } from '@/ui/async-content-container';
-import { RouteBase, useVyuh } from '@vyuh/react-core';
-import { RefreshCcw } from 'lucide-react';
-import React, { useCallback, useState } from 'react';
+import { ContentItem, RouteBase, useVyuh } from '@vyuh/react-core';
+import React, { useCallback } from 'react';
+import { DocumentLoader } from './document-loader';
 
 /**
- * Props for the RouteBuilder component
+ * Props for the RouteLoader component
  */
 export interface RouteLoaderProps {
   /**
@@ -31,7 +30,7 @@ export interface RouteLoaderProps {
 }
 
 /**
- * A component that builds a route from a URL or route ID
+ * A component that loads and renders a route from a URL or route ID
  */
 export function RouteLoader({
   url,
@@ -40,14 +39,8 @@ export function RouteLoader({
   live = false,
 }: RouteLoaderProps) {
   const { plugins } = useVyuh();
-  const [refreshCounter, setRefreshCounter] = useState(0);
 
-  // Simple function to trigger a refresh by incrementing the counter
-  const handleRefresh = useCallback(() => {
-    setRefreshCounter((prev) => prev + 1);
-  }, []);
-
-  // This function will be called each time the component is mounted/refreshed
+  // Custom fetch function for routes
   const fetchContent = useCallback(() => {
     if (!url && !routeId) {
       throw new Error('Either url or routeId must be provided');
@@ -64,6 +57,7 @@ export function RouteLoader({
       return liveProvider.fetchRoute({
         path: url,
         routeId,
+        includeDrafts: process.env.NODE_ENV === 'development',
       });
     } else {
       // Return a promise for one-time loading
@@ -72,34 +66,22 @@ export function RouteLoader({
         routeId,
       });
     }
-  }, [plugins.content.provider, url, routeId, refreshCounter, live]);
+  }, [plugins.content.provider, url, routeId, live]);
 
   // Render the route content
   const renderContent = useCallback(
-    (route: RouteBase) => {
+    (route: ContentItem) => {
       return plugins.content.render(route);
     },
     [plugins.content],
   );
 
   return (
-    <>
-      <AsyncContentContainer
-        fetchContent={fetchContent}
-        renderContent={renderContent}
-        errorTitle={`Failed to render route: ${url || routeId}`}
-        onRetry={handleRefresh}
-      />
-
-      {allowRefresh && (
-        <button
-          onClick={handleRefresh}
-          className={`vxc:z-1000 vxc:fixed vxc:bottom-2 vxc:right-2 vxc:flex vxc:h-8 vxc:w-8 vxc:cursor-pointer vxc:items-center vxc:justify-center vxc:rounded-full vxc:bg-gray-600 vxc:text-white vxc:transition-colors vxc:ease-in-out vxc:hover:bg-gray-300 vxc:hover:text-gray-700 vxc:hover:shadow-md`}
-          title={'Refresh Route'}
-        >
-          <RefreshCcw size={16} />
-        </button>
-      )}
-    </>
+    <DocumentLoader
+      allowRefresh={allowRefresh}
+      fetchContent={fetchContent}
+      renderContent={renderContent}
+      errorTitle={`Failed to render route: ${url || routeId}`}
+    />
   );
 }
