@@ -1,13 +1,14 @@
-'use client';
-
 import { RouteLoader } from '@vyuh/react-extension-content';
-import { useParams } from 'next/navigation';
 
-export default function DynamicRoute() {
-  const params = useParams<{ slug: string | string[] }>();
-  const slug = Array.isArray(params.slug)
-    ? `/${params.slug.join('/')}`
-    : `/${params.slug}`;
+export default async function DynamicRoute({
+  params,
+}: {
+  params: Promise<{ slug: string[] }>;
+}) {
+  const allParams = await params;
+  const slug = Array.isArray(allParams.slug)
+    ? `/${allParams.slug.join('/')}`
+    : `/${allParams.slug}`;
 
   return <RouteLoader url={slug} allowRefresh={true} live={true} />;
 }

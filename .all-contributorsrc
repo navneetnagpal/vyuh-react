@@ -8,6 +8,17 @@
   "commitConvention": "angular",
   "contributors": [
     {
+      "login": "pavanpodila",
+      "name": "Pavan Podila",
+      "avatar_url": "https://avatars.githubusercontent.com/u/156846?v=4",
+      "profile": "https://vyuh.tech/",
+      "contributions": [
+        "code",
+        "doc",
+        "test"
+      ]
+    },
+    {
       "login": "navneetnagpal",
       "name": "Navneet Nagpal",
       "avatar_url": "https://avatars.githubusercontent.com/u/5485403?v=4",
