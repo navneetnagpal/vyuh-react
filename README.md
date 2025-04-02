@@ -198,6 +198,8 @@ the content plugin system.
 The Blog feature (`@vyuh/react-feature-blog`) offers components for content
 publishing:
 
+![](./_images/blog-feature.png)
+
 - **Blog Group**: Collections of blog posts with customizable layouts
 - **Blog Post Summary**: Preview components for individual blog posts
 
