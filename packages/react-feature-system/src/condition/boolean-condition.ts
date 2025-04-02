@@ -1,4 +1,4 @@
-import { ConditionConfiguration, TypeDescriptor } from '@vyuh/react-core';
+import { ConditionConfiguration, executeCondition, TypeDescriptor } from '@vyuh/react-core';
 
 /**
  * A simple boolean condition that returns a fixed value.
@@ -11,12 +11,15 @@ import { ConditionConfiguration, TypeDescriptor } from '@vyuh/react-core';
  *
  * Example:
  * ```typescript
- * const condition = new Condition({
+ * const condition = {
  *   configuration: new BooleanCondition({
  *     value: true,
  *     evaluationDelayInSeconds: 2 // 2 second delay
  *   }),
- * });
+ * };
+ *
+ * // Execute the condition
+ * const result = await executeCondition(condition);
  * ```
  */
 export class BooleanCondition extends ConditionConfiguration {

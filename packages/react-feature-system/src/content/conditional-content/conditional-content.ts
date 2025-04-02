@@ -1,4 +1,4 @@
-import { Condition, ContentItem } from '@vyuh/react-core';
+import { Condition, ContentItem, executeCondition } from '@vyuh/react-core';
 
 /**
  * A case item that pairs a condition value with its corresponding content.
@@ -50,8 +50,7 @@ export async function evaluateConditionalContent(
 ): Promise<ContentItem | null> {
   if (!content.condition || !content.cases) return null;
 
-  const condition = new Condition(content.condition);
-  const value = (await condition.execute()) || content.defaultCase;
+  const value = (await executeCondition(content.condition)) || content.defaultCase;
   const caseItem = content.cases?.find((x) => x.value === value);
 
   return Array.isArray(caseItem?.item) && caseItem.item.length > 0

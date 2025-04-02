@@ -1,5 +1,6 @@
 import {
   Condition,
+  executeCondition,
   ObjectReference,
   RouteBase,
   useVyuhStore,
@@ -46,9 +47,9 @@ export const CONDITIONAL_ROUTE_SCHEMA_TYPE = 'vyuh.conditionalRoute';
  *   id: 'route-123',
  *   title: 'Conditional Route',
  *   path: '/conditional',
- *   condition: new Condition({
+ *   condition: {
  *     configuration: new DeviceTypeCondition(),
- *   }),
+ *   },
  *   cases: [
  *     new CaseRouteItem({
  *       value: 'mobile',
@@ -96,8 +97,7 @@ export async function evaluateConditionalRoute(
 ): Promise<RouteBase | undefined> {
   if (!route.condition || !route.cases) return undefined;
 
-  const condition = new Condition(route.condition);
-  const value = (await condition.execute()) || route.defaultCase;
+  const value = (await executeCondition(route.condition)) || route.defaultCase;
   const caseItem = route.cases?.find((x) => x.value === value);
 
   const { content } = useVyuhStore.getState().plugins;
@@ -113,7 +113,7 @@ export async function evaluateConditionalRoute(
 
   throw new Error(`
 No matching route found for conditional route: ${route.path}.
-Condition (${condition.configuration?.schemaType}) evaluated to: ${value}.
+Condition evaluated to: ${value}.
 ${caseItem ? '' : 'No matching case defined.'}
   `);
 }
