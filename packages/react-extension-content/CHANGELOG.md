@@ -1,5 +1,13 @@
 # @vyuh/react-extension-content
 
+## 0.3.1
+
+### Patch Changes
+
+- Made Action and Condition classes into interfaces with execute\* methods
+- Updated dependencies
+  - @vyuh/react-core@0.3.1
+
 ## 0.3.0
 
 ### Minor Changes
