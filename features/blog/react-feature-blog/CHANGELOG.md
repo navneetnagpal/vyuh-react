@@ -1,5 +1,15 @@
 # @vyuh/react-feature-blog
 
+## 0.3.2
+
+### Patch Changes
+
+- Adding a generic DocumentLoader that makes it easier to load any single
+  Document
+- Updated dependencies
+  - @vyuh/react-core@0.3.2
+  - @vyuh/react-extension-content@0.3.2
+
 ## 0.3.1
 
 ### Patch Changes

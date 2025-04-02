@@ -1,5 +1,14 @@
 # @vyuh/react-plugin-content-provider-sanity
 
+## 0.3.2
+
+### Patch Changes
+
+- Adding a generic DocumentLoader that makes it easier to load any single
+  Document
+- Updated dependencies
+  - @vyuh/react-core@0.3.2
+
 ## 0.3.1
 
 ### Patch Changes
