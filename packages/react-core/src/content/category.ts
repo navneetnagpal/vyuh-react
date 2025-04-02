@@ -1,4 +1,4 @@
-import { ContentItem } from '@/index';
+import { type ContentItem } from '@/content/content-item';
 
 export const CATEGORY_SCHEMA_TYPE = 'vyuh.category';
 

@@ -1,5 +1,5 @@
 import { Group, GROUP_SCHEMA_TYPE } from '@/content/group/group';
-import { cn } from '@ui/lib/utils';
+import { cn } from '@/ui/lib/utils';
 import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
 import React from 'react';
 

@@ -6,7 +6,15 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*",
+        "../../features/marketing/react-feature-marketing/src/*",
+        "../../features/blog/react-feature-blog/src/*",
+        "../../packages/react-core/src/*",
+        "../../packages/react-extension-content/src/*",
+        "../../packages/react-feature-system/src/*",
+        "../../packages/react-plugin-content-provider-sanity/src/*"
+      ]
     },
     "plugins": [
       {

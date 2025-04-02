@@ -56,12 +56,12 @@ class DummyJsonApiConfiguration extends APIConfiguration<Product[]> {
   readonly searchText?: string;
   readonly limit?: number;
 
-  constructor(props: Partial<DummyJsonApiConfiguration>) {
+  constructor(props?: Partial<DummyJsonApiConfiguration>) {
     super({ schemaType: 'misc.apiContent.dummyJson' });
 
-    this.type = props.type || 'products';
-    this.searchText = props.searchText;
-    this.limit = props.limit;
+    this.type = props?.type || 'products';
+    this.searchText = props?.searchText;
+    this.limit = props?.limit;
   }
 
   override async invoke() {

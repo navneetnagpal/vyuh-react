@@ -11,6 +11,8 @@ export const UNKNOWN_SCHEMA_TYPE = 'vyuh.unknown';
  * - Has an invalid schema type
  */
 export interface Unknown extends ContentItem {
+  readonly schemaType: string;
+
   /**
    * The schema type that was missing or invalid
    */

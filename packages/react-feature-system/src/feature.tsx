@@ -23,7 +23,7 @@ import { PortableTextDescriptor } from '@/content/portable-text/portable-text-de
 import { RouteContentBuilder } from '@/content/route/route-builder';
 import { RouteDescriptor } from '@/content/route/route-descriptor';
 import { SingleItemLayout } from '@/content/route/single-item-layout';
-import { UnknownContentBuilder } from '@/content/unknown';
+import { UnknownContentBuilder } from '@/content/unknown-content-builder';
 import { VIDEO_PLAYER_SCHEMA_TYPE } from '@/content/video-player/video-player';
 import { VideoPlayerContentBuilder } from '@/content/video-player/video-player-builder';
 import { VideoPlayerDescriptor } from '@/content/video-player/video-player-descriptor';

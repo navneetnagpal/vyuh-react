@@ -3,7 +3,12 @@ import {
   ACCORDION_SCHEMA_TYPE,
   AccordionItem as ContentAccordionItem,
 } from '@/content/accordion/accordion';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@ui/components/accordion';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/ui/components/accordion';
 import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
 import React from 'react';
 

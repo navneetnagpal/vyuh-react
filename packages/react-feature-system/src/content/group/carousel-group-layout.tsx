@@ -1,5 +1,11 @@
 import { Group, GROUP_SCHEMA_TYPE } from '@/content/group/group';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@ui/components/carousel';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/ui/components/carousel';
 import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
 import React from 'react';
 
@@ -61,7 +67,10 @@ function CarouselGroupView({ content }: { content: Group }) {
       >
         <CarouselContent>
           {content.items.map((item, index) => (
-            <CarouselItem key={index} className="vfs:md:basis-1/2 vfs:lg:basis-1/3">
+            <CarouselItem
+              key={index}
+              className="vfs:md:basis-1/2 vfs:lg:basis-1/3"
+            >
               <div className="vfs:p-1">{plugins.content.render(item)}</div>
             </CarouselItem>
           ))}

@@ -1,5 +1,5 @@
 import { Card, CARD_SCHEMA_TYPE } from '@/content/card/card';
-import { Button } from '@ui/components/button';
+import { Button } from '@/ui/components/button';
 import {
   Card as ShadcnCard,
   CardContent,
@@ -7,9 +7,14 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@ui/components/card';
-import { cn } from '@ui/lib/utils';
-import { Action, LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
+} from '@/ui/components/card';
+import { cn } from '@/ui/lib/utils';
+import {
+  Action,
+  LayoutConfiguration,
+  TypeDescriptor,
+  useVyuh,
+} from '@vyuh/react-core';
 import React from 'react';
 
 /**

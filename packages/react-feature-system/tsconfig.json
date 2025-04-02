@@ -4,9 +4,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@ui/*": ["ui/*"]
+      "@ui/*": ["src/ui/*"]
     }
   },
-  "include": ["src", "ui"],
+  "include": ["src"],
   "exclude": ["node_modules", "dist"]
 }

@@ -1,7 +1,11 @@
 import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
 import { AsyncContentContainer } from '@vyuh/react-extension-content';
 import React from 'react';
-import { VIDEO_PLAYER_SCHEMA_TYPE, VideoLinkType, VideoPlayer } from './video-player';
+import {
+  VIDEO_PLAYER_SCHEMA_TYPE,
+  VideoLinkType,
+  VideoPlayer,
+} from './video-player';
 
 /**
  * Default layout for video player content.
@@ -50,11 +54,11 @@ const VideoPlayerComponent: React.FC<VideoPlayerComponentProps> = ({
 
   // Function to load the video URL
   const loadVideoUrl = async () => {
-    let url: string | null = null;
+    let url: string | undefined;
 
     if (content.linkType === VideoLinkType.file && content.file) {
       // Get URL from file reference using content provider
-      url = await plugins.content?.provider.fileUrl(content.file);
+      url = plugins.content?.provider.fileUrl(content.file);
     } else if (content.linkType === VideoLinkType.url && content.url) {
       url = content.url;
     }
@@ -71,7 +75,9 @@ const VideoPlayerComponent: React.FC<VideoPlayerComponentProps> = ({
     return (
       <div className="vfs:w-full">
         {content.title && (
-          <div className="vfs:mb-2 vfs:text-lg vfs:font-medium">{content.title}</div>
+          <div className="vfs:mb-2 vfs:text-lg vfs:font-medium">
+            {content.title}
+          </div>
         )}
         <div className="vfs:relative vfs:overflow-hidden vfs:rounded-lg">
           <VideoElement
