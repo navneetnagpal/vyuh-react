@@ -1,6 +1,6 @@
 import { Header } from '@/content/header/header';
 import { cn } from '@/shared/utils';
-import { Action } from '@vyuh/react-core';
+import { executeAction } from '@vyuh/react-core';
 import { DynamicIcon, IconName } from 'lucide-react/dynamic';
 import React from 'react';
 
@@ -18,7 +18,7 @@ const SimpleNavItem: React.FC<SimpleNavItemProps> = ({ item }) => {
     <li>
       <div
         role="button"
-        onClick={() => new Action(item.action).execute()}
+        onClick={() => executeAction(item.action)}
         className={cn(
           'btn btn-ghost px-3 text-base normal-case',
           item.isActive ? 'btn-active' : '',
@@ -38,9 +38,7 @@ interface NavChildItemProps {
 const NavChildItem: React.FC<NavChildItemProps> = ({ child }) => {
   return (
     <li>
-      <a onClick={() => new Action(child.action).execute()}>
-        {child.action?.title}
-      </a>
+      <a onClick={() => executeAction(child.action)}>{child.action?.title}</a>
     </li>
   );
 };
@@ -71,7 +69,7 @@ const NavItemWithSubmenu: React.FC<NavItemWithSubmenuProps> = ({ item }) => {
           'btn btn-ghost flex items-center gap-1 px-3 text-base normal-case',
           item.isActive ? 'btn-active' : '',
         )}
-        onClick={() => new Action(item.action).execute()}
+        onClick={() => executeAction(item.action)}
       >
         {item.action.title}
         {hasChildren && (
@@ -140,7 +138,7 @@ const MobileNavItem: React.FC<MobileNavItemProps> = ({ item }) => {
   if (!hasChildren) {
     return (
       <li>
-        <a onClick={() => item.action && item.action.execute()}>
+        <a onClick={() => item.action && executeAction(item.action)}>
           {item.action?.title}
         </a>
       </li>
@@ -150,13 +148,13 @@ const MobileNavItem: React.FC<MobileNavItemProps> = ({ item }) => {
   return (
     <li>
       <details>
-        <summary onClick={() => new Action(item.action).execute()}>
+        <summary onClick={() => executeAction(item.action)}>
           {item.action?.title}
         </summary>
         <ul className="p-2">
           {item.children.map((child, childIndex) => (
             <li key={childIndex}>
-              <a onClick={() => new Action(child.action).execute()}>
+              <a onClick={() => executeAction(child.action)}>
                 {child.action?.title}
               </a>
             </li>
@@ -203,7 +201,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
         <>
           {actions.map((actionItem, index) => (
             <li key={`action-${index}`}>
-              <a onClick={() => new Action(actionItem.action).execute()}>
+              <a onClick={() => executeAction(actionItem.action)}>
                 {actionItem.icon && (
                   <span className="mr-2">
                     <DynamicIcon

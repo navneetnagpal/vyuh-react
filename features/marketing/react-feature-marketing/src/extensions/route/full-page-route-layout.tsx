@@ -1,10 +1,4 @@
-import {
-  Action,
-  ContentItem,
-  LayoutConfiguration,
-  TypeDescriptor,
-  useVyuh,
-} from '@vyuh/react-core';
+import { Action, ContentItem, LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
 import { Region, Route } from '@vyuh/react-feature-system';
 import React, { Fragment } from 'react';
 

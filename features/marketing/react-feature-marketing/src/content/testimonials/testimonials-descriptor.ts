@@ -1,7 +1,4 @@
-import {
-  Testimonials,
-  TESTIMONIALS_SCHEMA_TYPE,
-} from '@/content/testimonials/testimonials';
+import { Testimonials, TESTIMONIALS_SCHEMA_TYPE } from '@/content/testimonials/testimonials';
 import { ContentDescriptor } from '@vyuh/react-extension-content';
 
 /**

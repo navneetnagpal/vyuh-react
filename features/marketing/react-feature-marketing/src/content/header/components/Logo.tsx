@@ -18,7 +18,10 @@ export const Logo: React.FC<LogoProps> = ({ content, className }) => {
 
   return (
     <div className={cn('flex items-center', className)}>
-      <a href="/" className="btn btn-ghost text-base normal-case md:text-lg px-2">
+      <a
+        href="/"
+        className="btn btn-ghost px-2 text-base normal-case md:text-lg"
+      >
         {content.logo && (
           <img
             src={plugins.content.provider.image(content.logo, {

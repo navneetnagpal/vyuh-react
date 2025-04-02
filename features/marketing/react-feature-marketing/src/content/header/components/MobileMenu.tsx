@@ -1,5 +1,5 @@
 import { Header } from '@/content/header/header';
-import { Action } from '@vyuh/react-core';
+import { executeAction } from '@vyuh/react-core';
 import { DynamicIcon, IconName } from 'lucide-react/dynamic';
 import React from 'react';
 import { ThemeToggle } from './ThemeToggle';
@@ -16,7 +16,7 @@ export const MobileMenuItem: React.FC<MobileMenuItemProps> = ({ item }) => {
     return (
       <li>
         <a
-          onClick={() => item.action && new Action(item.action).execute()}
+          onClick={() => item.action && executeAction(item.action)}
           className="w-full transition-colors duration-200"
         >
           {item.action?.title}
@@ -34,9 +34,7 @@ export const MobileMenuItem: React.FC<MobileMenuItemProps> = ({ item }) => {
           {item.children.map((child, childIndex) => (
             <li key={childIndex}>
               <a
-                onClick={() =>
-                  child.action && new Action(child.action).execute()
-                }
+                onClick={() => child.action && executeAction(child.action)}
                 className="w-full transition-colors duration-200"
               >
                 {child.action?.title}
@@ -60,9 +58,7 @@ export const MobileMenuActionItem: React.FC<MobileMenuActionItemProps> = ({
   return (
     <li>
       <a
-        onClick={() =>
-          actionItem.action && new Action(actionItem.action).execute()
-        }
+        onClick={() => actionItem.action && executeAction(actionItem.action)}
         className="w-full transition-colors duration-200"
       >
         {actionItem.icon && <DynamicIcon name={actionItem.icon as IconName} />}

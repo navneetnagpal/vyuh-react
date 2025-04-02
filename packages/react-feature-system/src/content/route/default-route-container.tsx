@@ -1,5 +1,5 @@
 import { Button } from '@/ui/components/button';
-import { Action, PoweredByVyuh } from '@vyuh/react-core';
+import { Action, executeAction, PoweredByVyuh } from '@vyuh/react-core';
 import {
   Blocks,
   CircleUser,
@@ -47,7 +47,7 @@ export const DefaultRouteContainer = ({
                   variant={'outline'}
                   size={'icon'}
                   onClick={() => {
-                    new Action(action.action).execute();
+                    executeAction(action.action);
                   }}
                   className={'vfs:cursor-pointer'}
                 >

@@ -1,4 +1,3 @@
-import { Testimonials } from '@/content/testimonials/testimonials';
 import { cn } from '@/shared/utils';
 import React from 'react';
 
@@ -18,14 +17,12 @@ export const TestimonialHeader: React.FC<TestimonialHeaderProps> = ({
   return (
     <div className={cn('text-center', className)}>
       {title && (
-        <h2 className="text-3xl font-bold tracking-tight text-base-content sm:text-4xl">
+        <h2 className="text-base-content text-3xl font-bold tracking-tight sm:text-4xl">
           {title}
         </h2>
       )}
       {subtitle && (
-        <p className="mt-4 text-lg text-base-content/70">
-          {subtitle}
-        </p>
+        <p className="text-base-content/70 mt-4 text-lg">{subtitle}</p>
       )}
     </div>
   );

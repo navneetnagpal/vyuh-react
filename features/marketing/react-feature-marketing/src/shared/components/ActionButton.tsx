@@ -1,5 +1,5 @@
 import { cn } from '@/shared/utils';
-import { Action } from '@vyuh/react-core';
+import { Action, executeAction } from '@vyuh/react-core';
 import React from 'react';
 
 export interface ActionButtonProps {
@@ -12,8 +12,6 @@ export interface ActionButtonProps {
    * Additional CSS classes to apply to the button
    */
   className?: string;
-
-
 
   /**
    * The variant of the button
@@ -71,7 +69,7 @@ export const ActionButton: React.FC<ActionButtonProps> = ({
 
   return (
     <button
-      onClick={() => action.execute()}
+      onClick={() => executeAction(action)}
       className={cn(
         'btn',
         sizeClasses[size],

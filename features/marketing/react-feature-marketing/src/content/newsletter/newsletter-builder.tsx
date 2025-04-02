@@ -1,8 +1,5 @@
 import { DefaultNewsletterLayout } from '@/content/newsletter/default-newsletter-layout';
-import {
-  Newsletter,
-  NEWSLETTER_SCHEMA_TYPE,
-} from '@/content/newsletter/newsletter';
+import { Newsletter, NEWSLETTER_SCHEMA_TYPE } from '@/content/newsletter/newsletter';
 import { ContentBuilder } from '@vyuh/react-extension-content';
 
 /**

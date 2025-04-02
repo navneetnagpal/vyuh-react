@@ -1,7 +1,4 @@
-import {
-  ContentDescriptor,
-  ContentSchemaBuilder,
-} from '@vyuh/sanity-schema-core';
+import { ContentDescriptor, ContentSchemaBuilder } from '@vyuh/sanity-schema-core';
 import { TbLayoutBoard as Icon } from 'react-icons/tb';
 import { defineField, defineType } from 'sanity';
 

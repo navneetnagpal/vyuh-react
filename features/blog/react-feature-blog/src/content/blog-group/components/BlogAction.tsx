@@ -1,4 +1,4 @@
-import { Action } from '@vyuh/react-core';
+import { Action, executeAction } from '@vyuh/react-core';
 import React from 'react';
 import { cn } from '../../../shared/utils';
 
@@ -17,8 +17,11 @@ export const BlogAction: React.FC<BlogActionProps> = ({
 
   return (
     <button
-      className={cn('btn btn-primary transition-all duration-200 hover:scale-[1.02] hover:shadow-md', className)}
-      onClick={() => new Action(action).execute()}
+      className={cn(
+        'btn btn-primary transition-all duration-200 hover:scale-[1.02] hover:shadow-md',
+        className,
+      )}
+      onClick={() => executeAction(action)}
     >
       {action.title || 'Read more'}
     </button>

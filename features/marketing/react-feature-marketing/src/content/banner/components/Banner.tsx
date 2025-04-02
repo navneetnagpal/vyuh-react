@@ -1,7 +1,7 @@
 import { Banner as BannerItem } from '@/content/banner/banner';
 import { DefaultBannerLayout } from '@/content/banner/default-banner-layout';
 import { cn } from '@/shared/utils';
-import { Action } from '@vyuh/react-core';
+import { executeAction } from '@vyuh/react-core';
 import React, { useState } from 'react';
 import { BannerContent } from './BannerContent';
 import { BannerDismiss } from './BannerDismiss';
@@ -60,7 +60,7 @@ export const Banner: React.FC<BannerProps> = ({
           <button
             type="button"
             className="btn btn-link"
-            onClick={() => new Action(content.action).execute()}
+            onClick={() => executeAction(content.action)}
           >
             {content.action.title}
           </button>

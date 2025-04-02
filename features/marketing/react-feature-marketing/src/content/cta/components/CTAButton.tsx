@@ -1,5 +1,5 @@
 import { cn } from '@/shared/utils';
-import { Action } from '@vyuh/react-core';
+import { Action, executeAction } from '@vyuh/react-core';
 import React from 'react';
 
 interface CTAButtonProps {
@@ -51,7 +51,7 @@ export const CTAButton: React.FC<CTAButtonProps> = ({
         buttonClasses,
         className,
       )}
-      onClick={() => action.execute()}
+      onClick={() => executeAction(action)}
     >
       {action.title || 'Click here'}
     </button>

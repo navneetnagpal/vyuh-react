@@ -1,7 +1,7 @@
 import { Logo } from '@/content/logo/logo';
 import { useMediaUtils } from '@/shared/MediaUtils';
 import { cn } from '@/shared/utils';
-import { Action } from '@vyuh/react-core';
+import { executeAction } from '@vyuh/react-core';
 import React from 'react';
 
 interface LogoItemProps {
@@ -29,7 +29,7 @@ export const LogoItem: React.FC<LogoItemProps> = ({
   if (item.action) {
     return (
       <button
-        onClick={() => new Action(item.action!).execute()}
+        onClick={() => executeAction(item.action!)}
         className={cn(
           'flex items-center justify-center p-4',
           variant === 'with-borders' && 'border-base-100 border',

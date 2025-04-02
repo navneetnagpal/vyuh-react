@@ -13,7 +13,7 @@ import { useVyuhStore } from '@/hooks/use-vyuh';
  *
  * Example usage:
  * ```typescript
- * const action = new Action({
+ * const action: Action = {
  *   configurations: [
  *     new NavigateAction({
  *       path: '/dashboard',
@@ -23,13 +23,13 @@ import { useVyuhStore } from '@/hooks/use-vyuh';
  *       properties: { destination: 'dashboard' }
  *     })
  *   ],
- * });
+ * };
  *
  * // Execute the action
- * await action.execute();
+ * await executeAction(action);
  * ```
  */
-export class Action {
+export interface Action {
   /**
    * Optional title for the action.
    */
@@ -41,6 +41,22 @@ export class Action {
    * Multiple configurations can be provided to execute a series of operations
    * when the action is triggered.
    */
+  readonly configurations?: ActionConfiguration[];
+}
+
+/**
+ * Implementation of the Action interface.
+ * This class is used internally by the executeAction function.
+ */
+class ActionImpl implements Action {
+  /**
+   * Optional title for the action.
+   */
+  readonly title?: string;
+
+  /**
+   * The configurations that define the action's logic.
+   */
   readonly configurations: ActionConfiguration[];
 
   /**
@@ -48,6 +64,7 @@ export class Action {
    */
   constructor(data?: Partial<Action>) {
     const { content } = useVyuhStore.getState().plugins;
+    this.title = data?.title;
     this.configurations = [];
 
     // Handle array of configurations
@@ -85,4 +102,19 @@ export class Action {
       }
     }
   }
+}
+
+/**
+ * Executes an action with the given parameters.
+ *
+ * @param action The action to execute
+ * @param params Optional parameters for the action
+ * @returns A promise that resolves when the action is complete
+ */
+export async function executeAction(
+  action?: Action,
+  params?: Record<string, any>,
+): Promise<void> {
+  const actionImpl = new ActionImpl(action);
+  return actionImpl.execute(params);
 }

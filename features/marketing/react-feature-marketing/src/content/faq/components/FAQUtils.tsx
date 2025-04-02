@@ -1,6 +1,6 @@
 import { FAQ } from '@/content/faq/faq';
 import { cn } from '@/shared/utils';
-import { Action, useVyuh } from '@vyuh/react-core';
+import { executeAction, useVyuh } from '@vyuh/react-core';
 import { Mail, Phone } from 'lucide-react';
 import React from 'react';
 
@@ -120,9 +120,8 @@ export function FAQContact({
 
   const handleActionClick = () => {
     if (action) {
-      // Create a new instance of the action and execute it
-      const actionInstance = new Action(action);
-      actionInstance.execute();
+      // Execute the action using the executeAction function
+      executeAction(action);
     }
   };
 

@@ -21,11 +21,7 @@ export const Logo: React.FC<LogoProps> = ({ content, layout, className }) => {
       <LogoHeader title={content.title} className="mb-8" />
 
       {/* Logo grid or carousel */}
-      <LogoGrid
-        items={content.items}
-        variant={variant}
-        columns={columns}
-      />
+      <LogoGrid items={content.items} variant={variant} columns={columns} />
     </Section>
   );
 };

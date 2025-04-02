@@ -1,9 +1,7 @@
 import { Hero } from '@/content/hero';
-import { HeroComponentProps } from '@/content/hero/components/HeroTypes';
-import { DefaultHeroLayout } from '@/content/hero/default-hero-layout';
 import { MediaImage } from '@/shared/components';
-import { MediaVideo, useMediaUtils } from '@/shared/MediaUtils';
-import { Action } from '@vyuh/react-core';
+import { MediaVideo } from '@/shared/MediaUtils';
+import { Action, executeAction } from '@vyuh/react-core';
 import React from 'react';
 
 export function HeroTitle({
@@ -53,9 +51,8 @@ export function HeroActions({
   const handleActionClick = (e: React.MouseEvent, action: Action) => {
     e.preventDefault();
     if (action) {
-      // Create a new instance of the action and execute it
-      const actionInstance = new Action(action);
-      actionInstance.execute();
+      // Execute the action using the executeAction function
+      executeAction(action);
     }
   };
 
@@ -102,7 +99,7 @@ export function HeroActions({
         <button
           key={index}
           onClick={(e) => handleActionClick(e, action)}
-          className="btn btn-link text-primary group w-full no-underline sm:w-auto transition-colors duration-200"
+          className="btn btn-link text-primary group w-full no-underline transition-colors duration-200 sm:w-auto"
         >
           {actionTitle}{' '}
           <span
@@ -120,7 +117,7 @@ export function HeroActions({
       <button
         key={index}
         onClick={(e) => handleActionClick(e, action)}
-        className="btn btn-outline btn-primary group w-full sm:w-auto transition-all duration-200"
+        className="btn btn-outline btn-primary group w-full transition-all duration-200 sm:w-auto"
       >
         {actionTitle}{' '}
         <span

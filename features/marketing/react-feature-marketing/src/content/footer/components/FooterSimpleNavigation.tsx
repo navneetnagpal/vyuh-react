@@ -1,6 +1,6 @@
 import { Footer } from '@/content/footer/footer';
 import { cn } from '@/shared/utils';
-import { Action } from '@vyuh/react-core';
+import { executeAction } from '@vyuh/react-core';
 import React from 'react';
 
 interface FooterSimpleNavigationProps {
@@ -27,7 +27,7 @@ export const FooterSimpleNavigation: React.FC<FooterSimpleNavigationProps> = ({
         <button
           key={index}
           className={cn('text-sm', linkClasses)}
-          onClick={() => new Action(link.action).execute()}
+          onClick={() => executeAction(link.action)}
         >
           {link.action && link.action.title && link.action.title}
         </button>

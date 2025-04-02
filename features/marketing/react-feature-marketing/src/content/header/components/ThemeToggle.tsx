@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Moon, Sun, Palette } from 'lucide-react';
 import { cn } from '@/shared/utils';
+import { Moon, Palette, Sun } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
 
 interface ThemeToggleProps {
   className?: string;

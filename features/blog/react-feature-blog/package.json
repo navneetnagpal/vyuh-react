@@ -1,6 +1,6 @@
 {
   "name": "@vyuh/react-feature-blog",
-  "version": "0.2.7",
+  "version": "0.3.0",
   "description": "The Blog feature package for the Vyuh React framework",
   "type": "module",
   "scripts": {
@@ -31,8 +31,8 @@
     "react-dom": "^19.0.0"
   },
   "dependencies": {
-    "@vyuh/react-core": "^0.2.7",
-    "@vyuh/react-extension-content": "^0.2.7",
+    "@vyuh/react-core": "^0.3.0",
+    "@vyuh/react-extension-content": "^0.3.0",
     "lucide-react": "^0.482.0"
   },
   "devDependencies": {

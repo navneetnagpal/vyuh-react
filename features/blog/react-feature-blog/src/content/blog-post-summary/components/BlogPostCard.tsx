@@ -1,4 +1,4 @@
-import { Action } from '@vyuh/react-core';
+import { executeAction } from '@vyuh/react-core';
 import React from 'react';
 import { useMediaUtils } from '../../../shared/MediaUtils';
 import { cn } from '../../../shared/utils';
@@ -39,7 +39,7 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
         'cursor-pointer',
         className,
       )}
-      onClick={() => new Action(content.action).execute()}
+      onClick={() => executeAction(content.action)}
     >
       {/* Featured image */}
       {content.image && (
@@ -120,7 +120,7 @@ export const BlogPostCard: React.FC<BlogPostCardProps> = ({
             )}
             onClick={(e) => {
               e.stopPropagation();
-              new Action(content.action).execute();
+              executeAction(content.action);
             }}
           >
             Read more

@@ -1,5 +1,4 @@
 import { Newsletter } from '@/content/newsletter/newsletter';
-import { cn } from '@/shared/utils';
 import React from 'react';
 
 interface NewsletterFormProps {
@@ -38,15 +37,12 @@ export const NewsletterForm: React.FC<NewsletterFormProps> = ({
           className="input input-bordered w-full"
           placeholder={content.placeholderText || 'Enter your email'}
         />
-        <button
-          type="submit"
-          className="btn btn-primary font-semibold"
-        >
+        <button type="submit" className="btn btn-primary font-semibold">
           {content.buttonText}
         </button>
       </div>
       {content.privacyText && (
-        <p className="mt-4 text-sm text-base-content/60">
+        <p className="text-base-content/60 mt-4 text-sm">
           {content.privacyText}
         </p>
       )}

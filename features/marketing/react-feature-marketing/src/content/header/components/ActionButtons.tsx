@@ -1,6 +1,6 @@
 import { Header } from '@/content/header/header';
 import { cn } from '@/shared/utils';
-import { Action } from '@vyuh/react-core';
+import { executeAction } from '@vyuh/react-core';
 import { DynamicIcon, IconName } from 'lucide-react/dynamic';
 import React from 'react';
 
@@ -23,7 +23,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
         <button
           key={index}
           className={cn('btn btn-ghost px-3 text-base')}
-          onClick={() => new Action(actionItem.action).execute()}
+          onClick={() => executeAction(actionItem.action)}
         >
           {actionItem.icon && (
             <DynamicIcon

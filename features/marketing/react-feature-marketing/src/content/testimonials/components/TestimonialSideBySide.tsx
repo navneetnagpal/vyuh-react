@@ -16,13 +16,16 @@ export const TestimonialSideBySide: React.FC<TestimonialSideBySideProps> = ({
 
   return (
     <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-16 md:max-w-none md:grid-cols-2 lg:mx-0">
-      {testimonials.map((testimonial, index) => (
-        testimonial && <TestimonialItem
-          key={index}
-          testimonial={testimonial}
-          variant="side-by-side"
-        />
-      ))}
+      {testimonials.map(
+        (testimonial, index) =>
+          testimonial && (
+            <TestimonialItem
+              key={index}
+              testimonial={testimonial}
+              variant="side-by-side"
+            />
+          ),
+      )}
     </div>
   );
 };

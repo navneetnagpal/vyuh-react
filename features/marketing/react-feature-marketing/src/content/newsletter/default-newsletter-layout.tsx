@@ -1,8 +1,5 @@
 import { Newsletter } from '@/content/newsletter/components/Newsletter';
-import {
-  Newsletter as NewsletterContent,
-  NEWSLETTER_SCHEMA_TYPE,
-} from '@/content/newsletter/newsletter';
+import { Newsletter as NewsletterContent, NEWSLETTER_SCHEMA_TYPE } from '@/content/newsletter/newsletter';
 import { LayoutConfiguration, TypeDescriptor } from '@vyuh/react-core';
 import React from 'react';
 

@@ -1,7 +1,7 @@
 import { MediaImage } from '@/shared/components';
 import { MediaVideo } from '@/shared/MediaUtils';
 import { cn } from '@/shared/utils';
-import { Action } from '@vyuh/react-core';
+import { Action, executeAction } from '@vyuh/react-core';
 import { DynamicIcon, IconName } from 'lucide-react/dynamic';
 import React from 'react';
 import { FeatureComponentProps } from './FeatureTypes';
@@ -105,7 +105,7 @@ export const FeatureActions: React.FC<{
           <button
             key={index}
             className={cn('btn', buttonClasses)}
-            onClick={() => new Action(action.action).execute()}
+            onClick={() => executeAction(action.action)}
           >
             {action.action.title || 'Action'}
           </button>

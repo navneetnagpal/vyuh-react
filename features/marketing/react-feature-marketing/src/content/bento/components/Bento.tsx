@@ -1,7 +1,6 @@
 import { Bento as BentoContent } from '@/content/bento/bento';
 import { DefaultBentoLayout } from '@/content/bento/default-bento-layout';
 import { Section } from '@/shared/components';
-import { cn } from '@/shared/utils';
 import React from 'react';
 import { BentoGrid } from './BentoGrid';
 import { BentoHeader } from './BentoHeader';

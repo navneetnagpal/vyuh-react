@@ -1,7 +1,3 @@
-import {
-  BlogPostSchemaBuilder,
-  BlogPostSummaryDescriptor,
-} from './content/blog-post-summary';
 import { FeatureDescriptor } from '@vyuh/sanity-schema-core';
 import { RouteDescriptor } from '@vyuh/sanity-schema-system';
 import {
@@ -9,6 +5,10 @@ import {
   BlogGroupSchemaBuilder,
   defaultBlogGroupLayout,
 } from './content/blog-group';
+import {
+  BlogPostSchemaBuilder,
+  BlogPostSummaryDescriptor,
+} from './content/blog-post-summary';
 
 export const blog = new FeatureDescriptor({
   name: 'blog',

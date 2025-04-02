@@ -1,7 +1,7 @@
 import { DefaultHeaderLayout } from '@/content/header/default-header-layout';
 import { Header as HeaderItem } from '@/content/header/header';
 import { cn } from '@/shared/utils';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DesktopNavigation } from './DesktopNavigation';
 import { Logo } from './Logo';
 import { MobileMenu, MobileMenuButton } from './MobileMenu';

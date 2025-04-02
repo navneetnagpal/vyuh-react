@@ -1,9 +1,5 @@
-import {
-  BuiltContentSchemaBuilder,
-  FeatureDescriptor,
-} from '@vyuh/sanity-schema-core';
+import { FeatureDescriptor } from '@vyuh/sanity-schema-core';
 import { RouteDescriptor } from '@vyuh/sanity-schema-system';
-import { fullPageRouteLayout } from './extensions';
 import {
   BannerDescriptor,
   BannerSchemaBuilder,
@@ -14,8 +10,16 @@ import {
   BentoSchemaBuilder,
   defaultBentoLayout,
 } from './content/bento';
-import { CTADescriptor, CTASchemaBuilder, defaultCTALayout } from './content/cta';
-import { defaultFaqLayout, FAQDescriptor, FAQSchemaBuilder } from './content/faq';
+import {
+  CTADescriptor,
+  CTASchemaBuilder,
+  defaultCTALayout,
+} from './content/cta';
+import {
+  defaultFaqLayout,
+  FAQDescriptor,
+  FAQSchemaBuilder,
+} from './content/faq';
 import {
   defaultFeatureLayout,
   FeatureSectionDescriptor,
@@ -31,8 +35,16 @@ import {
   HeaderDescriptor,
   HeaderSchemaBuilder,
 } from './content/header';
-import { defaultHeroLayout, HeroDescriptor, HeroSchemaBuilder } from './content/hero';
-import { defaultLogoLayout, LogoDescriptor, LogoSchemaBuilder } from './content/logo';
+import {
+  defaultHeroLayout,
+  HeroDescriptor,
+  HeroSchemaBuilder,
+} from './content/hero';
+import {
+  defaultLogoLayout,
+  LogoDescriptor,
+  LogoSchemaBuilder,
+} from './content/logo';
 import {
   defaultNewsletterLayout,
   NewsletterDescriptor,
@@ -48,12 +60,17 @@ import {
   StatsDescriptor,
   StatsSchemaBuilder,
 } from './content/stats';
-import { defaultTeamLayout, TeamDescriptor, TeamSchemaBuilder } from './content/team';
+import {
+  defaultTeamLayout,
+  TeamDescriptor,
+  TeamSchemaBuilder,
+} from './content/team';
 import {
   defaultTestimonialsLayout,
   TestimonialsDescriptor,
   TestimonialsSchemaBuilder,
 } from './content/testimonials';
+import { fullPageRouteLayout } from './extensions';
 
 export const marketing = new FeatureDescriptor({
   name: 'marketing',

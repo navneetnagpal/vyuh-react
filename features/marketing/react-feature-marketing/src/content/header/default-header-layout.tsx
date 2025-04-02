@@ -1,8 +1,5 @@
 import { Header } from '@/content/header/components/Header';
-import {
-  Header as HeaderContent,
-  HEADER_SCHEMA_TYPE,
-} from '@/content/header/header';
+import { Header as HeaderContent, HEADER_SCHEMA_TYPE } from '@/content/header/header';
 import { LayoutConfiguration, TypeDescriptor } from '@vyuh/react-core';
 import React from 'react';
 

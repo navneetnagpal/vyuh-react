@@ -1,6 +1,6 @@
 import { HeroCentered, HeroSplitRight } from '@/content/hero/components';
 import { Hero, HERO_SCHEMA_TYPE } from '@/content/hero/hero';
-import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
+import { LayoutConfiguration, TypeDescriptor } from '@vyuh/react-core';
 import React from 'react';
 
 /**

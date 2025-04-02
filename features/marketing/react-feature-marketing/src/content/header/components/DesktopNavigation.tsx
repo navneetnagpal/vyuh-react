@@ -18,10 +18,10 @@ export const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
 }) => {
   return (
     <>
-      <div className="navbar-center hidden lg:flex ml-6">
+      <div className="navbar-center ml-6 hidden lg:flex">
         <Navigation items={navigationItems} className="px-2" />
       </div>
-      <div className="navbar-end hidden lg:flex items-center ml-6">
+      <div className="navbar-end ml-6 hidden items-center lg:flex">
         <ActionButtons actions={actions} />
         {showThemeSwitch && <ThemeToggle className="ml-2" />}
       </div>

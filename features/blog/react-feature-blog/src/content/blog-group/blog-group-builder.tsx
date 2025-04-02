@@ -1,6 +1,6 @@
-import { BlogGroup, BLOG_GROUP_SCHEMA_TYPE } from './blog-group';
-import { DefaultBlogGroupLayout } from './default-blog-group-layout';
 import { ContentBuilder } from '@vyuh/react-extension-content';
+import { BLOG_GROUP_SCHEMA_TYPE, BlogGroup } from './blog-group';
+import { DefaultBlogGroupLayout } from './default-blog-group-layout';
 
 /**
  * Content builder for Blog section content items

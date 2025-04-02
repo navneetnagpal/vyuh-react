@@ -7,7 +7,6 @@ import { FooterDescription } from './FooterDescription';
 import { FooterLegalLinks } from './FooterLegalLinks';
 import { FooterLogo } from './FooterLogo';
 import { FooterNavigation } from './FooterNavigation';
-import { FooterSimpleNavigation } from './FooterSimpleNavigation';
 import { FooterSocialLinks } from './FooterSocialLinks';
 
 interface FooterProps {
@@ -27,7 +26,8 @@ export const Footer: React.FC<FooterProps> = ({
   const backgroundClasses = 'bg-base-200 text-base-content';
   const textClasses = 'text-base-content/70';
   const headingClasses = 'text-base-content';
-  const linkClasses = 'text-base-content/70 hover:text-base-content transition-colors duration-200';
+  const linkClasses =
+    'text-base-content/70 hover:text-base-content transition-colors duration-200';
 
   // Render the footer based on the variant
   const renderFooter = () => {
@@ -59,7 +59,7 @@ export const Footer: React.FC<FooterProps> = ({
 
             <div
               className={cn(
-                `mt-12 flex items-center justify-between border-t border-base-300 pt-8 max-sm:flex-col md:flex-row`,
+                `border-base-300 mt-12 flex items-center justify-between border-t pt-8 max-sm:flex-col md:flex-row`,
               )}
             >
               <div className="mb-4 md:mb-0">

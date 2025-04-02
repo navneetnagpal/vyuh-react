@@ -39,18 +39,14 @@ export const TestimonialItem: React.FC<TestimonialItemProps> = ({
     <div
       className={cn(
         isCardVariant && 'card p-6',
-        isCardVariant && 'bg-base-100 border border-base-300 transition-all duration-200 hover:shadow-md',
-        testimonial.featured && 'border-2 border-primary',
+        isCardVariant &&
+          'bg-base-100 border-base-300 border transition-all duration-200 hover:shadow-md',
+        testimonial.featured && 'border-primary border-2',
         className,
       )}
     >
       <div className="flex flex-col">
-        <QuoteIcon
-          className={cn(
-            'mb-4 h-8 w-8',
-            'text-primary',
-          )}
-        />
+        <QuoteIcon className={cn('mb-4 h-8 w-8', 'text-primary')} />
 
         <p className={cn('text-lg font-medium', quoteColor)}>
           "{testimonial.quote}"

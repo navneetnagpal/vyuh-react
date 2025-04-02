@@ -1,9 +1,6 @@
 import { LayoutConfiguration, TypeDescriptor } from '@vyuh/react-core';
 import React from 'react';
-import {
-  BLOG_POST_SUMMARY_SCHEMA_TYPE,
-  BlogPostSummary,
-} from './blog-post-summary';
+import { BLOG_POST_SUMMARY_SCHEMA_TYPE, BlogPostSummary } from './blog-post-summary';
 import { BlogPostCard } from './components/BlogPostCard';
 
 /**

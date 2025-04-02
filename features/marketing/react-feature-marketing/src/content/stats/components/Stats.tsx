@@ -1,7 +1,7 @@
 import { DefaultStatsLayout } from '@/content/stats/default-stats-layout';
 import { Stats as StatsContent } from '@/content/stats/stats';
 import { Section } from '@/shared/components/Section';
-import { cn } from '@/shared/utils';
+import { executeAction } from '@vyuh/react-core';
 import React from 'react';
 import { StatItem } from './StatItem';
 import { StatsHeader } from './StatsHeader';
@@ -20,7 +20,7 @@ export const Stats: React.FC<StatsProps> = ({ content, layout }) => {
     return (
       <div className="mt-8 flex justify-center">
         <button
-          onClick={() => content.action?.execute()}
+          onClick={() => content.action && executeAction(content.action)}
           className="btn btn-primary transition-all duration-200 hover:scale-[1.02] hover:shadow-md"
         >
           {content.action.title || 'Learn more'}
@@ -35,15 +35,11 @@ export const Stats: React.FC<StatsProps> = ({ content, layout }) => {
         <>
           <StatsHeader content={content} />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
+          <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
             {content.stats &&
               content.stats.length > 0 &&
               content.stats.map((stat, index) => (
-                <StatItem
-                  key={index}
-                  stat={stat}
-                  variant={variant}
-                />
+                <StatItem key={index} stat={stat} variant={variant} />
               ))}
           </div>
 
@@ -56,23 +52,17 @@ export const Stats: React.FC<StatsProps> = ({ content, layout }) => {
           <div className="max-w-2xl">
             <StatsHeader content={content} centered={false} />
             {content.description && (
-              <p
-                className="mt-6 text-base leading-7 text-base-content/70"
-              >
+              <p className="text-base-content/70 mt-6 text-base leading-7">
                 {content.description}
               </p>
             )}
             {renderAction()}
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             {content.stats &&
               content.stats.length > 0 &&
               content.stats.map((stat, index) => (
-                <StatItem
-                  key={index}
-                  stat={stat}
-                  variant={variant}
-                />
+                <StatItem key={index} stat={stat} variant={variant} />
               ))}
           </div>
         </div>
@@ -82,15 +72,11 @@ export const Stats: React.FC<StatsProps> = ({ content, layout }) => {
         <>
           <StatsHeader content={content} />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
+          <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
             {content.stats &&
               content.stats.length > 0 &&
               content.stats.map((stat, index) => (
-                <StatItem
-                  key={index}
-                  stat={stat}
-                  variant="simple"
-                />
+                <StatItem key={index} stat={stat} variant="simple" />
               ))}
           </div>
 

@@ -1,5 +1,5 @@
-import { defineField, defineType } from 'sanity';
 import { GrDocument as Icon } from 'react-icons/gr';
+import { defineField, defineType } from 'sanity';
 
 /**
  * Full Page Route Layout schema for Sanity

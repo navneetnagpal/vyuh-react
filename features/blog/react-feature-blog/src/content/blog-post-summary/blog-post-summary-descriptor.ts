@@ -1,5 +1,5 @@
-import { BlogPostSummary, BLOG_POST_SUMMARY_SCHEMA_TYPE } from './blog-post-summary';
 import { ContentDescriptor } from '@vyuh/react-extension-content';
+import { BLOG_POST_SUMMARY_SCHEMA_TYPE, BlogPostSummary } from './blog-post-summary';
 
 /**
  * Content type descriptor for Blog Post Summary content items

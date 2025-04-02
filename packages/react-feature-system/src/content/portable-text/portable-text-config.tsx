@@ -62,16 +62,24 @@ export class PortableTextConfig {
     PortableTextBlockComponent
   > = {
     h1: ({ children }) => (
-      <h1 className="vfs:mb-4 vfs:mt-6 vfs:text-3xl vfs:font-bold">{children}</h1>
+      <h1 className="vfs:mb-4 vfs:mt-6 vfs:text-3xl vfs:font-bold">
+        {children}
+      </h1>
     ),
     h2: ({ children }) => (
-      <h2 className="vfs:mb-3 vfs:mt-5 vfs:text-2xl vfs:font-bold">{children}</h2>
+      <h2 className="vfs:mb-3 vfs:mt-5 vfs:text-2xl vfs:font-bold">
+        {children}
+      </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="vfs:mb-2 vfs:mt-4 vfs:text-xl vfs:font-bold">{children}</h3>
+      <h3 className="vfs:mb-2 vfs:mt-4 vfs:text-xl vfs:font-bold">
+        {children}
+      </h3>
     ),
     h4: ({ children }) => (
-      <h4 className="vfs:mb-1 vfs:mt-3 vfs:text-lg vfs:font-bold">{children}</h4>
+      <h4 className="vfs:mb-1 vfs:mt-3 vfs:text-lg vfs:font-bold">
+        {children}
+      </h4>
     ),
     normal: ({ children }) => <div className="vfs:mb-4">{children}</div>,
     blockquote: ({ children }) => (

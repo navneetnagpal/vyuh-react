@@ -23,12 +23,7 @@ export interface SectionProps {
  */
 export const Section: React.FC<SectionProps> = ({ children, className }) => {
   return (
-    <section
-      className={cn(
-        'container mx-auto py-8 px-4 md:py-16',
-        className,
-      )}
-    >
+    <section className={cn('container mx-auto px-4 py-8 md:py-16', className)}>
       {children}
     </section>
   );

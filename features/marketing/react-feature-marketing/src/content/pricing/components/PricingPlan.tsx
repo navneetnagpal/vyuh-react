@@ -1,6 +1,6 @@
 import { Pricing } from '@/content/pricing/pricing';
 import { cn } from '@/shared/utils';
-import { Action } from '@vyuh/react-core';
+import { executeAction } from '@vyuh/react-core';
 import { CheckIcon } from 'lucide-react';
 import React from 'react';
 
@@ -60,12 +60,10 @@ export const PricingPlan: React.FC<PricingPlanProps> = ({
       {/* Button - Row 4 */}
       <div>
         <button
-          onClick={() => new Action(plan.action).execute()}
+          onClick={() => executeAction(plan.action)}
           className={cn(
             'btn w-full',
-            plan.featured
-              ? 'btn-outline'
-              : 'btn-primary',
+            plan.featured ? 'btn-outline' : 'btn-primary',
           )}
         >
           {plan.action.title || 'Get started'}

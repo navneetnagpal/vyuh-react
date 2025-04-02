@@ -1,8 +1,7 @@
 import { DefaultTeamLayout } from '@/content/team/default-team-layout';
 import { Team as TeamContent } from '@/content/team/team';
 import { Section } from '@/shared/components';
-import { cn } from '@/shared/utils';
-import { Action } from '@vyuh/react-core';
+import { executeAction } from '@vyuh/react-core';
 import React from 'react';
 import { TeamHeader } from './TeamHeader';
 import { TeamMember } from './TeamMember';
@@ -24,7 +23,7 @@ export const Team: React.FC<TeamProps> = ({ content, layout, className }) => {
     return (
       <div className="mt-10 flex justify-center">
         <button
-          onClick={() => new Action(content.action).execute()}
+          onClick={() => executeAction(content.action)}
           className="btn btn-primary transition-all duration-200 hover:scale-[1.02] hover:shadow-md"
         >
           {content.action.title || 'Learn more'}

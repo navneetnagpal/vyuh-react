@@ -9,12 +9,7 @@ import {
   CardTitle,
 } from '@/ui/components/card';
 import { cn } from '@/ui/lib/utils';
-import {
-  Action,
-  LayoutConfiguration,
-  TypeDescriptor,
-  useVyuh,
-} from '@vyuh/react-core';
+import { executeAction, LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
 import React from 'react';
 
 /**
@@ -80,7 +75,7 @@ const CardView: React.FC<CardRendererProps> = ({ content }) => {
         className={cn('vfs:overflow-hidden vfs:border-neutral-300 vfs:p-0', {
           'vfs:cursor-pointer': content.action,
         })}
-        onClick={() => content.action && new Action(content.action).execute()}
+        onClick={() => content.action && executeAction(content.action)}
       >
         <img
           src={imageUrl}
@@ -97,7 +92,7 @@ const CardView: React.FC<CardRendererProps> = ({ content }) => {
       className={cn('vfs:h-full vfs:border-[6px] vfs:border-neutral-100', {
         'vfs:cursor-pointer': content.action,
       })}
-      onClick={() => content.action && new Action(content.action).execute()}
+      onClick={() => content.action && executeAction(content.action)}
     >
       <CardHeader>
         {hasImage && (
@@ -124,7 +119,7 @@ const CardView: React.FC<CardRendererProps> = ({ content }) => {
         <CardFooter className="vfs:flex vfs:flex-wrap vfs:gap-2">
           {content.secondaryAction && (
             <Button
-              onClick={() => new Action(content.secondaryAction).execute()}
+              onClick={() => executeAction(content.secondaryAction)}
               variant="outline"
             >
               {content.secondaryAction.label || 'Secondary'}
@@ -133,7 +128,7 @@ const CardView: React.FC<CardRendererProps> = ({ content }) => {
 
           {content.tertiaryAction && (
             <Button
-              onClick={() => new Action(content.tertiaryAction).execute()}
+              onClick={() => executeAction(content.tertiaryAction)}
               variant="link"
             >
               {content.tertiaryAction.label || 'Tertiary'}

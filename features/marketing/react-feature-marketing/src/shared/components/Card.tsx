@@ -12,8 +12,6 @@ export interface CardProps {
    */
   className?: string;
 
-
-
   /**
    * Whether the card should be highlighted
    */
@@ -57,9 +55,9 @@ export const Card: React.FC<CardProps> = ({
     <div
       className={cn(
         'card bg-base-100',
-        highlighted ? 'border-2 border-primary' : 'border border-base-300',
+        highlighted ? 'border-primary border-2' : 'border-base-300 border',
         paddingClasses[padding],
-        hoverable ? 'hover:shadow-lg cursor-pointer' : '',
+        hoverable ? 'cursor-pointer hover:shadow-lg' : '',
         className,
       )}
       onClick={onClick}

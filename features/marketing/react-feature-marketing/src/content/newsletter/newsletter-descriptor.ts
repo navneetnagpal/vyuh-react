@@ -1,7 +1,4 @@
-import {
-  Newsletter,
-  NEWSLETTER_SCHEMA_TYPE,
-} from '@/content/newsletter/newsletter';
+import { Newsletter, NEWSLETTER_SCHEMA_TYPE } from '@/content/newsletter/newsletter';
 import { ContentDescriptor } from '@vyuh/react-extension-content';
 
 /**

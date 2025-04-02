@@ -1,8 +1,5 @@
 import { DefaultTestimonialsLayout } from '@/content/testimonials/default-testimonials-layout';
-import {
-  Testimonials,
-  TESTIMONIALS_SCHEMA_TYPE,
-} from '@/content/testimonials/testimonials';
+import { Testimonials, TESTIMONIALS_SCHEMA_TYPE } from '@/content/testimonials/testimonials';
 import { ContentBuilder } from '@vyuh/react-extension-content';
 
 /**

@@ -2,7 +2,7 @@ import { Bento } from '@/content/bento/bento';
 import { MediaImage } from '@/shared/components';
 import { useMediaUtils } from '@/shared/MediaUtils';
 import { cn } from '@/shared/utils';
-import { Action } from '@vyuh/react-core';
+import { executeAction } from '@vyuh/react-core';
 import { DynamicIcon, IconName } from 'lucide-react/dynamic';
 import React from 'react';
 
@@ -47,7 +47,7 @@ export const BentoItem: React.FC<BentoItemProps> = ({
         item.action && 'cursor-pointer',
         className,
       )}
-      onClick={() => item.action && new Action(item.action).execute()}
+      onClick={() => item.action && executeAction(item.action)}
     >
       {/* Icon or Image */}
       {item.icon && (

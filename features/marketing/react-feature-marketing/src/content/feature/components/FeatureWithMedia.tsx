@@ -1,13 +1,7 @@
 import { Section } from '@/shared/components/Section';
 import React from 'react';
 import { FeatureComponentProps } from './FeatureTypes';
-import {
-  FeatureActions,
-  FeatureDescription,
-  FeatureItem,
-  FeatureMedia,
-  FeatureTitle,
-} from './FeatureUtils';
+import { FeatureActions, FeatureDescription, FeatureItem, FeatureMedia, FeatureTitle } from './FeatureUtils';
 
 /**
  * Feature section with product screenshot

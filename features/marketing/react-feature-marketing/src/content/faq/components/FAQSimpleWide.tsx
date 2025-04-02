@@ -1,13 +1,7 @@
 import { Section } from '@/shared/components/Section';
 import React from 'react';
 import { FAQComponentProps } from './FAQTypes';
-import {
-  FAQContact,
-  FAQQuestion,
-  FAQSubtitle,
-  FAQTitle,
-  groupQuestionsByCategory,
-} from './FAQUtils';
+import { FAQContact, FAQQuestion, FAQSubtitle, FAQTitle, groupQuestionsByCategory } from './FAQUtils';
 
 /**
  * Simple FAQ layout with wide questions

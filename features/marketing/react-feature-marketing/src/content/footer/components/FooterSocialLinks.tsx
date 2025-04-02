@@ -1,6 +1,6 @@
 import { Footer } from '@/content/footer/footer';
 import { cn } from '@/shared/utils';
-import { Action } from '@vyuh/react-core';
+import { executeAction } from '@vyuh/react-core';
 import React from 'react';
 
 interface FooterSocialLinksProps {
@@ -24,7 +24,7 @@ export const FooterSocialLinks: React.FC<FooterSocialLinksProps> = ({
         <button
           key={index}
           className={linkClasses}
-          onClick={() => new Action(link.action).execute()}
+          onClick={() => executeAction(link.action)}
           aria-label={link.action.title}
         >
           {/* This would be replaced with your icon component */}
