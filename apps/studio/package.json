@@ -17,9 +17,9 @@
   "dependencies": {
     "@sanity/vision": "^3.82.0",
     "@vyuh/sanity-plugin-structure": "^2.0.1",
-    "@vyuh/sanity-schema-blog": "^0.3.3",
+    "@vyuh/sanity-schema-blog": "^0.4.0",
     "@vyuh/sanity-schema-core": "^2.0.1",
-    "@vyuh/sanity-schema-marketing": "^0.3.3",
+    "@vyuh/sanity-schema-marketing": "^0.4.0",
     "@vyuh/sanity-schema-system": "^2.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

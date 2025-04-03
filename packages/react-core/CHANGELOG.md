@@ -1,5 +1,11 @@
 # @vyuh/react-core
 
+## 0.4.0
+
+### Minor Changes
+
+- Adding support for Document and loading them by reference inside a route
+
 ## 0.3.3
 
 ### Patch Changes

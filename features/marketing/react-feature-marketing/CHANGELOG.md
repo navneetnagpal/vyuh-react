@@ -1,5 +1,18 @@
 # @vyuh/react-feature-marketing
 
+## 0.4.0
+
+### Minor Changes
+
+- Adding support for Document and loading them by reference inside a route
+
+### Patch Changes
+
+- Updated dependencies
+  - @vyuh/react-core@0.4.0
+  - @vyuh/react-extension-content@0.4.0
+  - @vyuh/react-feature-system@0.4.0
+
 ## 0.3.3
 
 ### Patch Changes
