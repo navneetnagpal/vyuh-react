@@ -12,6 +12,9 @@ import { ConditionalRouteDescriptor } from '@/content/conditional-route/conditio
 import { DIVIDER_SCHEMA_TYPE } from '@/content/divider/divider';
 import { DividerContentBuilder } from '@/content/divider/divider-builder';
 import { DividerDescriptor } from '@/content/divider/divider-descriptor';
+import { DocumentContentBuilder } from '@/content/document/document-builder';
+import { DocumentViewContentBuilder } from '@/content/document-view/document-view-builder';
+import { DocumentViewDescriptor } from '@/content/document-view/document-view-descriptor';
 import { CarouselGroupLayout } from '@/content/group/carousel-group-layout';
 import { GridGroupLayout } from '@/content/group/grid-group-layout';
 import { GROUP_SCHEMA_TYPE } from '@/content/group/group';
@@ -42,6 +45,7 @@ import {
   APIContentDescriptor,
 } from './content/api-content/api-content';
 import { APIContentBuilder } from './content/api-content/api-content-builder';
+import { DOCUMENT_VIEW_SCHEMA_TYPE } from './content/document-view/document-view';
 
 /**
  * System feature for Vyuh React
@@ -69,6 +73,7 @@ export const system = new FeatureDescriptor({
           ],
         }),
         new AccordionDescriptor(),
+        new DocumentViewDescriptor(),
         new PortableTextDescriptor({
           blockTypes: [
             {
@@ -99,6 +104,10 @@ export const system = new FeatureDescriptor({
               type: ACCORDION_SCHEMA_TYPE,
               component: PortableTextConfig.shared.renderContentItem,
             },
+            {
+              type: DOCUMENT_VIEW_SCHEMA_TYPE,
+              component: PortableTextConfig.shared.renderContentItem,
+            },
           ],
         }),
         new DividerDescriptor(),
@@ -117,11 +126,10 @@ export const system = new FeatureDescriptor({
         new VideoPlayerContentBuilder(),
         new APIContentBuilder(),
         new AccordionContentBuilder(),
+        new DocumentContentBuilder(),
+        new DocumentViewContentBuilder(),
       ],
-      actions: [
-        NavigateAction.typeDescriptor,
-        OpenUrlAction.typeDescriptor, // Add the new OpenUrlAction
-      ],
+      actions: [NavigateAction.typeDescriptor, OpenUrlAction.typeDescriptor],
       conditions: [BooleanCondition.typeDescriptor],
     }),
   ],

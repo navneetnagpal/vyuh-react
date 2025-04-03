@@ -34,13 +34,13 @@
     "react-icons": "^5.5.0"
   },
   "devDependencies": {
-    "@types/node": "^22.13.17",
+    "@types/node": "^22.14.0",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.1",
     "@typescript-eslint/eslint-plugin": "^8.29.0",
     "@typescript-eslint/parser": "^8.29.0",
-    "@vyuh/sanity-schema-core": "^2.0.0",
-    "@vyuh/sanity-schema-system": "^2.0.0",
+    "@vyuh/sanity-schema-core": "^2.0.1",
+    "@vyuh/sanity-schema-system": "^2.0.1",
     "eslint": "^9.23.0",
     "eslint-plugin-react": "^7.37.4",
     "sanity": "^3.82.0",
