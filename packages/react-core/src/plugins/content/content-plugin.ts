@@ -1,4 +1,5 @@
 import { ContentItem } from '@/content/content-item';
+import { LayoutConfiguration } from '@/content/layout-configuration';
 import { SchemaItem } from '@/content/schema-item';
 import { ExtensionBuilder } from '@/core/extension-builder';
 import { ItemType } from '@/core/platform-types';
@@ -31,7 +32,12 @@ export abstract class ContentPlugin extends Plugin {
   /**
    * Build content from a JSON object
    */
-  abstract render(json: Record<string, any> | ContentItem): React.ReactNode;
+  abstract render(
+    json: Record<string, any> | ContentItem,
+    options?: {
+      layout?: LayoutConfiguration;
+    },
+  ): React.ReactNode;
 
   /**
    * Attach an extension builder to this plugin

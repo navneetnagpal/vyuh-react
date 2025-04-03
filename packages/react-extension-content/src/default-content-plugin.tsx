@@ -6,6 +6,7 @@ import {
   ContentProvider,
   ExtensionBuilder,
   type ItemType,
+  LayoutConfiguration,
   SchemaItem,
   TypeDescriptor,
   useVyuhStore,
@@ -38,7 +39,10 @@ export class DefaultContentPlugin extends ContentPlugin {
   /**
    * Build content from a JSON object
    */
-  render(json: Record<string, any> | ContentItem): React.ReactNode {
+  render(
+    json: Record<string, any> | ContentItem,
+    options?: { layout: LayoutConfiguration },
+  ): React.ReactNode {
     const schemaType = json.schemaType ?? this.provider.schemaType(json);
 
     // Wrap the renderer in an error boundary to isolate rendering errors
@@ -48,6 +52,7 @@ export class DefaultContentPlugin extends ContentPlugin {
           schemaType={schemaType}
           extensionBuilder={this.extensionBuilder}
           content={json as ContentItem}
+          layout={options?.layout}
         />
       </ErrorBoundary>
     );
@@ -89,11 +94,13 @@ function ContentRenderer({
   schemaType,
   content,
   extensionBuilder,
+  layout,
 }: {
   schemaType: string;
   content: ContentItem;
   extensionBuilder?: ContentExtensionBuilder;
+  layout?: LayoutConfiguration | undefined;
 }) {
   const builder = extensionBuilder?.getBuilder(schemaType);
-  return builder?.render(content);
+  return builder?.render(content, layout);
 }

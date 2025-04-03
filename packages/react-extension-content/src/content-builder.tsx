@@ -1,5 +1,11 @@
 import { ContentDescriptor } from '@/content-descriptor';
-import { ContentItem, LayoutConfiguration, SchemaItem, TypeDescriptor, useVyuh } from '@vyuh/react-core';
+import {
+  ContentItem,
+  LayoutConfiguration,
+  SchemaItem,
+  TypeDescriptor,
+  useVyuh,
+} from '@vyuh/react-core';
 import React from 'react';
 
 /**
@@ -93,11 +99,18 @@ export class ContentBuilder<TContent extends ContentItem = ContentItem>
   /**
    * Build a widget for the given content item
    */
-  render(content: TContent): React.ReactNode {
+  render(
+    content: ContentItem,
+    layout: LayoutConfiguration | undefined,
+  ): React.ReactNode {
     // Using getState() here since this is not inside a React component's render function
     const { plugins } = useVyuh();
     const contentPlugin = plugins.content;
     const telemetry = plugins.telemetry;
+
+    if (layout) {
+      return layout.render(content);
+    }
 
     const layoutConfig = this.getLayout(content);
     const layoutType = layoutConfig
@@ -117,8 +130,8 @@ export class ContentBuilder<TContent extends ContentItem = ContentItem>
       return this.defaultLayout.render(content);
     }
 
-    const layout = new layoutDescriptor.fromJson(layoutConfig);
-    return layout.render(content);
+    const contentLayout = new layoutDescriptor.fromJson(layoutConfig);
+    return contentLayout.render(content);
   }
 
   /**
