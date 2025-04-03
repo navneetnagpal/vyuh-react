@@ -1,5 +1,11 @@
 # @vyuh/react-core
 
+## 0.3.3
+
+### Patch Changes
+
+- Adding support for overriding layouts with the content plugin
+
 ## 0.3.2
 
 ### Patch Changes

@@ -1,5 +1,14 @@
 # @vyuh/react-feature-system
 
+## 0.3.3
+
+### Patch Changes
+
+- Adding support for overriding layouts with the content plugin
+- Updated dependencies
+  - @vyuh/react-core@0.3.3
+  - @vyuh/react-extension-content@0.3.3
+
 ## 0.3.2
 
 ### Patch Changes

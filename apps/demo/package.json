@@ -11,12 +11,12 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@vyuh/react-core": "^0.3.2",
-    "@vyuh/react-extension-content": "^0.3.2",
-    "@vyuh/react-feature-blog": "^0.3.2",
-    "@vyuh/react-feature-marketing": "^0.3.2",
-    "@vyuh/react-feature-system": "^0.3.2",
-    "@vyuh/react-plugin-content-provider-sanity": "^0.3.2",
+    "@vyuh/react-core": "^0.3.3",
+    "@vyuh/react-extension-content": "^0.3.3",
+    "@vyuh/react-feature-blog": "^0.3.3",
+    "@vyuh/react-feature-marketing": "^0.3.3",
+    "@vyuh/react-feature-system": "^0.3.3",
+    "@vyuh/react-plugin-content-provider-sanity": "^0.3.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.482.0",

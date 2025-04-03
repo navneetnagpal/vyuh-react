@@ -100,7 +100,7 @@ export class ContentBuilder<TContent extends ContentItem = ContentItem>
    * Build a widget for the given content item
    */
   render(
-    content: ContentItem,
+    content: TContent,
     layout: LayoutConfiguration | undefined,
   ): React.ReactNode {
     // Using getState() here since this is not inside a React component's render function
