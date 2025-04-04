@@ -15,14 +15,16 @@ export interface DocumentLoaderProps<TContent extends ContentItem> {
    * Returns either a Promise (one-time loading) or Observable (live updates)
    */
   fetchContent: () =>
-    | Promise<TContent | undefined>
-    | Observable<TContent | undefined>;
+    | Promise<TContent | TContent[] | undefined>
+    | Observable<TContent | TContent[] | undefined>;
 
   /**
    * Custom render function for the content
    * If not provided, uses the content plugin's render method
    */
-  renderContent?: (content: TContent) => React.ReactNode;
+  renderContent?: (
+    content: TContent | TContent[] | undefined,
+  ) => React.ReactNode;
 
   /**
    * Whether to allow refreshing the document
@@ -59,7 +61,7 @@ export function DocumentLoader<TContent extends ContentItem>({
 
   // Render the document content
   const renderContentFn = useCallback(
-    (content: TContent) => {
+    (content: TContent | TContent[] | undefined) => {
       if (customRenderContent) {
         return customRenderContent(content);
       }
@@ -93,7 +95,7 @@ export function DocumentLoader<TContent extends ContentItem>({
 /**
  * Creates a fetch function for fetching content by query
  */
-export function fetchWithQuery<TContent extends ContentItem>(
+export function fetchSingleWithQuery<TContent extends ContentItem>(
   query: string,
   options?: {
     queryParams?: Record<string, any>;
@@ -116,6 +118,38 @@ export function fetchWithQuery<TContent extends ContentItem>(
       });
     } else {
       return plugins.content.provider.fetchSingle<TContent>(query, {
+        queryParams: options?.queryParams,
+      });
+    }
+  };
+}
+
+/**
+ * Creates a fetch function for fetching content by query
+ */
+export function fetchMultipleWithQuery<TContent extends ContentItem>(
+  query: string,
+  options?: {
+    queryParams?: Record<string, any>;
+    live?: boolean;
+  },
+) {
+  return () => {
+    const { plugins } = useVyuhStore.getState();
+
+    if (options?.live) {
+      const supportsLive = plugins.content.provider.supportsLive;
+      const liveProvider = plugins.content.provider.live;
+      if (!supportsLive || !liveProvider) {
+        throw new Error('Live updates not supported');
+      }
+
+      return liveProvider.fetchMultiple<TContent>(query, {
+        params: options?.queryParams,
+        includeDrafts: process.env.NODE_ENV === 'development',
+      });
+    } else {
+      return plugins.content.provider.fetchMultiple<TContent>(query, {
         queryParams: options?.queryParams,
       });
     }
