@@ -1,6 +1,6 @@
 import { ContentBuilder } from '@vyuh/react-extension-content';
-import { DocumentView, DOCUMENT_VIEW_SCHEMA_TYPE } from './document-view';
 import { DefaultDocumentViewLayout } from './default-document-view-layout';
+import { DOCUMENT_VIEW_SCHEMA_TYPE, DocumentView } from './document-view';
 
 /**
  * Content builder for DocumentView content items

@@ -12,9 +12,9 @@ import { ConditionalRouteDescriptor } from '@/content/conditional-route/conditio
 import { DIVIDER_SCHEMA_TYPE } from '@/content/divider/divider';
 import { DividerContentBuilder } from '@/content/divider/divider-builder';
 import { DividerDescriptor } from '@/content/divider/divider-descriptor';
-import { DocumentContentBuilder } from '@/content/document/document-builder';
 import { DocumentViewContentBuilder } from '@/content/document-view/document-view-builder';
 import { DocumentViewDescriptor } from '@/content/document-view/document-view-descriptor';
+import { DocumentContentBuilder } from '@/content/document/document-builder';
 import { CarouselGroupLayout } from '@/content/group/carousel-group-layout';
 import { GridGroupLayout } from '@/content/group/grid-group-layout';
 import { GROUP_SCHEMA_TYPE } from '@/content/group/group';
@@ -31,19 +31,13 @@ import { VIDEO_PLAYER_SCHEMA_TYPE } from '@/content/video-player/video-player';
 import { VideoPlayerContentBuilder } from '@/content/video-player/video-player-builder';
 import { VideoPlayerDescriptor } from '@/content/video-player/video-player-descriptor';
 import { FeatureDescriptor } from '@vyuh/react-core';
-import {
-  ContentExtensionBuilder,
-  ContentExtensionDescriptor,
-} from '@vyuh/react-extension-content';
+import { ContentExtensionBuilder, ContentExtensionDescriptor } from '@vyuh/react-extension-content';
 import { Command } from 'lucide-react';
 import React from 'react';
 import { NavigateAction } from './action/navigate-action';
 import { OpenUrlAction } from './action/open-url-action';
 import { BooleanCondition } from './condition/boolean-condition';
-import {
-  API_CONTENT_SCHEMA_TYPE,
-  APIContentDescriptor,
-} from './content/api-content/api-content';
+import { API_CONTENT_SCHEMA_TYPE, APIContentDescriptor } from './content/api-content/api-content';
 import { APIContentBuilder } from './content/api-content/api-content-builder';
 import { DOCUMENT_VIEW_SCHEMA_TYPE } from './content/document-view/document-view';
 

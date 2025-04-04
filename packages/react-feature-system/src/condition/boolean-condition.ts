@@ -1,4 +1,4 @@
-import { ConditionConfiguration, executeCondition, TypeDescriptor } from '@vyuh/react-core';
+import { ConditionConfiguration, TypeDescriptor } from '@vyuh/react-core';
 
 /**
  * A simple boolean condition that returns a fixed value.

@@ -1,4 +1,8 @@
-import { ContentItem, LayoutConfiguration, TypeDescriptor } from '@vyuh/react-core';
+import {
+  ContentItem,
+  LayoutConfiguration,
+  TypeDescriptor,
+} from '@vyuh/react-core';
 
 /**
  * Descriptor for content types in the Vyuh system.

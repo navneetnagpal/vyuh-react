@@ -1,10 +1,4 @@
-import {
-  Condition,
-  executeCondition,
-  ObjectReference,
-  RouteBase,
-  useVyuhStore,
-} from '@vyuh/react-core';
+import { Condition, executeCondition, ObjectReference, RouteBase, useVyuhStore } from '@vyuh/react-core';
 
 /**
  * A case item that pairs a condition value with its corresponding route reference.

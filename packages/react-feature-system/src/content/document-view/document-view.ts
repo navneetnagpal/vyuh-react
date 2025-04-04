@@ -1,9 +1,4 @@
-import {
-  ContentItem,
-  ObjectReference,
-  SchemaItem,
-  TypeDescriptor,
-} from '@vyuh/react-core';
+import { ContentItem, ObjectReference, SchemaItem } from '@vyuh/react-core';
 
 /**
  * Schema type for DocumentView content

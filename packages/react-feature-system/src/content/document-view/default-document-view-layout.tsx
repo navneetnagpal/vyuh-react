@@ -1,17 +1,7 @@
-import {
-  ContentItem,
-  LayoutConfiguration,
-  TypeDescriptor,
-  useVyuh,
-  useVyuhStore,
-} from '@vyuh/react-core';
-import React from 'react';
-import {
-  DocumentView,
-  DOCUMENT_VIEW_SCHEMA_TYPE,
-  DocumentLoadStrategy,
-} from './document-view';
+import { ContentItem, LayoutConfiguration, TypeDescriptor, useVyuh, useVyuhStore } from '@vyuh/react-core';
 import { AsyncContentContainer } from '@vyuh/react-extension-content';
+import React from 'react';
+import { DOCUMENT_VIEW_SCHEMA_TYPE, DocumentLoadStrategy, DocumentView } from './document-view';
 
 /**
  * Default layout for DocumentView content items

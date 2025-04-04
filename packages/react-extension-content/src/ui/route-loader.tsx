@@ -1,6 +1,6 @@
 'use client';
 
-import { ContentItem, RouteBase, useVyuh } from '@vyuh/react-core';
+import { ContentItem, useVyuh } from '@vyuh/react-core';
 import React, { useCallback } from 'react';
 import { DocumentLoader } from './document-loader';
 
