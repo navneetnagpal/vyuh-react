@@ -42,7 +42,7 @@
     "@vyuh/sanity-schema-core": "^2.0.1",
     "@vyuh/sanity-schema-system": "^2.0.1",
     "eslint": "^9.23.0",
-    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react": "^7.37.5",
     "sanity": "^3.82.0",
     "tsup": "^8.4.0",
     "typescript": "^5.8.2"
