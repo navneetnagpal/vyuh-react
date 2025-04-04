@@ -70,7 +70,7 @@ export function RouteLoader({
 
   // Render the route content
   const renderContent = useCallback(
-    (route: ContentItem) => {
+    (route: ContentItem | ContentItem[] | undefined) => {
       return plugins.content.render(route);
     },
     [plugins.content],
