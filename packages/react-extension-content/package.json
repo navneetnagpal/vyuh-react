@@ -1,6 +1,6 @@
 {
   "name": "@vyuh/react-extension-content",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Content extension for the Vyuh Framework",
   "type": "module",
   "scripts": {
@@ -46,10 +46,11 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "tailwindcss": "^4.1.2",
     "tsup": "^8.4.0",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "postcss": "^8.5.3"
   },
   "dependencies": {
-    "@vyuh/react-core": "^0.4.1",
+    "@vyuh/react-core": "^0.4.2",
     "lucide-react": "^0.482.0",
     "rxjs": "^7.8.2"
   },

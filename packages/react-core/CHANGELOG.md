@@ -1,5 +1,11 @@
 # @vyuh/react-core
 
+## 0.4.2
+
+### Patch Changes
+
+- Fixing the build for including css
+
 ## 0.4.1
 
 ### Patch Changes

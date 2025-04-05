@@ -1,5 +1,13 @@
 # @vyuh/react-extension-content
 
+## 0.4.2
+
+### Patch Changes
+
+- Fixing the build for including css
+- Updated dependencies
+  - @vyuh/react-core@0.4.2
+
 ## 0.4.1
 
 ### Patch Changes
