@@ -1,6 +1,7 @@
 @import 'tailwindcss' source(none);
 @import '@vyuh/react-feature-marketing/styles.css';
 @import '@vyuh/react-feature-blog/styles.css';
+@import '@vyuh/react-feature-auth/styles.css';
 
 @source './';
 @source '../features/';

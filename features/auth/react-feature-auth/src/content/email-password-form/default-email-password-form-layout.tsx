@@ -32,10 +32,12 @@ export class DefaultEmailPasswordFormLayout extends LayoutConfiguration<EmailPas
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
       setError(null);
+      setLoading(true);
 
       try {
         if (content.actionType === AuthActionType.SignUp) {
@@ -61,23 +63,14 @@ export class DefaultEmailPasswordFormLayout extends LayoutConfiguration<EmailPas
         }
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Authentication failed');
+      } finally {
+        setLoading(false);
       }
     };
 
     return (
       <div className="card bg-base-100 mx-auto w-full max-w-md shadow-xl">
         <div className="card-body">
-          <h2 className="card-title justify-center text-2xl">
-            {content.actionType === AuthActionType.SignIn
-              ? 'Sign In'
-              : 'Sign Up'}
-          </h2>
-          <p className="mb-4 text-center opacity-70">
-            {content.actionType === AuthActionType.SignIn
-              ? 'Enter your credentials to sign in'
-              : 'Create a new account'}
-          </p>
-
           {error && content.showLoginError && (
             <div className="alert alert-error mb-4">
               <svg
@@ -152,10 +145,23 @@ export class DefaultEmailPasswordFormLayout extends LayoutConfiguration<EmailPas
                 </div>
               )}
 
-            <button type="submit" className="btn btn-primary w-full">
-              {content.actionType === AuthActionType.SignIn
-                ? 'Sign In'
-                : 'Sign Up'}
+            <button
+              type="submit"
+              className="btn btn-primary w-full"
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <span className="loading loading-spinner loading-sm"></span>
+                  {content.actionType === AuthActionType.SignIn
+                    ? 'Signing In...'
+                    : 'Signing Up...'}
+                </>
+              ) : (
+                content.actionType === AuthActionType.SignIn
+                  ? 'Sign In'
+                  : 'Sign Up'
+              )}
             </button>
           </form>
 
