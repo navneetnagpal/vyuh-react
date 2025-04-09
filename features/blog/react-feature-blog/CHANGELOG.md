@@ -1,5 +1,15 @@
 # @vyuh/react-feature-blog
 
+## 0.4.3
+
+### Patch Changes
+
+- Package updates and cleanups
+- Updated dependencies
+  - @vyuh/react-core@0.4.3
+  - @vyuh/react-extension-content@0.4.3
+  - @vyuh/react-feature-system@0.4.3
+
 ## 0.4.2
 
 ### Patch Changes

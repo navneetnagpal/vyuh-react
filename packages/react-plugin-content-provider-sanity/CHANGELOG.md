@@ -1,5 +1,13 @@
 # @vyuh/react-plugin-content-provider-sanity
 
+## 0.4.3
+
+### Patch Changes
+
+- Package updates and cleanups
+- Updated dependencies
+  - @vyuh/react-core@0.4.3
+
 ## 0.4.2
 
 ### Patch Changes
