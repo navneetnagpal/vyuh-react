@@ -1,5 +1,11 @@
 # @vyuh/sanity-schema-marketing
 
+## 0.5.0
+
+### Minor Changes
+
+- Added the auth plugin and the corresponding auth feature for UI
+
 ## 0.4.3
 
 ### Patch Changes
