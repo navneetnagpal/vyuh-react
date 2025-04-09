@@ -65,7 +65,14 @@ export function DocumentLoader<TContent extends ContentItem>({
       if (customRenderContent) {
         return customRenderContent(content);
       }
-      return plugins.content.render(content);
+
+      if (Array.isArray(content)) {
+        return content.map((item, index) => (
+          <div key={index}>{plugins.content.render(item)}</div>
+        ));
+      }
+
+      return null;
     },
     [plugins.content, customRenderContent],
   );
@@ -98,7 +105,7 @@ export function DocumentLoader<TContent extends ContentItem>({
 export function fetchSingleWithQuery<TContent extends ContentItem>(
   query: string,
   options?: {
-    queryParams?: Record<string, any>;
+    params?: Record<string, any>;
     live?: boolean;
   },
 ) {
@@ -113,12 +120,12 @@ export function fetchSingleWithQuery<TContent extends ContentItem>(
       }
 
       return liveProvider.fetchSingle<TContent>(query, {
-        params: options?.queryParams,
+        params: options?.params,
         includeDrafts: process.env.NODE_ENV === 'development',
       });
     } else {
       return plugins.content.provider.fetchSingle<TContent>(query, {
-        queryParams: options?.queryParams,
+        params: options?.params,
       });
     }
   };
@@ -130,7 +137,7 @@ export function fetchSingleWithQuery<TContent extends ContentItem>(
 export function fetchMultipleWithQuery<TContent extends ContentItem>(
   query: string,
   options?: {
-    queryParams?: Record<string, any>;
+    params?: Record<string, any>;
     live?: boolean;
   },
 ) {
@@ -145,12 +152,12 @@ export function fetchMultipleWithQuery<TContent extends ContentItem>(
       }
 
       return liveProvider.fetchMultiple<TContent>(query, {
-        params: options?.queryParams,
+        params: options?.params,
         includeDrafts: process.env.NODE_ENV === 'development',
       });
     } else {
       return plugins.content.provider.fetchMultiple<TContent>(query, {
-        queryParams: options?.queryParams,
+        params: options?.params,
       });
     }
   };

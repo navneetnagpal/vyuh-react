@@ -1,5 +1,12 @@
-import { FeatureDescriptor } from '@vyuh/sanity-schema-core';
-import { RouteDescriptor } from '@vyuh/sanity-schema-system';
+import {
+  BuiltContentSchemaBuilder,
+  DefaultFieldsModifier,
+  FeatureDescriptor,
+} from '@vyuh/sanity-schema-core';
+import {
+  DocumentViewDescriptor,
+  RouteDescriptor,
+} from '@vyuh/sanity-schema-system';
 import {
   BlogGroupDescriptor,
   BlogGroupSchemaBuilder,
@@ -9,6 +16,9 @@ import {
   BlogPostSchemaBuilder,
   BlogPostSummaryDescriptor,
 } from './content/blog-post-summary';
+import { blogAuthor } from './documents/blog-author';
+import { blogCategory } from './documents/blog-category';
+import { blogPost } from './documents/blog-post';
 
 export const blog = new FeatureDescriptor({
   name: 'blog',
@@ -16,6 +26,13 @@ export const blog = new FeatureDescriptor({
   description:
     'Schema for Blog components including blog posts, blog post summaries, and blog post groups',
   contents: [
+    new DocumentViewDescriptor({
+      documentTypes: [
+        { type: blogPost.name },
+        { type: blogCategory.name },
+        { type: blogAuthor.name },
+      ],
+    }),
     new BlogGroupDescriptor({
       layouts: [defaultBlogGroupLayout],
     }),
@@ -29,5 +46,17 @@ export const blog = new FeatureDescriptor({
   contentSchemaBuilders: [
     new BlogPostSchemaBuilder(),
     new BlogGroupSchemaBuilder(),
+    new BuiltContentSchemaBuilder(blogPost),
+    new BuiltContentSchemaBuilder(blogCategory),
+    new BuiltContentSchemaBuilder(blogAuthor),
+  ],
+  contentSchemaModifiers: [
+    new DefaultFieldsModifier({
+      excludedSchemaTypes: [
+        { type: blogPost.name },
+        { type: blogCategory.name },
+        { type: blogAuthor.name },
+      ],
+    }),
   ],
 });

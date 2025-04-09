@@ -1,5 +1,11 @@
-import { FeatureDescriptor } from '@vyuh/sanity-schema-core';
-import { RouteDescriptor } from '@vyuh/sanity-schema-system';
+import {
+  BuiltContentSchemaBuilder,
+  FeatureDescriptor,
+} from '@vyuh/sanity-schema-core';
+import {
+  DocumentDescriptor,
+  RouteDescriptor,
+} from '@vyuh/sanity-schema-system';
 import {
   BannerDescriptor,
   BannerSchemaBuilder,

@@ -1,7 +1,11 @@
 import { FileReference, ImageReference } from '@/content/reference';
 import { RouteBase } from '@/content/route-base';
 import { UNKNOWN_SCHEMA_TYPE } from '@/content/unknown';
-import { ContentProvider, FieldKey, LiveContentProvider } from '@/plugins/content/content-provider';
+import {
+  ContentProvider,
+  FieldKey,
+  LiveContentProvider,
+} from '@/plugins/content/content-provider';
 import { NoOpLiveContentProvider } from '@/plugins/content/noop-live-content-provider';
 
 /**
@@ -87,7 +91,7 @@ export class NoOpContentProvider extends ContentProvider {
    */
   async fetchById<T>(
     id: string,
-    options: {
+    options?: {
       useCache?: boolean;
     },
   ): Promise<T | undefined> {
@@ -100,8 +104,8 @@ export class NoOpContentProvider extends ContentProvider {
    */
   async fetchSingle<T>(
     query: string,
-    options: {
-      queryParams?: Record<string, any>;
+    options?: {
+      params?: Record<string, any>;
       useCache?: boolean;
     },
   ): Promise<T | undefined> {
@@ -114,8 +118,8 @@ export class NoOpContentProvider extends ContentProvider {
    */
   async fetchMultiple<T>(
     query: string,
-    options: {
-      queryParams?: Record<string, any>;
+    options?: {
+      params?: Record<string, any>;
       useCache?: boolean;
     },
   ): Promise<T[] | undefined> {

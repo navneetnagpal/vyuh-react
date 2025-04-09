@@ -1,7 +1,11 @@
 import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
 import { AsyncContentContainer } from '@vyuh/react-extension-content';
 import React from 'react';
-import { VIDEO_PLAYER_SCHEMA_TYPE, VideoLinkType, VideoPlayer } from './video-player';
+import {
+  VIDEO_PLAYER_SCHEMA_TYPE,
+  VideoLinkType,
+  VideoPlayer,
+} from './video-player';
 
 /**
  * Default layout for video player content.
@@ -67,23 +71,26 @@ const VideoPlayerComponent: React.FC<VideoPlayerComponentProps> = ({
   };
 
   // Function to render the video with the loaded URL
-  const renderVideo = (url: string) => {
+  const renderVideo = (url?: string | string[]) => {
     return (
-      <div className="vfs:w-full">
-        {content.title && (
-          <div className="vfs:mb-2 vfs:text-lg vfs:font-medium">
-            {content.title}
+      url &&
+      !Array.isArray(url) && (
+        <div className="vfs:w-full">
+          {content.title && (
+            <div className="vfs:mb-2 vfs:text-lg vfs:font-medium">
+              {content.title}
+            </div>
+          )}
+          <div className="vfs:relative vfs:overflow-hidden vfs:rounded-lg">
+            <VideoElement
+              url={url}
+              loop={content.loop}
+              muted={content.muted}
+              autoplay={content.autoplay}
+            />
           </div>
-        )}
-        <div className="vfs:relative vfs:overflow-hidden vfs:rounded-lg">
-          <VideoElement
-            url={url}
-            loop={content.loop}
-            muted={content.muted}
-            autoplay={content.autoplay}
-          />
         </div>
-      </div>
+      )
     );
   };
 

@@ -50,7 +50,7 @@ export abstract class ContentProvider {
    */
   abstract fetchById<T>(
     id: string,
-    options: {
+    options?: {
       useCache?: boolean;
     },
   ): Promise<T | undefined>;
@@ -60,7 +60,7 @@ export abstract class ContentProvider {
    */
   abstract fetchSingle<T>(
     query: string,
-    options: {
+    options?: {
       params?: Record<string, any>;
       useCache?: boolean;
     },
@@ -71,7 +71,7 @@ export abstract class ContentProvider {
    */
   abstract fetchMultiple<T>(
     query: string,
-    options: {
+    options?: {
       params?: Record<string, any>;
       useCache?: boolean;
     },
@@ -213,7 +213,7 @@ export class NoOpLiveContentProvider implements LiveContentProvider {
 
   fetchById<T>(
     id: string,
-    options: {
+    options?: {
       includeDrafts?: boolean;
     },
   ): Observable<T | undefined> {
@@ -222,8 +222,8 @@ export class NoOpLiveContentProvider implements LiveContentProvider {
 
   fetchSingle<T>(
     query: string,
-    options: {
-      queryParams?: Record<string, any>;
+    options?: {
+      params?: Record<string, any>;
       includeDrafts?: boolean;
     },
   ): Observable<T | undefined> {
@@ -232,8 +232,8 @@ export class NoOpLiveContentProvider implements LiveContentProvider {
 
   fetchMultiple<T>(
     query: string,
-    options: {
-      queryParams?: Record<string, any>;
+    options?: {
+      params?: Record<string, any>;
       includeDrafts?: boolean;
     },
   ): Observable<T[] | undefined> {

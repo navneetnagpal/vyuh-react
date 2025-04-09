@@ -33,6 +33,7 @@
   "dependencies": {
     "@vyuh/react-core": "^0.4.2",
     "@vyuh/react-extension-content": "^0.4.2",
+    "@vyuh/react-feature-system": "^0.4.2",
     "lucide-react": "^0.482.0"
   },
   "devDependencies": {

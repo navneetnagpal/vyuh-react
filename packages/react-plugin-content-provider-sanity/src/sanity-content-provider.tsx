@@ -90,13 +90,13 @@ export class SanityContentProvider extends ContentProvider {
 
   async fetchMultiple<T>(
     query: string,
-    options: {
-      queryParams?: Record<string, any>;
+    options?: {
+      params?: Record<string, any>;
       useCache?: boolean;
     },
   ): Promise<T[] | undefined> {
     const results = await resolveQuery<T[]>(this.sanityInstance, query, {
-      params: options.queryParams,
+      params: options?.params,
       useCdn: this.config.useCdn,
       perspective: this.config.perspective,
     });

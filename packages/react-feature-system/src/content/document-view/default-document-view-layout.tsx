@@ -1,7 +1,17 @@
-import { ContentItem, LayoutConfiguration, TypeDescriptor, useVyuh, useVyuhStore } from '@vyuh/react-core';
+import {
+  ContentItem,
+  LayoutConfiguration,
+  TypeDescriptor,
+  useVyuh,
+  useVyuhStore,
+} from '@vyuh/react-core';
 import { AsyncContentContainer } from '@vyuh/react-extension-content';
 import React from 'react';
-import { DOCUMENT_VIEW_SCHEMA_TYPE, DocumentLoadStrategy, DocumentView } from './document-view';
+import {
+  DOCUMENT_VIEW_SCHEMA_TYPE,
+  DocumentLoadStrategy,
+  DocumentView,
+} from './document-view';
 
 /**
  * Default layout for DocumentView content items
@@ -41,32 +51,45 @@ const DocumentViewComponent: React.FC<DocumentViewComponentProps> = ({
   const { plugins } = useVyuh();
 
   // Function to fetch document data
-  const fetchContent = async () => {
+  const fetchContent: () => Promise<
+    ContentItem | ContentItem[] | undefined
+  > = async () => {
     switch (content.loadStrategy) {
       case DocumentLoadStrategy.REFERENCE:
-        const ref = plugins.content.provider.reference(content.reference);
+        const ref = content.reference
+          ? plugins.content.provider.reference(content.reference)
+          : undefined;
+
         const documentId = ref;
         if (!documentId) {
-          throw new Error(`No valid Document ID set for ${content.schemaType}`);
+          return Promise.reject(
+            new Error(`No valid Document ID set for ${content.schemaType}`),
+          );
         }
-        return await plugins.content.provider.fetchById(documentId);
+
+        return plugins.content.provider.fetchById<DocumentView>(documentId);
 
       case DocumentLoadStrategy.QUERY:
         const query = content.query?.buildQuery({});
         if (!query) {
-          throw new Error(
-            `Document query is null for document type: ${content.schemaType}`,
+          return Promise.reject(
+            new Error(
+              `Document query is null for document type: ${content.schemaType}`,
+            ),
           );
         }
-        return await plugins.content.provider.fetchSingle(query);
+
+        return plugins.content.provider.fetchSingle(query);
 
       default:
-        throw new Error(`Unsupported load strategy: ${content.loadStrategy}`);
+        return Promise.reject(
+          new Error(`Unsupported load strategy: ${content.loadStrategy}`),
+        );
     }
   };
 
   // Function to render the document content
-  const renderContent = (document?: ContentItem) => {
+  const renderContent = (document?: ContentItem | ContentItem[]) => {
     const { plugins } = useVyuhStore.getState();
 
     if (!document) {

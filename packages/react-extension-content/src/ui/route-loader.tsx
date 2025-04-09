@@ -71,7 +71,7 @@ export function RouteLoader({
   // Render the route content
   const renderContent = useCallback(
     (route: ContentItem | ContentItem[] | undefined) => {
-      return plugins.content.render(route);
+      return plugins.content.render(route as ContentItem);
     },
     [plugins.content],
   );
