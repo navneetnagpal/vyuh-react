@@ -36,14 +36,14 @@
   "devDependencies": {
     "@types/node": "^22.14.0",
     "@types/react": "^19.1.0",
-    "@types/react-dom": "^19.1.1",
-    "@typescript-eslint/eslint-plugin": "^8.29.0",
-    "@typescript-eslint/parser": "^8.29.0",
+    "@types/react-dom": "^19.1.2",
+    "@typescript-eslint/eslint-plugin": "^8.29.1",
+    "@typescript-eslint/parser": "^8.29.1",
     "@vyuh/sanity-schema-core": "^2.0.1",
     "@vyuh/sanity-schema-system": "^2.0.1",
     "eslint": "^9.24.0",
     "eslint-plugin-react": "^7.37.5",
-    "sanity": "^3.82.0",
+    "sanity": "^3.83.0",
     "tsup": "^8.4.0",
     "typescript": "^5.8.3"
   },
