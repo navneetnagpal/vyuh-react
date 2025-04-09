@@ -27,6 +27,14 @@
 | [![@vyuh/react-feature-system](https://img.shields.io/npm/v/%40vyuh%2Freact-feature-system.svg?logo=npm&label=%40vyuh%2Freact-feature-system&style=for-the-badge&color=cb3837)](https://www.npmjs.com/package/@vyuh/react-feature-system)                                                                 | System-level features and components |
 | [![@vyuh/react-plugin-content-provider-sanity](https://img.shields.io/npm/v/%40vyuh%2Freact-plugin-content-provider-sanity.svg?logo=npm&label=%40vyuh%2Freact-plugin-content-provider-sanity&style=for-the-badge&color=cb3837)](https://www.npmjs.com/package/@vyuh/react-plugin-content-provider-sanity) | Sanity.io content provider           |
 
+## Feature Packages
+
+| Package                                                                                                                                                                                                                                                                                                   | Description                          |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| [![@vyuh/react-feature-marketing](https://img.shields.io/npm/v/%40vyuh%2Freact-feature-marketing.svg?logo=npm&label=%40vyuh%2Freact-feature-marketing&style=for-the-badge&color=cb3837)](https://www.npmjs.com/package/@vyuh/react-feature-marketing)                                                     | Marketing components and layouts     |
+| [![@vyuh/react-feature-blog](https://img.shields.io/npm/v/%40vyuh%2Freact-feature-blog.svg?logo=npm&label=%40vyuh%2Freact-feature-blog&style=for-the-badge&color=cb3837)](https://www.npmjs.com/package/@vyuh/react-feature-blog)                                                                         | Blog components and content types    |
+| [![@vyuh/react-feature-auth](https://img.shields.io/npm/v/%40vyuh%2Freact-feature-auth.svg?logo=npm&label=%40vyuh%2Freact-feature-auth&style=for-the-badge&color=cb3837)](https://www.npmjs.com/package/@vyuh/react-feature-auth)                                                                         | Authentication components and flows  |
+
 ## Hi there! 👋
 
 **Vyuh for React** brings the powerful architecture of the Vyuh Flutter
