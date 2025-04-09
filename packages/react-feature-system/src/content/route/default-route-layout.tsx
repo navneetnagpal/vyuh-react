@@ -55,9 +55,14 @@ function DefaultRouteComponent({
       {route.regions.map((region) => (
         <div key={region.identifier} className="vfs:mb-8">
           <div className={`vfs:flex vfs:flex-col ${gapClass}`}>
-            {region.items.map((item, itemIndex) => (
-              <div key={itemIndex}>{plugins.content.render(item)}</div>
-            ))}
+            {region.items.map((item, itemIndex) => {
+              const type = plugins.content.provider.schemaType(item);
+              return (
+                <div key={`${type}-${itemIndex}`}>
+                  {plugins.content.render(item)}
+                </div>
+              );
+            })}
           </div>
         </div>
       ))}
