@@ -1,4 +1,9 @@
-import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
+import {
+  executeAction,
+  LayoutConfiguration,
+  TypeDescriptor,
+  useVyuh,
+} from '@vyuh/react-core';
 import React, { useState } from 'react';
 import { PhoneOtpForm, PHONE_OTP_FORM_SCHEMA_TYPE } from './phone-otp-form';
 
@@ -17,143 +22,167 @@ export class DefaultPhoneOtpFormLayout extends LayoutConfiguration<PhoneOtpForm>
   }
 
   render(content: PhoneOtpForm): React.ReactNode {
-  const { plugins } = useVyuh();
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [otp, setOtp] = useState('');
-  const [error, setError] = useState<string | null>(null);
-  const [otpSent, setOtpSent] = useState(false);
-  const [loading, setLoading] = useState(false);
+    const { plugins } = useVyuh();
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [otp, setOtp] = useState('');
+    const [error, setError] = useState<string | null>(null);
+    const [otpSent, setOtpSent] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-  const handleSendOtp = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    setLoading(true);
+    const handleSendOtp = async (e: React.FormEvent) => {
+      e.preventDefault();
+      setError(null);
+      setLoading(true);
 
-    try {
-      await plugins.auth.sendOtp({
-        phoneNumber,
-      });
-      setOtpSent(true);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to send OTP');
-    } finally {
-      setLoading(false);
-    }
-  };
+      try {
+        await plugins.auth.sendOtp({
+          phoneNumber,
+        });
+        setOtpSent(true);
 
-  const handleVerifyOtp = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    setLoading(true);
-
-    try {
-      await plugins.auth.loginWithPhoneOtp({
-        phoneNumber,
-        otp,
-      });
-
-      // If action is provided, execute it
-      if (content.onSuccess) {
-        plugins.content.executeAction(content.onSuccess);
+        // Execute getOtpAction if provided
+        if (content.getOtpAction) {
+          executeAction(content.getOtpAction);
+        }
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to send OTP');
+      } finally {
+        setLoading(false);
       }
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Invalid OTP');
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
 
-  return (
-    <div className="w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-2 text-center">{content.title}</h2>
-      {content.description && (
-        <p className="text-gray-600 mb-6 text-center">{content.description}</p>
-      )}
+    const handleVerifyOtp = async (e: React.FormEvent) => {
+      e.preventDefault();
+      setError(null);
+      setLoading(true);
 
-      {error && content.showLoginError && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-          {error}
+      try {
+        await plugins.auth.loginWithPhoneOtp({
+          phoneNumber,
+          otp,
+        });
+
+        // If action is provided, execute it
+        if (content.action) {
+          executeAction(content.action);
+        }
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Invalid OTP');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    return (
+      <div className="card w-full max-w-md mx-auto bg-base-100 shadow-xl">
+        <div className="card-body">
+          <h2 className="card-title text-2xl justify-center">Phone Verification</h2>
+          <p className="text-center opacity-70 mb-4">
+            Verify your phone number with a one-time code
+          </p>
+
+          {error && content.showLoginError && (
+            <div className="alert alert-error mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+              <span>{error}</span>
+            </div>
+          )}
+
+          {!otpSent ? (
+            <form onSubmit={handleSendOtp}>
+              <div className="form-control mb-6">
+                <label className="label">
+                  <span className="label-text">Phone Number</span>
+                </label>
+                <input
+                  id="phoneNumber"
+                  type="tel"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  className="input input-bordered w-full"
+                  placeholder="+1 (555) 123-4567"
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="btn btn-primary w-full"
+              >
+                {loading ? (
+                  <>
+                    <span className="loading loading-spinner loading-sm"></span>
+                    Sending...
+                  </>
+                ) : (
+                  'Send Verification Code'
+                )}
+              </button>
+            </form>
+          ) : (
+            <form onSubmit={handleVerifyOtp}>
+              <div className="form-control mb-6">
+                <label className="label">
+                  <span className="label-text">Verification Code</span>
+                </label>
+                <input
+                  id="otp"
+                  type="text"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                  className="input input-bordered w-full"
+                  placeholder="Enter the code sent to your phone"
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="btn btn-primary w-full"
+              >
+                {loading ? (
+                  <>
+                    <span className="loading loading-spinner loading-sm"></span>
+                    Verifying...
+                  </>
+                ) : (
+                  'Verify'
+                )}
+              </button>
+
+              <div className="mt-4 text-center">
+                <button
+                  type="button"
+                  onClick={() => setOtpSent(false)}
+                  className="btn btn-link"
+                >
+                  Change phone number
+                </button>
+              </div>
+            </form>
+          )}
+
+          {content.signupAction && (
+            <div className="divider">OR</div>
+          )}
+
+          {content.signupAction && (
+            <div className="text-center">
+              <button
+                type="button"
+                className="btn btn-link"
+                onClick={() => {
+                  executeAction(content.signupAction!);
+                }}
+              >
+                Don't have an account? Sign up
+              </button>
+            </div>
+          )}
         </div>
-      )}
-
-      {!otpSent ? (
-        <form onSubmit={handleSendOtp}>
-          <div className="mb-4">
-            <label htmlFor="phoneNumber" className="block text-gray-700 text-sm font-bold mb-2">
-              Phone Number
-            </label>
-            <input
-              id="phoneNumber"
-              type="tel"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="+1 (555) 123-4567"
-              required
-            />
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
-          >
-            {loading ? 'Sending...' : content.sendOtpButtonText}
-          </button>
-        </form>
-      ) : (
-        <form onSubmit={handleVerifyOtp}>
-          <div className="mb-4">
-            <label htmlFor="otp" className="block text-gray-700 text-sm font-bold mb-2">
-              Verification Code
-            </label>
-            <input
-              id="otp"
-              type="text"
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter the code sent to your phone"
-              required
-            />
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
-          >
-            {loading ? 'Verifying...' : content.verifyOtpButtonText}
-          </button>
-
-          <div className="mt-4 text-center">
-            <button
-              type="button"
-              onClick={() => setOtpSent(false)}
-              className="text-blue-500 hover:text-blue-700"
-            >
-              Change phone number
-            </button>
-          </div>
-        </form>
-      )}
-
-      {content.alternateAuthLink && (
-        <div className="mt-4 text-center">
-          <button
-            type="button"
-            className="text-blue-500 hover:text-blue-700"
-            onClick={() => {
-              if (content.alternateAuthLink?.action) {
-                plugins.content.executeAction(content.alternateAuthLink.action);
-              }
-            }}
-          >
-            {content.alternateAuthLink.text}
-          </button>
-        </div>
-      )}
-    </div>
-  );
+      </div>
+    );
   }
 }

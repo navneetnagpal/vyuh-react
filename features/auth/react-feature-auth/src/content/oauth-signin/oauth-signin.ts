@@ -7,24 +7,9 @@ export const OAUTH_SIGNIN_SCHEMA_TYPE = 'auth.oauthSignIn';
  */
 export interface OAuthSignIn extends ContentItem {
   /**
-   * The title displayed at the top of the component
+   * List of OAuth authentication types to display
    */
-  readonly title?: string;
-
-  /**
-   * Optional subtitle or description text
-   */
-  readonly description?: string;
-
-  /**
-   * List of OAuth providers to display
-   */
-  readonly providers: Array<{
-    type: OAuthType;
-    label?: string;
-    icon?: string;
-    customIcon?: string;
-  }>;
+  readonly authTypes: string[];
 
   /**
    * Whether to show error messages inline
@@ -32,12 +17,7 @@ export interface OAuthSignIn extends ContentItem {
   readonly showLoginError?: boolean;
 
   /**
-   * Action to perform on successful authentication
+   * Action to invoke after a successful sign in
    */
-  readonly onSuccess?: Action;
-
-  /**
-   * Optional divider text (e.g., "OR")
-   */
-  readonly dividerText?: string;
+  readonly action?: Action;
 }

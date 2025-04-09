@@ -1,4 +1,4 @@
-import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
+import { executeAction, LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
 import React, { useState } from 'react';
 import { ForgotPasswordForm, FORGOT_PASSWORD_FORM_SCHEMA_TYPE } from './forgot-password-form';
 
@@ -35,8 +35,8 @@ export class DefaultForgotPasswordFormLayout extends LayoutConfiguration<ForgotP
       setSuccess(true);
 
       // If action is provided, execute it
-      if (content.onSubmit) {
-        plugins.content.executeAction(content.onSubmit);
+      if (content.action) {
+        executeAction(content.action);
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to send reset email');
@@ -44,62 +44,68 @@ export class DefaultForgotPasswordFormLayout extends LayoutConfiguration<ForgotP
   };
 
   return (
-    <div className="w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-2 text-center">{content.title}</h2>
-      {content.description && (
-        <p className="text-gray-600 mb-6 text-center">{content.description}</p>
-      )}
+    <div className="card w-full max-w-md mx-auto bg-base-100 shadow-xl">
+      <div className="card-body">
+        <h2 className="card-title text-2xl justify-center">Forgot Password</h2>
+        <p className="text-center opacity-70 mb-4">
+          Enter your email to receive a password reset link
+        </p>
 
-      {error && content.showLoginError && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-          {error}
-        </div>
-      )}
+        {error && content.showLoginError && (
+          <div className="alert alert-error mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span>{error}</span>
+          </div>
+        )}
 
-      {success && (
-        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
-          Password reset email sent. Please check your inbox.
-        </div>
-      )}
+        {success && (
+          <div className="alert alert-success mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span>Password reset email sent. Please check your inbox.</span>
+          </div>
+        )}
 
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-        </div>
+        <form onSubmit={handleSubmit}>
+          <div className="form-control mb-6">
+            <label className="label">
+              <span className="label-text">Email</span>
+            </label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="input input-bordered w-full"
+              required
+            />
+          </div>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          {content.submitButtonText}
-        </button>
-      </form>
-
-      {content.backToLoginLink && (
-        <div className="mt-4 text-center">
           <button
-            type="button"
-            className="text-blue-500 hover:text-blue-700"
-            onClick={() => {
-              if (content.backToLoginLink?.action) {
-                plugins.content.executeAction(content.backToLoginLink.action);
-              }
-            }}
+            type="submit"
+            className="btn btn-primary w-full"
           >
-            {content.backToLoginLink.text}
+            Reset Password
           </button>
-        </div>
-      )}
+        </form>
+
+        {content.returnAction && (
+          <div className="divider"></div>
+        )}
+
+        {content.returnAction && (
+          <div className="text-center">
+            <button
+              type="button"
+              className="btn btn-link"
+              onClick={() => {
+                executeAction(content.returnAction!);
+              }}
+            >
+              Back to Login
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
   }

@@ -1,6 +1,6 @@
-import { LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
+import { executeAction, LayoutConfiguration, TypeDescriptor, useVyuh } from '@vyuh/react-core';
 import React from 'react';
-import { HintActionText, HINT_ACTION_TEXT_SCHEMA_TYPE } from './hint-action-text';
+import { HintActionText, HINT_ACTION_TEXT_SCHEMA_TYPE, TextAlignment } from './hint-action-text';
 
 /**
  * Default layout for the Hint Action Text
@@ -21,19 +21,34 @@ export class DefaultHintActionTextLayout extends LayoutConfiguration<HintActionT
 
   const handleActionClick = () => {
     if (content.action) {
-      plugins.content.executeAction(content.action);
+      executeAction(content.action);
+    }
+  };
+
+  // Determine text alignment class
+  const getAlignmentClass = () => {
+    switch (content.alignment) {
+      case TextAlignment.Start:
+        return 'text-start';
+      case TextAlignment.End:
+        return 'text-end';
+      case TextAlignment.Center:
+      default:
+        return 'text-center';
     }
   };
 
   return (
-    <div className="text-center my-4">
-      <span className="text-gray-600">{content.hintText}</span>{' '}
-      <button
-        onClick={handleActionClick}
-        className="text-blue-500 hover:text-blue-700 font-medium"
-      >
-        {content.actionText}
-      </button>
+    <div className={`${getAlignmentClass()} my-4`}>
+      <span className="opacity-70">{content.hint}</span>{' '}
+      {content.action && (
+        <button
+          onClick={handleActionClick}
+          className="btn btn-link btn-sm p-0 h-auto min-h-0"
+        >
+          {content.action.title || 'Action'}
+        </button>
+      )}
     </div>
   );
   }

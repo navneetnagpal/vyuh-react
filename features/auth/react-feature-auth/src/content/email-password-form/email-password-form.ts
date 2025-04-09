@@ -3,8 +3,16 @@ import { Action, ContentItem } from '@vyuh/react-core';
 export const EMAIL_PASSWORD_FORM_SCHEMA_TYPE = 'auth.emailPasswordForm';
 
 /**
+ * Auth action type for email/password form
+ */
+export enum AuthActionType {
+  SignIn = 'signIn',
+  SignUp = 'signUp',
+}
+
+/**
  * Email/Password form content item for login and registration
- * 
+ *
  * This component provides a form for users to:
  * - Login with email and password
  * - Register with email and password
@@ -12,29 +20,14 @@ export const EMAIL_PASSWORD_FORM_SCHEMA_TYPE = 'auth.emailPasswordForm';
  */
 export interface EmailPasswordForm extends ContentItem {
   /**
-   * The title displayed at the top of the form
+   * The type of authentication action to perform
    */
-  readonly title: string;
-
-  /**
-   * Optional subtitle or description text
-   */
-  readonly description?: string;
-
-  /**
-   * Whether this form is for registration (true) or login (false)
-   */
-  readonly isRegistration: boolean;
-
-  /**
-   * The text to display on the submit button
-   */
-  readonly submitButtonText: string;
+  readonly actionType: AuthActionType;
 
   /**
    * Whether to show the password visibility toggle
    */
-  readonly showPasswordToggle?: boolean;
+  readonly showPasswordVisibilityToggle?: boolean;
 
   /**
    * Whether to show error messages inline
@@ -42,23 +35,25 @@ export interface EmailPasswordForm extends ContentItem {
   readonly showLoginError?: boolean;
 
   /**
-   * Action to perform on successful form submission
+   * Action to invoke after signing in or after registering a new user
    */
-  readonly onSubmit?: Action;
+  readonly action?: Action;
 
   /**
-   * Optional link to the alternate form (login/register)
+   * Action to invoke when user requests to reset their password
+   * Only applicable when actionType is SignIn
    */
-  readonly alternateFormLink?: {
-    text: string;
-    action?: Action;
-  };
+  readonly forgotPasswordAction?: Action;
 
   /**
-   * Optional link to the forgot password form
+   * Action to invoke when user wants to sign up for a new account
+   * Only applicable when actionType is SignIn
    */
-  readonly forgotPasswordLink?: {
-    text: string;
-    action?: Action;
-  };
+  readonly signupAction?: Action;
+
+  /**
+   * Action to invoke when user wants to login to an existing account
+   * Only applicable when actionType is SignUp
+   */
+  readonly loginAction?: Action;
 }
