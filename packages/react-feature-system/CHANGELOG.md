@@ -1,5 +1,13 @@
 # @vyuh/react-feature-system
 
+## 0.5.1
+
+### Patch Changes
+
+- Fixing the use of keys in rendering the route items
+  - @vyuh/react-core@0.5.1
+  - @vyuh/react-extension-content@0.5.1
+
 ## 0.5.0
 
 ### Minor Changes
