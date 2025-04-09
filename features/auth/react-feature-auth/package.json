@@ -1,0 +1,79 @@
+{
+  "name": "@vyuh/react-feature-auth",
+  "version": "0.4.3",
+  "description": "The Authentication feature package for the Vyuh React framework",
+  "type": "module",
+  "scripts": {
+    "build": "NODE_ENV=production tsup",
+    "lint": "eslint \"src/**/*.ts*\"",
+    "lint:fix": "eslint \"src/**/*.ts*\" --fix"
+  },
+  "keywords": [
+    "vyuh",
+    "react",
+    "feature",
+    "auth",
+    "authentication"
+  ],
+  "homepage": "https://vyuh.tech",
+  "bugs": {
+    "url": "https://github.com/vyuh-tech/vyuh/issues"
+  },
+  "packageManager": "pnpm@10.6.3",
+  "contributors": [
+    {
+      "name": "Pavan Podila",
+      "email": "pavan@vyuh.tech",
+      "url": "https://github.com/pavanpodila"
+    }
+  ],
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "dependencies": {
+    "@vyuh/react-core": "^0.4.3",
+    "@vyuh/react-extension-content": "^0.4.3",
+    "@vyuh/react-feature-system": "^0.4.3",
+    "lucide-react": "^0.482.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.3",
+    "@tailwindcss/postcss": "^4.1.3",
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.2",
+    "@typescript-eslint/eslint-plugin": "^8.29.1",
+    "@typescript-eslint/parser": "^8.29.1",
+    "clsx": "^2.1.1",
+    "daisyui": "^5.0.17",
+    "eslint": "^9.24.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "react-icons": "^5.5.0",
+    "tailwind-merge": "^3.2.0",
+    "tailwindcss": "^4.1.3",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.3"
+  },
+  "files": [
+    "*.md",
+    "src/styles.css",
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./src/index.ts"
+    },
+    "./styles.css": "./src/styles.css"
+  },
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      }
+    }
+  }
+}

@@ -1,0 +1,97 @@
+/* Auth Feature Styles */
+
+/* Email/Password Form */
+.auth-form-container {
+  @apply w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-md;
+}
+
+.auth-form-title {
+  @apply text-2xl font-bold mb-2 text-center;
+}
+
+.auth-form-description {
+  @apply text-gray-600 mb-6 text-center;
+}
+
+.auth-form-error {
+  @apply bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4;
+}
+
+.auth-form-success {
+  @apply bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4;
+}
+
+.auth-form-input {
+  @apply w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+.auth-form-label {
+  @apply block text-gray-700 text-sm font-bold mb-2;
+}
+
+.auth-form-button-primary {
+  @apply w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+.auth-form-button-secondary {
+  @apply w-full bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-gray-500;
+}
+
+.auth-form-link {
+  @apply text-blue-500 hover:text-blue-700;
+}
+
+/* Profile Card */
+.profile-card-container {
+  @apply w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-md;
+}
+
+.profile-card-avatar {
+  @apply w-24 h-24 rounded-full object-cover;
+}
+
+.profile-card-avatar-placeholder {
+  @apply w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center;
+}
+
+.profile-card-name {
+  @apply text-xl font-semibold;
+}
+
+.profile-card-info {
+  @apply text-gray-600 mt-1;
+}
+
+.profile-card-timestamp {
+  @apply text-gray-500 text-sm mt-2;
+}
+
+/* OAuth Sign-in */
+.oauth-button {
+  @apply w-full font-semibold py-2 px-4 border border-gray-300 rounded-lg shadow-sm flex items-center justify-center;
+}
+
+.oauth-divider {
+  @apply relative flex items-center my-4;
+}
+
+.oauth-divider-line {
+  @apply flex-grow border-t border-gray-300;
+}
+
+.oauth-divider-text {
+  @apply flex-shrink mx-4 text-gray-600;
+}
+
+/* Hint Action Text */
+.hint-action-container {
+  @apply text-center my-4;
+}
+
+.hint-text {
+  @apply text-gray-600;
+}
+
+.action-text {
+  @apply text-blue-500 hover:text-blue-700 font-medium;
+}

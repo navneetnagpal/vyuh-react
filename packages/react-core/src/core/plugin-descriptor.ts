@@ -1,4 +1,6 @@
 import { Plugin } from '@/core/plugin';
+import { AuthPlugin } from '@/plugins/auth/auth-plugin';
+import { DefaultAuthPlugin } from '@/plugins/auth/default-auth-plugin';
 import { ContentPlugin } from '@/plugins/content/content-plugin';
 import { NoOpContentPlugin } from '@/plugins/content/noop-content-plugin';
 import { DefaultEventPlugin } from '@/plugins/event/default-event-plugin';
@@ -16,37 +18,37 @@ export class PluginDescriptor {
   readonly telemetry: TelemetryPlugin;
   readonly event: EventPlugin;
   readonly navigation: NavigationPlugin;
+  readonly auth: AuthPlugin;
 
   constructor(props: Partial<PluginDescriptor> = {}) {
     this.content = props.content ?? PluginDescriptor.system.content;
     this.telemetry = props.telemetry ?? PluginDescriptor.system.telemetry;
     this.event = props.event ?? PluginDescriptor.system.event;
     this.navigation = props.navigation ?? PluginDescriptor.system.navigation;
+    this.auth = props.auth ?? PluginDescriptor.system.auth;
   }
 
   /**
    * Get all plugins as an array
    */
   get plugins(): Plugin[] {
-    return [this.content, this.telemetry, this.event];
+    return [
+      this.content,
+      this.telemetry,
+      this.event,
+      this.navigation,
+      this.auth,
+    ];
   }
 
   /**
-   * Get a plugin by type
+   * System default plugins
    */
-  get<T extends Plugin>(type: new (...args: any[]) => T): T | undefined {
-    return this.plugins.find((plugin) => plugin instanceof type) as
-      | T
-      | undefined;
-  }
-
-  /**
-   * Default system plugins
-   */
-  static readonly system = new PluginDescriptor({
+  static readonly system = {
     content: new NoOpContentPlugin(),
     telemetry: new DefaultTelemetryPlugin(),
     event: new DefaultEventPlugin(),
     navigation: new NoOpNavigationPlugin(),
-  });
+    auth: new DefaultAuthPlugin(),
+  };
 }

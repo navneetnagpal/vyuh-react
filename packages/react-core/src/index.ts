@@ -15,6 +15,9 @@ export * from './plugins/telemetry/default-telemetry-plugin';
 export * from './plugins/telemetry/telemetry-provider';
 export * from './plugins/telemetry/providers/console-provider';
 export * from './plugins/navigation/navigation-plugin';
+export * from './plugins/auth/auth-plugin';
+export * from './plugins/auth/default-auth-plugin';
+export * from './plugins/auth/user';
 
 // Content Plugin
 export * from './plugins/content/content-plugin';

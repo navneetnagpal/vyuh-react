@@ -6,6 +6,7 @@ import { misc } from '@/features/misc-feature';
 import { NextNavigationPlugin } from '@/plugins/next-navigation-plugin';
 import { PluginDescriptor, VyuhProvider } from '@vyuh/react-core';
 import { DefaultContentPlugin } from '@vyuh/react-extension-content';
+import { auth } from '@vyuh/react-feature-auth';
 import { blog } from '@vyuh/react-feature-blog';
 import { marketing } from '@vyuh/react-feature-marketing';
 
@@ -32,7 +33,7 @@ const plugins = new PluginDescriptor({
  * Feature configuration
  * Returns all features used in the application
  */
-const features = () => [system, misc, marketing, blog];
+const features = () => [system, misc, marketing, blog, auth];
 
 export default function ClientApp({ children }: { children: ReactNode }) {
   return (

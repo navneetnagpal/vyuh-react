@@ -1,4 +1,5 @@
 import { vyuh } from '@vyuh/sanity-plugin-structure';
+import { auth } from '@vyuh/sanity-schema-auth';
 import { blog } from '@vyuh/sanity-schema-blog';
 import { marketing } from '@vyuh/sanity-schema-marketing';
 import { system } from '@vyuh/sanity-schema-system';
@@ -15,7 +16,7 @@ export default defineConfig({
   plugins: [
     // @ts-ignore
     vyuh({
-      features: [system, misc, marketing, blog],
+      features: [system, misc, marketing, blog, auth],
     }),
   ],
 });
