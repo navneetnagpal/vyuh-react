@@ -75,7 +75,7 @@ export class AccordionSchemaBuilder extends ContentSchemaBuilder {
     fields: [
       defineField({
         name: 'header',
-        title: 'Title',
+        title: 'Header',
         type: 'string',
         description: 'The main header for the Accordion section',
         validation: (Rule) => Rule.required(),
@@ -91,13 +91,13 @@ export class AccordionSchemaBuilder extends ContentSchemaBuilder {
             fields: [
               defineField({
                 name: 'header',
-                title: 'Plan Name',
+                title: 'Header',
                 type: 'string',
                 validation: (Rule) => Rule.required(),
               }),
               defineField({
                 name: 'description',
-                title: 'Plan Description',
+                title: 'Description',
                 type: 'text',
               }),
             ],
