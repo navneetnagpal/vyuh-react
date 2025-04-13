@@ -31,8 +31,8 @@ export interface AccordionItem {
  * Accordion content item for displaying collapsible content sections
  *
  * Accordions can include:
- * - Header and items for the overall accordion
- * - Multiple accordion items, each with their own header and description
+ * - Title and description for the overall accordion
+ * - Multiple accordion items, each with their own title and content
  * - Configurable expand/collapse behavior
  */
 export interface Accordion extends ContentItem {
