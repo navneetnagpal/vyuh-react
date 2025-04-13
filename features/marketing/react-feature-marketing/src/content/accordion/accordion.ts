@@ -6,11 +6,9 @@ export const ACCORDION_SCHEMA_TYPE = 'marketing.accordion';
 /**
  * Accordion content item for displaying Accordion elements
  *
- * Accordions can include:
- * - Text message
- * - Optional icon
- * - Optional action button
- * - Dismissible functionality
+ * Accordion can include:
+ * - Header message
+ * - Optional items
  */
 export interface Accordion extends ContentItem {
   /**
